@@ -1,6 +1,7 @@
 //Tokens for outlines
-:host {
+:host,:root {
     //outline widths
+    --outline-width--sm: 1px; 
     --outline-width--regular: 2px; 
 
     //outline styles

@@ -10,6 +10,26 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
+  interface GxgCard {
+    'title': string;
+  }
+  interface GxgColorPalette {
+    'color': string;
+  }
+  interface GxgTab {
+    'tab': string;
+  }
+  interface GxgTabBar {}
+  interface GxgTabButton {
+    'disabled': boolean;
+    'tab': string;
+  }
+  interface GxgTabs {
+    'tab': string;
+  }
+  interface GxgTemplate {
+    'name': string;
+  }
   interface MyComponent {
     /**
     * The first name
@@ -29,17 +49,86 @@ export namespace Components {
 declare global {
 
 
+  interface HTMLGxgCardElement extends Components.GxgCard, HTMLStencilElement {}
+  var HTMLGxgCardElement: {
+    prototype: HTMLGxgCardElement;
+    new (): HTMLGxgCardElement;
+  };
+
+  interface HTMLGxgColorPaletteElement extends Components.GxgColorPalette, HTMLStencilElement {}
+  var HTMLGxgColorPaletteElement: {
+    prototype: HTMLGxgColorPaletteElement;
+    new (): HTMLGxgColorPaletteElement;
+  };
+
+  interface HTMLGxgTabElement extends Components.GxgTab, HTMLStencilElement {}
+  var HTMLGxgTabElement: {
+    prototype: HTMLGxgTabElement;
+    new (): HTMLGxgTabElement;
+  };
+
+  interface HTMLGxgTabBarElement extends Components.GxgTabBar, HTMLStencilElement {}
+  var HTMLGxgTabBarElement: {
+    prototype: HTMLGxgTabBarElement;
+    new (): HTMLGxgTabBarElement;
+  };
+
+  interface HTMLGxgTabButtonElement extends Components.GxgTabButton, HTMLStencilElement {}
+  var HTMLGxgTabButtonElement: {
+    prototype: HTMLGxgTabButtonElement;
+    new (): HTMLGxgTabButtonElement;
+  };
+
+  interface HTMLGxgTabsElement extends Components.GxgTabs, HTMLStencilElement {}
+  var HTMLGxgTabsElement: {
+    prototype: HTMLGxgTabsElement;
+    new (): HTMLGxgTabsElement;
+  };
+
+  interface HTMLGxgTemplateElement extends Components.GxgTemplate, HTMLStencilElement {}
+  var HTMLGxgTemplateElement: {
+    prototype: HTMLGxgTemplateElement;
+    new (): HTMLGxgTemplateElement;
+  };
+
   interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
-  const HTMLMyComponentElement: {
+  var HTMLMyComponentElement: {
     prototype: HTMLMyComponentElement;
     new (): HTMLMyComponentElement;
   };
   interface HTMLElementTagNameMap {
+    'gxg-card': HTMLGxgCardElement;
+    'gxg-color-palette': HTMLGxgColorPaletteElement;
+    'gxg-tab': HTMLGxgTabElement;
+    'gxg-tab-bar': HTMLGxgTabBarElement;
+    'gxg-tab-button': HTMLGxgTabButtonElement;
+    'gxg-tabs': HTMLGxgTabsElement;
+    'gxg-template': HTMLGxgTemplateElement;
     'my-component': HTMLMyComponentElement;
   }
 }
 
 declare namespace LocalJSX {
+  interface GxgCard {
+    'title'?: string;
+  }
+  interface GxgColorPalette {
+    'color'?: string;
+  }
+  interface GxgTab {
+    'tab'?: string;
+  }
+  interface GxgTabBar {}
+  interface GxgTabButton {
+    'disabled'?: boolean;
+    'tab'?: string;
+  }
+  interface GxgTabs {
+    'tab'?: string;
+  }
+  interface GxgTemplate {
+    'name'?: string;
+  }
   interface MyComponent {
     /**
     * The first name
@@ -56,6 +145,13 @@ declare namespace LocalJSX {
   }
 
   interface IntrinsicElements {
+    'gxg-card': GxgCard;
+    'gxg-color-palette': GxgColorPalette;
+    'gxg-tab': GxgTab;
+    'gxg-tab-bar': GxgTabBar;
+    'gxg-tab-button': GxgTabButton;
+    'gxg-tabs': GxgTabs;
+    'gxg-template': GxgTemplate;
     'my-component': MyComponent;
   }
 }
@@ -66,6 +162,13 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
+      'gxg-card': LocalJSX.GxgCard & JSXBase.HTMLAttributes<HTMLGxgCardElement>;
+      'gxg-color-palette': LocalJSX.GxgColorPalette & JSXBase.HTMLAttributes<HTMLGxgColorPaletteElement>;
+      'gxg-tab': LocalJSX.GxgTab & JSXBase.HTMLAttributes<HTMLGxgTabElement>;
+      'gxg-tab-bar': LocalJSX.GxgTabBar & JSXBase.HTMLAttributes<HTMLGxgTabBarElement>;
+      'gxg-tab-button': LocalJSX.GxgTabButton & JSXBase.HTMLAttributes<HTMLGxgTabButtonElement>;
+      'gxg-tabs': LocalJSX.GxgTabs & JSXBase.HTMLAttributes<HTMLGxgTabsElement>;
+      'gxg-template': LocalJSX.GxgTemplate & JSXBase.HTMLAttributes<HTMLGxgTemplateElement>;
       'my-component': LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
     }
   }

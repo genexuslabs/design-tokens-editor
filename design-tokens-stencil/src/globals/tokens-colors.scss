@@ -1,20 +1,28 @@
 //Tokens for colors
-:host {
+:host,:root {
     --color--primary: rgb(2, 102, 160);
     --color--primary-active: rgb(0, 86, 136);  
     --color--secondary: rgb(0, 119, 222);
     --color--secondary-1: rgba(0, 119, 222, 0.1);
     --color--disabled: rgb(155, 155, 155);
     --color--yellow: rgb(255, 192, 10);
+    --color-aquamarine: rgb(207, 222, 230);
+    --color-aquamarine-darker: rgb(177, 202, 216);
     
+    
+
     /*not present in "Abstract" branding guide*/
+    --color--black: rgb(0,0,0);
     --color--white: rgb(255,255,255);
     --color--white-9: rgba(255,255,255,.9);
     --color--white-6: rgba(255,255,255,.6);
-    --color--link: rgb(0, 119, 222);
+    --color--link: rgb(76, 81, 85);
+
+    /*Greys*/
+    --color-grey-1: rgb(251, 251, 251);
+    --color-grey-2: rgb(242, 242, 242);
+    --color-grey-3: rgb(236, 236, 236);
+
+
 }
 //Tokens for colors (Dark Mode)
-:host(.dark){
-
-    
-}

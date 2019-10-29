@@ -1,0 +1,26 @@
+@mixin box-shadow{
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.3);
+}
+@mixin box-styles {
+    border-radius: var(--border-radius--sm);
+    border-width: var(--border-width--sm);
+    border-color: var(--color--grey-1);
+    background: var(--color--white);
+    padding: var(--spacing--sm);
+}
+@mixin ui-animation($property) {
+    transition: $property 0.2s ease-in-out;
+}
+@mixin button-has-icon {
+    background: transparent;
+    border:none;
+    padding: var(--spacing--xs);
+    &:last-child {
+        padding-right: 0;
+    }
+    &:hover {
+        svg * {
+            fill: var(--color--secondary);
+        }
+    }
+}

@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
-//Tokens for fonts
-:host {
+:host,:root {
+    //Tokens for fonts
+
     /*font families*/
     --font-family--primary: 'Open Sans', sans-serif;
     --font-family--secondary: sans-serif; /*None, at the time of writting*/
@@ -13,6 +13,10 @@
     /*font sizes*/
     --font-size--sm: 10px;
     --font-size--md: 11px;
+
+    /*letter spacing*/
+    --letter-spacing--sm: 0.06em;
+    --letter-spacing--md: 0.02em;
 
     /*font styles*/
     --font-style--regular: normal;

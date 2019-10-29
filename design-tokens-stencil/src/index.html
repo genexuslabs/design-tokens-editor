@@ -7,11 +7,148 @@
 
   <script type="module" src="/build/design-tokens-stencil.esm.js"></script>
   <script nomodule src="/build/design-tokens-stencil.js"></script>
-
+  <style>
+  .container {
+    border: 1px solid #ccc;
+    width: 800px;
+    height: 750px;
+    background: #fff;
+    margin: 0 auto;
+    margin-top: 100px;
+  }
+  </style>
+  <link rel="stylesheet" href="./assets/styles/pickr.min.css"/> <!-- 'nano' theme -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
 </head>
 <body>
+ 
+   <!-- <div class="container">
 
-  <my-component first="Stencil" last="'Don't call me a framework' JS"></my-component>
+    
+    <gxg-tabs>
+      <gxg-tab-bar>
+        <gxg-tab-button tab="colors"></gxg-tab-button>
+        <gxg-tab-button tab="spacing"></gxg-tab-button>
+        <gxg-tab-button tab="borders" disabled></gxg-tab-button>
+      </gxg-tab-bar>
 
+      <gxg-tab tab="colors">
+        <gxg-card title="rosa">
+          <gxg-color-palette color="#faa"></gxg-color-palette>
+        </gxg-card>
+        <gxg-card title="celeste">
+          <gxg-color-palette color="#aef"></gxg-color-palette>
+        </gxg-card>
+        <gxg-card title="verde">
+            <gxg-color-palette color="#afc"></gxg-color-palette>
+          </gxg-card>
+      </gxg-tab>
+      <gxg-tab tab="spacing"></gxg-tab>
+      <gxg-tab tab="borders"></gxg-tab>
+
+    </gxg-tabs>
+    
+
+  </div> -->
+  
+  <script>
+    const model = {
+                      colors: {
+                          disabled: false, 
+                          items: [
+                              {
+                                  caption: "rosa",
+                                  value: "#faa"
+                              },
+                              {
+                                  caption: "celeste",
+                                  value: "#444"
+                              },
+                              {
+                                  caption: "verde",
+                                  value: "#ab2"
+                              },
+                              {
+                                  caption: "verde",
+                                  value: "#ab2"
+                              }
+                          ]
+                      },
+                      borders: {
+                      },
+                      spacing: {
+                      }
+                  }
+            
+        //<div class="container">
+        const container = document.createElement("div");
+        container.className += "container";
+
+
+
+        //<gxg-tabs>
+        const gxgTabs = document.createElement("gxg-tabs");
+
+        //<gxg-tab-bar>
+        const gxgTabBar = document.createElement("gxg-tab-bar");
+        gxgTabs.appendChild(gxgTabBar);
+
+        //<gxg-tab-button>
+        for (let prop in model){
+          let gxgTabButton = document.createElement("gxg-tab-button");
+          gxgTabButton.setAttribute('tab', prop);
+          gxgTabBar.appendChild(gxgTabButton);
+        }
+
+        //<gxg-tab> (one tab for each token)
+        for (let token in model){
+          const currentToken = token;
+          console.log(currentToken);
+
+          //Create one tab for each token
+          const gxgTab = document.createElement("gxg-tab");
+          gxgTab.setAttribute('tab', currentToken); 
+
+          //Append to the current tab, a gxg-card for each item of the current token
+          for( item in model[token].items){
+
+            const gxgCard = document.createElement("gxg-card");
+            const cardTitle = model[token].items[item].caption
+            gxgCard.setAttribute('title', cardTitle); 
+            
+            //Depending on the type of token, the content the card will have:
+            //If token ir color: 
+            if(currentToken === 'colors'){
+              const colorValue = model[token].items[item].value;
+              const gxgColorPalette = document.createElement("gxg-color-palette");
+              gxgColorPalette.setAttribute('color', colorValue); 
+
+              //Apend to the current gxgCard
+              gxgCard.appendChild(gxgColorPalette);
+            }
+
+            //Append gxg-card to the current tab
+            gxgTab.appendChild(gxgCard);
+          }
+          //Append the tab to the tabs container
+          gxgTabs.appendChild(gxgTab);
+        }
+
+        // Append Elements
+        container.appendChild(gxgTabs);
+        document.body.appendChild(container); 
+  </script>
+ 
+  <script>
+
+
+// // Card edit button action
+// let btnEditButton = document.getElementById("btnEditCard");
+// btnEditButton.addEventListener("click", editAction);
+// function editAction(){
+//         let colorPickerMainContainer = document.getElementById("color-picker-main-container");
+//         colorPickerMainContainer.classList.add("color-picker-main-container--visible");
+// }
+  </script>
 </body>
 </html>

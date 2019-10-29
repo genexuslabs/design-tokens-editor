@@ -1,0 +1,2 @@
+- hacer el routing para mostrar ocultar los items del menu
+- importar los iconos svg, en vez de tenerlos en el tsx

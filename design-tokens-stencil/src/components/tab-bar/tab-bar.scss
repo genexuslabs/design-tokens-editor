@@ -1,0 +1,13 @@
+:host {
+    
+    display: block;
+
+    .tab-bar {
+        list-style-type: none;
+        padding-left: 0;
+        display: flex !important;
+        margin-bottom: var(--spacing--md);
+        margin-top: 0;
+        font-family: var(--font-family--primary);
+    }
+}
