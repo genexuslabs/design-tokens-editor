@@ -8,13 +8,47 @@ import { Model } from "../model";
 })
 export class Main {
   // Indicate that name should be a public property on the component
-  @Prop() model: Model;
+  //@Prop() model: Model;
 
   render() {
-    const model = this.model;
+    const model = {
+      colors: {
+        disabled: false,
+        items: [
+          {
+            cardID: "01",
+            caption: "rosa",
+            value: "#faa"
+          },
+          {
+            cardID: "02",
+            caption: "celeste",
+            value: "#444"
+          },
+          {
+            cardID: "03",
+            caption: "verde",
+            value: "#ab2"
+          },
+          {
+            cardID: "04",
+            caption: "verde",
+            value: "#ab2"
+          }
+        ]
+      },
+      borders: {
+        disabled: false,
+        items: []
+      },
+      spacing: {
+        disabled: false,
+        items: []
+      }
+    };
+
     return (
       <div class="container">
-        <gxg-button>Hola</gxg-button>
         <dt-tabs>
           <dt-tab-bar>
             {Object.keys(model).map(token => (

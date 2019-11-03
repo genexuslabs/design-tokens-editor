@@ -7,35 +7,32 @@
 
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
-import {
-  Model,
-} from './components/model';
+
 
 export namespace Components {
+  interface DtCard {
+    'cardId': string;
+    'title': string;
+  }
+  interface DtColorPalette {
+    'color': string;
+  }
   interface DtColorPicker {
     'name': string;
   }
-  interface DtMain {
-    'model': Model;
-  }
-  interface GxgCard {
-    'title': string;
-  }
-  interface GxgColorPalette {
-    'color': string;
-  }
-  interface GxgTab {
+  interface DtMain {}
+  interface DtTab {
     'tab': string;
   }
-  interface GxgTabBar {}
-  interface GxgTabButton {
+  interface DtTabBar {}
+  interface DtTabButton {
     'disabled': boolean;
     'tab': string;
   }
-  interface GxgTabs {
+  interface DtTabs {
     'tab': string;
   }
-  interface GxgTemplate {
+  interface DtTemplate {
     'name': string;
   }
   interface MyComponent {
@@ -57,6 +54,18 @@ export namespace Components {
 declare global {
 
 
+  interface HTMLDtCardElement extends Components.DtCard, HTMLStencilElement {}
+  var HTMLDtCardElement: {
+    prototype: HTMLDtCardElement;
+    new (): HTMLDtCardElement;
+  };
+
+  interface HTMLDtColorPaletteElement extends Components.DtColorPalette, HTMLStencilElement {}
+  var HTMLDtColorPaletteElement: {
+    prototype: HTMLDtColorPaletteElement;
+    new (): HTMLDtColorPaletteElement;
+  };
+
   interface HTMLDtColorPickerElement extends Components.DtColorPicker, HTMLStencilElement {}
   var HTMLDtColorPickerElement: {
     prototype: HTMLDtColorPickerElement;
@@ -69,46 +78,34 @@ declare global {
     new (): HTMLDtMainElement;
   };
 
-  interface HTMLGxgCardElement extends Components.GxgCard, HTMLStencilElement {}
-  var HTMLGxgCardElement: {
-    prototype: HTMLGxgCardElement;
-    new (): HTMLGxgCardElement;
+  interface HTMLDtTabElement extends Components.DtTab, HTMLStencilElement {}
+  var HTMLDtTabElement: {
+    prototype: HTMLDtTabElement;
+    new (): HTMLDtTabElement;
   };
 
-  interface HTMLGxgColorPaletteElement extends Components.GxgColorPalette, HTMLStencilElement {}
-  var HTMLGxgColorPaletteElement: {
-    prototype: HTMLGxgColorPaletteElement;
-    new (): HTMLGxgColorPaletteElement;
+  interface HTMLDtTabBarElement extends Components.DtTabBar, HTMLStencilElement {}
+  var HTMLDtTabBarElement: {
+    prototype: HTMLDtTabBarElement;
+    new (): HTMLDtTabBarElement;
   };
 
-  interface HTMLGxgTabElement extends Components.GxgTab, HTMLStencilElement {}
-  var HTMLGxgTabElement: {
-    prototype: HTMLGxgTabElement;
-    new (): HTMLGxgTabElement;
+  interface HTMLDtTabButtonElement extends Components.DtTabButton, HTMLStencilElement {}
+  var HTMLDtTabButtonElement: {
+    prototype: HTMLDtTabButtonElement;
+    new (): HTMLDtTabButtonElement;
   };
 
-  interface HTMLGxgTabBarElement extends Components.GxgTabBar, HTMLStencilElement {}
-  var HTMLGxgTabBarElement: {
-    prototype: HTMLGxgTabBarElement;
-    new (): HTMLGxgTabBarElement;
+  interface HTMLDtTabsElement extends Components.DtTabs, HTMLStencilElement {}
+  var HTMLDtTabsElement: {
+    prototype: HTMLDtTabsElement;
+    new (): HTMLDtTabsElement;
   };
 
-  interface HTMLGxgTabButtonElement extends Components.GxgTabButton, HTMLStencilElement {}
-  var HTMLGxgTabButtonElement: {
-    prototype: HTMLGxgTabButtonElement;
-    new (): HTMLGxgTabButtonElement;
-  };
-
-  interface HTMLGxgTabsElement extends Components.GxgTabs, HTMLStencilElement {}
-  var HTMLGxgTabsElement: {
-    prototype: HTMLGxgTabsElement;
-    new (): HTMLGxgTabsElement;
-  };
-
-  interface HTMLGxgTemplateElement extends Components.GxgTemplate, HTMLStencilElement {}
-  var HTMLGxgTemplateElement: {
-    prototype: HTMLGxgTemplateElement;
-    new (): HTMLGxgTemplateElement;
+  interface HTMLDtTemplateElement extends Components.DtTemplate, HTMLStencilElement {}
+  var HTMLDtTemplateElement: {
+    prototype: HTMLDtTemplateElement;
+    new (): HTMLDtTemplateElement;
   };
 
   interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
@@ -117,44 +114,43 @@ declare global {
     new (): HTMLMyComponentElement;
   };
   interface HTMLElementTagNameMap {
+    'dt-card': HTMLDtCardElement;
+    'dt-color-palette': HTMLDtColorPaletteElement;
     'dt-color-picker': HTMLDtColorPickerElement;
     'dt-main': HTMLDtMainElement;
-    'gxg-card': HTMLGxgCardElement;
-    'gxg-color-palette': HTMLGxgColorPaletteElement;
-    'gxg-tab': HTMLGxgTabElement;
-    'gxg-tab-bar': HTMLGxgTabBarElement;
-    'gxg-tab-button': HTMLGxgTabButtonElement;
-    'gxg-tabs': HTMLGxgTabsElement;
-    'gxg-template': HTMLGxgTemplateElement;
+    'dt-tab': HTMLDtTabElement;
+    'dt-tab-bar': HTMLDtTabBarElement;
+    'dt-tab-button': HTMLDtTabButtonElement;
+    'dt-tabs': HTMLDtTabsElement;
+    'dt-template': HTMLDtTemplateElement;
     'my-component': HTMLMyComponentElement;
   }
 }
 
 declare namespace LocalJSX {
+  interface DtCard {
+    'cardId'?: string;
+    'title'?: string;
+  }
+  interface DtColorPalette {
+    'color'?: string;
+  }
   interface DtColorPicker {
     'name'?: string;
   }
-  interface DtMain {
-    'model'?: Model;
-  }
-  interface GxgCard {
-    'title'?: string;
-  }
-  interface GxgColorPalette {
-    'color'?: string;
-  }
-  interface GxgTab {
+  interface DtMain {}
+  interface DtTab {
     'tab'?: string;
   }
-  interface GxgTabBar {}
-  interface GxgTabButton {
+  interface DtTabBar {}
+  interface DtTabButton {
     'disabled'?: boolean;
     'tab'?: string;
   }
-  interface GxgTabs {
+  interface DtTabs {
     'tab'?: string;
   }
-  interface GxgTemplate {
+  interface DtTemplate {
     'name'?: string;
   }
   interface MyComponent {
@@ -173,15 +169,15 @@ declare namespace LocalJSX {
   }
 
   interface IntrinsicElements {
+    'dt-card': DtCard;
+    'dt-color-palette': DtColorPalette;
     'dt-color-picker': DtColorPicker;
     'dt-main': DtMain;
-    'gxg-card': GxgCard;
-    'gxg-color-palette': GxgColorPalette;
-    'gxg-tab': GxgTab;
-    'gxg-tab-bar': GxgTabBar;
-    'gxg-tab-button': GxgTabButton;
-    'gxg-tabs': GxgTabs;
-    'gxg-template': GxgTemplate;
+    'dt-tab': DtTab;
+    'dt-tab-bar': DtTabBar;
+    'dt-tab-button': DtTabButton;
+    'dt-tabs': DtTabs;
+    'dt-template': DtTemplate;
     'my-component': MyComponent;
   }
 }
@@ -192,15 +188,15 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
+      'dt-card': LocalJSX.DtCard & JSXBase.HTMLAttributes<HTMLDtCardElement>;
+      'dt-color-palette': LocalJSX.DtColorPalette & JSXBase.HTMLAttributes<HTMLDtColorPaletteElement>;
       'dt-color-picker': LocalJSX.DtColorPicker & JSXBase.HTMLAttributes<HTMLDtColorPickerElement>;
       'dt-main': LocalJSX.DtMain & JSXBase.HTMLAttributes<HTMLDtMainElement>;
-      'gxg-card': LocalJSX.GxgCard & JSXBase.HTMLAttributes<HTMLGxgCardElement>;
-      'gxg-color-palette': LocalJSX.GxgColorPalette & JSXBase.HTMLAttributes<HTMLGxgColorPaletteElement>;
-      'gxg-tab': LocalJSX.GxgTab & JSXBase.HTMLAttributes<HTMLGxgTabElement>;
-      'gxg-tab-bar': LocalJSX.GxgTabBar & JSXBase.HTMLAttributes<HTMLGxgTabBarElement>;
-      'gxg-tab-button': LocalJSX.GxgTabButton & JSXBase.HTMLAttributes<HTMLGxgTabButtonElement>;
-      'gxg-tabs': LocalJSX.GxgTabs & JSXBase.HTMLAttributes<HTMLGxgTabsElement>;
-      'gxg-template': LocalJSX.GxgTemplate & JSXBase.HTMLAttributes<HTMLGxgTemplateElement>;
+      'dt-tab': LocalJSX.DtTab & JSXBase.HTMLAttributes<HTMLDtTabElement>;
+      'dt-tab-bar': LocalJSX.DtTabBar & JSXBase.HTMLAttributes<HTMLDtTabBarElement>;
+      'dt-tab-button': LocalJSX.DtTabButton & JSXBase.HTMLAttributes<HTMLDtTabButtonElement>;
+      'dt-tabs': LocalJSX.DtTabs & JSXBase.HTMLAttributes<HTMLDtTabsElement>;
+      'dt-template': LocalJSX.DtTemplate & JSXBase.HTMLAttributes<HTMLDtTemplateElement>;
       'my-component': LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
     }
   }
