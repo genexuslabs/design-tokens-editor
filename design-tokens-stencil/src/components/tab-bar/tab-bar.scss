@@ -1,13 +1,12 @@
 :host {
-    
-    display: block;
+  display: block;
 
-    .tab-bar {
-        list-style-type: none;
-        padding-left: 0;
-        display: flex !important;
-        margin-bottom: var(--spacing--md);
-        margin-top: 0;
-        font-family: var(--font-family--primary);
-    }
+  .tab-bar {
+    list-style-type: none;
+    padding-left: 0;
+    display: flex !important;
+    margin-bottom: var(--spacing-comp-03);
+    margin-top: 0;
+    font-family: var(--font-family-primary);
+  }
 }

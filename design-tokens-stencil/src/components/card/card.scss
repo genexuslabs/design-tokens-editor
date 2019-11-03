@@ -1,69 +1,67 @@
 :host {
-    
-    display: block;
-    flex: 0 0 calc((100% - var(--spacing--sm) * 2) / 3);
-    margin-bottom: var(--spacing--sm);
+  display: block;
+  flex: 0 0 calc((100% - var(--spacing-comp-02) * 2) / 3);
+  margin-bottom: var(--spacing-comp-02);
 
-    .card {
-        padding: var(--spacing--sm);
+  .card {
+    padding: var(--spacing-comp-02);
 
-        border-width: var(--border-width--sm);
-        border-style: var(--border-style--regular);
-        border-color: var(--color-grey-2);
+    border-width: var(--border-width-sm);
+    border-style: var(--border-style-regular);
+    border-color: var(--color-grey-2);
 
-        &-header {
-            display: flex !important;
-            margin-bottom: var(--spacing--sm);
-            line-height: 0;
+    &-header {
+      display: flex !important;
+      margin-bottom: var(--spacing-comp-02);
+      line-height: 0;
 
-            &-title {
-                flex: 1 1 auto !important;
-                align-self: flex-end !important;
-                margin: 0;
-                padding: var(--spacing--xs) var(--spacing--xs) var(--spacing--xs) 0;
-                font-family: var(--font-family--primary);
-                font-weight: var(--font-weight--bold);
-                font-size: var(--font-size--md);
-                line-height: 1;
-                text-transform: capitalize;
+      &-title {
+        flex: 1 1 auto !important;
+        align-self: flex-end !important;
+        margin: 0;
+        padding: var(--spacing-comp-01) var(--spacing-comp-01)
+          var(--spacing-comp-01) 0;
+        font-family: var(--font-family-primary);
+        font-weight: var(--font-weight-bold);
+        font-size: var(--font-size-md);
+        line-height: 1;
+        text-transform: capitalize;
+      }
+
+      &-menu {
+        @include ui-animation(opacity);
+        opacity: 0;
+
+        display: flex !important;
+        line-height: 0;
+
+        &-button {
+          background: transparent;
+          border: none;
+          padding: var(--spacing-comp-01);
+          line-height: 0;
+          &:hover {
+            cursor: pointer;
+            img {
+              opacity: 0.75;
             }
+          }
 
-            &-menu {
-
-                @include ui-animation(opacity);
-                opacity: 0;
-
-                display: flex !important;
-                line-height: 0;
-
-
-                &-button {
-                    background: transparent;
-                    border: none;
-                    padding: var(--spacing--xs);
-                    line-height: 0;
-                    &:hover {
-                        cursor: pointer;
-                        img {
-                            opacity: 0.75;
-                        }
-                    }
-                
-                    img {
-                        height: var(--icon-height--regular);
-                    }
-                }
-            }
+          img {
+            height: var(--icon-height-regular);
+          }
         }
-
-        &:hover {
-            .card-header-menu {
-                opacity: 1;
-            }
-        }
+      }
     }
+
+    &:hover {
+      .card-header-menu {
+        opacity: 1;
+      }
+    }
+  }
 }
 :host(:nth-child(3n-1)) {
-    margin-left: var(--spacing--sm);
-    margin-right: var(--spacing--sm);
+  margin-left: var(--spacing-comp-02);
+  margin-right: var(--spacing-comp-02);
 }
