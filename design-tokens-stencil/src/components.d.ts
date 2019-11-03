@@ -7,9 +7,17 @@
 
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
-
+import {
+  Model,
+} from './components/model';
 
 export namespace Components {
+  interface DtColorPicker {
+    'name': string;
+  }
+  interface DtMain {
+    'model': Model;
+  }
   interface GxgCard {
     'title': string;
   }
@@ -48,6 +56,18 @@ export namespace Components {
 
 declare global {
 
+
+  interface HTMLDtColorPickerElement extends Components.DtColorPicker, HTMLStencilElement {}
+  var HTMLDtColorPickerElement: {
+    prototype: HTMLDtColorPickerElement;
+    new (): HTMLDtColorPickerElement;
+  };
+
+  interface HTMLDtMainElement extends Components.DtMain, HTMLStencilElement {}
+  var HTMLDtMainElement: {
+    prototype: HTMLDtMainElement;
+    new (): HTMLDtMainElement;
+  };
 
   interface HTMLGxgCardElement extends Components.GxgCard, HTMLStencilElement {}
   var HTMLGxgCardElement: {
@@ -97,6 +117,8 @@ declare global {
     new (): HTMLMyComponentElement;
   };
   interface HTMLElementTagNameMap {
+    'dt-color-picker': HTMLDtColorPickerElement;
+    'dt-main': HTMLDtMainElement;
     'gxg-card': HTMLGxgCardElement;
     'gxg-color-palette': HTMLGxgColorPaletteElement;
     'gxg-tab': HTMLGxgTabElement;
@@ -109,6 +131,12 @@ declare global {
 }
 
 declare namespace LocalJSX {
+  interface DtColorPicker {
+    'name'?: string;
+  }
+  interface DtMain {
+    'model'?: Model;
+  }
   interface GxgCard {
     'title'?: string;
   }
@@ -145,6 +173,8 @@ declare namespace LocalJSX {
   }
 
   interface IntrinsicElements {
+    'dt-color-picker': DtColorPicker;
+    'dt-main': DtMain;
     'gxg-card': GxgCard;
     'gxg-color-palette': GxgColorPalette;
     'gxg-tab': GxgTab;
@@ -162,6 +192,8 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
+      'dt-color-picker': LocalJSX.DtColorPicker & JSXBase.HTMLAttributes<HTMLDtColorPickerElement>;
+      'dt-main': LocalJSX.DtMain & JSXBase.HTMLAttributes<HTMLDtMainElement>;
       'gxg-card': LocalJSX.GxgCard & JSXBase.HTMLAttributes<HTMLGxgCardElement>;
       'gxg-color-palette': LocalJSX.GxgColorPalette & JSXBase.HTMLAttributes<HTMLGxgColorPaletteElement>;
       'gxg-tab': LocalJSX.GxgTab & JSXBase.HTMLAttributes<HTMLGxgTabElement>;

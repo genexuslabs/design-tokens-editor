@@ -1,0 +1,167 @@
+@import "../../../node_modules/@simonwep/pickr/dist/themes/nano.min.css";
+
+.color-picker-main-container {
+  background: var(--color-white);
+  position: relative;
+  margin-top: -1px;
+  transition: max-height 0.5s ease-in-out;
+  padding: var(--spacing-comp-02) var(--card-padding) 0 var(--card-padding);
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+    0px 2px 1px -1px rgba(0, 0, 0, 0.12), 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
+
+  &-label {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-md);
+    margin-bottom: var(--spacing-comp-01);
+    padding-top: 11px;
+    display: inline-block;
+    text-transform: capitalize;
+  }
+  &-textbox {
+    @include form-input-styles;
+    width: 100%;
+    margin-bottom: var(--spacing-comp-02);
+    box-sizing: border-box;
+  }
+
+  &--visible {
+    max-height: 400px;
+  }
+}
+.pcr-app[data-theme="nano"] .pcr-selection .pcr-color-palette .pcr-palette {
+  border-radius: 0;
+}
+.pickr {
+  display: none;
+}
+.pcr-app {
+  max-width: 100%;
+  width: 100% !important;
+  box-shadow: none;
+}
+.pcr-app .pcr-interaction .pcr-result[type="text"] {
+  flex: 1 1 100%;
+  margin: 0 0 var(--spacing-comp-02) 0;
+}
+.pcr-app .pcr-interaction input {
+  flex: 1 1 calc(100% / 3);
+  margin: 0 0 var(--spacing-comp-02) 0;
+}
+
+//Buttons
+.pcr-app .pcr-interaction input:focus {
+  &:focus {
+    box-shadow: none;
+  }
+}
+.pcr-app[data-theme="nano"] .pcr-interaction {
+  padding: 0;
+}
+.pcr-app .pcr-interaction {
+  margin: 0;
+}
+.pcr-app .pcr-interaction .pcr-save {
+  background: var(--color-primary-enabled);
+  border-color: var(--color-primary-enabled);
+  border-style: var(--border-style-regular);
+  border-width: var(--border-width-sm);
+  border-radius: var(--border-radius-sm);
+}
+
+// .color-picker {
+//     font-size: 13px;
+//   }
+// .color-picker-main-container {
+//     position: relative;
+//     max-height: 0;
+//     overflow: hidden;
+//     transition: max-height 0.5s ease-in-out;
+
+//     &-textbox {
+//         @include form-input-styles;
+//         width: 100%;
+//         margin-bottom: var(--spacing--sm);
+//     }
+
+//     &--visible {
+//         max-height: 400px;
+//     }
+
+// }
+// .color-palette {
+//     display: flex!important;
+
+//     &-name {
+//         font-family: var(--font-family--primary);
+//         font-size: var(--font-size--md);
+
+//         &-input {
+//             width: 100%;
+//             height: 20px;
+//             padding-left: var(--spacing--xs);
+//             padding-right: var(--spacing--xs);
+//             background: var(--color-grey-1);
+//             border-color: var(--color-grey-3);
+//             border-style: var(--border-style--regular);
+//             border-width: var(--border-width--sm);
+//         }
+//         margin-bottom: var(--spacing--sm);
+//     }
+
+//     &-column {
+
+//         &:first-child {
+//             margin-right: var(--spacing--xs);
+//             flex: 0 0 calc(66% - var(--spacing--xs));
+
+//             .color-palette-box {
+//                 &:after {
+//                     content: '';
+//                     display: block;
+//                     padding-bottom: 100%;
+//                 }
+//             }
+//         }
+//         &:last-child {
+//             -ms-flex: 1 1 auto !important;
+//             flex: 1 1 auto !important;
+//             -ms-flex-direction: column;
+//             flex-direction: column;
+//             display: flex!important;
+//         }
+//     }
+//     &-box {
+//         padding: var(--spacing--sm);
+
+//         -ms-flex: 1 1 auto!important;
+//         flex: 1 1 auto!important;
+//         display: flex!important;
+
+//         border-width: var(--border-width--sm);
+//         border-style: var(--border-style--regular);
+//         border-color: var(--color--light-grey);
+
+//         &-value {
+//             margin-bottom: 0;
+//             font-size: var(--font-size--md);
+//             -ms-flex-align: end!important;
+//             align-items: flex-end!important;
+//         }
+//         &:first-child:last-child {
+//             height: 100%;
+//             width: 100%;
+//             -ms-flex-align: end!important;
+//             align-items: flex-end!important;
+//         }
+//         &:first-child:not(:last-child) {
+//             -ms-flex-align: center!important;
+//             align-items: center!important;
+//             margin-bottom: var(--spacing--xs);
+//         }
+//         &:last-child:not(:first-child){
+//             -ms-flex-align: center!important;
+//             align-items: center!important;
+//         }
+
+//     }
+// }

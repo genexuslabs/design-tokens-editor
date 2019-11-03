@@ -1,9 +1,12 @@
-//Tokens for outlines
-:host,:root {
+
+/*********************************
+TOKENS FOR OUTLINES
+*********************************/
+
+:host {
     //outline widths
-    --outline-width--sm: 1px; 
-    --outline-width--regular: 2px; 
+    --outline-width-regular: 2px; 
 
     //outline styles
-    --outline-style--regular: solid;
+    --outline-style-regular: solid;
 }
