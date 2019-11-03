@@ -8,7 +8,7 @@
 
     border-width: var(--border-width-sm);
     border-style: var(--border-style-regular);
-    border-color: var(--color-grey-2);
+    border-color: var(--gray-03);
 
     &-header {
       display: flex !important;
@@ -48,7 +48,7 @@
           }
 
           img {
-            height: var(--icon-height-regular);
+            height: var(--spacing-comp-03);
           }
         }
       }

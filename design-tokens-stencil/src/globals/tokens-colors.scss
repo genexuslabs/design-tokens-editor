@@ -15,7 +15,7 @@ TOKENS FOR COLORS
   //Gemini
   --color-primary-rgb: 2, 102, 160; //Edit this value to change '--color-primary'
   --color-primary: rgb(var(--color-primary-rgb)); //Do not edit this value.
-  --color-secondary: orange;
+  --color-secondary: #8dcbff;
 
   //Primary
   --color-primary-enabled: var(--color-primary);
@@ -24,7 +24,7 @@ TOKENS FOR COLORS
   --color-primary-disabled: var(--color-disabled);
 
   //Secondary
-  --color-secondary-enabled: var(--color-secondary);
+  --color-secondary-enabled: #cfdee6;
   --color-secondary-active: #6a8c9f;
   --color-secondary-hover: #97b0bf;
   --color-secondary-disabled: var(--color-disabled);

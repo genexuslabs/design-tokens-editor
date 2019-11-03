@@ -6,11 +6,10 @@
     border-width: var(--border-width-sm);
     border-top-width: var(--border-width-sm);
     border-bottom-width: var(--border-width-sm);
-    border-color: var(--color-aquamarine-darker);
+    border-color: var(--color-secondary-hover);
     border-style: var(--border-style-regular);
 
-    background: var(--color-white);
-    background-color: var(--color-aquamarine);
+    background-color: var(--color-secondary-enabled);
     height: var(--spacing-comp-05);
     display: flex !important;
     justify-content: center !important;

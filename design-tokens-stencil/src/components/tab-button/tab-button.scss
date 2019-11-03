@@ -11,7 +11,7 @@
     font-weight: var(--font-weight-semibold);
     text-transform: uppercase;
     color: var(--color-black);
-    letter-spacing: var(--letter-spacing-sm);
+    letter-spacing: var(--letter-spacing-regular);
     background: var(--color-white);
     padding-top: 0;
     padding-right: 0;
@@ -44,7 +44,7 @@
     &:hover {
       cursor: pointer;
       &:after {
-        background-color: var(--color-secondary);
+        background-color: var(--color-primary-hover);
       }
     }
     &:active {
@@ -54,9 +54,9 @@
     }
     &:focus {
       outline: none;
-      -webkit-box-shadow: inset 0px 0px 0px 1px var(--color-primary);
-      -moz-box-shadow: inset 0px 0px 0px 1px var(--color-primary);
-      box-shadow: inset 0px 0px 0px 1px var(--color-primary);
+      -webkit-box-shadow: inset 0px 0px 0px 1px var(--color-primary-enabled);
+      -moz-box-shadow: inset 0px 0px 0px 1px var(--color-primary-enabled);
+      box-shadow: inset 0px 0px 0px 1px var(--color-primary-enabled);
     }
     &[disabled] {
       color: var(--color-disabled);

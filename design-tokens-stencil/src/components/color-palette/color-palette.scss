@@ -11,7 +11,7 @@
         padding-right: var(--spacing-comp-02);
         border-right-width: var(--border-width-sm);
         border-right-style: var(--border-style-regular);
-        border-right-color: var(--color-disabled);
+        border-right-color: var(--gray-03);
 
         // border styles
         -border-style-regular: solid;
@@ -33,7 +33,7 @@
       &:last-child {
         display: flex;
         .color-palette-row-box {
-          min-height: var(--spacing-comp-03);
+          min-height: var(--spacing-comp-04);
         }
         .color-palette-row-box:first-child {
           margin-right: var(--spacing-comp-01);
