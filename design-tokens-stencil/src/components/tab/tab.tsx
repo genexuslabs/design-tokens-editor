@@ -21,7 +21,10 @@ export class Tab {
           </div>
           <div class="tab-container-menu">
             <button class="tab-container-menu-button" data-action="delete">
-              <img src="/assets/svg-icons/gx-icon-magic.svg" alt="Close icon" />
+              <img
+                src="/assets/svg-icons/gxg-icon-magic.svg"
+                alt="Close icon"
+              />
             </button>
           </div>
         </div>
