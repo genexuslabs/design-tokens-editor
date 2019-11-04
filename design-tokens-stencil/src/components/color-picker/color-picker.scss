@@ -6,19 +6,17 @@
   margin-top: -1px;
   transition: max-height 0.5s ease-in-out;
   padding: var(--spacing-comp-02) var(--card-padding) 0 var(--card-padding);
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
-    0px 2px 1px -1px rgba(0, 0, 0, 0.12), 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
 
   &-label {
     font-family: var(--font-family-primary);
     font-size: var(--font-size-md);
     margin-bottom: var(--spacing-comp-01);
-    padding-top: 11px;
     display: inline-block;
     text-transform: capitalize;
   }
   &-textbox {
     @include form-input-styles;
+
     width: 100%;
     margin-bottom: var(--spacing-comp-02);
     box-sizing: border-box;
