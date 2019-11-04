@@ -130,6 +130,7 @@ declare global {
 declare namespace LocalJSX {
   interface DtCard {
     'cardId'?: string;
+    'onCardClosed'?: (event: CustomEvent<any>) => void;
     'onCardDeleted'?: (event: CustomEvent<any>) => void;
     'onCardDuplicated'?: (event: CustomEvent<any>) => void;
     'title'?: string;

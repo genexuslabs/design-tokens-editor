@@ -53,6 +53,11 @@ export class Main {
             cardId: "04",
             caption: "verde",
             value: "#ab2"
+          },
+          {
+            cardId: "03",
+            caption: "verde",
+            value: "#ab2"
           }
         ]
       },
