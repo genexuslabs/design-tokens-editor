@@ -49,7 +49,13 @@ export class Card {
   }
   render() {
     return (
-      <div class="card" data-cardId={this.cardId}>
+      <div
+        class={{
+          card: true,
+          "card--editable": this.mode === "editable"
+        }}
+        data-cardId={this.cardId}
+      >
         <header class="card-header">
           <h3 class="card-header-title">{this.title}</h3>
           {this.mode === "non-editable" ? (
@@ -100,7 +106,6 @@ export class Card {
         <div class="card-content">
           {this.mode === "editable" ? (
             <div class="card-content-editable">
-              <slot name="non-editable"></slot>
               <slot name="editable"></slot>
             </div>
           ) : (

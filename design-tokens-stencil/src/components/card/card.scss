@@ -4,6 +4,8 @@
   margin-bottom: var(--spacing-comp-02);
 
   .card {
+    @include ui-animation(box-shadow);
+    box-shadow: 0;
     padding: var(--spacing-comp-02);
 
     border-width: var(--border-width-sm);
@@ -60,7 +62,7 @@
       }
     }
 
-    &.card--box-shadow {
+    &.card--editable {
       box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
         0px 2px 1px -1px rgba(0, 0, 0, 0.12), 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
     }
