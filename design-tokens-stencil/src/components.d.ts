@@ -26,7 +26,7 @@ export namespace Components {
   }
   interface DtTabBar {}
   interface DtTabButton {
-    'disabled': boolean;
+    'isSelected': boolean;
     'tab': string;
   }
   interface DtTabs {
@@ -147,7 +147,7 @@ declare namespace LocalJSX {
   }
   interface DtTabBar {}
   interface DtTabButton {
-    'disabled'?: boolean;
+    'isSelected'?: boolean;
     'tab'?: string;
   }
   interface DtTabs {
