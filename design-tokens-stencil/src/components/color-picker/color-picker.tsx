@@ -8,9 +8,6 @@ import Pickr from "@simonwep/pickr";
 })
 export class ColorPicker {
   @Element() element: HTMLElement;
-  // Indicate that name should be a public property on the component
-
-  @Prop() name: string;
   private pickr: Pickr;
 
   componentDidLoad() {
@@ -21,8 +18,7 @@ export class ColorPicker {
       ".color-picker-main-container"
     ) as HTMLElement;
 
-    // Simple example, see optional options for more configuration.
-    this.pickr = Pickr.create({
+    this.pickr = new Pickr({
       el: colorPickerEl,
       theme: "nano", // or 'monolith', or 'nano'
       container: colorPickerMainCtEl,
@@ -38,7 +34,6 @@ export class ColorPicker {
         // Input / output Options
         interaction: {
           hex: true,
-          rgba: true,
           input: true,
           save: true
         }

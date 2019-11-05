@@ -11,6 +11,7 @@ export class Card {
   @Prop() cardId: string = "cardId";
   @State() mode: string = "non-editable";
 
+  //Events
   @Event({
     eventName: "cardDuplicated",
     composed: true,
@@ -18,7 +19,6 @@ export class Card {
     bubbles: true
   })
   cardDuplicated: EventEmitter;
-
   @Event({
     eventName: "cardDeleted",
     composed: true,
@@ -26,7 +26,6 @@ export class Card {
     bubbles: true
   })
   cardDeleted: EventEmitter;
-
   @Event({
     eventName: "cardClosed",
     composed: true,
@@ -35,6 +34,7 @@ export class Card {
   })
   cardClosed: EventEmitter;
 
+  //Click functions
   editCard() {
     this.mode = "editable";
   }
@@ -47,6 +47,7 @@ export class Card {
   closeCard() {
     this.mode = "non-editable";
   }
+
   render() {
     return (
       <div

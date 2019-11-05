@@ -8,10 +8,16 @@ import { Component, Prop, h } from "@stencil/core";
 export class Tab {
   // Indicate that name should be a public property on the component
   @Prop() tab: string;
+  @Prop() isSelected: boolean = false;
 
   render() {
-    return (
-      <section>
+    return this.isSelected ? (
+      <section
+        class={{
+          tab: true,
+          "tab--selected": this.isSelected === true
+        }}
+      >
         <header class="tab-header">
           <h2 class="tab-header-title">{this.tab}</h2>
         </header>
@@ -29,6 +35,8 @@ export class Tab {
           </div>
         </div>
       </section>
+    ) : (
+      <div></div>
     );
   }
 }

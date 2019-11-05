@@ -7,7 +7,9 @@
 
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
-
+import {
+  Model,
+} from './components/model';
 
 export namespace Components {
   interface DtCard {
@@ -17,11 +19,12 @@ export namespace Components {
   interface DtColorPalette {
     'color': string;
   }
-  interface DtColorPicker {
-    'name': string;
+  interface DtColorPicker {}
+  interface DtMain {
+    'model': Model;
   }
-  interface DtMain {}
   interface DtTab {
+    'isSelected': boolean;
     'tab': string;
   }
   interface DtTabBar {}
@@ -138,16 +141,18 @@ declare namespace LocalJSX {
   interface DtColorPalette {
     'color'?: string;
   }
-  interface DtColorPicker {
-    'name'?: string;
+  interface DtColorPicker {}
+  interface DtMain {
+    'model'?: Model;
   }
-  interface DtMain {}
   interface DtTab {
+    'isSelected'?: boolean;
     'tab'?: string;
   }
   interface DtTabBar {}
   interface DtTabButton {
     'isSelected'?: boolean;
+    'onTabActivated'?: (event: CustomEvent<any>) => void;
     'tab'?: string;
   }
   interface DtTabs {

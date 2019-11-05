@@ -1,5 +1,4 @@
-import { Component, Prop, h } from "@stencil/core";
-import { Listen } from "@stencil/core";
+import { Component, Prop, h, Event, EventEmitter } from "@stencil/core";
 
 @Component({
   tag: "dt-tab-button",
@@ -11,8 +10,14 @@ export class TabButton {
   @Prop() tab: string;
   @Prop() isSelected: boolean = false;
 
+  //Events
+  @Event()
+  tabActivated: EventEmitter;
+
+  //Click functions
   tabButtonClicked() {
     this.isSelected = true;
+    this.tabActivated.emit();
   }
 
   render() {

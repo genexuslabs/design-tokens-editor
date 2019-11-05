@@ -29,6 +29,7 @@
   </head>
   <body>
     <dt-main></dt-main>
+    <gxg-button>hola</gxg-button>
     <script>
       const model = {
         colors: {
@@ -70,8 +71,20 @@
           items: []
         }
       };
-
-      /* document.getElementsByTagName("dt-main")[0].setAttribute("model", model); */
+      const main = document.querySelector("dt-main");
+      main.model = model;
+      main.addEventListener("cardDuplicated", event => {
+        console.log(
+          "Received the card duplicated event, for the card id: ",
+          event.detail
+        );
+      });
+      main.addEventListener("cardDeleted", event => {
+        console.log(
+          "Received the card deleted event, for the card id: ",
+          event.detail
+        );
+      });
     </script>
   </body>
 </html>
