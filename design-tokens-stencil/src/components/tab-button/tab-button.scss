@@ -4,7 +4,12 @@
   flex: 1 1 auto !important;
   align-self: center !important;
   line-height: 0;
+
   .tab-item {
+    &--selected {
+      .tab-button {
+      }
+    }
   }
   .tab-button {
     font-size: var(--font-size-sm);
@@ -61,6 +66,11 @@
     &[disabled] {
       color: var(--color-disabled);
       pointer-events: none;
+    }
+    &--selected {
+      &:after {
+        background-color: var(--color-primary-hover);
+      }
     }
   }
 }
