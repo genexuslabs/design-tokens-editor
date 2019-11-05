@@ -28,15 +28,50 @@
     />
   </head>
   <body>
-    <script>
-      // // Card edit button action
-      // let btnEditButton = document.getElementById("btnEditCard");
-      // btnEditButton.addEventListener("click", editAction);
-      // function editAction(){
-      //         let colorPickerMainContainer = document.getElementById("color-picker-main-container");
-      //         colorPickerMainContainer.classList.add("color-picker-main-container--visible");
-      // }
-    </script>
     <dt-main></dt-main>
+    <script>
+      const model = {
+        colors: {
+          disabled: false,
+          items: [
+            {
+              cardId: "01",
+              caption: "rosa",
+              value: "#faa"
+            },
+            {
+              cardId: "02",
+              caption: "celeste",
+              value: "#444"
+            },
+            {
+              cardId: "03",
+              caption: "verde",
+              value: "#ab2"
+            },
+            {
+              cardId: "04",
+              caption: "verde",
+              value: "#ab2"
+            },
+            {
+              cardId: "03",
+              caption: "verde",
+              value: "#ab2"
+            }
+          ]
+        },
+        borders: {
+          disabled: false,
+          items: []
+        },
+        spacing: {
+          disabled: false,
+          items: []
+        }
+      };
+
+      /* document.getElementsByTagName("dt-main")[0].setAttribute("model", model); */
+    </script>
   </body>
 </html>
