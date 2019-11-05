@@ -4,8 +4,10 @@
   margin-bottom: var(--spacing-comp-02);
 
   .card {
-    @include ui-animation(box-shadow);
-    box-shadow: 0;
+    &-main-container {
+      box-shadow: 0;
+      // @include ui-animation(box-shadow);
+    }
     padding: var(--spacing-comp-02);
 
     border-width: var(--border-width-sm);
@@ -63,8 +65,28 @@
     }
 
     &.card--editable {
-      box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
-        0px 2px 1px -1px rgba(0, 0, 0, 0.12), 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
+      padding: 0;
+      position: relative;
+      border-color: transparent;
+
+      .card-header {
+        padding: var(--spacing-comp-02) var(--spacing-comp-02) 0
+          var(--spacing-comp-02); /*should be same padding as .card */
+      }
+      .card-content {
+        padding: 0 var(--spacing-comp-02) var(--spacing-comp-02)
+          var(--spacing-comp-02); /*should be same padding as .card */
+      }
+      .card-main-container {
+        background: var(--color-white);
+        box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+          0px 2px 1px -1px rgba(0, 0, 0, 0.12),
+          0px 1px 3px 0px rgba(0, 0, 0, 0.2);
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 0;
+      }
     }
   }
 }
