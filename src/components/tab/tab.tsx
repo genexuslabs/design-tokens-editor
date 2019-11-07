@@ -28,6 +28,7 @@ export class Tab {
           <div class="tab-container-menu">
             <button class="tab-container-menu-button" data-action="delete">
               <img
+                style={{ width: "15px" }}
                 src="/assets/svg-icons/gxg-icon-magic.svg"
                 alt="Close icon"
               />

@@ -58,6 +58,16 @@
       }
     }
 
+    &-content {
+      &-editable {
+        &-footer {
+          display: flex;
+          justify-content: space-between !important;
+          flex-direction: row-reverse;
+        }
+      }
+    }
+
     &:hover {
       .card-header-menu {
         opacity: 1;
