@@ -45,7 +45,9 @@
         cursor: pointer;
 
         img {
-          height: var(--icon-height-regular);
+          width: var(
+            --icon-height-regular
+          ); //width must be set inline in order to avoid not the tab to "jump" on tab change.
         }
 
         &:hover {
