@@ -33,9 +33,10 @@ export class ColorPicker {
 
         // Input / output Options
         interaction: {
-          hex: true,
-          input: true,
-          save: true
+          // hex: true,
+          // rgb: true,
+          input: true
+          // save: true
         }
       }
     });
@@ -56,6 +57,11 @@ export class ColorPicker {
           class="color-picker-main-container-textbox"
         />
         <div class="color-picker"></div>
+        <div class="cp-gxg-buttons" slot="editable">
+          <gxg-button type="outlined">HEX</gxg-button>
+          <gxg-button type="outlined">Outlined</gxg-button>
+          <gxg-button>Save</gxg-button>
+        </div>
       </div>
     );
   }
