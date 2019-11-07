@@ -109,6 +109,9 @@ export class Card {
             {this.mode === "editable" ? (
               <div class="card-content-editable">
                 <slot name="editable"></slot>
+                <footer class="card-content-editable-footer">
+                  <gxg-button>Save</gxg-button>
+                </footer>
               </div>
             ) : (
               <div class="card-non-editable-content">
