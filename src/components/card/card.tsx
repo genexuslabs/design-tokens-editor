@@ -32,7 +32,7 @@ export class Card {
   @Listen("save")
   saveHandler(event: CustomEvent) {
     this.colorSaved.emit({
-      cardId: this.cardId,
+      id: this.cardId,
       color: event.detail.color,
       title: event.detail.title
     });
