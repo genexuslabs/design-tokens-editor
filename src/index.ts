@@ -1,2 +1,2 @@
-import "gx-geminis-ds";
+import "@genexus/gemini";
 export * from "./components";

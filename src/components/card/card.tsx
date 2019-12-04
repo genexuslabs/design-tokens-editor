@@ -1,4 +1,12 @@
-import { Component, Prop, h, State, Event, EventEmitter } from "@stencil/core";
+import {
+  Component,
+  Prop,
+  h,
+  State,
+  Event,
+  EventEmitter,
+  Listen
+} from "@stencil/core";
 
 @Component({
   tag: "dt-card",
@@ -7,32 +15,30 @@ import { Component, Prop, h, State, Event, EventEmitter } from "@stencil/core";
 })
 export class Card {
   // Indicate that name should be a public property on the component
-  @Prop() title: string = "Card Title";
-  @Prop() cardId: string = "cardId";
+  @Prop() title: string;
+  @Prop() cardId: string;
   @State() mode: string = "non-editable";
 
   //Events
-  @Event({
-    eventName: "cardDuplicated",
-    composed: true,
-    cancelable: true,
-    bubbles: true
-  })
+  @Event()
   cardDuplicated: EventEmitter;
-  @Event({
-    eventName: "cardDeleted",
-    composed: true,
-    cancelable: true,
-    bubbles: true
-  })
+  @Event()
   cardDeleted: EventEmitter;
-  @Event({
-    eventName: "cardClosed",
-    composed: true,
-    cancelable: true,
-    bubbles: true
-  })
+  @Event()
   cardClosed: EventEmitter;
+  @Event()
+  colorSaved: EventEmitter;
+
+  @Listen("save")
+  saveHandler(event: CustomEvent) {
+    this.colorSaved.emit({
+      cardId: this.cardId,
+      color: event.detail.color,
+      title: event.detail.title
+    });
+  }
+  @Listen("nameInputEvent")
+  nameInputHandler(event: CustomEvent) {}
 
   //Click functions
   editCard() {
@@ -109,9 +115,6 @@ export class Card {
             {this.mode === "editable" ? (
               <div class="card-content-editable">
                 <slot name="editable"></slot>
-                <footer class="card-content-editable-footer">
-                  <gxg-button>Save</gxg-button>
-                </footer>
               </div>
             ) : (
               <div class="card-non-editable-content">

@@ -19,7 +19,10 @@ export namespace Components {
   interface DtColorPalette {
     'color': string;
   }
-  interface DtColorPicker {}
+  interface DtColorPicker {
+    'color': string;
+    'title': string;
+  }
   interface DtMain {
     'model': Model;
   }
@@ -136,12 +139,18 @@ declare namespace LocalJSX {
     'onCardClosed'?: (event: CustomEvent<any>) => void;
     'onCardDeleted'?: (event: CustomEvent<any>) => void;
     'onCardDuplicated'?: (event: CustomEvent<any>) => void;
+    'onColorSaved'?: (event: CustomEvent<any>) => void;
     'title'?: string;
   }
   interface DtColorPalette {
     'color'?: string;
   }
-  interface DtColorPicker {}
+  interface DtColorPicker {
+    'color'?: string;
+    'onNameInputEvent'?: (event: CustomEvent<any>) => void;
+    'onSave'?: (event: CustomEvent<any>) => void;
+    'title'?: string;
+  }
   interface DtMain {
     'model'?: Model;
   }

@@ -21,6 +21,7 @@
       }
     </style>
     <link rel="stylesheet" href="./assets/styles/pickr.min.css" />
+    <link rel="stylesheet" href="/build/design-tokens-stencil.css" />
     <!-- 'nano' theme -->
     <link
       href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap"
@@ -29,7 +30,6 @@
   </head>
   <body>
     <dt-main></dt-main>
-    <gxg-button>hola</gxg-button>
     <script>
       const model = {
         colors: {
@@ -71,6 +71,8 @@
           items: []
         }
       };
+
+      //Card "Header buttons" Event Listeners
       const main = document.querySelector("dt-main");
       main.model = model;
       main.addEventListener("cardDuplicated", event => {
@@ -82,6 +84,13 @@
       main.addEventListener("cardDeleted", event => {
         console.log(
           "Received the card deleted event, for the card id: ",
+          event.detail
+        );
+      });
+      //Card "Color picker save button" Event Listener
+      main.addEventListener("colorSaved", event => {
+        console.log(
+          "Received the color picker 'save' button pressed event",
           event.detail
         );
       });

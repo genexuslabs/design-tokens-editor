@@ -7,6 +7,7 @@
     &-main-container {
       box-shadow: 0;
       // @include ui-animation(box-shadow);
+      background: var(--color-background);
     }
     padding: var(--spacing-comp-02);
     border-width: var(--border-width-sm);
@@ -28,7 +29,6 @@
         font-weight: var(--font-weight-bold);
         font-size: var(--font-size-md);
         line-height: 1;
-        text-transform: capitalize;
       }
 
       &-menu {
@@ -87,7 +87,6 @@
           var(--spacing-comp-02); /*should be same padding as .card */
       }
       .card-main-container {
-        background: var(--color-white);
         box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
           0px 2px 1px -1px rgba(0, 0, 0, 0.12),
           0px 1px 3px 0px rgba(0, 0, 0, 0.2);

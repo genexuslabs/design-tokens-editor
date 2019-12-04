@@ -34,7 +34,11 @@ export class Main {
                     slot="non-editable"
                     color={item.value}
                   ></dt-color-palette>
-                  <dt-color-picker slot="editable"></dt-color-picker>
+                  <dt-color-picker
+                    color={item.value}
+                    title={item.caption}
+                    slot="editable"
+                  ></dt-color-picker>
                 </dt-card>
               ))}
             </dt-tab>
