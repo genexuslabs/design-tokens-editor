@@ -27,9 +27,9 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@genexus/gemini": "^0.1.1",
     "@simonwep/pickr": "^1.4.5",
     "chokidar": "^3.2.2",
-    "stencil-fragment": "^1.0.1",
-    "gx-geminis-ds": "0.1.0"
+    "stencil-fragment": "^1.0.1"
   }
 }

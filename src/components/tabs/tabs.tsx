@@ -20,9 +20,11 @@ export class Tabs {
   }
 
   updateActiveChildren(activeTab: string, tagName: string) {
-    const children = Array.from(this.element.querySelectorAll(
-      tagName
-    ) as NodeListOf<HTMLDtTabButtonElement | HTMLDtTabElement>);
+    const children = Array.from(
+      this.element.querySelectorAll(tagName) as NodeListOf<
+        HTMLDtTabButtonElement | HTMLDtTabElement
+      >
+    );
     for (const child of children) {
       child.isSelected = activeTab === child.tab;
     }
