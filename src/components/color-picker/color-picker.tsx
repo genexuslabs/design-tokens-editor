@@ -20,7 +20,7 @@ export class ColorPicker {
 
   @Prop({ mutable: true }) title = "";
   @Prop({ mutable: true }) color = "";
-  @State() colorRepresentation: "HEX" | "RGBA" = "HEX";
+  @State() colorRepresentation: "HEXA" | "RGBA" = "HEXA";
 
   @State() colorObject: Pickr.HSVaColor;
 
@@ -90,9 +90,9 @@ export class ColorPicker {
     this.title = element.value;
   }
   colorValue() {
-    if (this.colorRepresentation === "HEX") {
+    if (this.colorRepresentation === "HEXA") {
       console.log(this.colorObject);
-      return "HEX";
+      return "HEXA";
     } else if (this.colorRepresentation === "RGBA") {
       return "RGBA";
     }
