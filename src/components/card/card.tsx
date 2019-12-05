@@ -1,13 +1,4 @@
-import {
-  Component,
-  Prop,
-  h,
-  State,
-  Event,
-  EventEmitter,
-  Listen,
-  Watch
-} from "@stencil/core";
+import { Component, Prop, h, Event, EventEmitter, Listen } from "@stencil/core";
 
 @Component({
   tag: "dt-card",
