@@ -5,7 +5,8 @@ import {
   State,
   Event,
   EventEmitter,
-  Listen
+  Listen,
+  Watch
 } from "@stencil/core";
 
 @Component({
@@ -17,7 +18,7 @@ export class Card {
   // Indicate that name should be a public property on the component
   @Prop() title: string;
   @Prop() cardId: string;
-  @State() mode: string = "non-editable";
+  @Prop() mode: string = "non-editable";
 
   //Events
   @Event()
@@ -37,8 +38,6 @@ export class Card {
       title: event.detail.title
     });
   }
-  @Listen("nameInputEvent")
-  nameInputHandler(event: CustomEvent) {}
 
   //Click functions
   editCard() {

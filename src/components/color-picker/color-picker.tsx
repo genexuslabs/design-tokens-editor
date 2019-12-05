@@ -22,7 +22,7 @@ export class ColorPicker {
   @Prop({ mutable: true }) color = "";
   @State() colorRepresentation: "HEXA" | "RGBA" = "HEXA";
 
-  @State() colorObject: Pickr.HSVaColor;
+  @State() colorObject: any; // rename to "Pickr.HSVaColor" when this commit is published in a new npm version: https://github.com/Simonwep/pickr/commit/3a6181fed3cc9c0423a8ebd76bde58ca1e7bd891#diff-573ce24aa615d6a8c9a110355faf562bR101
 
   //Events
   @Event()
@@ -62,11 +62,16 @@ export class ColorPicker {
         }
       }
     });
-    this.colorObject = this.pickr.getColor();
+
+    //this.pickr.setColor(this.color); //We have to set the color by force, because we need to get the color at this time, and pickr seems to defer it.
 
     this.pickr.on("change", color => {
       this.colorObject = color;
       this.color = color.toRGBA().toString(0);
+    });
+
+    this.pickr.on("show", () => {
+      this.colorObject = this.pickr.getColor();
     });
   }
   componentDidUnload() {
@@ -76,9 +81,11 @@ export class ColorPicker {
   //Button Methods
   handleHexaButtonClick() {
     this.pickr.setColorRepresentation("HEXA");
+    this.colorRepresentation = "HEXA";
   }
   handleRgbaButtonClick() {
     this.pickr.setColorRepresentation("RGBA");
+    this.colorRepresentation = "RGBA";
   }
   handleSaveButtonClick() {
     //const rgbaColor = this.pickr.getColor().toRGBA();
@@ -90,11 +97,13 @@ export class ColorPicker {
     this.title = element.value;
   }
   colorValue() {
+    if (this.colorObject === undefined) {
+      return "";
+    }
     if (this.colorRepresentation === "HEXA") {
-      console.log(this.colorObject);
-      return "HEXA";
+      return this.colorObject.toHEXA().toString();
     } else if (this.colorRepresentation === "RGBA") {
-      return "RGBA";
+      return this.colorObject.toRGBA().toString(0);
     }
   }
 
