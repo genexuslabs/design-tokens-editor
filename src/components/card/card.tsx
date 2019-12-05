@@ -7,7 +7,7 @@ import { Component, Prop, h, Event, EventEmitter, Listen } from "@stencil/core";
 })
 export class Card {
   // Indicate that name should be a public property on the component
-  @Prop() title: string;
+  @Prop() cardTitle: string;
   @Prop() cardId: string;
   @Prop() mode: string = "non-editable";
 
@@ -26,7 +26,7 @@ export class Card {
     this.colorSaved.emit({
       id: this.cardId,
       color: event.detail.color,
-      title: event.detail.title
+      cardTitle: event.detail.cardTitle
     });
   }
 
@@ -55,7 +55,7 @@ export class Card {
       >
         <div class="card-main-container">
           <header class="card-header">
-            <h3 class="card-header-title">{this.title}</h3>
+            <h3 class="card-header-title">{this.cardTitle}</h3>
             {this.mode === "non-editable" ? (
               <div class="card-header-menu">
                 <button

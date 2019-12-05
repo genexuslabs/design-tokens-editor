@@ -18,7 +18,7 @@ export class ColorPicker {
   @Element() element: HTMLElement;
   private pickr: Pickr;
 
-  @Prop({ mutable: true }) title = "";
+  @Prop({ mutable: true }) cardTitle = "";
   @Prop({ mutable: true }) color = "";
   @State() colorRepresentation: "HEXA" | "RGBA" = "HEXA";
 
@@ -89,12 +89,12 @@ export class ColorPicker {
   }
   handleSaveButtonClick() {
     //const rgbaColor = this.pickr.getColor().toRGBA();
-    this.save.emit({ color: this.color, title: this.title });
+    this.save.emit({ color: this.color, cardTitle: this.cardTitle });
   }
 
   handleInputChange(ev: InputEvent) {
     const element = ev.target as HTMLInputElement;
-    this.title = element.value;
+    this.cardTitle = element.value;
   }
   colorValue() {
     if (this.colorObject === undefined) {
@@ -119,7 +119,7 @@ export class ColorPicker {
         <input
           type="text"
           id="cp-color-name"
-          value={this.title}
+          value={this.cardTitle}
           class="color-picker-main-container-textbox"
           onInput={this.handleInputChange.bind(this)}
         />

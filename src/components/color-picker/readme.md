@@ -7,10 +7,10 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type     | Default |
-| -------- | --------- | ----------- | -------- | ------- |
-| `color`  | `color`   |             | `string` | `""`    |
-| `title`  | `title`   |             | `string` | `""`    |
+| Property    | Attribute    | Description | Type     | Default |
+| ----------- | ------------ | ----------- | -------- | ------- |
+| `cardTitle` | `card-title` |             | `string` | `""`    |
+| `color`     | `color`      |             | `string` | `""`    |
 
 
 ## Events

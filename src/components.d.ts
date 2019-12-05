@@ -14,15 +14,15 @@ import {
 export namespace Components {
   interface DtCard {
     'cardId': string;
+    'cardTitle': string;
     'mode': string;
-    'title': string;
   }
   interface DtColorPalette {
     'color': string;
   }
   interface DtColorPicker {
+    'cardTitle': string;
     'color': string;
-    'title': string;
   }
   interface DtMain {
     'model': Model;
@@ -137,21 +137,21 @@ declare global {
 declare namespace LocalJSX {
   interface DtCard {
     'cardId'?: string;
+    'cardTitle'?: string;
     'mode'?: string;
     'onCardClosed'?: (event: CustomEvent<any>) => void;
     'onCardDeleted'?: (event: CustomEvent<any>) => void;
     'onCardDuplicated'?: (event: CustomEvent<any>) => void;
     'onColorSaved'?: (event: CustomEvent<any>) => void;
-    'title'?: string;
   }
   interface DtColorPalette {
     'color'?: string;
   }
   interface DtColorPicker {
+    'cardTitle'?: string;
     'color'?: string;
     'onNameInputEvent'?: (event: CustomEvent<any>) => void;
     'onSave'?: (event: CustomEvent<any>) => void;
-    'title'?: string;
   }
   interface DtMain {
     'model'?: Model;

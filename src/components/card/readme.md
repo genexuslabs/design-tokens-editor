@@ -7,11 +7,11 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type     | Default          |
-| -------- | --------- | ----------- | -------- | ---------------- |
-| `cardId` | `card-id` |             | `string` | `undefined`      |
-| `mode`   | `mode`    |             | `string` | `"non-editable"` |
-| `title`  | `title`   |             | `string` | `undefined`      |
+| Property    | Attribute    | Description | Type     | Default          |
+| ----------- | ------------ | ----------- | -------- | ---------------- |
+| `cardId`    | `card-id`    |             | `string` | `undefined`      |
+| `cardTitle` | `card-title` |             | `string` | `undefined`      |
+| `mode`      | `mode`       |             | `string` | `"non-editable"` |
 
 
 ## Events
