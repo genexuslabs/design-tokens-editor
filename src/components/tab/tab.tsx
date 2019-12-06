@@ -25,7 +25,9 @@ export class Tab {
           <div class="tab-container-content">
             <slot></slot>
           </div>
-          <div class="tab-container-menu">
+          {
+            // At the time of writting we are not using the "edit" menu, but we will in the future..
+            /* <div class="tab-container-menu">
             <button class="tab-container-menu-button" data-action="delete">
               <img
                 style={{ width: "15px" }}
@@ -33,7 +35,8 @@ export class Tab {
                 alt="Close icon"
               />
             </button>
-          </div>
+          </div> */
+          }
         </div>
       </section>
     ) : (

@@ -1,6 +1,8 @@
 :host {
   display: block;
-  flex: 0 0 calc((100% - var(--spacing-comp-02) * 2) / 3);
+  //flex: 0 0 calc((100% - var(--spacing-comp-02) * 2) / 3);
+  width: 200px;
+  margin-right: var(--spacing-comp-02);
   margin-bottom: var(--spacing-comp-02);
 
   .card {
@@ -97,8 +99,4 @@
       }
     }
   }
-}
-:host(:nth-child(3n-1)) {
-  margin-left: var(--spacing-comp-02);
-  margin-right: var(--spacing-comp-02);
 }
