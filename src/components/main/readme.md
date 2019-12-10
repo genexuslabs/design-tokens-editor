@@ -34,7 +34,6 @@ graph TD;
   dt-main --> dt-card
   dt-main --> dt-color-palette
   dt-main --> dt-color-picker
-  dt-color-picker --> gxg-button
   style dt-main fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

@@ -27,14 +27,9 @@
 
  - [dt-main](../main)
 
-### Depends on
-
-- gxg-button
-
 ### Graph
 ```mermaid
 graph TD;
-  dt-color-picker --> gxg-button
   dt-main --> dt-color-picker
   style dt-color-picker fill:#f9f,stroke:#333,stroke-width:4px
 ```

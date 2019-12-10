@@ -1,4 +1,13 @@
-import { Component, Prop, h, Event, EventEmitter, Listen } from "@stencil/core";
+import {
+  Component,
+  Prop,
+  h,
+  Event,
+  EventEmitter,
+  Listen,
+  Element,
+  Watch
+} from "@stencil/core";
 
 @Component({
   tag: "dt-card",
@@ -6,6 +15,12 @@ import { Component, Prop, h, Event, EventEmitter, Listen } from "@stencil/core";
   shadow: true
 })
 export class Card {
+  constructor() {
+    this.detectClickOutsideCard = this.detectClickOutsideCard.bind(this);
+  }
+
+  @Element() element: HTMLElement;
+
   // Indicate that name should be a public property on the component
   @Prop() cardTitle: string;
   @Prop() cardId: string;
@@ -28,6 +43,42 @@ export class Card {
       color: event.detail.color,
       cardTitle: event.detail.cardTitle
     });
+  }
+
+  @Watch("mode")
+  watchHandler(newValue: string, oldValue: string) {
+    if (newValue === "editable") {
+      document.addEventListener("click", this.detectClickOutsideCard);
+    } else {
+      document.removeEventListener("click", this.detectClickOutsideCard);
+    }
+  }
+
+  detectClickOutsideCard(event) {
+    const cardMainContainer = this.element.shadowRoot.querySelector(
+      ".card-main-container"
+    ) as HTMLElement;
+
+    let x = event.x;
+    let y = event.y;
+
+    //card main container coordinates
+    const cardRect = cardMainContainer.getBoundingClientRect();
+
+    if (
+      x > cardRect.left &&
+      x < cardRect.right &&
+      y > cardRect.top &&
+      y < cardRect.bottom
+    ) {
+      //Click happened inside the card
+    } else {
+      //Click happened outside the card
+      this.mode = "non-editable";
+    }
+  }
+  componentDidUnload() {
+    document.removeEventListener("click", this.detectClickOutsideCard);
   }
 
   //Click functions
