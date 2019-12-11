@@ -115,13 +115,13 @@ export class Card {
                   onClick={this.editCard.bind(this)}
                 >
                   <img
-                    src="./assets/svg-icons/gxg-icon-edit.svg"
+                    src="assets/svg-icons/gxg-icon-edit.svg"
                     alt="Edit icon"
                   />
                 </button>
                 <button class="card-header-menu-button" data-action="duplicate">
                   <img
-                    src="/assets/svg-icons/gxg-icon-duplicate.svg"
+                    src="assets/svg-icons/gxg-icon-duplicate.svg"
                     alt="Duplicate icon"
                     onClick={this.duplicateCard.bind(this)}
                   />
@@ -132,7 +132,7 @@ export class Card {
                   onClick={this.deleteCard.bind(this)}
                 >
                   <img
-                    src="/assets/svg-icons/gxg-icon-delete.svg"
+                    src="assets/svg-icons/gxg-icon-delete.svg"
                     alt="Delete icon"
                   />
                 </button>
@@ -145,7 +145,7 @@ export class Card {
                   onClick={this.closeCard.bind(this)}
                 >
                   <img
-                    src="/assets/svg-icons/gxg-icon-close.svg"
+                    src="assets/svg-icons/gxg-icon-close.svg"
                     alt="Close icon"
                   />
                 </button>
