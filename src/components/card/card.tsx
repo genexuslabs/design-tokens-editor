@@ -46,7 +46,7 @@ export class Card {
   }
 
   @Watch("mode")
-  watchHandler(newValue: string, oldValue: string) {
+  watchHandler(newValue: string) {
     if (newValue === "editable") {
       document.addEventListener("click", this.detectClickOutsideCard);
     } else {

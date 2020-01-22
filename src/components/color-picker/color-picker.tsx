@@ -80,11 +80,9 @@ export class ColorPicker {
 
   //Button Methods
   handleHexaButtonClick() {
-    this.pickr.setColorRepresentation("HEXA");
     this.colorRepresentation = "HEXA";
   }
   handleRgbaButtonClick() {
-    this.pickr.setColorRepresentation("RGBA");
     this.colorRepresentation = "RGBA";
   }
   handleSaveButtonClick() {
