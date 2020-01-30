@@ -50,7 +50,7 @@ export class ColorPicker {
       components: {
         // Main components
         preview: true,
-        opacity: false,
+        opacity: true,
         hue: true,
 
         // Input / output Options
