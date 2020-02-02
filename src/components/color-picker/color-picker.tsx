@@ -89,10 +89,15 @@ export class ColorPicker {
     //const rgbaColor = this.pickr.getColor().toRGBA();
     this.save.emit({ color: this.color, cardTitle: this.cardTitle });
   }
-
-  handleInputChange(ev: InputEvent) {
+  handleTitleValueChange(ev: InputEvent) {
     const element = ev.target as HTMLInputElement;
     this.cardTitle = element.value;
+  }
+  handleColorValueChange(ev: InputEvent) {
+    const element = ev.target as HTMLInputElement;
+    //this.pickr.setColor(element.value);
+    this.color = "red";
+    console.log(this.color);
   }
   colorValue() {
     if (this.colorObject === undefined) {
@@ -119,7 +124,7 @@ export class ColorPicker {
           id="cp-color-name"
           value={this.cardTitle}
           class="color-picker-main-container-textbox"
-          onInput={this.handleInputChange.bind(this)}
+          onInput={this.handleTitleValueChange.bind(this)}
         />
         <div class="color-picker"></div>
         <div class="cp-gxg-buttons before-color-value" slot="editable">
@@ -142,11 +147,11 @@ export class ColorPicker {
           id="cp-color-value"
           value={this.colorValue()}
           class="color-picker-main-container-textbox"
-          onInput={this.handleInputChange.bind(this)}
+          onInput={this.handleColorValueChange.bind(this)}
         />
         <div class="cp-gxg-buttons after-color-value" slot="editable">
           <gxg-button
-            type="Primary"
+            type="primary-text-only"
             onClick={this.handleSaveButtonClick.bind(this)}
           >
             Save
