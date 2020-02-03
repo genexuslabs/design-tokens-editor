@@ -67,7 +67,11 @@ export class ColorPicker {
 
     this.pickr.on("change", color => {
       this.colorObject = color;
-      this.color = color.toRGBA().toString(0);
+      if (this.colorRepresentation === "HEXA") {
+        this.color = this.colorObject.toHEXA().toString();
+      } else if (this.colorRepresentation === "RGBA") {
+        this.color = this.colorObject.toRGBA().toString(0);
+      }
     });
 
     this.pickr.on("show", () => {
