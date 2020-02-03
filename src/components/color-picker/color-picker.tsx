@@ -81,9 +81,11 @@ export class ColorPicker {
   //Button Methods
   handleHexaButtonClick() {
     this.colorRepresentation = "HEXA";
+    this.color = this.colorObject.toHEXA().toString();
   }
   handleRgbaButtonClick() {
     this.colorRepresentation = "RGBA";
+    this.color = this.colorObject.toRGBA().toString(0);
   }
   handleSaveButtonClick() {
     //const rgbaColor = this.pickr.getColor().toRGBA();
@@ -96,8 +98,6 @@ export class ColorPicker {
   handleColorValueChange(ev: InputEvent) {
     const element = ev.target as HTMLInputElement;
     //this.pickr.setColor(element.value);
-    this.color = "red";
-    console.log(this.color);
   }
   colorValue() {
     if (this.colorObject === undefined) {
