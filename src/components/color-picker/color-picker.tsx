@@ -32,6 +32,13 @@ export class ColorPicker {
 
   //Lyfe cycles
   componentDidLoad() {
+    //Detect color representation
+    if (this.color.includes("rgb")) {
+      this.colorRepresentation = "RGBA";
+    } else if (this.color.includes("#")) {
+      this.colorRepresentation = "HEXA";
+    }
+
     const colorPickerEl = this.element.shadowRoot.querySelector(
       ".color-picker"
     ) as HTMLElement;
@@ -78,6 +85,7 @@ export class ColorPicker {
       this.colorObject = this.pickr.getColor();
     });
   }
+
   componentDidUnload() {
     this.pickr.destroy();
   }
