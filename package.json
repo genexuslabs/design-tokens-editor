@@ -1,5 +1,5 @@
 {
-  "name": "@genexus/design-tokens-editor",
+  "name": "@genexus/design-tokens-stencil",
   "version": "0.0.3",
   "description": "Stencil Component Starter",
   "main": "dist/index.js",
