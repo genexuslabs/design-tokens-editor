@@ -109,7 +109,7 @@ export class ColorPicker {
   }
   handleColorValueChange(ev: InputEvent) {
     const element = ev.target as HTMLInputElement;
-    //this.pickr.setColor(element.value);
+    this.pickr.setColor(element.value);
   }
   colorValue() {
     if (this.colorObject === undefined) {
