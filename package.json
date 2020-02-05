@@ -1,5 +1,5 @@
 {
-  "name": "@genexus/design-tokens-stencil",
+  "name": "@genexus/design-tokens-editor",
   "version": "0.0.3",
   "description": "Stencil Component Starter",
   "main": "dist/index.js",
@@ -9,7 +9,7 @@
   "types": "dist/types/index.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "collection:main": "dist/collection/index.js",
-  "unpkg": "dist/design-tokens-stencil/design-tokens-stencil.js",
+  "unpkg": "dist/design-tokens-editor/design-tokens-editor.js",
   "files": [
     "dist/",
     "loader/"
