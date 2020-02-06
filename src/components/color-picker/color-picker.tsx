@@ -32,6 +32,8 @@ export class ColorPicker {
 
   //Lyfe cycles
   componentDidLoad() {
+    console.log(this.element);
+
     //Detect color representation
     if (this.color.includes("rgb")) {
       this.colorRepresentation = "RGBA";
@@ -101,7 +103,6 @@ export class ColorPicker {
     this.color = this.colorObject.toRGBA().toString(0);
   }
   handleSaveButtonClick() {
-    //const rgbaColor = this.pickr.getColor().toRGBA();
     this.save.emit({ color: this.color, cardTitle: this.cardTitle });
   }
   handleTitleValueChange(ev: InputEvent) {
@@ -110,8 +111,13 @@ export class ColorPicker {
   }
   handleColorValueChange(ev: InputEvent) {
     const element = ev.target as HTMLInputElement;
-    console.log(element.value);
     this.pickr.setColor(element.value);
+  }
+  handleKeyDown(event) {
+    //If Enter key was pressed, simulate click on the save button
+    if (event.key === "Enter") {
+      this.handleSaveButtonClick();
+    }
   }
   colorValue() {
     if (this.colorObject === undefined) {
@@ -162,6 +168,7 @@ export class ColorPicker {
           value={this.colorValue()}
           class="color-picker-main-container-textbox"
           onInput={this.handleColorValueChange.bind(this)}
+          onKeyDown={this.handleKeyDown.bind(this)}
         />
         <div class="cp-gxg-buttons after-color-value" slot="editable">
           <gxg-button

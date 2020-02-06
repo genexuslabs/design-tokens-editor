@@ -43,6 +43,9 @@ export class Card {
       color: event.detail.color,
       cardTitle: event.detail.cardTitle
     });
+
+    //close the card
+    this.mode = "non-editable";
   }
 
   @Watch("mode")
@@ -57,6 +60,9 @@ export class Card {
   detectClickOutsideCard(event) {
     if (event.isTrusted) {
       //If event.isTrusted is false, it means it was a click simulated by pickr, on the setColor method (color-picker.tsx) If this is the case, ignore everything.
+
+      console.log(event);
+
       const cardMainContainer = this.element.shadowRoot.querySelector(
         ".card-main-container"
       ) as HTMLElement;
