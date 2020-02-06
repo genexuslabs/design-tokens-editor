@@ -73,6 +73,7 @@ export class ColorPicker {
     //this.pickr.setColor(this.color); //We have to set the color by force, because we need to get the color at this time, and pickr seems to defer it.
 
     this.pickr.on("change", color => {
+      console.log(color);
       this.colorObject = color;
       if (this.colorRepresentation === "HEXA") {
         this.color = this.colorObject.toHEXA().toString();
@@ -109,6 +110,7 @@ export class ColorPicker {
   }
   handleColorValueChange(ev: InputEvent) {
     const element = ev.target as HTMLInputElement;
+    console.log(element.value);
     this.pickr.setColor(element.value);
   }
   colorValue() {

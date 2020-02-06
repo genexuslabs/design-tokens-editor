@@ -55,28 +55,32 @@ export class Card {
   }
 
   detectClickOutsideCard(event) {
-    const cardMainContainer = this.element.shadowRoot.querySelector(
-      ".card-main-container"
-    ) as HTMLElement;
+    if (event.isTrusted) {
+      //If event.isTrusted is false, it means it was a click simulated by pickr, on the setColor method (color-picker.tsx) If this is the case, ignore everything.
+      const cardMainContainer = this.element.shadowRoot.querySelector(
+        ".card-main-container"
+      ) as HTMLElement;
 
-    let x = event.x;
-    let y = event.y;
+      let x = event.x;
+      let y = event.y;
 
-    //card main container coordinates
-    const cardRect = cardMainContainer.getBoundingClientRect();
+      //card main container coordinates
+      const cardRect = cardMainContainer.getBoundingClientRect();
 
-    if (
-      x > cardRect.left &&
-      x < cardRect.right &&
-      y > cardRect.top &&
-      y < cardRect.bottom
-    ) {
-      //Click happened inside the card
-    } else {
-      //Click happened outside the card
-      this.mode = "non-editable";
+      if (
+        x > cardRect.left &&
+        x < cardRect.right &&
+        y > cardRect.top &&
+        y < cardRect.bottom
+      ) {
+        //Click happened inside the card
+      } else {
+        //Click happened outside the card
+        this.mode = "non-editable";
+      }
     }
   }
+
   componentDidUnload() {
     document.removeEventListener("click", this.detectClickOutsideCard);
   }
