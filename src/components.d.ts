@@ -15,7 +15,9 @@ export namespace Components {
   interface DtCard {
     'cardTitle': string;
     'mode': string;
+    'tokenGroup': string;
     'tokenId': string;
+    'tokenValue': string;
   }
   interface DtColorPalette {
     'color': string;
@@ -142,7 +144,9 @@ declare namespace LocalJSX {
     'onCardDeleted'?: (event: CustomEvent<any>) => void;
     'onCardDuplicated'?: (event: CustomEvent<any>) => void;
     'onColorSaved'?: (event: CustomEvent<any>) => void;
+    'tokenGroup'?: string;
     'tokenId'?: string;
+    'tokenValue'?: string;
   }
   interface DtColorPalette {
     'color'?: string;

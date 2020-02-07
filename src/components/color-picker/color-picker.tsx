@@ -28,6 +28,8 @@ export class ColorPicker {
   //Events
   @Event()
   save: EventEmitter;
+  cardSavedEventData: Object = { cardTitle: this.cardTitle, color: this.color };
+
   @Event()
   nameInputEvent: EventEmitter;
 
@@ -107,7 +109,7 @@ export class ColorPicker {
     console.log("this.color: " + this.color);
   }
   handleSaveButtonClick() {
-    this.save.emit({ color: this.color, cardTitle: this.cardTitle });
+    this.save.emit(this.cardSavedEventData);
   }
   handleTitleValueChange(ev: InputEvent) {
     const element = ev.target as HTMLInputElement;

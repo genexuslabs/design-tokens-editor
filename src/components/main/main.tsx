@@ -17,19 +17,27 @@ export class Main {
       <div class="container">
         <dt-tabs>
           <dt-tab-bar>
-            {Object.keys(model).map((token, index) => (
+            {Object.keys(model).map((tokenGroup, index) => (
               <dt-tab-button
-                tab={token}
-                key={token}
+                tab={tokenGroup}
+                key={tokenGroup}
                 isSelected={index === 0}
               ></dt-tab-button>
             ))}
           </dt-tab-bar>
 
-          {Object.keys(model).map((token, index) => (
-            <dt-tab tab={token} key={token} is-selected={(index === 0) == true}>
-              {model[token].items.map(item => (
-                <dt-card cardTitle={item.caption} tokenId={item.id}>
+          {Object.keys(model).map((tokenGroup, index) => (
+            <dt-tab
+              tab={tokenGroup}
+              key={tokenGroup}
+              is-selected={(index === 0) == true}
+            >
+              {model[tokenGroup].items.map(item => (
+                <dt-card
+                  cardTitle={item.caption}
+                  tokenId={item.tokenId}
+                  tokenGroup={tokenGroup}
+                >
                   <dt-color-palette
                     slot="non-editable"
                     color={item.value}
