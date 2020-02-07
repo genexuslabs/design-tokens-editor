@@ -21,6 +21,7 @@ export class ColorPicker {
   @Prop({ mutable: true }) cardTitle = "";
   @Prop({ mutable: true }) color = "";
   @State() colorRepresentation: "HEXA" | "RGBA" = "HEXA";
+  @State() colorInputValue: String = "";
 
   @State() colorObject: any; // rename to "Pickr.HSVaColor" when this commit is published in a new npm version: https://github.com/Simonwep/pickr/commit/3a6181fed3cc9c0423a8ebd76bde58ca1e7bd891#diff-573ce24aa615d6a8c9a110355faf562bR101
 
@@ -30,10 +31,10 @@ export class ColorPicker {
   @Event()
   nameInputEvent: EventEmitter;
 
+  private colorChangedFromInput: boolean = false;
+
   //Lyfe cycles
   componentDidLoad() {
-    console.log(this.element);
-
     //Detect color representation
     if (this.color.includes("rgb")) {
       this.colorRepresentation = "RGBA";
@@ -75,7 +76,6 @@ export class ColorPicker {
     //this.pickr.setColor(this.color); //We have to set the color by force, because we need to get the color at this time, and pickr seems to defer it.
 
     this.pickr.on("change", color => {
-      console.log(color);
       this.colorObject = color;
       if (this.colorRepresentation === "HEXA") {
         this.color = this.colorObject.toHEXA().toString();
@@ -95,12 +95,16 @@ export class ColorPicker {
 
   //Button Methods
   handleHexaButtonClick() {
+    this.colorChangedFromInput = false;
     this.colorRepresentation = "HEXA";
     this.color = this.colorObject.toHEXA().toString();
+    console.log("this.color: " + this.color);
   }
   handleRgbaButtonClick() {
+    this.colorChangedFromInput = false;
     this.colorRepresentation = "RGBA";
     this.color = this.colorObject.toRGBA().toString(0);
+    console.log("this.color: " + this.color);
   }
   handleSaveButtonClick() {
     this.save.emit({ color: this.color, cardTitle: this.cardTitle });
@@ -110,7 +114,9 @@ export class ColorPicker {
     this.cardTitle = element.value;
   }
   handleColorValueChange(ev: InputEvent) {
+    this.colorChangedFromInput = true;
     const element = ev.target as HTMLInputElement;
+    this.colorInputValue = element.value;
     this.pickr.setColor(element.value);
   }
   handleKeyDown(event) {
@@ -120,14 +126,19 @@ export class ColorPicker {
     }
   }
   colorValue() {
-    if (this.colorObject === undefined) {
-      return "";
+    if (!this.colorChangedFromInput) {
+      //We only want to update the color value on the input if the pick was changed directly by handling the color picker window, not by changing the input color value
+      if (this.colorObject === undefined) {
+        return "";
+      }
+      if (this.colorRepresentation === "HEXA") {
+        return this.colorObject.toHEXA().toString();
+      } else if (this.colorRepresentation === "RGBA") {
+        return this.colorObject.toRGBA().toString(0);
+      }
     }
-    if (this.colorRepresentation === "HEXA") {
-      return this.colorObject.toHEXA().toString();
-    } else if (this.colorRepresentation === "RGBA") {
-      return this.colorObject.toRGBA().toString(0);
-    }
+    this.colorChangedFromInput = true;
+    return this.colorInputValue;
   }
 
   render() {

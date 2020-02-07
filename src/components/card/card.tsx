@@ -23,7 +23,7 @@ export class Card {
 
   // Indicate that name should be a public property on the component
   @Prop() cardTitle: string;
-  @Prop() cardId: string;
+  @Prop() tokenId: string;
   @Prop() mode: string = "non-editable";
 
   //Events
@@ -39,7 +39,7 @@ export class Card {
   @Listen("save")
   saveHandler(event: CustomEvent) {
     this.colorSaved.emit({
-      id: this.cardId,
+      id: this.tokenId,
       color: event.detail.color,
       cardTitle: event.detail.cardTitle
     });
@@ -96,10 +96,10 @@ export class Card {
     this.mode = "editable";
   }
   duplicateCard() {
-    this.cardDuplicated.emit(this.cardId);
+    this.cardDuplicated.emit(this.tokenId);
   }
   deleteCard() {
-    this.cardDeleted.emit(this.cardId);
+    this.cardDeleted.emit(this.tokenId);
   }
   closeCard() {
     this.mode = "non-editable";
@@ -112,7 +112,7 @@ export class Card {
           card: true,
           "card--editable": this.mode === "editable"
         }}
-        data-cardId={this.cardId}
+        data-tokenId={this.tokenId}
       >
         <div class="card-main-container">
           <header class="card-header">

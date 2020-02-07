@@ -29,7 +29,7 @@ export class Main {
           {Object.keys(model).map((token, index) => (
             <dt-tab tab={token} key={token} is-selected={(index === 0) == true}>
               {model[token].items.map(item => (
-                <dt-card cardTitle={item.caption} cardId={item.id}>
+                <dt-card cardTitle={item.caption} tokenId={item.id}>
                   <dt-color-palette
                     slot="non-editable"
                     color={item.value}
