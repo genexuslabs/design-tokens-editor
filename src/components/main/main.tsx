@@ -32,19 +32,22 @@ export class Main {
               key={tokenGroup}
               is-selected={(index === 0) == true}
             >
-              {model[tokenGroup].items.map(item => (
+              {console.log("Token group: " + tokenGroup)}
+
+              {model[tokenGroup].tokens.map(token => (
                 <dt-card
-                  cardTitle={item.caption}
-                  tokenId={item.tokenId}
+                  cardTitle={token.caption}
+                  tokenId={token.id}
+                  tokenValue={token.value}
                   tokenGroup={tokenGroup}
                 >
-                  <dt-color-palette
-                    slot="non-editable"
-                    color={item.value}
-                  ></dt-color-palette>
+                  <dt-token-color-palette
+                    slot="preview"
+                    color={token.value}
+                  ></dt-token-color-palette>
                   <dt-color-picker
-                    color={item.value}
-                    cardTitle={item.caption}
+                    color={token.value}
+                    cardTitle={token.caption}
                     slot="editable"
                   ></dt-color-picker>
                 </dt-card>

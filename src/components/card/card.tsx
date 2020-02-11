@@ -26,7 +26,7 @@ export class Card {
   @Prop() tokenId: string;
   @Prop() tokenGroup: string;
   @Prop() tokenValue: string;
-  @Prop() mode: string = "non-editable";
+  @Prop() mode: string = "preview";
 
   //Events
   @Event()
@@ -58,7 +58,7 @@ export class Card {
     });
 
     //close the card
-    this.mode = "non-editable";
+    this.mode = "preview";
   }
 
   @Watch("mode")
@@ -73,9 +73,6 @@ export class Card {
   detectClickOutsideCard(event) {
     if (event.isTrusted) {
       //If event.isTrusted is false, it means it was a click simulated by pickr, on the setColor method (color-picker.tsx) If this is the case, ignore everything.
-
-      console.log(event);
-
       const cardMainContainer = this.element.shadowRoot.querySelector(
         ".card-main-container"
       ) as HTMLElement;
@@ -95,7 +92,7 @@ export class Card {
         //Click happened inside the card
       } else {
         //Click happened outside the card
-        this.mode = "non-editable";
+        this.mode = "preview";
       }
     }
   }
@@ -115,7 +112,7 @@ export class Card {
     this.cardDeleted.emit(this.cardDeletedEventData);
   }
   closeCard() {
-    this.mode = "non-editable";
+    this.mode = "preview";
   }
 
   render() {
@@ -130,7 +127,7 @@ export class Card {
         <div class="card-main-container">
           <header class="card-header">
             <h3 class="card-header-title">{this.cardTitle}</h3>
-            {this.mode === "non-editable" ? (
+            {this.mode === "preview" ? (
               <div class="card-header-menu">
                 <button
                   class="card-header-menu-button"
@@ -176,13 +173,18 @@ export class Card {
             )}
           </header>
           <div class="card-content">
-            {this.mode === "editable" ? (
-              <div class="card-content-editable">
-                <slot name="editable"></slot>
+            {this.mode === "preview" ? (
+              <div class="card-content-preview">
+                <div class="col col-left">
+                  <slot name="preview"></slot>
+                </div>
+                <div class="col col-right">
+                  <span class="token-value">{this.tokenValue}</span>
+                </div>
               </div>
             ) : (
-              <div class="card-non-editable-content">
-                <slot name="non-editable"></slot>
+              <div class="card-content-editable">
+                <slot name="editable"></slot>
               </div>
             )}
           </div>

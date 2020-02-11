@@ -28,7 +28,6 @@ export class ColorPicker {
   //Events
   @Event()
   save: EventEmitter;
-  cardSavedEventData: Object = { cardTitle: this.cardTitle, color: this.color };
 
   @Event()
   nameInputEvent: EventEmitter;
@@ -100,16 +99,14 @@ export class ColorPicker {
     this.colorChangedFromInput = false;
     this.colorRepresentation = "HEXA";
     this.color = this.colorObject.toHEXA().toString();
-    console.log("this.color: " + this.color);
   }
   handleRgbaButtonClick() {
     this.colorChangedFromInput = false;
     this.colorRepresentation = "RGBA";
     this.color = this.colorObject.toRGBA().toString(0);
-    console.log("this.color: " + this.color);
   }
   handleSaveButtonClick() {
-    this.save.emit(this.cardSavedEventData);
+    this.save.emit({ cardTitle: this.cardTitle, color: this.color });
   }
   handleTitleValueChange(ev: InputEvent) {
     const element = ev.target as HTMLInputElement;

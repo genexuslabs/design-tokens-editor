@@ -19,9 +19,6 @@ export namespace Components {
     'tokenId': string;
     'tokenValue': string;
   }
-  interface DtColorPalette {
-    'color': string;
-  }
   interface DtColorPicker {
     'cardTitle': string;
     'color': string;
@@ -29,6 +26,7 @@ export namespace Components {
   interface DtMain {
     'model': Model;
   }
+  interface DtSpacing {}
   interface DtTab {
     'isSelected': boolean;
     'tab': string;
@@ -44,6 +42,10 @@ export namespace Components {
   interface DtTemplate {
     'name': string;
   }
+  interface DtTokenColorPalette {
+    'color': string;
+  }
+  interface DtTokenSpacing {}
   interface MyComponent {
     /**
     * The first name
@@ -69,12 +71,6 @@ declare global {
     new (): HTMLDtCardElement;
   };
 
-  interface HTMLDtColorPaletteElement extends Components.DtColorPalette, HTMLStencilElement {}
-  var HTMLDtColorPaletteElement: {
-    prototype: HTMLDtColorPaletteElement;
-    new (): HTMLDtColorPaletteElement;
-  };
-
   interface HTMLDtColorPickerElement extends Components.DtColorPicker, HTMLStencilElement {}
   var HTMLDtColorPickerElement: {
     prototype: HTMLDtColorPickerElement;
@@ -85,6 +81,12 @@ declare global {
   var HTMLDtMainElement: {
     prototype: HTMLDtMainElement;
     new (): HTMLDtMainElement;
+  };
+
+  interface HTMLDtSpacingElement extends Components.DtSpacing, HTMLStencilElement {}
+  var HTMLDtSpacingElement: {
+    prototype: HTMLDtSpacingElement;
+    new (): HTMLDtSpacingElement;
   };
 
   interface HTMLDtTabElement extends Components.DtTab, HTMLStencilElement {}
@@ -117,6 +119,18 @@ declare global {
     new (): HTMLDtTemplateElement;
   };
 
+  interface HTMLDtTokenColorPaletteElement extends Components.DtTokenColorPalette, HTMLStencilElement {}
+  var HTMLDtTokenColorPaletteElement: {
+    prototype: HTMLDtTokenColorPaletteElement;
+    new (): HTMLDtTokenColorPaletteElement;
+  };
+
+  interface HTMLDtTokenSpacingElement extends Components.DtTokenSpacing, HTMLStencilElement {}
+  var HTMLDtTokenSpacingElement: {
+    prototype: HTMLDtTokenSpacingElement;
+    new (): HTMLDtTokenSpacingElement;
+  };
+
   interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
   var HTMLMyComponentElement: {
     prototype: HTMLMyComponentElement;
@@ -124,14 +138,16 @@ declare global {
   };
   interface HTMLElementTagNameMap {
     'dt-card': HTMLDtCardElement;
-    'dt-color-palette': HTMLDtColorPaletteElement;
     'dt-color-picker': HTMLDtColorPickerElement;
     'dt-main': HTMLDtMainElement;
+    'dt-spacing': HTMLDtSpacingElement;
     'dt-tab': HTMLDtTabElement;
     'dt-tab-bar': HTMLDtTabBarElement;
     'dt-tab-button': HTMLDtTabButtonElement;
     'dt-tabs': HTMLDtTabsElement;
     'dt-template': HTMLDtTemplateElement;
+    'dt-token-color-palette': HTMLDtTokenColorPaletteElement;
+    'dt-token-spacing': HTMLDtTokenSpacingElement;
     'my-component': HTMLMyComponentElement;
   }
 }
@@ -148,9 +164,6 @@ declare namespace LocalJSX {
     'tokenId'?: string;
     'tokenValue'?: string;
   }
-  interface DtColorPalette {
-    'color'?: string;
-  }
   interface DtColorPicker {
     'cardTitle'?: string;
     'color'?: string;
@@ -160,6 +173,7 @@ declare namespace LocalJSX {
   interface DtMain {
     'model'?: Model;
   }
+  interface DtSpacing {}
   interface DtTab {
     'isSelected'?: boolean;
     'tab'?: string;
@@ -176,6 +190,10 @@ declare namespace LocalJSX {
   interface DtTemplate {
     'name'?: string;
   }
+  interface DtTokenColorPalette {
+    'color'?: string;
+  }
+  interface DtTokenSpacing {}
   interface MyComponent {
     /**
     * The first name
@@ -193,14 +211,16 @@ declare namespace LocalJSX {
 
   interface IntrinsicElements {
     'dt-card': DtCard;
-    'dt-color-palette': DtColorPalette;
     'dt-color-picker': DtColorPicker;
     'dt-main': DtMain;
+    'dt-spacing': DtSpacing;
     'dt-tab': DtTab;
     'dt-tab-bar': DtTabBar;
     'dt-tab-button': DtTabButton;
     'dt-tabs': DtTabs;
     'dt-template': DtTemplate;
+    'dt-token-color-palette': DtTokenColorPalette;
+    'dt-token-spacing': DtTokenSpacing;
     'my-component': MyComponent;
   }
 }
@@ -212,14 +232,16 @@ declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
       'dt-card': LocalJSX.DtCard & JSXBase.HTMLAttributes<HTMLDtCardElement>;
-      'dt-color-palette': LocalJSX.DtColorPalette & JSXBase.HTMLAttributes<HTMLDtColorPaletteElement>;
       'dt-color-picker': LocalJSX.DtColorPicker & JSXBase.HTMLAttributes<HTMLDtColorPickerElement>;
       'dt-main': LocalJSX.DtMain & JSXBase.HTMLAttributes<HTMLDtMainElement>;
+      'dt-spacing': LocalJSX.DtSpacing & JSXBase.HTMLAttributes<HTMLDtSpacingElement>;
       'dt-tab': LocalJSX.DtTab & JSXBase.HTMLAttributes<HTMLDtTabElement>;
       'dt-tab-bar': LocalJSX.DtTabBar & JSXBase.HTMLAttributes<HTMLDtTabBarElement>;
       'dt-tab-button': LocalJSX.DtTabButton & JSXBase.HTMLAttributes<HTMLDtTabButtonElement>;
       'dt-tabs': LocalJSX.DtTabs & JSXBase.HTMLAttributes<HTMLDtTabsElement>;
       'dt-template': LocalJSX.DtTemplate & JSXBase.HTMLAttributes<HTMLDtTemplateElement>;
+      'dt-token-color-palette': LocalJSX.DtTokenColorPalette & JSXBase.HTMLAttributes<HTMLDtTokenColorPaletteElement>;
+      'dt-token-spacing': LocalJSX.DtTokenSpacing & JSXBase.HTMLAttributes<HTMLDtTokenSpacingElement>;
       'my-component': LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
     }
   }
