@@ -45,7 +45,9 @@ export namespace Components {
   interface DtTokenColorPalette {
     'color': string;
   }
-  interface DtTokenSpacing {}
+  interface DtTokenSpacing {
+    'size': string;
+  }
   interface MyComponent {
     /**
     * The first name
@@ -193,7 +195,9 @@ declare namespace LocalJSX {
   interface DtTokenColorPalette {
     'color'?: string;
   }
-  interface DtTokenSpacing {}
+  interface DtTokenSpacing {
+    'size'?: string;
+  }
   interface MyComponent {
     /**
     * The first name

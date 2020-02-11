@@ -13,6 +13,33 @@ export class Main {
   render() {
     const { model } = this;
 
+    function switchTokenGroup(tokenGroup, tokenValue, tokenCaption) {
+      console.log("tokengroup is:" + tokenGroup);
+      switch (tokenGroup) {
+        case "colors":
+          return [
+            <dt-token-color-palette
+              slot="preview"
+              color={tokenValue}
+            ></dt-token-color-palette>,
+            <dt-color-picker
+              color={tokenValue}
+              cardTitle={tokenCaption}
+              slot="editable"
+            ></dt-color-picker>
+          ];
+        case "spacing":
+          return [
+            <dt-token-spacing
+              slot="preview"
+              size={tokenValue}
+            ></dt-token-spacing>
+          ];
+        default:
+        // code block
+      }
+    }
+
     return (
       <div class="container">
         <dt-tabs>
@@ -39,15 +66,7 @@ export class Main {
                   tokenValue={token.value}
                   tokenGroup={tokenGroup}
                 >
-                  <dt-token-color-palette
-                    slot="preview"
-                    color={token.value}
-                  ></dt-token-color-palette>
-                  <dt-color-picker
-                    color={token.value}
-                    cardTitle={token.caption}
-                    slot="editable"
-                  ></dt-color-picker>
+                  {switchTokenGroup(tokenGroup, token.value, token.caption)};
                 </dt-card>
               ))}
             </dt-tab>

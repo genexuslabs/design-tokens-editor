@@ -8,7 +8,18 @@ import Fragment from "stencil-fragment";
   shadow: true
 })
 export class Spacing {
+  @Prop() size: string = "0";
+
   render() {
-    return <Host class="spacing-square"></Host>;
+    const styles = {
+      width: this.size,
+      height: this.size
+    };
+
+    return (
+      <Host class="spacing-square">
+        <div class="square" style={styles}></div>
+      </Host>
+    );
   }
 }
