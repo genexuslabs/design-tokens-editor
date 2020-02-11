@@ -49,7 +49,6 @@ export class Card {
 
   @Listen("save")
   saveHandler(event: CustomEvent) {
-    console.log("evento:" + event.detail);
     this.colorSaved.emit({
       tokenId: this.tokenId,
       tokenGroup: this.tokenGroup,

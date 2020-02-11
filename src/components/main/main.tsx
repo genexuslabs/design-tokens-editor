@@ -32,8 +32,6 @@ export class Main {
               key={tokenGroup}
               is-selected={(index === 0) == true}
             >
-              {console.log("Token group: " + tokenGroup)}
-
               {model[tokenGroup].tokens.map(token => (
                 <dt-card
                   cardTitle={token.caption}
