@@ -26,27 +26,27 @@
           disabled: false,
           tokens: [
             {
-              tokenId: "01",
+              id: "01",
               caption: "rosa",
               value: "#faa"
             },
             {
-              tokenId: "02",
+              id: "02",
               caption: "celeste",
               value: "rgb(123,123,123)"
             },
             {
-              tokenId: "03",
+              id: "03",
               caption: "verde",
               value: "#ab2"
             },
             {
-              tokenId: "04",
+              id: "04",
               caption: "verde",
               value: "#ab2"
             },
             {
-              tokenId: "03",
+              id: "03",
               caption: "verde",
               value: "#ab2"
             }
@@ -56,12 +56,12 @@
           disabled: false,
           tokens: [
             {
-              tokenId: "01",
+              id: "01",
               caption: "XSmall",
               value: "8px"
             },
             {
-              tokenId: "02",
+              id: "02",
               caption: "Small",
               value: "10px"
             }
@@ -74,13 +74,13 @@
       main.model = model;
       main.addEventListener("cardDuplicated", event => {
         console.log(
-          "Received the card duplicated event, for the tokenId: ",
+          "Received the card duplicated event, for the id: ",
           event.detail
         );
       });
       main.addEventListener("cardDeleted", event => {
         console.log(
-          "Received the card deleted event, for the tokenId: ",
+          "Received the card deleted event, for the id: ",
           event.detail
         );
       });
