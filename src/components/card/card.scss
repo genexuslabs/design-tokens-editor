@@ -1,7 +1,7 @@
 :host {
   display: block;
   //flex: 0 0 calc((100% - var(--spacing-comp-02) * 2) / 3);
-  width: 200px;
+  width: 230px;
   margin-right: var(--spacing-comp-02);
   margin-bottom: var(--spacing-comp-02);
 
@@ -62,7 +62,6 @@
 
     &-content {
       font-family: var(--font-family-primary);
-      font-size: var(--font-size-md);
       line-height: 1;
       &-preview {
         display: flex;
@@ -76,9 +75,11 @@
             border-right-width: var(--border-width-sm);
             border-right-style: var(--border-style-regular);
             border-right-color: var(--gray-03);
+            font-size: var(--font-size-md);
           }
           &.col-right {
             padding-left: var(--spacing-comp-02);
+            font-size: var(--font-size-md);
           }
         }
       }
