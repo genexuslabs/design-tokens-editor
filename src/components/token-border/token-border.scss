@@ -1,0 +1,16 @@
+:host {
+  display: block;
+  --borderWidthToken: 0;
+}
+
+.square {
+  $squareSize: 60px;
+  display: block;
+  background: var(--color-background);
+  border-color: var(--color-on-background);
+  height: $squareSize;
+  width: $squareSize;
+  border-style: var(--border-style-regular);
+  box-sizing: border-box;
+  border-width: min(var(--borderWidthToken), 20px);
+}

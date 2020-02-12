@@ -44,6 +44,9 @@ export namespace Components {
   interface DtTemplate {
     'name': string;
   }
+  interface DtTokenBorder {
+    'borderWidth': string;
+  }
   interface DtTokenColorPalette {
     'color': string;
   }
@@ -123,6 +126,12 @@ declare global {
     new (): HTMLDtTemplateElement;
   };
 
+  interface HTMLDtTokenBorderElement extends Components.DtTokenBorder, HTMLStencilElement {}
+  var HTMLDtTokenBorderElement: {
+    prototype: HTMLDtTokenBorderElement;
+    new (): HTMLDtTokenBorderElement;
+  };
+
   interface HTMLDtTokenColorPaletteElement extends Components.DtTokenColorPalette, HTMLStencilElement {}
   var HTMLDtTokenColorPaletteElement: {
     prototype: HTMLDtTokenColorPaletteElement;
@@ -150,6 +159,7 @@ declare global {
     'dt-tab-button': HTMLDtTabButtonElement;
     'dt-tabs': HTMLDtTabsElement;
     'dt-template': HTMLDtTemplateElement;
+    'dt-token-border': HTMLDtTokenBorderElement;
     'dt-token-color-palette': HTMLDtTokenColorPaletteElement;
     'dt-token-spacing': HTMLDtTokenSpacingElement;
     'my-component': HTMLMyComponentElement;
@@ -196,6 +206,9 @@ declare namespace LocalJSX {
   interface DtTemplate {
     'name'?: string;
   }
+  interface DtTokenBorder {
+    'borderWidth'?: string;
+  }
   interface DtTokenColorPalette {
     'color'?: string;
   }
@@ -227,6 +240,7 @@ declare namespace LocalJSX {
     'dt-tab-button': DtTabButton;
     'dt-tabs': DtTabs;
     'dt-template': DtTemplate;
+    'dt-token-border': DtTokenBorder;
     'dt-token-color-palette': DtTokenColorPalette;
     'dt-token-spacing': DtTokenSpacing;
     'my-component': MyComponent;
@@ -248,6 +262,7 @@ declare module "@stencil/core" {
       'dt-tab-button': LocalJSX.DtTabButton & JSXBase.HTMLAttributes<HTMLDtTabButtonElement>;
       'dt-tabs': LocalJSX.DtTabs & JSXBase.HTMLAttributes<HTMLDtTabsElement>;
       'dt-template': LocalJSX.DtTemplate & JSXBase.HTMLAttributes<HTMLDtTemplateElement>;
+      'dt-token-border': LocalJSX.DtTokenBorder & JSXBase.HTMLAttributes<HTMLDtTokenBorderElement>;
       'dt-token-color-palette': LocalJSX.DtTokenColorPalette & JSXBase.HTMLAttributes<HTMLDtTokenColorPaletteElement>;
       'dt-token-spacing': LocalJSX.DtTokenSpacing & JSXBase.HTMLAttributes<HTMLDtTokenSpacingElement>;
       'my-component': LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;

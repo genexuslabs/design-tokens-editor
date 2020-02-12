@@ -35,6 +35,13 @@ export class Main {
               size={tokenValue}
             ></dt-token-spacing>
           ];
+        case "border":
+          return [
+            <dt-token-border
+              slot="preview"
+              borderWidth={tokenValue}
+            ></dt-token-border>
+          ];
         default:
         // code block
       }
