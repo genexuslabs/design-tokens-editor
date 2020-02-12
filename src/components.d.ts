@@ -50,6 +50,9 @@ export namespace Components {
   interface DtTokenColorPalette {
     'color': string;
   }
+  interface DtTokenFont {
+    'font': string;
+  }
   interface DtTokenSpacing {
     'size': string;
   }
@@ -138,6 +141,12 @@ declare global {
     new (): HTMLDtTokenColorPaletteElement;
   };
 
+  interface HTMLDtTokenFontElement extends Components.DtTokenFont, HTMLStencilElement {}
+  var HTMLDtTokenFontElement: {
+    prototype: HTMLDtTokenFontElement;
+    new (): HTMLDtTokenFontElement;
+  };
+
   interface HTMLDtTokenSpacingElement extends Components.DtTokenSpacing, HTMLStencilElement {}
   var HTMLDtTokenSpacingElement: {
     prototype: HTMLDtTokenSpacingElement;
@@ -161,6 +170,7 @@ declare global {
     'dt-template': HTMLDtTemplateElement;
     'dt-token-border': HTMLDtTokenBorderElement;
     'dt-token-color-palette': HTMLDtTokenColorPaletteElement;
+    'dt-token-font': HTMLDtTokenFontElement;
     'dt-token-spacing': HTMLDtTokenSpacingElement;
     'my-component': HTMLMyComponentElement;
   }
@@ -212,6 +222,9 @@ declare namespace LocalJSX {
   interface DtTokenColorPalette {
     'color'?: string;
   }
+  interface DtTokenFont {
+    'font'?: string;
+  }
   interface DtTokenSpacing {
     'size'?: string;
   }
@@ -242,6 +255,7 @@ declare namespace LocalJSX {
     'dt-template': DtTemplate;
     'dt-token-border': DtTokenBorder;
     'dt-token-color-palette': DtTokenColorPalette;
+    'dt-token-font': DtTokenFont;
     'dt-token-spacing': DtTokenSpacing;
     'my-component': MyComponent;
   }
@@ -264,6 +278,7 @@ declare module "@stencil/core" {
       'dt-template': LocalJSX.DtTemplate & JSXBase.HTMLAttributes<HTMLDtTemplateElement>;
       'dt-token-border': LocalJSX.DtTokenBorder & JSXBase.HTMLAttributes<HTMLDtTokenBorderElement>;
       'dt-token-color-palette': LocalJSX.DtTokenColorPalette & JSXBase.HTMLAttributes<HTMLDtTokenColorPaletteElement>;
+      'dt-token-font': LocalJSX.DtTokenFont & JSXBase.HTMLAttributes<HTMLDtTokenFontElement>;
       'dt-token-spacing': LocalJSX.DtTokenSpacing & JSXBase.HTMLAttributes<HTMLDtTokenSpacingElement>;
       'my-component': LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
     }

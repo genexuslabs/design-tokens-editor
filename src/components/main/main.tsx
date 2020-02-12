@@ -42,6 +42,10 @@ export class Main {
               borderWidth={tokenValue}
             ></dt-token-border>
           ];
+        case "font":
+          return [
+            <dt-token-font slot="preview" font={tokenValue}></dt-token-font>
+          ];
         default:
         // code block
       }

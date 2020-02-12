@@ -72,7 +72,7 @@
         .col {
           flex: 1;
           .token-value {
-            text-transform: uppercase;
+            text-transform: capitalize;
           }
           &.col-left {
             padding-right: var(--spacing-comp-02);
