@@ -27,6 +27,7 @@ export class Card {
   @Prop() tokenGroup: string;
   @Prop() tokenValue: string;
   @Prop() mode: string = "preview";
+  @Prop() readOnly: boolean = false;
 
   //Events
   @Event()
@@ -129,46 +130,34 @@ export class Card {
             <h3 class="card-header-title">{this.cardTitle}</h3>
             {this.mode === "preview" ? (
               <div class="card-header-menu">
-                <button
-                  class="card-header-menu-button"
-                  data-action="edit"
+                <gxg-button
+                  type="secondary-icon-only"
                   onClick={this.editCard.bind(this)}
+                  disabled={this.readOnly}
                 >
-                  <img
-                    src="assets/svg-icons/gxg-icon-edit.svg"
-                    alt="Edit icon"
-                  />
-                </button>
-                <button class="card-header-menu-button" data-action="duplicate">
-                  <img
-                    src="assets/svg-icons/gxg-icon-duplicate.svg"
-                    alt="Duplicate icon"
-                    onClick={this.duplicateCard.bind(this)}
-                  />
-                </button>
-                <button
-                  class="card-header-menu-button"
-                  data-action="delete"
+                  <gxg-icon slot="icon" type="edit"></gxg-icon>
+                </gxg-button>
+                <gxg-button
+                  type="secondary-icon-only"
+                  onClick={this.duplicateCard.bind(this)}
+                >
+                  <gxg-icon slot="icon" type="duplicate"></gxg-icon>
+                </gxg-button>
+                <gxg-button
+                  type="secondary-icon-only"
                   onClick={this.deleteCard.bind(this)}
                 >
-                  <img
-                    src="assets/svg-icons/gxg-icon-delete.svg"
-                    alt="Delete icon"
-                  />
-                </button>
+                  <gxg-icon slot="icon" type="deleted"></gxg-icon>
+                </gxg-button>
               </div>
             ) : (
               <div class="card-header-menu">
-                <button
-                  class="card-header-menu-button"
-                  data-action="close"
+                <gxg-button
+                  type="secondary-icon-only"
                   onClick={this.closeCard.bind(this)}
                 >
-                  <img
-                    src="assets/svg-icons/gxg-icon-close.svg"
-                    alt="Close icon"
-                  />
-                </button>
+                  <gxg-icon slot="icon" type="close"></gxg-icon>
+                </gxg-button>
               </div>
             )}
           </header>

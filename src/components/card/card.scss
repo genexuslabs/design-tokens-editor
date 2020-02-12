@@ -5,17 +5,20 @@
   margin-right: var(--spacing-comp-02);
   margin-bottom: var(--spacing-comp-02);
 
+  border-width: var(--border-width-sm);
+  border-style: var(--border-style-regular);
+  border-color: var(--gray-03);
+
   .card {
+    display: flex;
+    padding: var(--spacing-comp-02);
+
     &-main-container {
+      flex: 1;
       box-shadow: 0;
       // @include ui-animation(box-shadow);
       background: var(--color-background);
     }
-    padding: var(--spacing-comp-02);
-    border-width: var(--border-width-sm);
-    border-style: var(--border-style-regular);
-    border-color: var(--gray-03);
-
     &-header {
       display: flex !important;
       margin-bottom: var(--spacing-comp-02);
@@ -65,6 +68,7 @@
       line-height: 1;
       &-preview {
         display: flex;
+        min-height: 60px;
         .col {
           flex: 1;
           .token-value {

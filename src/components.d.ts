@@ -15,6 +15,7 @@ export namespace Components {
   interface DtCard {
     'cardTitle': string;
     'mode': string;
+    'readOnly': boolean;
     'tokenGroup': string;
     'tokenId': string;
     'tokenValue': string;
@@ -33,6 +34,7 @@ export namespace Components {
   }
   interface DtTabBar {}
   interface DtTabButton {
+    'disabled': boolean;
     'isSelected': boolean;
     'tab': string;
   }
@@ -162,6 +164,7 @@ declare namespace LocalJSX {
     'onCardDeleted'?: (event: CustomEvent<any>) => void;
     'onCardDuplicated'?: (event: CustomEvent<any>) => void;
     'onColorSaved'?: (event: CustomEvent<any>) => void;
+    'readOnly'?: boolean;
     'tokenGroup'?: string;
     'tokenId'?: string;
     'tokenValue'?: string;
@@ -182,6 +185,7 @@ declare namespace LocalJSX {
   }
   interface DtTabBar {}
   interface DtTabButton {
+    'disabled'?: boolean;
     'isSelected'?: boolean;
     'onTabActivated'?: (event: CustomEvent<any>) => void;
     'tab'?: string;

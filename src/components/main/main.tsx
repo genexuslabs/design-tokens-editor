@@ -65,6 +65,7 @@ export class Main {
                   tokenId={token.id}
                   tokenValue={token.value}
                   tokenGroup={tokenGroup}
+                  readOnly={model[tokenGroup].readOnly}
                 >
                   {switchTokenGroup(tokenGroup, token.value, token.caption)};
                 </dt-card>

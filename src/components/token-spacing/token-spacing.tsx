@@ -1,6 +1,4 @@
 import { Host, Component, Prop, h } from "@stencil/core";
-import Fragment from "stencil-fragment";
-// import Pickr from '@simonwep/pickr';
 
 @Component({
   tag: "dt-token-spacing",
@@ -13,7 +11,9 @@ export class Spacing {
   render() {
     const styles = {
       width: this.size,
-      height: this.size
+      height: this.size,
+      maxWidth: "64px",
+      maxHeight: "64px"
     };
 
     return (

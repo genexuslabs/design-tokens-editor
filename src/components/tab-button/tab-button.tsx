@@ -9,6 +9,7 @@ export class TabButton {
   // Indicate that name should be a public property on the component
   @Prop() tab: string;
   @Prop() isSelected: boolean = false;
+  @Prop() disabled: boolean = false;
 
   //Events
   @Event()
@@ -24,6 +25,7 @@ export class TabButton {
     return (
       <li class="tab-item">
         <button
+          disabled={this.disabled}
           class={{
             "tab-button": true,
             "tab-button--selected": this.isSelected === true
