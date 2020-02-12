@@ -53,6 +53,13 @@ export class Main {
               fontSize={tokenValue}
             ></dt-token-font-size>
           ];
+        case "radius":
+          return [
+            <dt-token-radius
+              slot="preview"
+              radius={tokenValue}
+            ></dt-token-radius>
+          ];
         default:
         // code block
       }

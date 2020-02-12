@@ -1,0 +1,16 @@
+:host {
+  display: block;
+  --radiusTokenRadius: 0; //default border width
+}
+.border-radius {
+  $squareSize: 40px;
+  width: $squareSize;
+  height: $squareSize;
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--color-on-background);
+  display: block;
+  border-bottom: 0;
+  border-left: 0;
+  border-top-right-radius: min(var(--radiusTokenRadius), 20px);
+}

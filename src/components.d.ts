@@ -27,7 +27,6 @@ export namespace Components {
   interface DtMain {
     'model': Model;
   }
-  interface DtSpacing {}
   interface DtTab {
     'isSelected': boolean;
     'tab': string;
@@ -56,9 +55,14 @@ export namespace Components {
   interface DtTokenFontSize {
     'fontSize': string;
   }
+  interface DtTokenOpacity {}
+  interface DtTokenRadius {
+    'radius': string;
+  }
   interface DtTokenSpacing {
     'size': string;
   }
+  interface DtTokenTemplate {}
   interface MyComponent {
     /**
     * The first name
@@ -94,12 +98,6 @@ declare global {
   var HTMLDtMainElement: {
     prototype: HTMLDtMainElement;
     new (): HTMLDtMainElement;
-  };
-
-  interface HTMLDtSpacingElement extends Components.DtSpacing, HTMLStencilElement {}
-  var HTMLDtSpacingElement: {
-    prototype: HTMLDtSpacingElement;
-    new (): HTMLDtSpacingElement;
   };
 
   interface HTMLDtTabElement extends Components.DtTab, HTMLStencilElement {}
@@ -156,10 +154,28 @@ declare global {
     new (): HTMLDtTokenFontSizeElement;
   };
 
+  interface HTMLDtTokenOpacityElement extends Components.DtTokenOpacity, HTMLStencilElement {}
+  var HTMLDtTokenOpacityElement: {
+    prototype: HTMLDtTokenOpacityElement;
+    new (): HTMLDtTokenOpacityElement;
+  };
+
+  interface HTMLDtTokenRadiusElement extends Components.DtTokenRadius, HTMLStencilElement {}
+  var HTMLDtTokenRadiusElement: {
+    prototype: HTMLDtTokenRadiusElement;
+    new (): HTMLDtTokenRadiusElement;
+  };
+
   interface HTMLDtTokenSpacingElement extends Components.DtTokenSpacing, HTMLStencilElement {}
   var HTMLDtTokenSpacingElement: {
     prototype: HTMLDtTokenSpacingElement;
     new (): HTMLDtTokenSpacingElement;
+  };
+
+  interface HTMLDtTokenTemplateElement extends Components.DtTokenTemplate, HTMLStencilElement {}
+  var HTMLDtTokenTemplateElement: {
+    prototype: HTMLDtTokenTemplateElement;
+    new (): HTMLDtTokenTemplateElement;
   };
 
   interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
@@ -171,7 +187,6 @@ declare global {
     'dt-card': HTMLDtCardElement;
     'dt-color-picker': HTMLDtColorPickerElement;
     'dt-main': HTMLDtMainElement;
-    'dt-spacing': HTMLDtSpacingElement;
     'dt-tab': HTMLDtTabElement;
     'dt-tab-bar': HTMLDtTabBarElement;
     'dt-tab-button': HTMLDtTabButtonElement;
@@ -181,7 +196,10 @@ declare global {
     'dt-token-color-palette': HTMLDtTokenColorPaletteElement;
     'dt-token-font': HTMLDtTokenFontElement;
     'dt-token-font-size': HTMLDtTokenFontSizeElement;
+    'dt-token-opacity': HTMLDtTokenOpacityElement;
+    'dt-token-radius': HTMLDtTokenRadiusElement;
     'dt-token-spacing': HTMLDtTokenSpacingElement;
+    'dt-token-template': HTMLDtTokenTemplateElement;
     'my-component': HTMLMyComponentElement;
   }
 }
@@ -208,7 +226,6 @@ declare namespace LocalJSX {
   interface DtMain {
     'model'?: Model;
   }
-  interface DtSpacing {}
   interface DtTab {
     'isSelected'?: boolean;
     'tab'?: string;
@@ -238,9 +255,14 @@ declare namespace LocalJSX {
   interface DtTokenFontSize {
     'fontSize'?: string;
   }
+  interface DtTokenOpacity {}
+  interface DtTokenRadius {
+    'radius'?: string;
+  }
   interface DtTokenSpacing {
     'size'?: string;
   }
+  interface DtTokenTemplate {}
   interface MyComponent {
     /**
     * The first name
@@ -260,7 +282,6 @@ declare namespace LocalJSX {
     'dt-card': DtCard;
     'dt-color-picker': DtColorPicker;
     'dt-main': DtMain;
-    'dt-spacing': DtSpacing;
     'dt-tab': DtTab;
     'dt-tab-bar': DtTabBar;
     'dt-tab-button': DtTabButton;
@@ -270,7 +291,10 @@ declare namespace LocalJSX {
     'dt-token-color-palette': DtTokenColorPalette;
     'dt-token-font': DtTokenFont;
     'dt-token-font-size': DtTokenFontSize;
+    'dt-token-opacity': DtTokenOpacity;
+    'dt-token-radius': DtTokenRadius;
     'dt-token-spacing': DtTokenSpacing;
+    'dt-token-template': DtTokenTemplate;
     'my-component': MyComponent;
   }
 }
@@ -284,7 +308,6 @@ declare module "@stencil/core" {
       'dt-card': LocalJSX.DtCard & JSXBase.HTMLAttributes<HTMLDtCardElement>;
       'dt-color-picker': LocalJSX.DtColorPicker & JSXBase.HTMLAttributes<HTMLDtColorPickerElement>;
       'dt-main': LocalJSX.DtMain & JSXBase.HTMLAttributes<HTMLDtMainElement>;
-      'dt-spacing': LocalJSX.DtSpacing & JSXBase.HTMLAttributes<HTMLDtSpacingElement>;
       'dt-tab': LocalJSX.DtTab & JSXBase.HTMLAttributes<HTMLDtTabElement>;
       'dt-tab-bar': LocalJSX.DtTabBar & JSXBase.HTMLAttributes<HTMLDtTabBarElement>;
       'dt-tab-button': LocalJSX.DtTabButton & JSXBase.HTMLAttributes<HTMLDtTabButtonElement>;
@@ -294,7 +317,10 @@ declare module "@stencil/core" {
       'dt-token-color-palette': LocalJSX.DtTokenColorPalette & JSXBase.HTMLAttributes<HTMLDtTokenColorPaletteElement>;
       'dt-token-font': LocalJSX.DtTokenFont & JSXBase.HTMLAttributes<HTMLDtTokenFontElement>;
       'dt-token-font-size': LocalJSX.DtTokenFontSize & JSXBase.HTMLAttributes<HTMLDtTokenFontSizeElement>;
+      'dt-token-opacity': LocalJSX.DtTokenOpacity & JSXBase.HTMLAttributes<HTMLDtTokenOpacityElement>;
+      'dt-token-radius': LocalJSX.DtTokenRadius & JSXBase.HTMLAttributes<HTMLDtTokenRadiusElement>;
       'dt-token-spacing': LocalJSX.DtTokenSpacing & JSXBase.HTMLAttributes<HTMLDtTokenSpacingElement>;
+      'dt-token-template': LocalJSX.DtTokenTemplate & JSXBase.HTMLAttributes<HTMLDtTokenTemplateElement>;
       'my-component': LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
     }
   }

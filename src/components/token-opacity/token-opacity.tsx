@@ -3,11 +3,11 @@ import Fragment from "stencil-fragment";
 // import Pickr from '@simonwep/pickr';
 
 @Component({
-  tag: "dt-spacing",
-  styleUrl: "token-spacing.scss",
+  tag: "dt-token-opacity",
+  styleUrl: "token-opacity.scss",
   shadow: true
 })
-export class Spacing {
+export class Opacity {
   render() {
     return <Fragment></Fragment>;
   }
