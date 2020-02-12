@@ -1,6 +1,6 @@
 :host {
   display: block;
-  --borderWidthToken: 0;
+  --borderWidthTokenBorderWidth: 0; //default border width
 }
 
 .square {
@@ -12,5 +12,5 @@
   width: $squareSize;
   border-style: var(--border-style-regular);
   box-sizing: border-box;
-  border-width: min(var(--borderWidthToken), 20px);
+  border-width: min(var(--borderWidthTokenBorderWidth), 20px);
 }

@@ -46,6 +46,13 @@ export class Main {
           return [
             <dt-token-font slot="preview" font={tokenValue}></dt-token-font>
           ];
+        case "fontSize":
+          return [
+            <dt-token-font-size
+              slot="preview"
+              fontSize={tokenValue}
+            ></dt-token-font-size>
+          ];
         default:
         // code block
       }

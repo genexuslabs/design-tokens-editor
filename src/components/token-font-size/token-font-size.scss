@@ -1,0 +1,5 @@
+:host {
+  display: block;
+  --fontSizeTokenFontSize: "1px"; //default font size
+  font-size: min(var(--fontSizeTokenFontSize), 48px);
+}

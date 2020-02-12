@@ -15,7 +15,7 @@ export class Border {
       <Host class="border-square">
         <div
           class="square"
-          style={{ "--borderWidthToken": this.borderWidth }}
+          style={{ "--borderWidthTokenBorderWidth": this.borderWidth }}
         ></div>
       </Host>
     );
