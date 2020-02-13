@@ -63,6 +63,9 @@ export namespace Components {
     'size': string;
   }
   interface DtTokenTemplate {}
+  interface DtTokenTransition {
+    'transition': string;
+  }
   interface MyComponent {
     /**
     * The first name
@@ -178,6 +181,12 @@ declare global {
     new (): HTMLDtTokenTemplateElement;
   };
 
+  interface HTMLDtTokenTransitionElement extends Components.DtTokenTransition, HTMLStencilElement {}
+  var HTMLDtTokenTransitionElement: {
+    prototype: HTMLDtTokenTransitionElement;
+    new (): HTMLDtTokenTransitionElement;
+  };
+
   interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
   var HTMLMyComponentElement: {
     prototype: HTMLMyComponentElement;
@@ -200,6 +209,7 @@ declare global {
     'dt-token-radius': HTMLDtTokenRadiusElement;
     'dt-token-spacing': HTMLDtTokenSpacingElement;
     'dt-token-template': HTMLDtTokenTemplateElement;
+    'dt-token-transition': HTMLDtTokenTransitionElement;
     'my-component': HTMLMyComponentElement;
   }
 }
@@ -263,6 +273,9 @@ declare namespace LocalJSX {
     'size'?: string;
   }
   interface DtTokenTemplate {}
+  interface DtTokenTransition {
+    'transition'?: string;
+  }
   interface MyComponent {
     /**
     * The first name
@@ -295,6 +308,7 @@ declare namespace LocalJSX {
     'dt-token-radius': DtTokenRadius;
     'dt-token-spacing': DtTokenSpacing;
     'dt-token-template': DtTokenTemplate;
+    'dt-token-transition': DtTokenTransition;
     'my-component': MyComponent;
   }
 }
@@ -321,6 +335,7 @@ declare module "@stencil/core" {
       'dt-token-radius': LocalJSX.DtTokenRadius & JSXBase.HTMLAttributes<HTMLDtTokenRadiusElement>;
       'dt-token-spacing': LocalJSX.DtTokenSpacing & JSXBase.HTMLAttributes<HTMLDtTokenSpacingElement>;
       'dt-token-template': LocalJSX.DtTokenTemplate & JSXBase.HTMLAttributes<HTMLDtTokenTemplateElement>;
+      'dt-token-transition': LocalJSX.DtTokenTransition & JSXBase.HTMLAttributes<HTMLDtTokenTransitionElement>;
       'my-component': LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
     }
   }

@@ -1,0 +1,27 @@
+:host-context(dt-card:hover) {
+  --animation-play-state-hover: running;
+}
+:host {
+  display: block;
+  --tokenTransitionAnimationValues: 0s ease-in;
+}
+
+.circle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--color-secondary-active);
+  position: relative;
+  display: inline-block;
+  animation: var(--tokenTransitionAnimationValues) 0s infinite alternate both
+    var(--animation-play-state-hover, paused) circleAnimation;
+}
+
+@keyframes circleAnimation {
+  from {
+    left: 0;
+  }
+  to {
+    left: calc(100% - 16px);
+  }
+}

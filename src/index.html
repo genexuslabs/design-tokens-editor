@@ -22,6 +22,26 @@
     <dt-main></dt-main>
     <script>
       const model = {
+        transition: {
+          readOnly: true,
+          tokens: [
+            {
+              id: "01",
+              caption: "snail",
+              value: "3s ease-in"
+            },
+            {
+              id: "01",
+              caption: "rabbit",
+              value: "1s ease-in-out"
+            },
+            {
+              id: "01",
+              caption: "horse",
+              value: "0.3s ease-out"
+            }
+          ]
+        },
         colors: {
           readOnly: false,
           tokens: [
@@ -108,12 +128,16 @@
             {
               id: "01",
               caption: "Primary Font",
-              value: "arial"
+              value: "arial",
+              metaData: {
+                fontPath: ""
+              }
             },
             {
               id: "02",
               caption: "Secondary Font",
-              value: "georgia"
+              value: "georgia",
+              fontPath: "c:/georgia"
             },
             {
               id: "03",
@@ -148,7 +172,7 @@
             {
               id: "04",
               caption: "Big",
-              value: "34px"
+              value: "99px"
             }
           ]
         },

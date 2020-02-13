@@ -60,6 +60,13 @@ export class Main {
               radius={tokenValue}
             ></dt-token-radius>
           ];
+        case "transition":
+          return [
+            <dt-token-transition
+              slot="preview"
+              transition={tokenValue}
+            ></dt-token-transition>
+          ];
         default:
         // code block
       }
