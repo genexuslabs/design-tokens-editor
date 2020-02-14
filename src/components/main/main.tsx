@@ -87,13 +87,14 @@ export class Main {
               key={tokenGroup}
               is-selected={(index === 0) == true}
             >
-              {model[tokenGroup].tokens.map(token => (
+              {model[tokenGroup].tokens.map((token, index) => (
                 <dt-card
                   cardTitle={token.caption}
                   tokenId={token.id}
                   tokenValue={token.value}
                   tokenGroup={tokenGroup}
                   readOnly={model[tokenGroup].readOnly}
+                  index={index}
                 >
                   {switchTokenGroup(tokenGroup, token.value, token.caption)};
                 </dt-card>

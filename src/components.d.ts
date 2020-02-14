@@ -14,6 +14,7 @@ import {
 export namespace Components {
   interface DtCard {
     'cardTitle': string;
+    'index': number;
     'mode': string;
     'readOnly': boolean;
     'tokenGroup': string;
@@ -225,6 +226,7 @@ declare global {
 declare namespace LocalJSX {
   interface DtCard {
     'cardTitle'?: string;
+    'index'?: number;
     'mode'?: string;
     'onCardClosed'?: (event: CustomEvent<any>) => void;
     'onCardDeleted'?: (event: CustomEvent<any>) => void;

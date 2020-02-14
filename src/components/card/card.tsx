@@ -6,7 +6,8 @@ import {
   EventEmitter,
   Listen,
   Element,
-  Watch
+  Watch,
+  Host
 } from "@stencil/core";
 
 @Component({
@@ -28,6 +29,7 @@ export class Card {
   @Prop() tokenValue: string;
   @Prop() mode: string = "preview";
   @Prop() readOnly: boolean = false;
+  @Prop() index: number; //index is for applying an increasing delay to the cards animation
 
   //Events
   @Event()
@@ -102,6 +104,11 @@ export class Card {
     document.removeEventListener("click", this.detectClickOutsideCard);
   }
 
+  componentDidLoad() {
+    console.log(this.index + "s");
+    console.log("nhoal");
+  }
+
   //Click functions
   editCard() {
     this.mode = "editable";
@@ -118,74 +125,76 @@ export class Card {
 
   render() {
     return (
-      <div
-        class={{
-          card: true,
-          "card--editable": this.mode === "editable"
-        }}
-        data-tokenId={this.tokenId}
-      >
-        <div class="card-main-container">
-          <header class="card-header">
-            <h3 class="card-header-title">{this.cardTitle}</h3>
-            {this.mode === "preview" ? (
-              <div class="card-header-menu">
-                <gxg-button
-                  type="secondary-icon-only"
-                  onClick={this.editCard.bind(this)}
-                  disabled={this.readOnly}
-                  title={
-                    this.readOnly === true
-                      ? "edit token (comming soon)"
-                      : "edit token"
-                  }
-                >
-                  <gxg-icon slot="icon" type="edit"></gxg-icon>
-                </gxg-button>
-                <gxg-button
-                  type="secondary-icon-only"
-                  onClick={this.duplicateCard.bind(this)}
-                  title="duplicate token"
-                >
-                  <gxg-icon slot="icon" type="duplicate"></gxg-icon>
-                </gxg-button>
-                <gxg-button
-                  type="secondary-icon-only"
-                  onClick={this.deleteCard.bind(this)}
-                  title="delete token"
-                >
-                  <gxg-icon slot="icon" type="deleted"></gxg-icon>
-                </gxg-button>
-              </div>
-            ) : (
-              <div class="card-header-menu">
-                <gxg-button
-                  type="secondary-icon-only"
-                  onClick={this.closeCard.bind(this)}
-                >
-                  <gxg-icon slot="icon" type="close"></gxg-icon>
-                </gxg-button>
-              </div>
-            )}
-          </header>
-          <div class="card-content">
-            {this.mode === "preview" ? (
-              <div class="card-content-preview">
-                <div class="col col-left">
-                  <slot name="preview"></slot>
+      <Host style={{ "--cardAnimationDelay": this.index * 0.125 + "s" }}>
+        <div
+          class={{
+            card: true,
+            "card--editable": this.mode === "editable"
+          }}
+          data-tokenId={this.tokenId}
+        >
+          <div class="card-main-container">
+            <header class="card-header">
+              <h3 class="card-header-title">{this.cardTitle}</h3>
+              {this.mode === "preview" ? (
+                <div class="card-header-menu">
+                  <gxg-button
+                    type="secondary-icon-only"
+                    onClick={this.editCard.bind(this)}
+                    disabled={this.readOnly}
+                    title={
+                      this.readOnly === true
+                        ? "edit token (comming soon)"
+                        : "edit token"
+                    }
+                  >
+                    <gxg-icon slot="icon" type="edit"></gxg-icon>
+                  </gxg-button>
+                  <gxg-button
+                    type="secondary-icon-only"
+                    onClick={this.duplicateCard.bind(this)}
+                    title="duplicate token"
+                  >
+                    <gxg-icon slot="icon" type="duplicate"></gxg-icon>
+                  </gxg-button>
+                  <gxg-button
+                    type="secondary-icon-only"
+                    onClick={this.deleteCard.bind(this)}
+                    title="delete token"
+                  >
+                    <gxg-icon slot="icon" type="deleted"></gxg-icon>
+                  </gxg-button>
                 </div>
-                <div class="col col-right">
-                  <span class="token-value">{this.tokenValue}</span>
+              ) : (
+                <div class="card-header-menu">
+                  <gxg-button
+                    type="secondary-icon-only"
+                    onClick={this.closeCard.bind(this)}
+                  >
+                    <gxg-icon slot="icon" type="close"></gxg-icon>
+                  </gxg-button>
                 </div>
-              </div>
-            ) : (
-              <div class="card-content-editable">
-                <slot name="editable"></slot>
-              </div>
-            )}
+              )}
+            </header>
+            <div class="card-content">
+              {this.mode === "preview" ? (
+                <div class="card-content-preview">
+                  <div class="col col-left">
+                    <slot name="preview"></slot>
+                  </div>
+                  <div class="col col-right">
+                    <span class="token-value">{this.tokenValue}</span>
+                  </div>
+                </div>
+              ) : (
+                <div class="card-content-editable">
+                  <slot name="editable"></slot>
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      </Host>
     );
   }
 }

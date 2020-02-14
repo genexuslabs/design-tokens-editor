@@ -1,16 +1,22 @@
 :host {
   //animation
   --cardAnimationDelay: 0;
+  $cardAnimationTopInitial: -5px;
+  $cardAnimationOpacityInitial: 0;
+
   position: relative;
   animation-name: slideUp;
   animation-duration: 0.75s;
   animation-iteration-count: 1;
   animation-delay: var(--cardAnimationDelay);
+  animation-fill-mode: forwards;
+  top: $cardAnimationTopInitial;
+  opacity: $cardAnimationOpacityInitial;
 
   @keyframes slideUp {
     0% {
-      top: -5px;
-      opacity: 0;
+      top: $cardAnimationTopInitial;
+      opacity: $cardAnimationOpacityInitial;
     }
     100% {
       top: 0px;
