@@ -144,18 +144,25 @@ export class Card {
                   type="secondary-icon-only"
                   onClick={this.editCard.bind(this)}
                   disabled={this.readOnly}
+                  title={
+                    this.readOnly === true
+                      ? "edit token (comming soon)"
+                      : "edit token"
+                  }
                 >
                   <gxg-icon slot="icon" type="edit"></gxg-icon>
                 </gxg-button>
                 <gxg-button
                   type="secondary-icon-only"
                   onClick={this.duplicateCard.bind(this)}
+                  title="duplicate token"
                 >
                   <gxg-icon slot="icon" type="duplicate"></gxg-icon>
                 </gxg-button>
                 <gxg-button
                   type="secondary-icon-only"
                   onClick={this.deleteCard.bind(this)}
+                  title="delete token"
                 >
                   <gxg-icon slot="icon" type="deleted"></gxg-icon>
                 </gxg-button>
