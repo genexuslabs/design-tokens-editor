@@ -64,7 +64,7 @@ export namespace Components {
   }
   interface DtTokenTemplate {}
   interface DtTokenTime {
-    'transition': string;
+    'time': string;
   }
   interface DtTokenZIndex {}
   interface MyComponent {
@@ -282,7 +282,7 @@ declare namespace LocalJSX {
   }
   interface DtTokenTemplate {}
   interface DtTokenTime {
-    'transition'?: string;
+    'time'?: string;
   }
   interface DtTokenZIndex {}
   interface MyComponent {

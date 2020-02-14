@@ -6,11 +6,11 @@ import { Component, Prop, h, Host, Element, State } from "@stencil/core";
   shadow: true
 })
 export class Time {
-  @Prop() transition: string = "0s";
+  @Prop() time: string = "0s";
 
   render() {
     return (
-      <Host class="" style={{ "--tokenTimeValue": this.transition }}>
+      <Host class="" style={{ "--tokenTimeValue": this.time }}>
         <div class="circle-box">
           <div class="circle"></div>
         </div>

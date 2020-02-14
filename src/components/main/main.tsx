@@ -61,10 +61,7 @@ export class Main {
           ];
         case "times":
           return [
-            <dt-token-time
-              slot="preview"
-              transition={tokenValue}
-            ></dt-token-transition>
+            <dt-token-time slot="preview" time={tokenValue}></dt-token-time>
           ];
         default:
         // code block
