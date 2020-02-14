@@ -4,26 +4,27 @@ This token defines the font-family, font-variant, and font-style properties, and
 
 <!-- Auto Generated Below -->
 
+
 ## Properties
 
-| Property | Attribute | Description | Type     | Default  |
-| -------- | --------- | ----------- | -------- | -------- |
-| `color`  | `color`   |             | `string` | `"#CCC"` |
+| Property | Attribute | Description | Type     | Default              |
+| -------- | --------- | ----------- | -------- | -------------------- |
+| `font`   | `font`    |             | `string` | `"OpenSans-Regular"` |
+
 
 ## Dependencies
 
 ### Used by
 
-- [dt-main](../main)
+ - [dt-main](../main)
 
 ### Graph
-
 ```mermaid
 graph TD;
-  dt-main --> dt-color-palette
-  style dt-color-palette fill:#f9f,stroke:#333,stroke-width:4px
+  dt-main --> dt-token-font
+  style dt-token-font fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
----
+----------------------------------------------
 
-_Built with [StencilJS](https://stenciljs.com/)_
+*Built with [StencilJS](https://stenciljs.com/)*

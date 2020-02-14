@@ -7,9 +7,9 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type     | Default  |
-| -------- | --------- | ----------- | -------- | -------- |
-| `color`  | `color`   |             | `string` | `"#CCC"` |
+| Property   | Attribute   | Description | Type     | Default     |
+| ---------- | ----------- | ----------- | -------- | ----------- |
+| `fontSize` | `font-size` |             | `string` | `undefined` |
 
 
 ## Dependencies
@@ -21,8 +21,8 @@
 ### Graph
 ```mermaid
 graph TD;
-  dt-main --> dt-color-palette
-  style dt-color-palette fill:#f9f,stroke:#333,stroke-width:4px
+  dt-main --> dt-token-font-size
+  style dt-token-font-size fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

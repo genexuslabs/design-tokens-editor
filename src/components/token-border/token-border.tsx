@@ -9,8 +9,6 @@ export class Border {
   @Prop() borderWidth: string = "0px";
 
   render() {
-    const styles = {};
-
     return (
       <Host class="border-square">
         <div

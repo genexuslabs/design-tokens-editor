@@ -21,8 +21,8 @@
 ### Graph
 ```mermaid
 graph TD;
-  dt-main --> dt-color-palette
-  style dt-color-palette fill:#f9f,stroke:#333,stroke-width:4px
+  dt-main --> dt-token-color-palette
+  style dt-token-color-palette fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

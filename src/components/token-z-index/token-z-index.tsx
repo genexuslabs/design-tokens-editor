@@ -1,5 +1,4 @@
-import { Component, Prop, h } from "@stencil/core";
-import Fragment from "stencil-fragment";
+import { Component, h } from "@stencil/core";
 
 @Component({
   tag: "dt-token-z-index",

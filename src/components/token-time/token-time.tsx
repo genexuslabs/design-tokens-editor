@@ -1,4 +1,4 @@
-import { Component, Prop, h, Host, Element, State } from "@stencil/core";
+import { Component, Prop, h, Host } from "@stencil/core";
 
 @Component({
   tag: "dt-token-time",

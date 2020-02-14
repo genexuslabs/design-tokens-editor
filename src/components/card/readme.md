@@ -7,11 +7,15 @@
 
 ## Properties
 
-| Property    | Attribute    | Description | Type     | Default          |
-| ----------- | ------------ | ----------- | -------- | ---------------- |
-| `cardId`    | `card-id`    |             | `string` | `undefined`      |
-| `cardTitle` | `card-title` |             | `string` | `undefined`      |
-| `mode`      | `mode`       |             | `string` | `"non-editable"` |
+| Property     | Attribute     | Description | Type      | Default     |
+| ------------ | ------------- | ----------- | --------- | ----------- |
+| `cardTitle`  | `card-title`  |             | `string`  | `undefined` |
+| `index`      | `index`       |             | `number`  | `undefined` |
+| `mode`       | `mode`        |             | `string`  | `"preview"` |
+| `readOnly`   | `read-only`   |             | `boolean` | `false`     |
+| `tokenGroup` | `token-group` |             | `string`  | `undefined` |
+| `tokenId`    | `token-id`    |             | `string`  | `undefined` |
+| `tokenValue` | `token-value` |             | `string`  | `undefined` |
 
 
 ## Events
@@ -30,9 +34,16 @@
 
  - [dt-main](../main)
 
+### Depends on
+
+- gxg-button
+- gxg-icon
+
 ### Graph
 ```mermaid
 graph TD;
+  dt-card --> gxg-button
+  dt-card --> gxg-icon
   dt-main --> dt-card
   style dt-card fill:#f9f,stroke:#333,stroke-width:4px
 ```

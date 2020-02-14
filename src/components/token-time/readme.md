@@ -7,9 +7,9 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type     | Default  |
-| -------- | --------- | ----------- | -------- | -------- |
-| `color`  | `color`   |             | `string` | `"#CCC"` |
+| Property | Attribute | Description | Type     | Default |
+| -------- | --------- | ----------- | -------- | ------- |
+| `time`   | `time`    |             | `string` | `"0s"`  |
 
 
 ## Dependencies
@@ -21,8 +21,8 @@
 ### Graph
 ```mermaid
 graph TD;
-  dt-main --> dt-color-palette
-  style dt-color-palette fill:#f9f,stroke:#333,stroke-width:4px
+  dt-main --> dt-token-time
+  style dt-token-time fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

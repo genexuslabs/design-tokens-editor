@@ -9,6 +9,7 @@
 
 | Property     | Attribute     | Description | Type      | Default     |
 | ------------ | ------------- | ----------- | --------- | ----------- |
+| `disabled`   | `disabled`    |             | `boolean` | `false`     |
 | `isSelected` | `is-selected` |             | `boolean` | `false`     |
 | `tab`        | `tab`         |             | `string`  | `undefined` |
 

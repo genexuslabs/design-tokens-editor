@@ -1,4 +1,4 @@
-import { Component, Prop, h } from "@stencil/core";
+import { Component, h } from "@stencil/core";
 import Fragment from "stencil-fragment";
 
 @Component({
