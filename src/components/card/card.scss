@@ -1,8 +1,13 @@
+:host(.editable-mode-on) {
+  z-index: 10;
+}
+
 :host {
   //animation
   --cardAnimationDelay: 0;
   $cardAnimationTopInitial: -5px;
   $cardAnimationOpacityInitial: 0;
+  z-index: 1;
 
   position: relative;
   animation-name: slideUp;

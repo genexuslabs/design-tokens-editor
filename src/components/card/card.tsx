@@ -7,7 +7,8 @@ import {
   Listen,
   Element,
   Watch,
-  Host
+  Host,
+  State
 } from "@stencil/core";
 
 @Component({
@@ -30,6 +31,9 @@ export class Card {
   @Prop() mode: string = "preview";
   @Prop() readOnly: boolean = false;
   @Prop() index: number; //index is for applying an increasing delay to the cards animation
+
+  //State
+  @State() cardMinHeight: string; //index is for applying an increasing delay to the cards animation
 
   //Events
   @Event()
@@ -68,6 +72,7 @@ export class Card {
   watchHandler(newValue: string) {
     if (newValue === "editable") {
       document.addEventListener("click", this.detectClickOutsideCard);
+      this.cardMinHeight = this.element.clientHeight + "px";
     } else {
       document.removeEventListener("click", this.detectClickOutsideCard);
     }
@@ -104,11 +109,6 @@ export class Card {
     document.removeEventListener("click", this.detectClickOutsideCard);
   }
 
-  componentDidLoad() {
-    console.log(this.index + "s");
-    console.log("nhoal");
-  }
-
   //Click functions
   editCard() {
     this.mode = "editable";
@@ -125,7 +125,15 @@ export class Card {
 
   render() {
     return (
-      <Host style={{ "--cardAnimationDelay": this.index * 0.125 + "s" }}>
+      <Host
+        style={{
+          "--cardAnimationDelay": this.index * 0.125 + "s",
+          "min-height": this.cardMinHeight
+        }}
+        class={{
+          "editable-mode-on": this.mode === "editable"
+        }}
+      >
         <div
           class={{
             card: true,
