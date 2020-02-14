@@ -116,14 +116,6 @@ export class Card {
     this.mode = "preview";
   }
 
-  //mose enter and mouse leave funcitons
-  onCardEnter() {
-    console.log("on card enter");
-  }
-  onCardLeave() {
-    console.log("on card leave");
-  }
-
   render() {
     return (
       <div
@@ -132,8 +124,6 @@ export class Card {
           "card--editable": this.mode === "editable"
         }}
         data-tokenId={this.tokenId}
-        onMouseEnter={this.onCardEnter}
-        onMouseLeave={this.onCardLeave}
       >
         <div class="card-main-container">
           <header class="card-header">

@@ -5,7 +5,7 @@ import { Host, Component, Prop, h } from "@stencil/core";
   styleUrl: "token-font-size.scss",
   shadow: true
 })
-export class Font {
+export class FontSize {
   @Prop() fontSize: string;
 
   render() {

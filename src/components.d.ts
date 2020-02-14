@@ -63,9 +63,10 @@ export namespace Components {
     'size': string;
   }
   interface DtTokenTemplate {}
-  interface DtTokenTransition {
+  interface DtTokenTime {
     'transition': string;
   }
+  interface DtTokenZIndex {}
   interface MyComponent {
     /**
     * The first name
@@ -181,10 +182,16 @@ declare global {
     new (): HTMLDtTokenTemplateElement;
   };
 
-  interface HTMLDtTokenTransitionElement extends Components.DtTokenTransition, HTMLStencilElement {}
-  var HTMLDtTokenTransitionElement: {
-    prototype: HTMLDtTokenTransitionElement;
-    new (): HTMLDtTokenTransitionElement;
+  interface HTMLDtTokenTimeElement extends Components.DtTokenTime, HTMLStencilElement {}
+  var HTMLDtTokenTimeElement: {
+    prototype: HTMLDtTokenTimeElement;
+    new (): HTMLDtTokenTimeElement;
+  };
+
+  interface HTMLDtTokenZIndexElement extends Components.DtTokenZIndex, HTMLStencilElement {}
+  var HTMLDtTokenZIndexElement: {
+    prototype: HTMLDtTokenZIndexElement;
+    new (): HTMLDtTokenZIndexElement;
   };
 
   interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
@@ -209,7 +216,8 @@ declare global {
     'dt-token-radius': HTMLDtTokenRadiusElement;
     'dt-token-spacing': HTMLDtTokenSpacingElement;
     'dt-token-template': HTMLDtTokenTemplateElement;
-    'dt-token-transition': HTMLDtTokenTransitionElement;
+    'dt-token-time': HTMLDtTokenTimeElement;
+    'dt-token-z-index': HTMLDtTokenZIndexElement;
     'my-component': HTMLMyComponentElement;
   }
 }
@@ -273,9 +281,10 @@ declare namespace LocalJSX {
     'size'?: string;
   }
   interface DtTokenTemplate {}
-  interface DtTokenTransition {
+  interface DtTokenTime {
     'transition'?: string;
   }
+  interface DtTokenZIndex {}
   interface MyComponent {
     /**
     * The first name
@@ -308,7 +317,8 @@ declare namespace LocalJSX {
     'dt-token-radius': DtTokenRadius;
     'dt-token-spacing': DtTokenSpacing;
     'dt-token-template': DtTokenTemplate;
-    'dt-token-transition': DtTokenTransition;
+    'dt-token-time': DtTokenTime;
+    'dt-token-z-index': DtTokenZIndex;
     'my-component': MyComponent;
   }
 }
@@ -335,7 +345,8 @@ declare module "@stencil/core" {
       'dt-token-radius': LocalJSX.DtTokenRadius & JSXBase.HTMLAttributes<HTMLDtTokenRadiusElement>;
       'dt-token-spacing': LocalJSX.DtTokenSpacing & JSXBase.HTMLAttributes<HTMLDtTokenSpacingElement>;
       'dt-token-template': LocalJSX.DtTokenTemplate & JSXBase.HTMLAttributes<HTMLDtTokenTemplateElement>;
-      'dt-token-transition': LocalJSX.DtTokenTransition & JSXBase.HTMLAttributes<HTMLDtTokenTransitionElement>;
+      'dt-token-time': LocalJSX.DtTokenTime & JSXBase.HTMLAttributes<HTMLDtTokenTimeElement>;
+      'dt-token-z-index': LocalJSX.DtTokenZIndex & JSXBase.HTMLAttributes<HTMLDtTokenZIndexElement>;
       'my-component': LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
     }
   }

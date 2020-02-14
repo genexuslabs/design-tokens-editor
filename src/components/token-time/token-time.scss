@@ -3,7 +3,7 @@
 }
 :host {
   display: block;
-  --tokenTransitionAnimationValues: 0s ease-in;
+  --tokenTimeValue: 0s ease-in;
 }
 
 .circle {
@@ -13,7 +13,7 @@
   background-color: var(--color-secondary-active);
   position: relative;
   display: inline-block;
-  animation: var(--tokenTransitionAnimationValues) 0s infinite alternate both
+  animation: var(--tokenTimeValue) 0s infinite alternate both
     var(--animation-play-state-hover, paused) circleAnimation;
 }
 

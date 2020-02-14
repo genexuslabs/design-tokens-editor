@@ -14,7 +14,6 @@ export class Main {
     const { model } = this;
 
     function switchTokenGroup(tokenGroup, tokenValue, tokenCaption) {
-      console.log("tokengroup is:" + tokenGroup);
       switch (tokenGroup) {
         case "colors":
           return [
@@ -60,9 +59,9 @@ export class Main {
               radius={tokenValue}
             ></dt-token-radius>
           ];
-        case "transition":
+        case "times":
           return [
-            <dt-token-transition
+            <dt-token-time
               slot="preview"
               transition={tokenValue}
             ></dt-token-transition>
