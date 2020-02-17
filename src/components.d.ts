@@ -70,20 +70,6 @@ export namespace Components {
   interface DtTokenZIndex {
     'zIndex': number;
   }
-  interface MyComponent {
-    /**
-    * The first name
-    */
-    'first': string;
-    /**
-    * The last name
-    */
-    'last': string;
-    /**
-    * The middle name
-    */
-    'middle': string;
-  }
 }
 
 declare global {
@@ -196,12 +182,6 @@ declare global {
     prototype: HTMLDtTokenZIndexElement;
     new (): HTMLDtTokenZIndexElement;
   };
-
-  interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
-  var HTMLMyComponentElement: {
-    prototype: HTMLMyComponentElement;
-    new (): HTMLMyComponentElement;
-  };
   interface HTMLElementTagNameMap {
     'dt-card': HTMLDtCardElement;
     'dt-color-picker': HTMLDtColorPickerElement;
@@ -221,7 +201,6 @@ declare global {
     'dt-token-template': HTMLDtTokenTemplateElement;
     'dt-token-time': HTMLDtTokenTimeElement;
     'dt-token-z-index': HTMLDtTokenZIndexElement;
-    'my-component': HTMLMyComponentElement;
   }
 }
 
@@ -291,20 +270,6 @@ declare namespace LocalJSX {
   interface DtTokenZIndex {
     'zIndex'?: number;
   }
-  interface MyComponent {
-    /**
-    * The first name
-    */
-    'first'?: string;
-    /**
-    * The last name
-    */
-    'last'?: string;
-    /**
-    * The middle name
-    */
-    'middle'?: string;
-  }
 
   interface IntrinsicElements {
     'dt-card': DtCard;
@@ -325,7 +290,6 @@ declare namespace LocalJSX {
     'dt-token-template': DtTokenTemplate;
     'dt-token-time': DtTokenTime;
     'dt-token-z-index': DtTokenZIndex;
-    'my-component': MyComponent;
   }
 }
 
@@ -353,7 +317,6 @@ declare module "@stencil/core" {
       'dt-token-template': LocalJSX.DtTokenTemplate & JSXBase.HTMLAttributes<HTMLDtTokenTemplateElement>;
       'dt-token-time': LocalJSX.DtTokenTime & JSXBase.HTMLAttributes<HTMLDtTokenTimeElement>;
       'dt-token-z-index': LocalJSX.DtTokenZIndex & JSXBase.HTMLAttributes<HTMLDtTokenZIndexElement>;
-      'my-component': LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
     }
   }
 }
