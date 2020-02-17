@@ -24,6 +24,7 @@
 - [dt-token-font-size](../token-font-size)
 - [dt-token-radius](../token-radius)
 - [dt-token-time](../token-time)
+- [dt-token-z-index](../token-z-index)
 - [dt-tabs](../tabs)
 - [dt-tab-bar](../tab-bar)
 - [dt-tab-button](../tab-button)
@@ -41,6 +42,7 @@ graph TD;
   dt-main --> dt-token-font-size
   dt-main --> dt-token-radius
   dt-main --> dt-token-time
+  dt-main --> dt-token-z-index
   dt-main --> dt-tabs
   dt-main --> dt-tab-bar
   dt-main --> dt-tab-button

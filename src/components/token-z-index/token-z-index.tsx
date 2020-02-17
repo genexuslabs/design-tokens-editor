@@ -1,4 +1,4 @@
-import { Component, h } from "@stencil/core";
+import { Component, h, Prop } from "@stencil/core";
 
 @Component({
   tag: "dt-token-z-index",
@@ -6,15 +6,38 @@ import { Component, h } from "@stencil/core";
   shadow: true
 })
 export class ZIndex {
-  render() {
-    return (
-      <div class="rhombus">
-        <span class="rhombus-1"></span>
-        <span class="rhombus-2"></span>
-        <span class="rhombus-3"></span>
-        <span class="rhombus-4"></span>
-        <span class="rhombus-5"></span>
-      </div>
-    );
+  @Prop() zIndex: number = 0;
+
+  zIndexStack() {
+    const numberOfPiles = 5;
+    let stack;
+    for (let index = numberOfPiles; index < numberOfPiles; index++) {
+      stack += '<div class="stack"></div>';
+    }
+    return stack;
   }
+
+  render() {
+    <div class="stack-container">
+      <div class="stack"></div>
+      <div class="stack"></div>
+      <div class="stack"></div>
+      <div class="stack"></div>
+      <div class="stack"></div>
+    </div>;
+  }
+}
+
+{
+  /*
+
+  <div class="stack stack__above"></div>
+  <div class="stack"></div>
+  <div class="stack"></div>
+  <div class="stack"></div>
+  <div class="stack"></div>
+  <div class="stack"></div>
+  <div class="stack stack__below">
+</div>
+*/
 }

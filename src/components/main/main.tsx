@@ -63,6 +63,9 @@ export class Main {
           return [
             <dt-token-time slot="preview" time={tokenValue}></dt-token-time>
           ];
+        case "zIndex":
+          return [<dt-token-z-index slot="preview"></dt-token-z-index>];
+
         default:
         // code block
       }
@@ -87,7 +90,16 @@ export class Main {
               key={tokenGroup}
               is-selected={(index === 0) == true}
             >
+              {model[tokenGroup].tokens.length === 0 ? (
+                <q>
+                  Colors, like features, follow the changes of the emotions
+                  <span class="person">Pablo Picasso</span>
+                </q>
+              ) : (
+                true
+              )}
               {model[tokenGroup].tokens.map((token, index) => (
+                // <span>message</span> ? model[tokenGroup].tokens.
                 <dt-card
                   cardTitle={token.caption}
                   tokenId={token.id}

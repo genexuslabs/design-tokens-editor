@@ -19,7 +19,9 @@
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
-    "generate": "stencil generate"
+    "generate": "stencil generate",
+    "validate": "npm run test && npm run build",
+    "validate.ci": "npm run test && npm run build -- --max-workers 1 --debug"
   },
   "devDependencies": {
     "@stencil/core": "^1.7.4",

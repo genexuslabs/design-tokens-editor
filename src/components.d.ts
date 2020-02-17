@@ -67,7 +67,9 @@ export namespace Components {
   interface DtTokenTime {
     'time': string;
   }
-  interface DtTokenZIndex {}
+  interface DtTokenZIndex {
+    'zIndex': number;
+  }
   interface MyComponent {
     /**
     * The first name
@@ -286,7 +288,9 @@ declare namespace LocalJSX {
   interface DtTokenTime {
     'time'?: string;
   }
-  interface DtTokenZIndex {}
+  interface DtTokenZIndex {
+    'zIndex'?: number;
+  }
   interface MyComponent {
     /**
     * The first name
