@@ -2,7 +2,7 @@ import { Config } from "@stencil/core";
 import { sass } from "@stencil/sass";
 
 export const config: Config = {
-  namespace: "design-tokens-stencil",
+  namespace: "design-tokens-editor",
   outputTargets: [
     {
       type: "dist",
