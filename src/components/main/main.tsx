@@ -34,18 +34,18 @@ export class Main {
               size={tokenValue}
             ></dt-token-spacing>
           ];
-        case "border":
+        case "borders":
           return [
             <dt-token-border
               slot="preview"
               borderWidth={tokenValue}
             ></dt-token-border>
           ];
-        case "font":
+        case "fonts":
           return [
             <dt-token-font slot="preview" font={tokenValue}></dt-token-font>
           ];
-        case "fontSize":
+        case "fontSizes":
           return [
             <dt-token-font-size
               slot="preview"
@@ -90,16 +90,15 @@ export class Main {
               key={tokenGroup}
               is-selected={(index === 0) == true}
             >
-              {model[tokenGroup].tokens.length === 0 ? (
+              {/* {model[tokenGroup].tokens.length === 0 ? (
                 <q>
                   Colors, like features, follow the changes of the emotions
                   <span class="person">Pablo Picasso</span>
                 </q>
               ) : (
                 true
-              )}
+              )} */}
               {model[tokenGroup].tokens.map((token, index) => (
-                // <span>message</span> ? model[tokenGroup].tokens.
                 <dt-card
                   cardTitle={token.caption}
                   tokenId={token.id}
