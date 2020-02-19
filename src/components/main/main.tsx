@@ -107,6 +107,7 @@ export class Main {
                   tokenGroup={tokenGroup}
                   readOnly={model[tokenGroup].readOnly}
                   index={index}
+                  key={token.id}
                 >
                   {switchTokenGroup(tokenGroup, token.value, token.caption)};
                 </dt-card>
