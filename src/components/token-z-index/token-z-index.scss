@@ -11,13 +11,22 @@ $activeColor: var(--gray-04);
   margin-bottom: 4px;
   background-color: $inactiveColor;
 
-  &__active {
+  &--active {
     background-color: $activeColor;
-    width: 55px;
+    // width: 55px;
   }
 
   &__above,
   &__below {
+    &--active {
+      background-color: $activeColor;
+      &:before,
+      &:after {
+        border-top-color: $activeColor !important;
+        border-bottom-color: $activeColor !important;
+      }
+    }
+
     height: 3px;
     &:before,
     &:after {

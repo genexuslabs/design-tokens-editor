@@ -9,29 +9,37 @@ export class ZIndex {
   @Prop() zIndex: number = 0;
 
   zIndexStack() {
-    let stack = [<div class="stack stack__above"></div>];
     const numberOfPiles = 5;
-    for (let index = 0; index < numberOfPiles; index++) {
-      stack.push(<div class="stack"></div>);
+    let stack = [];
+
+    if (this.zIndex <= 0) {
+      stack.unshift(
+        <div class="stack stack__below stack__below--active"></div>
+      );
+    } else {
+      stack.unshift(<div class="stack stack__below"></div>);
     }
-    stack.push(<div class="stack stack__below"></div>);
+
+    for (let index = 1; index < numberOfPiles; index++) {
+      if (this.zIndex === index) {
+        stack.unshift(<div class="stack stack--active"></div>);
+      } else {
+        stack.unshift(<div class="stack"></div>);
+      }
+    }
+
+    if (this.zIndex >= numberOfPiles) {
+      stack.unshift(
+        <div class="stack stack__above stack__above--active"></div>
+      );
+    } else {
+      stack.unshift(<div class="stack stack__above"></div>);
+    }
+
     return stack;
   }
 
   render() {
-    // return {this.zIndexStack};
+    return this.zIndexStack();
   }
-}
-
-{
-  /*
-
-  <div class="stack stack__above"></div>
-  <div class="stack"></div>
-  <div class="stack"></div>
-  <div class="stack"></div>
-  <div class="stack"></div>
-  <div class="stack"></div>
-  <div class="stack stack__below"></div>
-*/
 }

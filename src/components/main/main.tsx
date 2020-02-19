@@ -64,7 +64,12 @@ export class Main {
             <dt-token-time slot="preview" time={tokenValue}></dt-token-time>
           ];
         case "zIndex":
-          return [<dt-token-z-index slot="preview"></dt-token-z-index>];
+          return [
+            <dt-token-z-index
+              slot="preview"
+              zIndex={tokenValue}
+            ></dt-token-z-index>
+          ];
 
         default:
         // code block
