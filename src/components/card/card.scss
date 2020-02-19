@@ -2,32 +2,32 @@
   z-index: 10;
 }
 
+$card-animation-top-initial: -5px;
+$card-animation-opacity-initial: 0;
+
+@keyframes slideUp {
+  0% {
+    top: $card-animation-top-initial;
+    opacity: $card-animation-opacity-initial;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+  }
+}
+
 :host {
   //animation
-  --cardAnimationDelay: 0;
-  $cardAnimationTopInitial: -5px;
-  $cardAnimationOpacityInitial: 0;
+  --card-animation-delay: 0;
   z-index: 1;
-
   position: relative;
   animation-name: slideUp;
   animation-duration: 0.75s;
   animation-iteration-count: 1;
   animation-delay: var(--cardAnimationDelay);
   animation-fill-mode: forwards;
-  top: $cardAnimationTopInitial;
-  opacity: $cardAnimationOpacityInitial;
-
-  @keyframes slideUp {
-    0% {
-      top: $cardAnimationTopInitial;
-      opacity: $cardAnimationOpacityInitial;
-    }
-    100% {
-      top: 0px;
-      opacity: 100%;
-    }
-  }
+  top: $card-animation-top-initial;
+  opacity: $card-animation-opacity-initial;
 
   display: block;
   //flex: 0 0 calc((100% - var(--spacing-comp-02) * 2) / 3);

@@ -1,7 +1,7 @@
 {
   "name": "@genexus/design-tokens-editor",
   "version": "0.1.20",
-  "description": "Stencil Component Starter",
+  "description": "GeneXus Design Tokens Editor",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "es2015": "dist/esm/index.mjs",
