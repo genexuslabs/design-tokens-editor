@@ -25,6 +25,10 @@
 - [dt-token-radius](../token-radius)
 - [dt-token-time](../token-time)
 - [dt-token-z-index](../token-z-index)
+- [dt-token-timing-function](../token-timing-function)
+- [dt-token-opacity](../token-opacity)
+- [dt-token-shadow](../token-shadow)
+- [dt-token-media-query](../token-media-query)
 - [dt-tabs](../tabs)
 - [dt-tab-bar](../tab-bar)
 - [dt-tab-button](../tab-button)
@@ -43,6 +47,10 @@ graph TD;
   dt-main --> dt-token-radius
   dt-main --> dt-token-time
   dt-main --> dt-token-z-index
+  dt-main --> dt-token-timing-function
+  dt-main --> dt-token-opacity
+  dt-main --> dt-token-shadow
+  dt-main --> dt-token-media-query
   dt-main --> dt-tabs
   dt-main --> dt-tab-bar
   dt-main --> dt-tab-button

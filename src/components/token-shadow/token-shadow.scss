@@ -1,0 +1,17 @@
+:host {
+  display: block;
+}
+:host {
+  $squareSize: 50px;
+  height: $squareSize;
+  width: $squareSize;
+  background: var(--gray-02);
+  display: block;
+
+  //center square
+  position: relative;
+  left: 50%;
+  top: 50%;
+  margin-left: $squareSize/2 * -1;
+  margin-top: $squareSize/2 * -1;
+}

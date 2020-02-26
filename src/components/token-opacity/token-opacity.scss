@@ -1,3 +1,16 @@
 :host {
   display: block;
 }
+.container {
+  background-image: url("./build/opacity-assets/grid.gif");
+  background-size: 30px;
+  position: relative;
+  $squareSize: 50px;
+  width: $squareSize;
+  height: $squareSize;
+}
+.opacity-rectangle {
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-on-background);
+}

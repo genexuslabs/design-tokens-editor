@@ -56,9 +56,17 @@ export namespace Components {
   interface DtTokenFontSize {
     'fontSize': string;
   }
-  interface DtTokenOpacity {}
+  interface DtTokenMediaQuery {
+    'mediaQuery': string;
+  }
+  interface DtTokenOpacity {
+    'opacity': string;
+  }
   interface DtTokenRadius {
     'radius': string;
+  }
+  interface DtTokenShadow {
+    'boxShadow': string;
   }
   interface DtTokenSpacing {
     'size': string;
@@ -66,6 +74,13 @@ export namespace Components {
   interface DtTokenTemplate {}
   interface DtTokenTime {
     'time': string;
+  }
+  interface DtTokenTimingFunction {
+    'timingFunction': | "linear"
+    | "ease"
+    | "ease-in"
+    | "ease-out"
+    | "ease-in-out";
   }
   interface DtTokenZIndex {
     'zIndex': number;
@@ -147,6 +162,12 @@ declare global {
     new (): HTMLDtTokenFontSizeElement;
   };
 
+  interface HTMLDtTokenMediaQueryElement extends Components.DtTokenMediaQuery, HTMLStencilElement {}
+  var HTMLDtTokenMediaQueryElement: {
+    prototype: HTMLDtTokenMediaQueryElement;
+    new (): HTMLDtTokenMediaQueryElement;
+  };
+
   interface HTMLDtTokenOpacityElement extends Components.DtTokenOpacity, HTMLStencilElement {}
   var HTMLDtTokenOpacityElement: {
     prototype: HTMLDtTokenOpacityElement;
@@ -157,6 +178,12 @@ declare global {
   var HTMLDtTokenRadiusElement: {
     prototype: HTMLDtTokenRadiusElement;
     new (): HTMLDtTokenRadiusElement;
+  };
+
+  interface HTMLDtTokenShadowElement extends Components.DtTokenShadow, HTMLStencilElement {}
+  var HTMLDtTokenShadowElement: {
+    prototype: HTMLDtTokenShadowElement;
+    new (): HTMLDtTokenShadowElement;
   };
 
   interface HTMLDtTokenSpacingElement extends Components.DtTokenSpacing, HTMLStencilElement {}
@@ -177,6 +204,12 @@ declare global {
     new (): HTMLDtTokenTimeElement;
   };
 
+  interface HTMLDtTokenTimingFunctionElement extends Components.DtTokenTimingFunction, HTMLStencilElement {}
+  var HTMLDtTokenTimingFunctionElement: {
+    prototype: HTMLDtTokenTimingFunctionElement;
+    new (): HTMLDtTokenTimingFunctionElement;
+  };
+
   interface HTMLDtTokenZIndexElement extends Components.DtTokenZIndex, HTMLStencilElement {}
   var HTMLDtTokenZIndexElement: {
     prototype: HTMLDtTokenZIndexElement;
@@ -195,11 +228,14 @@ declare global {
     'dt-token-color-palette': HTMLDtTokenColorPaletteElement;
     'dt-token-font': HTMLDtTokenFontElement;
     'dt-token-font-size': HTMLDtTokenFontSizeElement;
+    'dt-token-media-query': HTMLDtTokenMediaQueryElement;
     'dt-token-opacity': HTMLDtTokenOpacityElement;
     'dt-token-radius': HTMLDtTokenRadiusElement;
+    'dt-token-shadow': HTMLDtTokenShadowElement;
     'dt-token-spacing': HTMLDtTokenSpacingElement;
     'dt-token-template': HTMLDtTokenTemplateElement;
     'dt-token-time': HTMLDtTokenTimeElement;
+    'dt-token-timing-function': HTMLDtTokenTimingFunctionElement;
     'dt-token-z-index': HTMLDtTokenZIndexElement;
   }
 }
@@ -256,9 +292,17 @@ declare namespace LocalJSX {
   interface DtTokenFontSize {
     'fontSize'?: string;
   }
-  interface DtTokenOpacity {}
+  interface DtTokenMediaQuery {
+    'mediaQuery'?: string;
+  }
+  interface DtTokenOpacity {
+    'opacity'?: string;
+  }
   interface DtTokenRadius {
     'radius'?: string;
+  }
+  interface DtTokenShadow {
+    'boxShadow'?: string;
   }
   interface DtTokenSpacing {
     'size'?: string;
@@ -266,6 +310,13 @@ declare namespace LocalJSX {
   interface DtTokenTemplate {}
   interface DtTokenTime {
     'time'?: string;
+  }
+  interface DtTokenTimingFunction {
+    'timingFunction'?: | "linear"
+    | "ease"
+    | "ease-in"
+    | "ease-out"
+    | "ease-in-out";
   }
   interface DtTokenZIndex {
     'zIndex'?: number;
@@ -284,11 +335,14 @@ declare namespace LocalJSX {
     'dt-token-color-palette': DtTokenColorPalette;
     'dt-token-font': DtTokenFont;
     'dt-token-font-size': DtTokenFontSize;
+    'dt-token-media-query': DtTokenMediaQuery;
     'dt-token-opacity': DtTokenOpacity;
     'dt-token-radius': DtTokenRadius;
+    'dt-token-shadow': DtTokenShadow;
     'dt-token-spacing': DtTokenSpacing;
     'dt-token-template': DtTokenTemplate;
     'dt-token-time': DtTokenTime;
+    'dt-token-timing-function': DtTokenTimingFunction;
     'dt-token-z-index': DtTokenZIndex;
   }
 }
@@ -311,11 +365,14 @@ declare module "@stencil/core" {
       'dt-token-color-palette': LocalJSX.DtTokenColorPalette & JSXBase.HTMLAttributes<HTMLDtTokenColorPaletteElement>;
       'dt-token-font': LocalJSX.DtTokenFont & JSXBase.HTMLAttributes<HTMLDtTokenFontElement>;
       'dt-token-font-size': LocalJSX.DtTokenFontSize & JSXBase.HTMLAttributes<HTMLDtTokenFontSizeElement>;
+      'dt-token-media-query': LocalJSX.DtTokenMediaQuery & JSXBase.HTMLAttributes<HTMLDtTokenMediaQueryElement>;
       'dt-token-opacity': LocalJSX.DtTokenOpacity & JSXBase.HTMLAttributes<HTMLDtTokenOpacityElement>;
       'dt-token-radius': LocalJSX.DtTokenRadius & JSXBase.HTMLAttributes<HTMLDtTokenRadiusElement>;
+      'dt-token-shadow': LocalJSX.DtTokenShadow & JSXBase.HTMLAttributes<HTMLDtTokenShadowElement>;
       'dt-token-spacing': LocalJSX.DtTokenSpacing & JSXBase.HTMLAttributes<HTMLDtTokenSpacingElement>;
       'dt-token-template': LocalJSX.DtTokenTemplate & JSXBase.HTMLAttributes<HTMLDtTokenTemplateElement>;
       'dt-token-time': LocalJSX.DtTokenTime & JSXBase.HTMLAttributes<HTMLDtTokenTimeElement>;
+      'dt-token-timing-function': LocalJSX.DtTokenTimingFunction & JSXBase.HTMLAttributes<HTMLDtTokenTimingFunctionElement>;
       'dt-token-z-index': LocalJSX.DtTokenZIndex & JSXBase.HTMLAttributes<HTMLDtTokenZIndexElement>;
     }
   }

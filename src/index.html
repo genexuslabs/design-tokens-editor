@@ -22,42 +22,162 @@
     <dt-main></dt-main>
     <script>
       const model = {
+        mediaQueries: {
+          readOnly: true,
+          tokens: [
+            {
+              id: "0",
+              caption: "Section A",
+              value: "screen and (min-width: 30em) and (orientation: landscape)"
+            },
+            {
+              id: "01",
+              caption: "Headers",
+              value: "print and (min-width: 30em) and (orientation: landscape)"
+            },
+            {
+              id: "02",
+              caption: "Articles",
+              value: "speech and (min-width: 30em) and (orientation: landscape)"
+            },
+            {
+              id: "03",
+              caption: "News",
+              value: "screen and (min-width: 30em) and (orientation: landscape)"
+            },
+            {
+              id: "04",
+              caption: "Footer",
+              value: "screen and (min-width: 30em) and (orientation: landscape)"
+            }
+          ]
+        },
+        shadows: {
+          readOnly: true,
+          tokens: [
+            {
+              id: "0",
+              caption: "Section A",
+              value: "0px 0px 5px 0px rgba(0,0,0,0.75)"
+            },
+            {
+              id: "01",
+              caption: "Headers",
+              value: "10px 30px 5px #aaaaaa"
+            },
+            {
+              id: "02",
+              caption: "Articles",
+              value: "5px 10px inset"
+            },
+            {
+              id: "03",
+              caption: "News",
+              value: "5px 5px blue, 10px 10px red, 15px 15px green"
+            },
+            {
+              id: "04",
+              caption: "Footer",
+              value: "10px 10px 8px 10px #888888"
+            }
+          ]
+        },
+        opacity: {
+          readOnly: true,
+          tokens: [
+            {
+              id: "0",
+              caption: "Section A",
+              value: "0.8"
+            },
+            {
+              id: "01",
+              caption: "Headers",
+              value: "0.6"
+            },
+            {
+              id: "02",
+              caption: "Articles",
+              value: "0.4"
+            },
+            {
+              id: "03",
+              caption: "News",
+              value: "0.2"
+            },
+            {
+              id: "04",
+              caption: "Footer",
+              value: "0.1"
+            }
+          ]
+        },
+        timingFunction: {
+          readOnly: true,
+          tokens: [
+            {
+              id: "0",
+              caption: "Linear",
+              value: "linear"
+            },
+            {
+              id: "01",
+              caption: "Linear",
+              value: "ease"
+            },
+            {
+              id: "02",
+              caption: "Linear",
+              value: "ease-out"
+            },
+            {
+              id: "03",
+              caption: "Linear",
+              value: "ease-in"
+            },
+            {
+              id: "04",
+              caption: "Linear",
+              value: "ease-in-out"
+            }
+          ]
+        },
         zIndex: {
           readOnly: true,
           tokens: [
             {
               id: "0",
-              caption: "0",
+              caption: "Title",
               value: "0"
             },
             {
               id: "01",
-              caption: "1",
+              caption: "Title",
               value: "1"
             },
             {
               id: "02",
-              caption: "2",
+              caption: "Title",
               value: "2"
             },
             {
               id: "03",
-              caption: "3",
+              caption: "Title",
               value: "3"
             },
             {
               id: "04",
-              caption: "4",
+              caption: "Title",
               value: "4"
             },
             {
               id: "05",
-              caption: "5",
+              caption: "Title",
               value: "5"
             },
             {
               id: "06",
-              caption: "6",
+              caption: "Title",
               value: "6"
             }
           ]

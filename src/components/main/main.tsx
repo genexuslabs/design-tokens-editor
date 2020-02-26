@@ -70,7 +70,34 @@ export class Main {
               zIndex={tokenValue}
             ></dt-token-z-index>
           ];
-
+        case "timingFunction":
+          return [
+            <dt-token-timing-function
+              slot="preview"
+              timingFunction={tokenValue}
+            ></dt-token-timing-function>
+          ];
+        case "opacity":
+          return [
+            <dt-token-opacity
+              slot="preview"
+              opacity={tokenValue}
+            ></dt-token-opacity>
+          ];
+        case "shadows":
+          return [
+            <dt-token-shadow
+              slot="preview"
+              box-shadow={tokenValue}
+            ></dt-token-shadow>
+          ];
+        case "mediaQueries":
+          return [
+            <dt-token-media-query
+              slot="preview"
+              media-query={tokenValue}
+            ></dt-token-media-query>
+          ];
         default:
         // code block
       }
