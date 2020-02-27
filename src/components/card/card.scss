@@ -1,6 +1,12 @@
 :host(.editable-mode-on) {
   z-index: 10;
 }
+:host(.card--selected) {
+  border-color: var(--color-primary-active);
+  .card-header-menu {
+    opacity: 1;
+  }
+}
 
 $card-animation-top-initial: -5px;
 $card-animation-opacity-initial: 0;
@@ -121,12 +127,6 @@ $card-animation-opacity-initial: 0;
         }
       }
       &-editable {
-      }
-    }
-
-    &:hover {
-      .card-header-menu {
-        opacity: 1;
       }
     }
 

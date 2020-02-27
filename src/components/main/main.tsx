@@ -1,4 +1,4 @@
-import { Component, Prop, h } from "@stencil/core";
+import { Component, Prop, h, Listen } from "@stencil/core";
 import { Model } from "../model";
 
 @Component({
@@ -9,6 +9,8 @@ import { Model } from "../model";
 export class Main {
   // Indicate that name should be a public property on the component
   @Prop() model: Model;
+  @Prop({ mutable: true }) selectedTokenGroup: string;
+  @Prop({ mutable: true }) selectedTokenId: string;
 
   //inspirational quotes for each token group (only to show if number of tokens, for a specific token,  is euqal to zero)
   // tokensQuotes = [
@@ -74,6 +76,13 @@ export class Main {
   //     author: "Unkown"
   //   }
   // ];
+
+  @Listen("cardActivated")
+  cardActivatedHandler(event: CustomEvent) {
+    //Update active card
+    this.selectedTokenGroup = event.detail.tokenGroup;
+    this.selectedTokenId = event.detail.tokenId;
+  }
 
   render() {
     const { model } = this;
@@ -176,7 +185,7 @@ export class Main {
               <dt-tab-button
                 tab={tokenGroup}
                 key={tokenGroup}
-                isSelected={index === 0}
+                isSelected={this.selectedTokenGroup == tokenGroup}
               ></dt-tab-button>
             ))}
           </dt-tab-bar>
@@ -185,7 +194,7 @@ export class Main {
             <dt-tab
               tab={tokenGroup}
               key={tokenGroup}
-              is-selected={(index === 0) == true}
+              isSelected={this.selectedTokenGroup == tokenGroup}
             >
               {/* {model[tokenGroup].tokens.length === 0 ? (
                 <div class="token-quote">
@@ -208,6 +217,7 @@ export class Main {
                   readOnly={model[tokenGroup].readOnly}
                   index={index}
                   key={token.id}
+                  isSelected={this.selectedTokenId == token.id}
                 >
                   {switchTokenGroup(tokenGroup, token.value, token.caption)};
                 </dt-card>

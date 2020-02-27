@@ -15,6 +15,7 @@ export namespace Components {
   interface DtCard {
     'cardTitle': string;
     'index': number;
+    'isSelected': boolean;
     'mode': string;
     'readOnly': boolean;
     'tokenGroup': string;
@@ -27,6 +28,8 @@ export namespace Components {
   }
   interface DtMain {
     'model': Model;
+    'selectedTokenGroup': string;
+    'selectedTokenId': string;
   }
   interface DtTab {
     'isSelected': boolean;
@@ -244,7 +247,9 @@ declare namespace LocalJSX {
   interface DtCard {
     'cardTitle'?: string;
     'index'?: number;
+    'isSelected'?: boolean;
     'mode'?: string;
+    'onCardActivated'?: (event: CustomEvent<any>) => void;
     'onCardClosed'?: (event: CustomEvent<any>) => void;
     'onCardDeleted'?: (event: CustomEvent<any>) => void;
     'onCardDuplicated'?: (event: CustomEvent<any>) => void;
@@ -262,6 +267,8 @@ declare namespace LocalJSX {
   }
   interface DtMain {
     'model'?: Model;
+    'selectedTokenGroup'?: string;
+    'selectedTokenId'?: string;
   }
   interface DtTab {
     'isSelected'?: boolean;

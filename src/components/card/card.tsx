@@ -31,6 +31,7 @@ export class Card {
   @Prop() mode: string = "preview";
   @Prop() readOnly: boolean = false;
   @Prop() index: number; //index is for applying an increasing delay to the cards animation
+  @Prop() isSelected: boolean = false;
 
   //State
   @State() cardMinHeight: string; //index is for applying an increasing delay to the cards animation
@@ -44,6 +45,8 @@ export class Card {
   cardClosed: EventEmitter;
   @Event()
   colorSaved: EventEmitter;
+  @Event()
+  cardActivated: EventEmitter;
 
   cardDeletedEventData: Object = {
     tokenId: this.tokenId,
@@ -56,7 +59,6 @@ export class Card {
 
   @Listen("save")
   saveHandler(event: CustomEvent) {
-    console.log("tokenSaved" + this.tokenId);
     this.colorSaved.emit({
       tokenId: this.tokenId,
       tokenGroup: this.tokenGroup,
@@ -122,6 +124,12 @@ export class Card {
   closeCard() {
     this.mode = "preview";
   }
+  activateCard() {
+    this.cardActivated.emit({
+      tokenId: this.tokenId,
+      tokenGroup: this.tokenGroup
+    });
+  }
 
   render() {
     return (
@@ -131,8 +139,10 @@ export class Card {
           "min-height": this.cardMinHeight
         }}
         class={{
-          "editable-mode-on": this.mode === "editable"
+          "editable-mode-on": this.mode === "editable",
+          "card--selected": this.isSelected === true
         }}
+        onMouseEnter={this.activateCard.bind(this)}
       >
         <div
           class={{

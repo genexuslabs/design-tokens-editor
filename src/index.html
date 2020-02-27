@@ -426,6 +426,9 @@
       //Card "Header buttons" Event Listeners
       const main = document.querySelector("dt-main");
       main.model = model;
+      main.selectedTokenGroup = "radius";
+      main.selectedTokenId = "02";
+
       main.addEventListener("cardDuplicated", event => {
         console.log(
           "Received the card duplicated event, for the id: ",
