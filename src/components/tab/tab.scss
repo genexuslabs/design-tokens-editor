@@ -1,6 +1,8 @@
+// :host([is-selected]) {
+//   height: 100%;
+// }
 :host {
   display: block;
-
   .tab-header {
     border-radius: var(--border-radius-sm);
     border-width: var(--border-width-sm);

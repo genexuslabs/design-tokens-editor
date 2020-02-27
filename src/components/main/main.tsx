@@ -10,11 +10,87 @@ export class Main {
   // Indicate that name should be a public property on the component
   @Prop() model: Model;
 
+  //inspirational quotes for each token group (only to show if number of tokens, for a specific token,  is euqal to zero)
+  // tokensQuotes = [
+  //   {
+  //     tokenGroup: "fonts",
+  //     quote: "Typography is two-dimensional architecture.",
+  //     author: "Hermann Zapf"
+  //   },
+  //   {
+  //     tokenGroup: "fontSizes",
+  //     quote: "One size never fits all. One size fits one.",
+  //     author: "Tom Peters"
+  //   },
+  //   {
+  //     tokenGroup: "colors",
+  //     quote: "Color is a power which directly influences the soul.",
+  //     author: "Wassily Kandinsky"
+  //   },
+  //   {
+  //     tokenGroup: "spacing",
+  //     quote: "Space is the breath of art.",
+  //     author: "Paul Klee"
+  //   },
+  //   {
+  //     tokenGroup: "borders",
+  //     quote:
+  //       "The only borders that should be, are the borders in visual design.",
+  //     author: "Bruno Sastre"
+  //   },
+  //   {
+  //     tokenGroup: "radius",
+  //     quote: "(To be competed)",
+  //     author: "Unkown"
+  //   },
+  //   {
+  //     tokenGroup: "shadows",
+  //     quote: "All the beauty of life is made up of light and shadow.",
+  //     author: "Leo Tolstoy"
+  //   },
+  //   {
+  //     tokenGroup: "opacity",
+  //     quote: "Transparency if the new objectivity.",
+  //     author: "David Weinberger"
+  //   },
+  //   {
+  //     tokenGroup: "zIndex",
+  //     quote: "(To be competed)",
+  //     author: "Unkown"
+  //   },
+  //   {
+  //     tokenGroup: "timingFunction",
+  //     quote: "(To be competed)",
+  //     author: "Unkown"
+  //   },
+  //   {
+  //     tokenGroup: "times",
+  //     quote: "Time has a wonderful way of showing us what really matters.",
+  //     author: ""
+  //   },
+  //   {
+  //     tokenGroup: "mediaQueries",
+  //     quote: "(To be competed)",
+  //     author: "Unkown"
+  //   }
+  // ];
+
   render() {
     const { model } = this;
 
     function switchTokenGroup(tokenGroup, tokenValue, tokenCaption) {
       switch (tokenGroup) {
+        case "fonts":
+          return [
+            <dt-token-font slot="preview" font={tokenValue}></dt-token-font>
+          ];
+        case "fontSizes":
+          return [
+            <dt-token-font-size
+              slot="preview"
+              fontSize={tokenValue}
+            ></dt-token-font-size>
+          ];
         case "colors":
           return [
             <dt-token-color-palette
@@ -41,17 +117,6 @@ export class Main {
               borderWidth={tokenValue}
             ></dt-token-border>
           ];
-        case "fonts":
-          return [
-            <dt-token-font slot="preview" font={tokenValue}></dt-token-font>
-          ];
-        case "fontSizes":
-          return [
-            <dt-token-font-size
-              slot="preview"
-              fontSize={tokenValue}
-            ></dt-token-font-size>
-          ];
         case "radius":
           return [
             <dt-token-radius
@@ -59,9 +124,19 @@ export class Main {
               radius={tokenValue}
             ></dt-token-radius>
           ];
-        case "times":
+        case "shadows":
           return [
-            <dt-token-time slot="preview" time={tokenValue}></dt-token-time>
+            <dt-token-shadow
+              slot="preview"
+              box-shadow={tokenValue}
+            ></dt-token-shadow>
+          ];
+        case "opacity":
+          return [
+            <dt-token-opacity
+              slot="preview"
+              opacity={tokenValue}
+            ></dt-token-opacity>
           ];
         case "zIndex":
           return [
@@ -77,19 +152,9 @@ export class Main {
               timingFunction={tokenValue}
             ></dt-token-timing-function>
           ];
-        case "opacity":
+        case "times":
           return [
-            <dt-token-opacity
-              slot="preview"
-              opacity={tokenValue}
-            ></dt-token-opacity>
-          ];
-        case "shadows":
-          return [
-            <dt-token-shadow
-              slot="preview"
-              box-shadow={tokenValue}
-            ></dt-token-shadow>
+            <dt-token-time slot="preview" time={tokenValue}></dt-token-time>
           ];
         case "mediaQueries":
           return [
@@ -123,13 +188,17 @@ export class Main {
               is-selected={(index === 0) == true}
             >
               {/* {model[tokenGroup].tokens.length === 0 ? (
-                <q>
-                  Colors, like features, follow the changes of the emotions
-                  <span class="person">Pablo Picasso</span>
-                </q>
+                <div class="token-quote">
+                  <q class="token-quote__quote">
+                    Colors, like features, follow the changes of the emotions
+                    <span class="token-quote__author">Pablo Picasso</span>
+                    <gxg-button>add color</gxg-button>
+                  </q>
+                </div>
               ) : (
                 true
               )} */}
+
               {model[tokenGroup].tokens.map((token, index) => (
                 <dt-card
                   cardTitle={token.caption}
