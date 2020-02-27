@@ -84,6 +84,12 @@ export class Main {
     this.selectedTokenId = event.detail.tokenId;
   }
 
+  getCardsAnimationDuration(numberOfTokens, index) {
+    const totalAmountOfSeconds = 1;
+    let delay = totalAmountOfSeconds / numberOfTokens;
+    return index * delay + "s";
+  }
+
   render() {
     const { model } = this;
 
@@ -218,6 +224,12 @@ export class Main {
                   index={index}
                   key={token.id}
                   isSelected={this.selectedTokenId == token.id}
+                  style={{
+                    "--cardAnimationDelay": this.getCardsAnimationDuration(
+                      model[tokenGroup].tokens.length,
+                      index
+                    )
+                  }}
                 >
                   {switchTokenGroup(tokenGroup, token.value, token.caption)};
                 </dt-card>

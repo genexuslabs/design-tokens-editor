@@ -17,4 +17,6 @@ body {
   --tabContinerPadding: var(--spacing-comp-02);
   //The following css variable was created to calculate the negative lateral margin for the .tab-container-content div inside the dt-tab module.
   --cardLateralMargin: var(--spacing-comp-01);
+  //The following css variable was created to calculate the card animation duration according to the number of cards, for each token.
+  --cardAnimationDelay: 0.75s;
 }

@@ -135,7 +135,7 @@ export class Card {
     return (
       <Host
         style={{
-          "--cardAnimationDelay": this.index * 0.125 + "s",
+          // "--cardAnimationDelay": this.index * 0.125 + "s",
           "min-height": this.cardMinHeight
         }}
         class={{

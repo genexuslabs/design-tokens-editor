@@ -2,10 +2,11 @@
   z-index: 10;
 }
 :host(.card--selected) {
-  border-color: var(--color-primary-active);
+  // border-color: var(--color-primary-active);
   .card-header-menu {
     opacity: 1;
   }
+  box-shadow: var(--box-shadow-03);
 }
 
 $card-animation-top-initial: -5px;
@@ -23,6 +24,7 @@ $card-animation-opacity-initial: 0;
 }
 
 :host {
+  @include ui-animation(box-shadow);
   //animation
   --card-animation-delay: 0;
   z-index: 1;
