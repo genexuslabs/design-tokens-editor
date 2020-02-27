@@ -28,13 +28,14 @@
   }
 
   .tab-container {
-    padding: var(--spacing-comp-02);
+    padding: var(--tabContinerPadding);
     display: flex !important;
 
     &-content {
       display: flex !important;
       flex: 1 1 auto !important;
       flex-wrap: wrap;
+      margin: 0 calc(var(--cardLateralMargin) * -1);
     }
     &-menu {
       padding-left: var(--spacing-comp-03);

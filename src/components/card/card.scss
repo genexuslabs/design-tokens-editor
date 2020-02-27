@@ -37,11 +37,11 @@ $card-animation-opacity-initial: 0;
 
   display: block;
   //flex: 0 0 calc((100% - var(--spacing-comp-02) * 2) / 3);
-  width: 230px;
-  margin-right: var(--spacing-comp-02);
+  width: var(--cardWidth);
+  margin: 0 var(--spacing-comp-01);
   margin-bottom: var(--spacing-comp-02);
 
-  border-width: var(--border-width-sm);
+  border-width: var(--cardBorderWidth);
   border-style: var(--border-style-regular);
   border-color: var(--gray-03);
 

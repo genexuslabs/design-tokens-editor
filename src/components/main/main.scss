@@ -3,6 +3,10 @@
   height: 750px;
   background: #fff;
   margin: 0 auto;
+  min-width: calc(
+    var(--cardWidth) + (var(--tabContinerPadding) * 2) +
+      (var(--cardBorderWidth) * 2)
+  );
 }
 // .dt-tab-container {
 //   flex-grow: 1;
