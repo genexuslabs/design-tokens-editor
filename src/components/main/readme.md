@@ -7,27 +7,29 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type    | Default     |
-| -------- | --------- | ----------- | ------- | ----------- |
-| `model`  | --        |             | `Model` | `undefined` |
+| Property             | Attribute              | Description | Type     | Default     |
+| -------------------- | ---------------------- | ----------- | -------- | ----------- |
+| `model`              | --                     |             | `Model`  | `undefined` |
+| `selectedTokenGroup` | `selected-token-group` |             | `string` | `undefined` |
+| `selectedTokenId`    | `selected-token-id`    |             | `string` | `undefined` |
 
 
 ## Dependencies
 
 ### Depends on
 
+- [dt-token-font](../token-font)
+- [dt-token-font-size](../token-font-size)
 - [dt-token-color-palette](../token-color-palette)
 - [dt-color-picker](../color-picker)
 - [dt-token-spacing](../token-spacing)
 - [dt-token-border](../token-border)
-- [dt-token-font](../token-font)
-- [dt-token-font-size](../token-font-size)
 - [dt-token-radius](../token-radius)
-- [dt-token-time](../token-time)
+- [dt-token-shadow](../token-shadow)
+- [dt-token-opacity](../token-opacity)
 - [dt-token-z-index](../token-z-index)
 - [dt-token-timing-function](../token-timing-function)
-- [dt-token-opacity](../token-opacity)
-- [dt-token-shadow](../token-shadow)
+- [dt-token-time](../token-time)
 - [dt-token-media-query](../token-media-query)
 - [dt-tabs](../tabs)
 - [dt-tab-bar](../tab-bar)
@@ -38,18 +40,18 @@
 ### Graph
 ```mermaid
 graph TD;
+  dt-main --> dt-token-font
+  dt-main --> dt-token-font-size
   dt-main --> dt-token-color-palette
   dt-main --> dt-color-picker
   dt-main --> dt-token-spacing
   dt-main --> dt-token-border
-  dt-main --> dt-token-font
-  dt-main --> dt-token-font-size
   dt-main --> dt-token-radius
-  dt-main --> dt-token-time
+  dt-main --> dt-token-shadow
+  dt-main --> dt-token-opacity
   dt-main --> dt-token-z-index
   dt-main --> dt-token-timing-function
-  dt-main --> dt-token-opacity
-  dt-main --> dt-token-shadow
+  dt-main --> dt-token-time
   dt-main --> dt-token-media-query
   dt-main --> dt-tabs
   dt-main --> dt-tab-bar

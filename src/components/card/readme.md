@@ -11,6 +11,7 @@
 | ------------ | ------------- | ----------- | --------- | ----------- |
 | `cardTitle`  | `card-title`  |             | `string`  | `undefined` |
 | `index`      | `index`       |             | `number`  | `undefined` |
+| `isSelected` | `is-selected` |             | `boolean` | `false`     |
 | `mode`       | `mode`        |             | `string`  | `"preview"` |
 | `readOnly`   | `read-only`   |             | `boolean` | `false`     |
 | `tokenGroup` | `token-group` |             | `string`  | `undefined` |
@@ -22,6 +23,7 @@
 
 | Event            | Description | Type               |
 | ---------------- | ----------- | ------------------ |
+| `cardActivated`  |             | `CustomEvent<any>` |
 | `cardClosed`     |             | `CustomEvent<any>` |
 | `cardDeleted`    |             | `CustomEvent<any>` |
 | `cardDuplicated` |             | `CustomEvent<any>` |

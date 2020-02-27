@@ -181,7 +181,7 @@ export class Main {
       <div class="container">
         <dt-tabs>
           <dt-tab-bar>
-            {Object.keys(model).map((tokenGroup, index) => (
+            {Object.keys(model).map(tokenGroup => (
               <dt-tab-button
                 tab={tokenGroup}
                 key={tokenGroup}
@@ -190,7 +190,7 @@ export class Main {
             ))}
           </dt-tab-bar>
 
-          {Object.keys(model).map((tokenGroup, index) => (
+          {Object.keys(model).map(tokenGroup => (
             <dt-tab
               tab={tokenGroup}
               key={tokenGroup}
