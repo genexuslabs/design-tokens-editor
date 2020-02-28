@@ -99,7 +99,7 @@ export class Main {
           return [
             <dt-token-font slot="preview" font={tokenValue}></dt-token-font>
           ];
-        case "fontsizes":
+        case "fontSizes":
           return [
             <dt-token-font-size
               slot="preview"
@@ -153,14 +153,14 @@ export class Main {
               opacity={tokenValue}
             ></dt-token-opacity>
           ];
-        case "zindex":
+        case "zIndex":
           return [
             <dt-token-z-index
               slot="preview"
               zIndex={tokenValue}
             ></dt-token-z-index>
           ];
-        case "timingfunction":
+        case "timingFunction":
           return [
             <dt-token-timing-function
               slot="preview"
@@ -171,7 +171,7 @@ export class Main {
           return [
             <dt-token-time slot="preview" time={tokenValue}></dt-token-time>
           ];
-        case "mediaqueries":
+        case "mediaQueries":
           return [
             <dt-token-media-query
               slot="preview"
