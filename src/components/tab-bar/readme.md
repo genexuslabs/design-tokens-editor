@@ -11,9 +11,16 @@
 
  - [dt-main](../main)
 
+### Depends on
+
+- gxg-button
+- gxg-icon
+
 ### Graph
 ```mermaid
 graph TD;
+  dt-tab-bar --> gxg-button
+  dt-tab-bar --> gxg-icon
   dt-main --> dt-tab-bar
   style dt-tab-bar fill:#f9f,stroke:#333,stroke-width:4px
 ```

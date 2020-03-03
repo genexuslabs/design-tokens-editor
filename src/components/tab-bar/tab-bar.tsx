@@ -1,4 +1,4 @@
-import { Component, h, Host, Element, State, Prop } from "@stencil/core";
+import { Component, h, Host, Element, State } from "@stencil/core";
 
 @Component({
   tag: "dt-tab-bar",
@@ -21,8 +21,6 @@ export class TabBar {
   appendTabItemsToMenu() {
     //This function appends tab-buttons into a tab-menu, as long as the tab-buttons are too tight
 
-    let tabBarMenu = this.el.shadowRoot.querySelector(".tab-bar-menu");
-    let buttonPadding = 0;
     let buttonHeight = this.el.children.item(0).clientHeight;
 
     let calculateButtonPadding = () => {
@@ -71,9 +69,8 @@ export class TabBar {
     }
 
     const myObserver = new ResizeObserver(entries => {
-      entries.forEach(entry => {
+      entries.forEach(() => {
         //get any button space between text and button border
-
         this.appendTabItemsToMenu();
       });
     });

@@ -59,6 +59,8 @@ graph TD;
   dt-main --> dt-tab
   dt-main --> dt-card
   dt-color-picker --> gxg-button
+  dt-tab-bar --> gxg-button
+  dt-tab-bar --> gxg-icon
   dt-card --> gxg-button
   dt-card --> gxg-icon
   style dt-main fill:#f9f,stroke:#333,stroke-width:4px
