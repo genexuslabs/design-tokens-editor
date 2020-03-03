@@ -39,11 +39,11 @@ export class Template {
     if (print && screen && speech) {
       imgName = "all";
     } else if (print && screen) {
-      imgName = "print-screen";
+      imgName = "screen-print";
     } else if (print && speech) {
-      imgName = "print-speech";
+      // imgName = "speech-screen";
     } else if (speech && screen) {
-      imgName = "speech-screen";
+      imgName = "screen-speech";
     } else if (print) {
       imgName = "print";
     } else if (screen) {

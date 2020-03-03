@@ -87,7 +87,7 @@ export class TabBar {
             onClick={this.toggleMenu.bind(this)}
             type="secondary-icon-only"
           >
-            <gxg-icon slot="icon" type="showMore"></gxg-icon>
+            <gxg-icon slot="icon" type="show-more"></gxg-icon>
           </gxg-button>
         </div>
       );
