@@ -36,6 +36,7 @@ export namespace Components {
     'tab': string;
   }
   interface DtTabBar {}
+  interface DtTabBarCopy {}
   interface DtTabButton {
     'disabled': boolean;
     'isSelected': boolean;
@@ -121,6 +122,12 @@ declare global {
   var HTMLDtTabBarElement: {
     prototype: HTMLDtTabBarElement;
     new (): HTMLDtTabBarElement;
+  };
+
+  interface HTMLDtTabBarCopyElement extends Components.DtTabBarCopy, HTMLStencilElement {}
+  var HTMLDtTabBarCopyElement: {
+    prototype: HTMLDtTabBarCopyElement;
+    new (): HTMLDtTabBarCopyElement;
   };
 
   interface HTMLDtTabButtonElement extends Components.DtTabButton, HTMLStencilElement {}
@@ -224,6 +231,7 @@ declare global {
     'dt-main': HTMLDtMainElement;
     'dt-tab': HTMLDtTabElement;
     'dt-tab-bar': HTMLDtTabBarElement;
+    'dt-tab-bar-copy': HTMLDtTabBarCopyElement;
     'dt-tab-button': HTMLDtTabButtonElement;
     'dt-tabs': HTMLDtTabsElement;
     'dt-template': HTMLDtTemplateElement;
@@ -275,6 +283,7 @@ declare namespace LocalJSX {
     'tab'?: string;
   }
   interface DtTabBar {}
+  interface DtTabBarCopy {}
   interface DtTabButton {
     'disabled'?: boolean;
     'isSelected'?: boolean;
@@ -335,6 +344,7 @@ declare namespace LocalJSX {
     'dt-main': DtMain;
     'dt-tab': DtTab;
     'dt-tab-bar': DtTabBar;
+    'dt-tab-bar-copy': DtTabBarCopy;
     'dt-tab-button': DtTabButton;
     'dt-tabs': DtTabs;
     'dt-template': DtTemplate;
@@ -365,6 +375,7 @@ declare module "@stencil/core" {
       'dt-main': LocalJSX.DtMain & JSXBase.HTMLAttributes<HTMLDtMainElement>;
       'dt-tab': LocalJSX.DtTab & JSXBase.HTMLAttributes<HTMLDtTabElement>;
       'dt-tab-bar': LocalJSX.DtTabBar & JSXBase.HTMLAttributes<HTMLDtTabBarElement>;
+      'dt-tab-bar-copy': LocalJSX.DtTabBarCopy & JSXBase.HTMLAttributes<HTMLDtTabBarCopyElement>;
       'dt-tab-button': LocalJSX.DtTabButton & JSXBase.HTMLAttributes<HTMLDtTabButtonElement>;
       'dt-tabs': LocalJSX.DtTabs & JSXBase.HTMLAttributes<HTMLDtTabsElement>;
       'dt-template': LocalJSX.DtTemplate & JSXBase.HTMLAttributes<HTMLDtTemplateElement>;

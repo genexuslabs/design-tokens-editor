@@ -15,6 +15,8 @@ export class Tabs {
 
   @Listen("tabActivated")
   tabActivatedHandler(event) {
+    console.log("tab activated");
+    console.log(event.target.tab);
     this.updateActiveChildren(event.target.tab, "dt-tab-button");
     this.updateActiveChildren(event.target.tab, "dt-tab");
   }

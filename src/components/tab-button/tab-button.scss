@@ -35,6 +35,7 @@
     -moz-box-shadow: none;
     box-shadow: none;
     transition: box-shadow 0.2s ease-in-out;
+    @include ui-animation(box-shadow);
 
     &:after {
       content: "";
@@ -44,7 +45,7 @@
       bottom: 0;
       position: absolute;
       background-color: transparent;
-      transition: background-color 0.2s ease-in-out;
+      @include ui-animation(background-color);
     }
 
     &:hover {
@@ -74,4 +75,23 @@
       }
     }
   }
+  .tab-button__text {
+    display: inline-block;
+  }
+}
+
+//is button is inside menu
+:host(.menu-button) {
+  width: 100%;
+  margin: 0 var(--spacing-comp-04);
+  @include ui-animation(background-color);
+
+  .tab-button {
+    &:after {
+      display: none;
+    }
+  }
+}
+:host(.menu-button:hover) {
+  background: var(--color-secondary);
 }

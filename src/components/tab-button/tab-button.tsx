@@ -32,7 +32,7 @@ export class TabButton {
           }}
           onClick={this.tabButtonClicked.bind(this)}
         >
-          {this.tab}
+          <span class="tab-button__text">{this.tab}</span>
         </button>
         <slot></slot>
       </li>

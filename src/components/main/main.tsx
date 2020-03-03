@@ -183,12 +183,18 @@ export class Main {
       }
     }
 
+    // let arrayBotones = new Array();
+    // Object.keys(model).map(tokenGroup =>{
+
+    // });
+
     return (
       <div class="container">
         <dt-tabs>
           <dt-tab-bar>
             {Object.keys(model).map(tokenGroup => (
               <dt-tab-button
+                slot="tab-bar"
                 tab={tokenGroup}
                 key={tokenGroup}
                 isSelected={this.selectedTokenGroup == tokenGroup}
