@@ -1,0 +1,38 @@
+:host {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--font-family-primary);
+  text-align: center;
+}
+.blockquote {
+  font-style: italic;
+
+  padding: 0 20px;
+  margin: 0;
+}
+.cite {
+  margin: var(--spacing-comp-02) 0 var(--spacing-comp-03) 0;
+  font-style: normal;
+  display: block;
+  font-size: 14px;
+}
+.quote-container {
+  animation-name: slideUp;
+  animation-duration: 1.75s;
+  animation-iteration-count: 1;
+  animation-delay: 0.1s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+  position: relative;
+}
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

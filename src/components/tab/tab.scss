@@ -2,7 +2,13 @@
 //   height: 100%;
 // }
 :host {
+  height: 100%;
   display: block;
+  .tab {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+  }
   .tab-header {
     border-radius: var(--border-radius-sm);
     border-width: var(--border-width-sm);
@@ -28,14 +34,14 @@
   }
 
   .tab-container {
-    padding: var(--tabContinerPadding);
-    display: flex !important;
+    padding: var(--tabContinerPadding) 0;
+    flex: 1 1 auto;
 
     &-content {
-      display: flex !important;
-      flex: 1 1 auto !important;
-      flex-wrap: wrap;
-      margin: 0 calc(var(--cardLateralMargin) * -1);
+      align-content: flex-start !important;
+      flex-wrap: wrap !important;
+      display: flex;
+      height: 100%;
     }
     &-menu {
       padding-left: var(--spacing-comp-03);
@@ -61,4 +67,7 @@
       }
     }
   }
+}
+:host(.not-selected) {
+  display: none;
 }

@@ -12,71 +12,6 @@ export class Main {
   @Prop({ mutable: true }) selectedTokenGroup: string;
   @Prop({ mutable: true }) selectedTokenId: string;
 
-  //inspirational quotes for each token group (only to show if number of tokens, for a specific token,  is euqal to zero)
-  // tokensQuotes = [
-  //   {
-  //     tokenGroup: "fonts",
-  //     quote: "Typography is two-dimensional architecture.",
-  //     author: "Hermann Zapf"
-  //   },
-  //   {
-  //     tokenGroup: "fontSizes",
-  //     quote: "One size never fits all. One size fits one.",
-  //     author: "Tom Peters"
-  //   },
-  //   {
-  //     tokenGroup: "colors",
-  //     quote: "Color is a power which directly influences the soul.",
-  //     author: "Wassily Kandinsky"
-  //   },
-  //   {
-  //     tokenGroup: "spacing",
-  //     quote: "Space is the breath of art.",
-  //     author: "Paul Klee"
-  //   },
-  //   {
-  //     tokenGroup: "borders",
-  //     quote:
-  //       "The only borders that should be, are the borders in visual design.",
-  //     author: "Bruno Sastre"
-  //   },
-  //   {
-  //     tokenGroup: "radius",
-  //     quote: "(To be competed)",
-  //     author: "Unkown"
-  //   },
-  //   {
-  //     tokenGroup: "shadows",
-  //     quote: "All the beauty of life is made up of light and shadow.",
-  //     author: "Leo Tolstoy"
-  //   },
-  //   {
-  //     tokenGroup: "opacity",
-  //     quote: "Transparency if the new objectivity.",
-  //     author: "David Weinberger"
-  //   },
-  //   {
-  //     tokenGroup: "zIndex",
-  //     quote: "(To be competed)",
-  //     author: "Unkown"
-  //   },
-  //   {
-  //     tokenGroup: "timingFunction",
-  //     quote: "(To be competed)",
-  //     author: "Unkown"
-  //   },
-  //   {
-  //     tokenGroup: "times",
-  //     quote: "Time has a wonderful way of showing us what really matters.",
-  //     author: ""
-  //   },
-  //   {
-  //     tokenGroup: "mediaQueries",
-  //     quote: "(To be competed)",
-  //     author: "Unkown"
-  //   }
-  // ];
-
   @Listen("cardActivated")
   cardActivatedHandler(event: CustomEvent) {
     //Update active card
@@ -183,10 +118,100 @@ export class Main {
       }
     }
 
-    // let arrayBotones = new Array();
-    // Object.keys(model).map(tokenGroup =>{
+    function switchTokenQuote(tokenGroup, tokensLength) {
+      if (tokensLength === 0) {
+        //Only proceed to apply a quote if there are no tokens for the token group.
 
-    // });
+        let token;
+        let quote;
+        let author;
+
+        switch (tokenGroup) {
+          case "fonts":
+            token = "font";
+            quote = "Typography is two-dimensional architecture.";
+            author = "Hermann Zapf";
+            break;
+
+          case "fontSizes":
+            token = "font size";
+            quote = "One size never fits all. One size fits one.";
+            author = "Tom Peters";
+            break;
+
+          case "colors":
+            token = "color";
+            quote = "Color is a power which directly influences the soul.";
+            author = "Wassily Kandinsky";
+            break;
+
+          case "spacing":
+            token = "spacing";
+            quote = "Space is the breath of art.";
+            author = "Paul Klee";
+            break;
+
+          case "borders":
+            token = "border";
+            quote =
+              "The only borders that should exist are those of visual design.";
+            author = "GeneXus";
+            break;
+
+          case "radius":
+            token = "radius";
+            quote = "To be completed";
+            author = "Unkown";
+            break;
+
+          case "shadows":
+            token = "shadow";
+            quote = "All the beauty of life is made up of light and shadow.";
+            author = "Leo Tolstoy";
+            break;
+
+          case "opacity":
+            token = "opacity";
+            quote = "Transparency if the new objectivity.";
+            author = "David Weinberger";
+            break;
+
+          case "zIndex":
+            token = "z index";
+            quote = "To be completed";
+            author = "Unkown";
+            break;
+
+          case "timingFunction":
+            token = "timing function";
+            quote = "To be completed";
+            author = "Unkown";
+            break;
+
+          case "times":
+            token = "time";
+            quote =
+              "Time has a wonderful way of showing us what really matters.";
+            author = "Margaret Petters";
+            break;
+
+          case "mediaQueries":
+            token = "media query";
+            quote = "To be completed";
+            author = "Unkown";
+            break;
+
+          default:
+            token = "token";
+            quote = "There is no quote for this token";
+            author = "Unkown";
+          // code block
+        }
+        return (
+          <dt-quote token={token} quote={quote} author={author}></dt-quote>
+        );
+      }
+    }
 
     return (
       <div class="container">
@@ -208,18 +233,7 @@ export class Main {
               key={tokenGroup}
               isSelected={this.selectedTokenGroup == tokenGroup}
             >
-              {/* {model[tokenGroup].tokens.length === 0 ? (
-                <div class="token-quote">
-                  <q class="token-quote__quote">
-                    Colors, like features, follow the changes of the emotions
-                    <span class="token-quote__author">Pablo Picasso</span>
-                    <gxg-button>add color</gxg-button>
-                  </q>
-                </div>
-              ) : (
-                true
-              )} */}
-
+              {switchTokenQuote(tokenGroup, model[tokenGroup].tokens.length)}
               {model[tokenGroup].tokens.map((token, index) => (
                 <dt-card
                   cardTitle={token.caption}

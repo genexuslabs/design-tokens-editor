@@ -21,6 +21,57 @@
   <body>
     <dt-main></dt-main>
     <script>
+      const modelEmpty = {
+        fonts: {
+          readOnly: true,
+          tokens: []
+        },
+        fontSizes: {
+          readOnly: true,
+          tokens: []
+        },
+        colors: {
+          readOnly: false,
+          tokens: []
+        },
+        spacing: {
+          readOnly: true,
+          tokens: []
+        },
+        borders: {
+          readOnly: true,
+          tokens: []
+        },
+        radius: {
+          readOnly: true,
+          tokens: []
+        },
+        shadows: {
+          readOnly: true,
+          tokens: []
+        },
+        opacity: {
+          readOnly: true,
+          tokens: []
+        },
+        zIndex: {
+          readOnly: true,
+          tokens: []
+        },
+        timingFunction: {
+          readOnly: true,
+          tokens: []
+        },
+        times: {
+          readOnly: true,
+          tokens: []
+        },
+        mediaQueries: {
+          readOnly: true,
+          tokens: []
+        }
+      };
+
       const model = {
         fonts: {
           readOnly: true,
@@ -519,9 +570,11 @@
 
       //Card "Header buttons" Event Listeners
       const main = document.querySelector("dt-main");
-      main.model = model;
-      main.selectedTokenGroup = "spacing";
-      main.selectedTokenId = "02";
+      //      main.model = model;
+      main.model = modelEmpty;
+
+      main.selectedTokenGroup = "fonts";
+      main.selectedTokenId = "01";
 
       main.addEventListener("cardDuplicated", event => {
         console.log(

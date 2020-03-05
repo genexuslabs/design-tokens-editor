@@ -1,6 +1,11 @@
 @import "../../node_modules/@genexus/gemini/dist/gemini/gemini.css";
 
+html,
 body {
+  height: 100%;
+}
+body {
+  margin: 0 var(--spacing-comp-02);
 }
 .contenedor {
   border: 1px solid #ccc;

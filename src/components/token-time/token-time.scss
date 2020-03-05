@@ -1,4 +1,4 @@
-:host-context(dt-card:hover) {
+:host-context(dt-card.card--selected) {
   --animation-play-state-hover: running;
 }
 :host {

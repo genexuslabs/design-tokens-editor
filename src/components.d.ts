@@ -31,6 +31,12 @@ export namespace Components {
     'selectedTokenGroup': string;
     'selectedTokenId': string;
   }
+  interface DtQuote {
+    'author': string;
+    'buttonLabel': string;
+    'quote': string;
+    'token': string;
+  }
   interface DtTab {
     'isSelected': boolean;
     'tab': string;
@@ -109,6 +115,12 @@ declare global {
   var HTMLDtMainElement: {
     prototype: HTMLDtMainElement;
     new (): HTMLDtMainElement;
+  };
+
+  interface HTMLDtQuoteElement extends Components.DtQuote, HTMLStencilElement {}
+  var HTMLDtQuoteElement: {
+    prototype: HTMLDtQuoteElement;
+    new (): HTMLDtQuoteElement;
   };
 
   interface HTMLDtTabElement extends Components.DtTab, HTMLStencilElement {}
@@ -222,6 +234,7 @@ declare global {
     'dt-card': HTMLDtCardElement;
     'dt-color-picker': HTMLDtColorPickerElement;
     'dt-main': HTMLDtMainElement;
+    'dt-quote': HTMLDtQuoteElement;
     'dt-tab': HTMLDtTabElement;
     'dt-tab-bar': HTMLDtTabBarElement;
     'dt-tab-button': HTMLDtTabButtonElement;
@@ -269,6 +282,12 @@ declare namespace LocalJSX {
     'model'?: Model;
     'selectedTokenGroup'?: string;
     'selectedTokenId'?: string;
+  }
+  interface DtQuote {
+    'author'?: string;
+    'buttonLabel'?: string;
+    'quote'?: string;
+    'token'?: string;
   }
   interface DtTab {
     'isSelected'?: boolean;
@@ -333,6 +352,7 @@ declare namespace LocalJSX {
     'dt-card': DtCard;
     'dt-color-picker': DtColorPicker;
     'dt-main': DtMain;
+    'dt-quote': DtQuote;
     'dt-tab': DtTab;
     'dt-tab-bar': DtTabBar;
     'dt-tab-button': DtTabButton;
@@ -363,6 +383,7 @@ declare module "@stencil/core" {
       'dt-card': LocalJSX.DtCard & JSXBase.HTMLAttributes<HTMLDtCardElement>;
       'dt-color-picker': LocalJSX.DtColorPicker & JSXBase.HTMLAttributes<HTMLDtColorPickerElement>;
       'dt-main': LocalJSX.DtMain & JSXBase.HTMLAttributes<HTMLDtMainElement>;
+      'dt-quote': LocalJSX.DtQuote & JSXBase.HTMLAttributes<HTMLDtQuoteElement>;
       'dt-tab': LocalJSX.DtTab & JSXBase.HTMLAttributes<HTMLDtTabElement>;
       'dt-tab-bar': LocalJSX.DtTabBar & JSXBase.HTMLAttributes<HTMLDtTabBarElement>;
       'dt-tab-button': LocalJSX.DtTabButton & JSXBase.HTMLAttributes<HTMLDtTabButtonElement>;

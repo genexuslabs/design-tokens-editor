@@ -130,6 +130,14 @@ export class Card {
       tokenGroup: this.tokenGroup
     });
   }
+  @Listen("focus")
+  handleFocus() {
+    this.element.setAttribute("class", "card--selected");
+    this.cardActivated.emit({
+      tokenId: this.tokenId,
+      tokenGroup: this.tokenGroup
+    });
+  }
 
   render() {
     return (
@@ -143,6 +151,7 @@ export class Card {
           "card--selected": this.isSelected === true
         }}
         onMouseEnter={this.activateCard.bind(this)}
+        tabIndex=""
       >
         <div
           class={{

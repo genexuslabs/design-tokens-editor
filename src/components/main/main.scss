@@ -1,18 +1,16 @@
-.container {
-  border: 1px solid #ccc;
-  background: #fff;
-  margin: 0 auto;
-  min-width: calc(
-    var(--cardWidth) + (var(--tabContinerPadding) * 2) +
-      (var(--cardBorderWidth) * 2)
-  );
+:host {
+  display: block;
+  height: 100%;
 }
-// .dt-tab-container {
-//   flex-grow: 1;
-// }
+.container {
+  height: 100%;
+}
+.dt-tab-container {
+  flex-grow: 1;
+}
 
-// //Token Quote
-// .token-quote {
-//   width: 100%;
-//   max-width: 500px;
-// }
+//Token Quote
+.token-quote {
+  width: 100%;
+  max-width: 500px;
+}

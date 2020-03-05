@@ -1,4 +1,4 @@
-import { Component, Prop, h } from "@stencil/core";
+import { Component, Prop, h, Host } from "@stencil/core";
 
 @Component({
   tag: "dt-tab",
@@ -12,22 +12,23 @@ export class Tab {
 
   render() {
     return this.isSelected ? (
-      <section
-        class={{
-          tab: true,
-          "tab--selected": this.isSelected === true
-        }}
-      >
-        <header class="tab-header">
-          <h2 class="tab-header-title">{this.tab}</h2>
-        </header>
-        <div class="tab-container">
-          <div class="tab-container-content">
-            <slot></slot>
-          </div>
-          {
-            // At the time of writting we are not using the "edit" menu, but we will in the future..
-            /* <div class="tab-container-menu">
+      <Host class="selected">
+        <section
+          class={{
+            tab: true,
+            "tab--selected": this.isSelected === true
+          }}
+        >
+          <header class="tab-header">
+            <h2 class="tab-header-title">{this.tab}</h2>
+          </header>
+          <div class="tab-container">
+            <div class="tab-container-content">
+              <slot></slot>
+            </div>
+            {
+              // At the time of writting we are not using the "edit" menu, but we will in the future..
+              /* <div class="tab-container-menu">
             <button class="tab-container-menu-button" data-action="delete">
               <img
                 style={{ width: "15px" }}
@@ -36,11 +37,12 @@ export class Tab {
               />
             </button>
           </div> */
-          }
-        </div>
-      </section>
+            }
+          </div>
+        </section>
+      </Host>
     ) : (
-      <div></div>
+      <Host class="not-selected"></Host>
     );
   }
 }

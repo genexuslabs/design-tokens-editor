@@ -8,6 +8,9 @@
   }
   box-shadow: var(--box-shadow-02);
 }
+.card-header-menu:focus {
+  opacity: 1;
+}
 
 $card-animation-top-initial: -5px;
 $card-animation-opacity-initial: 0;

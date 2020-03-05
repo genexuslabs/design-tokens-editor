@@ -61,6 +61,10 @@ export class TabBar {
     this.tabBarMenuHeight = this.appendedButtons * buttonHeight + "px";
   }
   componentDidLoad() {
+    window.addEventListener("resize", () => {
+      this.appendTabItemsToMenu();
+    });
+
     requestAnimationFrame(() => this.appendTabItemsToMenu());
 
     for (var i = 1; i < 5; i++) {
@@ -86,6 +90,7 @@ export class TabBar {
           <gxg-button
             onClick={this.toggleMenu.bind(this)}
             type="secondary-icon-only"
+            onFocus={this.toggleMenu.bind(this)}
           >
             <gxg-icon slot="icon" type="show-more"></gxg-icon>
           </gxg-button>
