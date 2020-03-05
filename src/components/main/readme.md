@@ -31,11 +31,11 @@
 - [dt-token-timing-function](../token-timing-function)
 - [dt-token-time](../token-time)
 - [dt-token-media-query](../token-media-query)
+- [dt-quote](../quote)
 - [dt-tabs](../tabs)
 - [dt-tab-bar](../tab-bar)
 - [dt-tab-button](../tab-button)
 - [dt-tab](../tab)
-- [dt-quote](../quote)
 - [dt-card](../card)
 
 ### Graph
@@ -54,16 +54,16 @@ graph TD;
   dt-main --> dt-token-timing-function
   dt-main --> dt-token-time
   dt-main --> dt-token-media-query
+  dt-main --> dt-quote
   dt-main --> dt-tabs
   dt-main --> dt-tab-bar
   dt-main --> dt-tab-button
   dt-main --> dt-tab
-  dt-main --> dt-quote
   dt-main --> dt-card
   dt-color-picker --> gxg-button
+  dt-quote --> gxg-button
   dt-tab-bar --> gxg-button
   dt-tab-bar --> gxg-icon
-  dt-quote --> gxg-button
   dt-card --> gxg-button
   dt-card --> gxg-icon
   style dt-main fill:#f9f,stroke:#333,stroke-width:4px

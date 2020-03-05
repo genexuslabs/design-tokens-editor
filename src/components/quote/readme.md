@@ -7,12 +7,12 @@
 
 ## Properties
 
-| Property      | Attribute      | Description | Type     | Default                  |
-| ------------- | -------------- | ----------- | -------- | ------------------------ |
-| `author`      | `author`       |             | `string` | `undefined`              |
-| `buttonLabel` | `button-label` |             | `string` | `"Add your first token"` |
-| `quote`       | `quote`        |             | `string` | `undefined`              |
-| `token`       | `token`        |             | `string` | `undefined`              |
+| Property      | Attribute      | Description | Type     | Default                   |
+| ------------- | -------------- | ----------- | -------- | ------------------------- |
+| `author`      | `author`       |             | `string` | `undefined`               |
+| `buttonLabel` | `button-label` |             | `string` | `"Add your first  token"` |
+| `quote`       | `quote`        |             | `string` | `undefined`               |
+| `token`       | `token`        |             | `string` | `undefined`               |
 
 
 ## Dependencies
