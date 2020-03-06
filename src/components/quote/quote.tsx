@@ -6,6 +6,10 @@ import { Prop, Component, h, Host, Event, EventEmitter } from "@stencil/core";
   shadow: true
 })
 export class Quote {
+  constructor() {
+    this.addFirstTokenFunction = this.addFirstTokenFunction.bind(this);
+  }
+
   @Prop() quote: string;
   @Prop() author: string;
   @Prop() token: string;
@@ -56,7 +60,7 @@ export class Quote {
               <cite class="cite">{this.printAuthor()}</cite>
             </footer>
           </blockquote>
-          <gxg-button onClick={this.addFirstTokenFunction()}>
+          <gxg-button onClick={this.addFirstTokenFunction}>
             {this.printButtonLabel()}
           </gxg-button>
         </div>
