@@ -90,7 +90,7 @@ export class TabBar {
           <gxg-button
             onClick={this.toggleMenu.bind(this)}
             type="secondary-icon-only"
-            onFocus={this.toggleMenu.bind(this)}
+            //onFocus={this.toggleMenu.bind(this)}
           >
             <gxg-icon slot="icon" type="show-more"></gxg-icon>
           </gxg-button>
