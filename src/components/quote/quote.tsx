@@ -60,6 +60,9 @@ export class Quote {
             {this.printButtonLabel()}
           </gxg-button>
         </div>
+        <a href="#" class="need-help">
+          Need help?
+        </a>
       </Host>
     );
   }

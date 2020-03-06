@@ -35,3 +35,14 @@
     opacity: 1;
   }
 }
+.need-help {
+  position: absolute;
+  bottom: 20px;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-md);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

@@ -38,12 +38,12 @@ export class Template {
     }
     if (print && screen && speech) {
       imgName = "all";
-    } else if (print && screen) {
+    } else if (screen && print) {
       imgName = "screen-print";
-    } else if (print && speech) {
-      // imgName = "speech-screen";
-    } else if (speech && screen) {
+    } else if (screen && speech) {
       imgName = "screen-speech";
+    } else if (print && speech) {
+      imgName = "print-speech";
     } else if (print) {
       imgName = "print";
     } else if (screen) {
