@@ -440,22 +440,22 @@
       main.selectedTokenGroup = "fonts";
       main.selectedTokenId = "01";
 
-      main.addEventListener("cardDuplicated", event => {
+      main.addEventListener("tokenDuplicated", event => {
         console.log(
           "Received the card duplicated event, for the id: ",
           event.detail
         );
       });
-      main.addEventListener("cardDeleted", event => {
+      main.addEventListener("tokenDeleted", event => {
         console.log(
           "Received the card deleted event, for the id: ",
           event.detail
         );
       });
       //Card "Color picker save button" Event Listener
-      main.addEventListener("colorSaved", event => {
+      main.addEventListener("tokenSaved", event => {
         console.log(
-          "Received the color picker 'save' button pressed event",
+          "Received the token 'save' button pressed event",
           event.detail
         );
       });

@@ -14,7 +14,7 @@ export class Quote {
 
   //Events
   @Event()
-  addFirstTokenEvent: EventEmitter;
+  addFirstToken: EventEmitter;
 
   printQuote() {
     if (this.quote !== "") {
@@ -42,8 +42,8 @@ export class Quote {
 
   componentDidLoad() {}
 
-  addFirstToken() {
-    this.addFirstTokenEvent.emit(this.tokenGroup);
+  addFirstTokenFunction() {
+    this.addFirstToken.emit(this.tokenGroup);
   }
 
   render() {
@@ -56,7 +56,7 @@ export class Quote {
               <cite class="cite">{this.printAuthor()}</cite>
             </footer>
           </blockquote>
-          <gxg-button onClick={this.addFirstToken()}>
+          <gxg-button onClick={this.addFirstTokenFunction()}>
             {this.printButtonLabel()}
           </gxg-button>
         </div>

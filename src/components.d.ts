@@ -265,12 +265,12 @@ declare namespace LocalJSX {
     'isSelected'?: boolean;
     'mode'?: string;
     'newCard'?: boolean;
+    'onAddNewToken'?: (event: CustomEvent<any>) => void;
     'onCardActivated'?: (event: CustomEvent<any>) => void;
     'onCardClosed'?: (event: CustomEvent<any>) => void;
-    'onCardDeleted'?: (event: CustomEvent<any>) => void;
-    'onCardDuplicated'?: (event: CustomEvent<any>) => void;
-    'onColorSaved'?: (event: CustomEvent<any>) => void;
-    'onNewCardEmitter'?: (event: CustomEvent<any>) => void;
+    'onTokenDeleted'?: (event: CustomEvent<any>) => void;
+    'onTokenDuplicated'?: (event: CustomEvent<any>) => void;
+    'onTokenSaved'?: (event: CustomEvent<any>) => void;
     'readOnly'?: boolean;
     'tokenGroup'?: string;
     'tokenId'?: string;
@@ -290,7 +290,7 @@ declare namespace LocalJSX {
   interface DtQuote {
     'author'?: string;
     'buttonLabel'?: string;
-    'onAddFirstTokenEvent'?: (event: CustomEvent<any>) => void;
+    'onAddFirstToken'?: (event: CustomEvent<any>) => void;
     'quote'?: string;
     'token'?: string;
     'tokenGroup'?: string;

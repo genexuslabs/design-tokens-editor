@@ -22,14 +22,14 @@
 
 ## Events
 
-| Event            | Description | Type               |
-| ---------------- | ----------- | ------------------ |
-| `cardActivated`  |             | `CustomEvent<any>` |
-| `cardClosed`     |             | `CustomEvent<any>` |
-| `cardDeleted`    |             | `CustomEvent<any>` |
-| `cardDuplicated` |             | `CustomEvent<any>` |
-| `colorSaved`     |             | `CustomEvent<any>` |
-| `newCardEmitter` |             | `CustomEvent<any>` |
+| Event             | Description | Type               |
+| ----------------- | ----------- | ------------------ |
+| `addNewToken`     |             | `CustomEvent<any>` |
+| `cardActivated`   |             | `CustomEvent<any>` |
+| `cardClosed`      |             | `CustomEvent<any>` |
+| `tokenDeleted`    |             | `CustomEvent<any>` |
+| `tokenDuplicated` |             | `CustomEvent<any>` |
+| `tokenSaved`      |             | `CustomEvent<any>` |
 
 
 ## Dependencies

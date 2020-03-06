@@ -41,30 +41,30 @@ export class Card {
 
   //Events
   @Event()
-  cardDuplicated: EventEmitter;
+  tokenDuplicated: EventEmitter;
   @Event()
-  cardDeleted: EventEmitter;
+  tokenDeleted: EventEmitter;
   @Event()
   cardClosed: EventEmitter;
   @Event()
-  colorSaved: EventEmitter;
+  tokenSaved: EventEmitter;
   @Event()
   cardActivated: EventEmitter;
   @Event()
-  newCardEmitter: EventEmitter;
+  addNewToken: EventEmitter;
 
-  cardDeletedEventData: Object = {
+  tokenDeletedEventData: Object = {
     tokenId: this.tokenId,
     tokenGroup: this.tokenGroup
   };
-  cardDuplicatedEventData: Object = {
+  tokenDuplicatedEventData: Object = {
     tokenId: this.tokenId,
     tokenGroup: this.tokenGroup
   };
 
   @Listen("save")
   saveHandler(event: CustomEvent) {
-    this.colorSaved.emit({
+    this.tokenSaved.emit({
       tokenId: this.tokenId,
       tokenGroup: this.tokenGroup,
       tokenTitle: event.detail.cardTitle,
@@ -121,10 +121,10 @@ export class Card {
     this.mode = "editable";
   }
   duplicateCard() {
-    this.cardDuplicated.emit(this.tokenId);
+    this.tokenDuplicated.emit(this.tokenId);
   }
   deleteCard() {
-    this.cardDeleted.emit(this.cardDeletedEventData);
+    this.tokenDeleted.emit(this.tokenDeletedEventData);
   }
   closeCard() {
     this.mode = "preview";
@@ -136,7 +136,7 @@ export class Card {
     });
   }
   newCardOnClick() {
-    this.newCardEmitter.emit(this.tokenGroup);
+    this.addNewToken.emit(this.tokenGroup);
   }
   @Listen("focus")
   handleFocus() {

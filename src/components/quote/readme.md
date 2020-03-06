@@ -18,9 +18,9 @@
 
 ## Events
 
-| Event                | Description | Type               |
-| -------------------- | ----------- | ------------------ |
-| `addFirstTokenEvent` |             | `CustomEvent<any>` |
+| Event           | Description | Type               |
+| --------------- | ----------- | ------------------ |
+| `addFirstToken` |             | `CustomEvent<any>` |
 
 
 ## Dependencies
