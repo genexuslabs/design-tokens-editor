@@ -13,6 +13,7 @@
 | `index`      | `index`       |             | `number`  | `undefined` |
 | `isSelected` | `is-selected` |             | `boolean` | `false`     |
 | `mode`       | `mode`        |             | `string`  | `"preview"` |
+| `newCard`    | `new-card`    |             | `boolean` | `false`     |
 | `readOnly`   | `read-only`   |             | `boolean` | `false`     |
 | `tokenGroup` | `token-group` |             | `string`  | `undefined` |
 | `tokenId`    | `token-id`    |             | `string`  | `undefined` |
@@ -28,6 +29,7 @@
 | `cardDeleted`    |             | `CustomEvent<any>` |
 | `cardDuplicated` |             | `CustomEvent<any>` |
 | `colorSaved`     |             | `CustomEvent<any>` |
+| `newCardEmitter` |             | `CustomEvent<any>` |
 
 
 ## Dependencies

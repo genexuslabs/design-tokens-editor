@@ -51,14 +51,6 @@ $card-animation-opacity-initial: 0;
   border-color: var(--gray-03);
 
   .card {
-    // @include ui-animation(box-shadow);
-    // box-shadow: 0;
-    // padding: var(--spacing-comp-02);
-
-    // border-width: var(--border-width-sm);
-    // border-style: var(--border-style-regular);
-    // border-color: var(--gray-03);
-
     display: flex;
     padding: var(--spacing-comp-02);
 
@@ -171,4 +163,36 @@ $card-animation-opacity-initial: 0;
       }
     }
   }
+}
+:host(.new) {
+  animation-delay: 1.5s;
+  @include ui-animation(transform);
+
+  $cardSize: 100px;
+  width: auto;
+  background-color: var(--gray-01);
+
+  .card {
+    padding: 0;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .plus-sign {
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--font-weight-semibold);
+
+    .image {
+      width: 112px;
+    }
+  }
+}
+:host(.new:hover) {
+  transform: scale(1.025, 1.025);
+  cursor: pointer;
 }

@@ -160,8 +160,8 @@ export class Main {
 
           case "radius":
             token = "radius";
-            quote = "To be completed";
-            author = "Unkown";
+            quote = "";
+            author = "";
             break;
 
           case "shadows":
@@ -178,14 +178,14 @@ export class Main {
 
           case "zIndex":
             token = "z index";
-            quote = "To be completed";
-            author = "Unkown";
+            quote = "";
+            author = "";
             break;
 
           case "timingFunction":
             token = "timing function";
-            quote = "To be completed";
-            author = "Unkown";
+            quote = "";
+            author = "";
             break;
 
           case "times":
@@ -197,19 +197,30 @@ export class Main {
 
           case "mediaQueries":
             token = "media query";
-            quote = "To be completed";
-            author = "Unkown";
+            quote = "";
+            author = "";
             break;
 
           default:
             token = "token";
-            quote = "There is no quote for this token";
-            author = "Unkown";
+            quote = "";
+            author = "";
           // code block
         }
         return (
-          <dt-quote token={token} quote={quote} author={author}></dt-quote>
+          <dt-quote
+            token-group={tokenGroup}
+            token={token}
+            quote={quote}
+            author={author}
+          ></dt-quote>
         );
+      }
+    }
+
+    function printNewCard(tokenGroup, numberOfTokens) {
+      if (numberOfTokens > 0) {
+        return <dt-card newCard={true} tokenGroup={tokenGroup}></dt-card>;
       }
     }
 
@@ -234,8 +245,10 @@ export class Main {
               isSelected={this.selectedTokenGroup == tokenGroup}
             >
               {switchTokenQuote(tokenGroup, model[tokenGroup].tokens.length)}
+
               {model[tokenGroup].tokens.map((token, index) => (
                 <dt-card
+                  //si token.mode es distinto de null, que sea editable
                   cardTitle={token.caption}
                   tokenId={token.id}
                   tokenValue={token.value}
@@ -254,6 +267,8 @@ export class Main {
                   {switchTokenGroup(tokenGroup, token.value, token.caption)};
                 </dt-card>
               ))}
+
+              {printNewCard(tokenGroup, model[tokenGroup].tokens.length)}
             </dt-tab>
           ))}
         </dt-tabs>

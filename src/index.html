@@ -73,6 +73,10 @@
       };
 
       const model = {
+        fonts2: {
+          readOnly: true,
+          tokens: []
+        },
         fonts: {
           readOnly: true,
           tokens: [
@@ -185,146 +189,6 @@
         borders: {
           readOnly: true,
           tokens: [
-            {
-              id: "01",
-              caption: "XSmall",
-              value: "1px"
-            },
-            {
-              id: "02",
-              caption: "Small",
-              value: "3px"
-            },
-            {
-              id: "03",
-              caption: "Medium",
-              value: "5px"
-            },
-            {
-              id: "04",
-              caption: "Large",
-              value: "100px"
-            },
-            {
-              id: "01",
-              caption: "XSmall",
-              value: "1px"
-            },
-            {
-              id: "02",
-              caption: "Small",
-              value: "3px"
-            },
-            {
-              id: "03",
-              caption: "Medium",
-              value: "5px"
-            },
-            {
-              id: "04",
-              caption: "Large",
-              value: "100px"
-            },
-            {
-              id: "01",
-              caption: "XSmall",
-              value: "1px"
-            },
-            {
-              id: "02",
-              caption: "Small",
-              value: "3px"
-            },
-            {
-              id: "03",
-              caption: "Medium",
-              value: "5px"
-            },
-            {
-              id: "04",
-              caption: "Large",
-              value: "100px"
-            },
-            {
-              id: "01",
-              caption: "XSmall",
-              value: "1px"
-            },
-            {
-              id: "02",
-              caption: "Small",
-              value: "3px"
-            },
-            {
-              id: "03",
-              caption: "Medium",
-              value: "5px"
-            },
-            {
-              id: "04",
-              caption: "Large",
-              value: "100px"
-            },
-            {
-              id: "01",
-              caption: "XSmall",
-              value: "1px"
-            },
-            {
-              id: "02",
-              caption: "Small",
-              value: "3px"
-            },
-            {
-              id: "03",
-              caption: "Medium",
-              value: "5px"
-            },
-            {
-              id: "04",
-              caption: "Large",
-              value: "100px"
-            },
-            {
-              id: "01",
-              caption: "XSmall",
-              value: "1px"
-            },
-            {
-              id: "02",
-              caption: "Small",
-              value: "3px"
-            },
-            {
-              id: "03",
-              caption: "Medium",
-              value: "5px"
-            },
-            {
-              id: "04",
-              caption: "Large",
-              value: "100px"
-            },
-            {
-              id: "01",
-              caption: "XSmall",
-              value: "1px"
-            },
-            {
-              id: "02",
-              caption: "Small",
-              value: "3px"
-            },
-            {
-              id: "03",
-              caption: "Medium",
-              value: "5px"
-            },
-            {
-              id: "04",
-              caption: "Large",
-              value: "100px"
-            },
             {
               id: "01",
               caption: "XSmall",
@@ -570,8 +434,8 @@
 
       //Card "Header buttons" Event Listeners
       const main = document.querySelector("dt-main");
-      //      main.model = model;
-      main.model = modelEmpty;
+      main.model = model;
+      //main.model = modelEmpty;
 
       main.selectedTokenGroup = "fonts";
       main.selectedTokenId = "01";

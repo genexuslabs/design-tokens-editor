@@ -32,11 +32,11 @@
 - [dt-token-time](../token-time)
 - [dt-token-media-query](../token-media-query)
 - [dt-quote](../quote)
+- [dt-card](../card)
 - [dt-tabs](../tabs)
 - [dt-tab-bar](../tab-bar)
 - [dt-tab-button](../tab-button)
 - [dt-tab](../tab)
-- [dt-card](../card)
 
 ### Graph
 ```mermaid
@@ -55,17 +55,17 @@ graph TD;
   dt-main --> dt-token-time
   dt-main --> dt-token-media-query
   dt-main --> dt-quote
+  dt-main --> dt-card
   dt-main --> dt-tabs
   dt-main --> dt-tab-bar
   dt-main --> dt-tab-button
   dt-main --> dt-tab
-  dt-main --> dt-card
   dt-color-picker --> gxg-button
   dt-quote --> gxg-button
-  dt-tab-bar --> gxg-button
-  dt-tab-bar --> gxg-icon
   dt-card --> gxg-button
   dt-card --> gxg-icon
+  dt-tab-bar --> gxg-button
+  dt-tab-bar --> gxg-icon
   style dt-main fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

@@ -25,19 +25,15 @@ export class ColorPalette {
 
     return (
       <Fragment>
-        <div class="color-palette-col">
-          <div class="color-palette-row">
-            <div class="color-palette-row-box" style={colorValues}>
-              <h4 class="color-palette-row-box-value"></h4>
-            </div>
+        <div class="color-palette-row color-palette-row--first-child">
+          <div class="color-palette-row-box" style={colorValues}></div>
+        </div>
+        <div class="color-palette-row">
+          <div class="color-palette-row-box" style={colorValues}>
+            <h4 class="color-palette-row-box-contrast-value">AAA</h4>
           </div>
-          <div class="color-palette-row">
-            <div class="color-palette-row-box" style={colorValues}>
-              <h4 class="color-palette-row-box-contrast-value">AAA</h4>
-            </div>
-            <div class="color-palette-row-box" style={colorValuesInverted}>
-              <h4 class="color-palette-row-box-contrast-value">AAA</h4>
-            </div>
+          <div class="color-palette-row-box" style={colorValuesInverted}>
+            <h4 class="color-palette-row-box-contrast-value">AAA</h4>
           </div>
         </div>
       </Fragment>

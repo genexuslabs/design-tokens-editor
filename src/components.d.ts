@@ -17,6 +17,7 @@ export namespace Components {
     'index': number;
     'isSelected': boolean;
     'mode': string;
+    'newCard': boolean;
     'readOnly': boolean;
     'tokenGroup': string;
     'tokenId': string;
@@ -36,6 +37,7 @@ export namespace Components {
     'buttonLabel': string;
     'quote': string;
     'token': string;
+    'tokenGroup': string;
   }
   interface DtTab {
     'isSelected': boolean;
@@ -262,11 +264,13 @@ declare namespace LocalJSX {
     'index'?: number;
     'isSelected'?: boolean;
     'mode'?: string;
+    'newCard'?: boolean;
     'onCardActivated'?: (event: CustomEvent<any>) => void;
     'onCardClosed'?: (event: CustomEvent<any>) => void;
     'onCardDeleted'?: (event: CustomEvent<any>) => void;
     'onCardDuplicated'?: (event: CustomEvent<any>) => void;
     'onColorSaved'?: (event: CustomEvent<any>) => void;
+    'onNewCardEmitter'?: (event: CustomEvent<any>) => void;
     'readOnly'?: boolean;
     'tokenGroup'?: string;
     'tokenId'?: string;
@@ -286,8 +290,10 @@ declare namespace LocalJSX {
   interface DtQuote {
     'author'?: string;
     'buttonLabel'?: string;
+    'onAddFirstTokenEvent'?: (event: CustomEvent<any>) => void;
     'quote'?: string;
     'token'?: string;
+    'tokenGroup'?: string;
   }
   interface DtTab {
     'isSelected'?: boolean;
