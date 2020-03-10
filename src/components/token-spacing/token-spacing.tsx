@@ -12,8 +12,8 @@ export class Spacing {
     const styles = {
       width: this.size,
       height: this.size,
-      maxWidth: "64px",
-      maxHeight: "64px"
+      maxWidth: "60px",
+      maxHeight: "60px"
     };
 
     return (

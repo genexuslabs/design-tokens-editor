@@ -60,12 +60,6 @@ graph TD;
   dt-main --> dt-tab-bar
   dt-main --> dt-tab-button
   dt-main --> dt-tab
-  dt-color-picker --> gxg-button
-  dt-quote --> gxg-button
-  dt-card --> gxg-button
-  dt-card --> gxg-icon
-  dt-tab-bar --> gxg-button
-  dt-tab-bar --> gxg-icon
   style dt-main fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

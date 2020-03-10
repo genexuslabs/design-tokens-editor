@@ -272,6 +272,8 @@ export class Main {
             </dt-tab>
           ))}
         </dt-tabs>
+
+        <dt-butterbar></dt-butterbar>
       </div>
     );
   }

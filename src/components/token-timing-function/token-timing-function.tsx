@@ -15,7 +15,7 @@ export class TimingFunction {
     | "ease-in-out" = "linear";
 
   imagePath() {
-    return "./timing-function-assets/" + this.timingFunction + ".png";
+    return "./timing-function-assets/" + this.timingFunction + ".svg";
   }
   render() {
     return (
