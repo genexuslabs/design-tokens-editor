@@ -31,6 +31,7 @@ export namespace Components {
     'model': Model;
     'selectedTokenGroup': string;
     'selectedTokenId': string;
+    'tokenDeleted': boolean;
   }
   interface DtQuote {
     'author': string;
@@ -286,6 +287,7 @@ declare namespace LocalJSX {
     'model'?: Model;
     'selectedTokenGroup'?: string;
     'selectedTokenId'?: string;
+    'tokenDeleted'?: boolean;
   }
   interface DtQuote {
     'author'?: string;

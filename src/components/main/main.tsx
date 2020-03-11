@@ -11,12 +11,24 @@ export class Main {
   @Prop() model: Model;
   @Prop({ mutable: true }) selectedTokenGroup: string;
   @Prop({ mutable: true }) selectedTokenId: string;
+  @Prop({ mutable: true }) tokenDeleted: boolean;
+
+  alertBox!: HTMLElement;
 
   @Listen("cardActivated")
   cardActivatedHandler(event: CustomEvent) {
     //Update active card
     this.selectedTokenGroup = event.detail.tokenGroup;
     this.selectedTokenId = event.detail.tokenId;
+  }
+
+  componentDidLoad() {
+    if (this.tokenDeleted === true) {
+      setTimeout(() => {
+        this.alertBox.setAttribute("active", "active");
+        this.tokenDeleted = false;
+      }, 250);
+    }
   }
 
   getCardsAnimationDuration(numberOfTokens, index) {
@@ -274,6 +286,12 @@ export class Main {
         </dt-tabs>
 
         <dt-butterbar></dt-butterbar>
+        <gxg-alert
+          type="more-info"
+          ref={el => (this.alertBox = el as HTMLElement)}
+        >
+          The token has been deleted.
+        </gxg-alert>
       </div>
     );
   }

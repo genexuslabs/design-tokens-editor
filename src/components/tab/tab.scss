@@ -36,6 +36,8 @@
   .tab-container {
     padding: var(--tabContinerPadding) 0;
     flex: 1 1 auto;
+    margin-left: calc(var(--spacing-comp-01) * -1);
+    margin-right: calc(var(--spacing-comp-01) * -1);
 
     &-content {
       align-content: flex-start !important;
