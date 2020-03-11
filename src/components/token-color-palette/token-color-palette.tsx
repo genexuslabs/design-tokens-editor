@@ -12,16 +12,18 @@ export class ColorPalette {
   @Prop() color: string = "#CCC";
 
   render() {
+    // This is not ready for the first version.
+
     let colorValues = {
       backgroundColor: this.color,
       borderColor: this.color,
       color: "#FFF"
     };
-    let colorValuesInverted = {
-      backgroundColor: "#FFF",
-      borderColor: this.color,
-      color: this.color
-    };
+    // let colorValuesInverted = {
+    //   backgroundColor: "#FFF",
+    //   borderColor: this.color,
+    //   color: this.color
+    // };
 
     return (
       <Fragment>
