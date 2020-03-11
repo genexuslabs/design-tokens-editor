@@ -38,6 +38,7 @@
 - [dt-tab-bar](../tab-bar)
 - [dt-tab-button](../tab-button)
 - [dt-tab](../tab)
+- gxg-alert
 
 ### Graph
 ```mermaid
@@ -61,6 +62,16 @@ graph TD;
   dt-main --> dt-tab-bar
   dt-main --> dt-tab-button
   dt-main --> dt-tab
+  dt-main --> gxg-alert
+  dt-color-picker --> gxg-button-group
+  dt-color-picker --> gxg-button
+  dt-quote --> gxg-button
+  dt-card --> gxg-button
+  dt-card --> gxg-icon
+  dt-tab-bar --> gxg-button
+  dt-tab-bar --> gxg-icon
+  gxg-alert --> gxg-icon
+  gxg-alert --> gxg-button
   style dt-main fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

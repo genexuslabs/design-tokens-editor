@@ -76,6 +76,10 @@ $card-animation-opacity-initial: 0;
         font-weight: var(--font-weight-bold);
         font-size: var(--font-size-md);
         line-height: 1;
+        white-space: nowrap;
+        width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       &-menu {

@@ -15,6 +15,7 @@
   display: inline-block;
   animation: var(--tokenTimeValue) linear 0s infinite alternate both
     var(--animation-play-state-hover, paused) circleAnimation;
+  animation-fill-mode: forwards;
 }
 
 @keyframes circleAnimation {

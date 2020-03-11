@@ -28,14 +28,18 @@ export class ColorPalette {
         <div class="color-palette-row color-palette-row--first-child">
           <div class="color-palette-row-box" style={colorValues}></div>
         </div>
-        <div class="color-palette-row">
+
+        {
+          // This is not ready for the first version.
+          /* <div class="color-palette-row color-palette-row--second-child">
           <div class="color-palette-row-box" style={colorValues}>
             <h4 class="color-palette-row-box-contrast-value">AAA</h4>
           </div>
           <div class="color-palette-row-box" style={colorValuesInverted}>
             <h4 class="color-palette-row-box-contrast-value">AAA</h4>
           </div>
-        </div>
+        </div> */
+        }
       </Fragment>
     );
   }
