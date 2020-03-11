@@ -7,11 +7,12 @@
 
 ## Properties
 
-| Property             | Attribute              | Description | Type     | Default     |
-| -------------------- | ---------------------- | ----------- | -------- | ----------- |
-| `model`              | --                     |             | `Model`  | `undefined` |
-| `selectedTokenGroup` | `selected-token-group` |             | `string` | `undefined` |
-| `selectedTokenId`    | `selected-token-id`    |             | `string` | `undefined` |
+| Property             | Attribute              | Description | Type      | Default     |
+| -------------------- | ---------------------- | ----------- | --------- | ----------- |
+| `model`              | --                     |             | `Model`   | `undefined` |
+| `selectedTokenGroup` | `selected-token-group` |             | `string`  | `undefined` |
+| `selectedTokenId`    | `selected-token-id`    |             | `string`  | `undefined` |
+| `tokenDeleted`       | `token-deleted`        |             | `boolean` | `undefined` |
 
 
 ## Dependencies

@@ -140,6 +140,14 @@ export class ColorPicker {
     return this.colorInputValue;
   }
 
+  setActiveButton() {
+    if (this.color.includes("rgb")) {
+      return "RGBA";
+    } else if (this.color.includes("#")) {
+      return "HEXA";
+    }
+  }
+
   render() {
     return (
       <div class="color-picker-main-container" id="color-picker-main-container">
@@ -158,18 +166,14 @@ export class ColorPicker {
         />
         <div class="color-picker"></div>
         <div class="cp-gxg-buttons before-color-value" slot="editable">
-          <gxg-button
-            type="outlined"
-            onClick={this.handleHexaButtonClick.bind(this)}
-          >
-            HEXA
-          </gxg-button>
-          <gxg-button
-            type="outlined"
-            onClick={this.handleRgbaButtonClick.bind(this)}
-          >
-            RGBA
-          </gxg-button>
+          <gxg-button-group selected-button-id={this.setActiveButton()}>
+            <button id="HEXA" onClick={this.handleHexaButtonClick.bind(this)}>
+              HEXA
+            </button>
+            <button id="RGBA" onClick={this.handleRgbaButtonClick.bind(this)}>
+              RGBA
+            </button>
+          </gxg-button-group>
         </div>
         <input
           type="text"
