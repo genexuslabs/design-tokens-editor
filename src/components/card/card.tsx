@@ -148,7 +148,7 @@ export class Card {
   }
 
   newCardImage() {
-    return "./card-assets/new-card.jpg";
+    return "./card-assets/new-card.svg";
   }
 
   render() {
