@@ -30,6 +30,9 @@ export class Main {
         this.tokenDeleted = false;
       }, 250);
     }
+    if (this.tokenDeleted === false) {
+      console.log("tokenDeleted is false");
+    }
   }
 
   getCardsAnimationDuration(numberOfTokens, index) {
