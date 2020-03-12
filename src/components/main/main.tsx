@@ -1,4 +1,4 @@
-import { Component, Prop, h, Listen } from "@stencil/core";
+import { Component, Prop, h, Listen, Watch } from "@stencil/core";
 import { Model } from "../model";
 
 @Component({
@@ -22,7 +22,8 @@ export class Main {
     this.selectedTokenId = event.detail.tokenId;
   }
 
-  componentDidLoad() {
+  @Watch("tokenDeleted")
+  watchHandler(newValue: boolean) {
     if (this.tokenDeleted === true) {
       console.log("tokenDeleted is true");
       setTimeout(() => {
