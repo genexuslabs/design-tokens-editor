@@ -24,6 +24,7 @@ export class Main {
 
   componentDidLoad() {
     if (this.tokenDeleted === true) {
+      console.log("tokenDeleted is true");
       setTimeout(() => {
         this.alertBox.setAttribute("active", "active");
         this.tokenDeleted = false;
@@ -285,7 +286,6 @@ export class Main {
           ))}
         </dt-tabs>
 
-        <dt-butterbar></dt-butterbar>
         <gxg-alert
           type="more-info"
           ref={el => (this.alertBox = el as HTMLElement)}
