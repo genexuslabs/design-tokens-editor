@@ -11,7 +11,7 @@ export class Main {
   @Prop() model: Model;
   @Prop({ mutable: true }) selectedTokenGroup: string;
   @Prop({ mutable: true }) selectedTokenId: string;
-  @Prop({ mutable: true }) tokenDeleted: boolean;
+  @Prop({ mutable: true, reflect: true }) tokenDeleted: boolean;
 
   alertBox!: HTMLElement;
 
@@ -22,17 +22,22 @@ export class Main {
     this.selectedTokenId = event.detail.tokenId;
   }
 
-  @Watch("tokenDeleted")
-  watchHandler(newValue: boolean) {
+  componentDidLoad() {
     if (this.tokenDeleted === true) {
-      console.log("tokenDeleted is true");
       setTimeout(() => {
         this.alertBox.setAttribute("active", "active");
         this.tokenDeleted = false;
       }, 250);
     }
-    if (this.tokenDeleted === false) {
-      console.log("tokenDeleted is false");
+  }
+
+  @Watch("tokenDeleted")
+  watchHandler(newValue: boolean) {
+    if (newValue === true) {
+      setTimeout(() => {
+        this.alertBox.setAttribute("active", "active");
+        this.tokenDeleted = false;
+      }, 250);
     }
   }
 
