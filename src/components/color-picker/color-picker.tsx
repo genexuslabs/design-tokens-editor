@@ -167,11 +167,11 @@ export class ColorPicker {
         <div class="color-picker"></div>
         <div class="cp-gxg-buttons before-color-value" slot="editable">
           <gxg-button-group selected-button-id={this.setActiveButton()}>
-            <button id="HEXA" onClick={this.handleHexaButtonClick.bind(this)}>
-              HEXA
-            </button>
             <button id="RGBA" onClick={this.handleRgbaButtonClick.bind(this)}>
               RGBA
+            </button>
+            <button id="HEXA" onClick={this.handleHexaButtonClick.bind(this)}>
+              HEXA
             </button>
           </gxg-button-group>
         </div>
