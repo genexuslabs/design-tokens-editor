@@ -38,12 +38,26 @@
   }
 }
 .need-help {
-  @include link();
   position: fixed;
   bottom: -100px;
+
+  // below styles should be substituted by Gemini "link" mixin
   font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-regular);
   font-size: var(--font-size-md);
-  text-decoration: none;
+  letter-spacing: var(--letter-spacing-xs);
+  color: var(--color-primary);
+  text-align: left;
+  text-decoration: underline;
+  line-height: 1.455em;
+
+  &:hover {
+    color: var(--color-primary-hover);
+  }
+  &:active {
+    color: var(--color-primary-active);
+  }
+  // /above styles should be substituted by Gemini "link" mixin
 
   animation-name: needHelp;
   animation-duration: 1.75s;
