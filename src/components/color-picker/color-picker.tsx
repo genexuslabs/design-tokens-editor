@@ -8,7 +8,6 @@ import {
   State
 } from "@stencil/core";
 import Pickr from "@simonwep/pickr";
-import { callbackify } from "util";
 
 @Component({
   tag: "dt-color-picker",
