@@ -6,6 +6,11 @@ import { Component, h, Host, Element, State } from "@stencil/core";
   shadow: true
 })
 export class TabBar {
+  constructor() {
+    this.detectClickOutsideTabBarMenu = this.detectClickOutsideTabBarMenu.bind(
+      this
+    );
+  }
   // Indicate that name should be a public property on the component
   // @Prop() name: string;
 
@@ -14,8 +19,12 @@ export class TabBar {
   @State() appendedButtons: number = 0;
   @State() tabBarMenuHeight: string = "100px";
 
-  toggleMenu() {
+  toggleMenu(event) {
+    event.stopPropagation();
+
     this.tabBarMenu.classList.toggle("tab-bar-menu--collapsed");
+
+    document.addEventListener("click", this.detectClickOutsideTabBarMenu);
   }
 
   appendTabItemsToMenu() {
@@ -96,6 +105,38 @@ export class TabBar {
         </div>
       );
     }
+  }
+
+  detectClickOutsideTabBarMenu(event) {
+    console.log("click outside tabar menu");
+    const tabMenuContainer = this.el.shadowRoot.querySelector(
+      ".tab-bar-menu"
+    ) as HTMLElement;
+
+    console.log("tabMenuContainer");
+    console.log(tabMenuContainer);
+
+    let x = event.x;
+    let y = event.y;
+
+    //card main container coordinates
+    const tabMenu = tabMenuContainer.getBoundingClientRect();
+
+    if (
+      x > tabMenu.left &&
+      x < tabMenu.right &&
+      y > tabMenu.top &&
+      y < tabMenu.bottom
+    ) {
+      //Click happened inside the menu
+    } else {
+      //Click happened outside the menu
+      tabMenuContainer.classList.add("tab-bar-menu--collapsed");
+    }
+  }
+
+  componentDidUnload() {
+    document.removeEventListener("click", this.detectClickOutsideTabBarMenu);
   }
 
   render() {

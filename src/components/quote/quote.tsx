@@ -38,7 +38,7 @@ export class Quote {
     if (this.quote === "") {
       return "Add token";
     } else if (this.token !== "") {
-      return "Begin by adding your first " + this.token + " token";
+      return "Add your first " + this.token + " token";
     } else {
       return this.buttonLabel;
     }

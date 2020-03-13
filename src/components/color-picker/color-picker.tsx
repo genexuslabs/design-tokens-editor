@@ -8,6 +8,7 @@ import {
   State
 } from "@stencil/core";
 import Pickr from "@simonwep/pickr";
+import { callbackify } from "util";
 
 @Component({
   tag: "dt-color-picker",
@@ -74,8 +75,6 @@ export class ColorPicker {
       }
     });
 
-    //this.pickr.setColor(this.color); //We have to set the color by force, because we need to get the color at this time, and pickr seems to defer it.
-
     this.pickr.on("change", color => {
       this.colorObject = color;
       if (this.colorRepresentation === "HEXA") {
@@ -88,6 +87,17 @@ export class ColorPicker {
     this.pickr.on("show", () => {
       this.colorObject = this.pickr.getColor();
     });
+
+    let options = {
+      root: document.querySelector("body"),
+      rootMargin: "0px",
+      threshold: 1.0
+    };
+    let observer = new IntersectionObserver(() => {
+      console.log("colorPicker is visible");
+      this.pickr.setColor(this.color); //We have to set the color by force, because we need to get the color at this time, and pickr seems to defer it.
+    }, options);
+    observer.observe(this.element);
   }
 
   componentDidUnload() {
