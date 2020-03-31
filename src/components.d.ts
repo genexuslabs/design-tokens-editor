@@ -29,6 +29,7 @@ export namespace Components {
   }
   interface DtMain {
     'model': Model;
+    'needHelpUrl': string;
     'selectedTokenGroup': string;
     'selectedTokenId': string;
     'tokenDeleted': boolean;
@@ -36,6 +37,7 @@ export namespace Components {
   interface DtQuote {
     'author': string;
     'buttonLabel': string;
+    'needHelpUrl': string;
     'quote': string;
     'token': string;
     'tokenGroup': string;
@@ -285,6 +287,8 @@ declare namespace LocalJSX {
   }
   interface DtMain {
     'model'?: Model;
+    'needHelpUrl'?: string;
+    'onSaveNewValue'?: (event: CustomEvent<any>) => void;
     'selectedTokenGroup'?: string;
     'selectedTokenId'?: string;
     'tokenDeleted'?: boolean;
@@ -292,6 +296,7 @@ declare namespace LocalJSX {
   interface DtQuote {
     'author'?: string;
     'buttonLabel'?: string;
+    'needHelpUrl'?: string;
     'onAddFirstToken'?: (event: CustomEvent<any>) => void;
     'quote'?: string;
     'token'?: string;

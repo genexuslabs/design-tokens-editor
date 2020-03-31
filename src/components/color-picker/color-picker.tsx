@@ -93,7 +93,6 @@ export class ColorPicker {
       threshold: 1.0
     };
     let observer = new IntersectionObserver(() => {
-      console.log("colorPicker is visible");
       this.pickr.setColor(this.color); //We have to set the color by force, because we need to get the color at this time, and pickr seems to defer it.
     }, options);
     observer.observe(this.element);

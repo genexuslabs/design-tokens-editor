@@ -21,6 +21,26 @@
   <body>
     <dt-main></dt-main>
     <script>
+      const modelEditable = {
+        spacing: {
+          readOnly: false,
+          tokens: [
+            {
+              id: "01",
+              caption: "XSmall",
+              value: "8px",
+              valid: true
+            },
+            {
+              id: "02",
+              caption: "Large",
+              value: "12px",
+              valid: false
+            }
+          ]
+        }
+      };
+
       const modelEmpty = {
         fonts: {
           readOnly: true,
@@ -74,11 +94,11 @@
 
       const model = {
         fonts2: {
-          readOnly: true,
+          readOnly: false,
           tokens: []
         },
         fonts: {
-          readOnly: true,
+          readOnly: false,
           tokens: [
             {
               id: "01",
@@ -107,7 +127,7 @@
           ]
         },
         fontSizes: {
-          readOnly: true,
+          readOnly: false,
           tokens: [
             {
               id: "01",
@@ -162,7 +182,7 @@
           ]
         },
         spacing: {
-          readOnly: true,
+          readOnly: false,
           tokens: [
             {
               id: "01",
@@ -187,7 +207,7 @@
           ]
         },
         borders: {
-          readOnly: true,
+          readOnly: false,
           tokens: [
             {
               id: "01",
@@ -212,7 +232,7 @@
           ]
         },
         radius: {
-          readOnly: true,
+          readOnly: false,
           tokens: [
             {
               id: "01",
@@ -237,7 +257,7 @@
           ]
         },
         shadows: {
-          readOnly: true,
+          readOnly: false,
           tokens: [
             {
               id: "0",
@@ -267,7 +287,7 @@
           ]
         },
         opacity: {
-          readOnly: true,
+          readOnly: false,
           tokens: [
             {
               id: "0",
@@ -297,7 +317,7 @@
           ]
         },
         zIndex: {
-          readOnly: true,
+          readOnly: false,
           tokens: [
             {
               id: "0",
@@ -337,7 +357,7 @@
           ]
         },
         timingFunction: {
-          readOnly: true,
+          readOnly: false,
           tokens: [
             {
               id: "0",
@@ -367,7 +387,7 @@
           ]
         },
         times: {
-          readOnly: true,
+          readOnly: false,
           tokens: [
             {
               id: "01",
@@ -387,7 +407,7 @@
           ]
         },
         mediaQueries: {
-          readOnly: true,
+          readOnly: false,
           tokens: [
             {
               id: "0",
@@ -437,9 +457,10 @@
       main.model = model;
       //main.model = modelEmpty;
 
-      main.selectedTokenGroup = "radius";
+      main.selectedTokenGroup = "spacing";
       main.selectedTokenId = "01";
       main.tokenDeleted = true;
+      main.needHelpUrl = "http://need-help.com";
 
       main.addEventListener("tokenDuplicated", event => {
         console.log(
@@ -455,6 +476,13 @@
       });
       //Card "Color picker save button" Event Listener
       main.addEventListener("tokenSaved", event => {
+        console.log(
+          "Received the color picker token 'save' button pressed event",
+          event.detail
+        );
+      });
+      //"Save" button was pressed for the token value
+      main.addEventListener("saveNewValue", event => {
         console.log(
           "Received the token 'save' button pressed event",
           event.detail

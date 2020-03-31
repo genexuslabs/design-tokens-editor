@@ -1,4 +1,13 @@
-import { Component, Prop, h, Listen, Watch } from "@stencil/core";
+import {
+  Component,
+  Prop,
+  h,
+  Listen,
+  Watch,
+  Event,
+  EventEmitter,
+  Element
+} from "@stencil/core";
 import { Model } from "../model";
 
 @Component({
@@ -12,8 +21,20 @@ export class Main {
   @Prop({ mutable: true }) selectedTokenGroup: string;
   @Prop({ mutable: true }) selectedTokenId: string;
   @Prop({ mutable: true, reflect: true }) tokenDeleted: boolean;
+  @Prop() needHelpUrl: string = "#";
 
   alertBox!: HTMLElement;
+  @Element() el: HTMLElement;
+
+  @Event()
+  saveNewValue: EventEmitter;
+
+  saveNewValueHandler(buttonId, tokenGroup, tokenId) {
+    let tokenValue = this.el.shadowRoot.getElementById(buttonId[0])
+      .previousSibling["value"];
+
+    this.saveNewValue.emit({ tokenGroup, tokenId, tokenValue });
+  }
 
   @Listen("cardActivated")
   cardActivatedHandler(event: CustomEvent) {
@@ -50,18 +71,66 @@ export class Main {
   render() {
     const { model } = this;
 
-    function switchTokenGroup(tokenGroup, tokenValue, tokenCaption) {
+    let switchTokenGroup = (tokenGroup, tokenValue, tokenCaption, tokenId) => {
       switch (tokenGroup) {
         case "fonts":
           return [
-            <dt-token-font slot="preview" font={tokenValue}></dt-token-font>
+            <dt-token-font slot="preview" font={tokenValue}></dt-token-font>,
+            <div slot="editable">
+              <gxg-form-input
+                type="text"
+                name="name"
+                label="Value"
+                label-position="above"
+                full-width
+                value={tokenValue}
+                style={{ marginBottom: "8px" }}
+              ></gxg-form-input>
+              <gxg-button
+                id={tokenGroup + "-value-save-button-" + tokenId}
+                type="primary-text-only"
+                style={{ float: "right" }}
+                onClick={this.saveNewValueHandler.bind(
+                  this,
+                  [tokenGroup + "-value-save-button-" + tokenId],
+                  tokenGroup,
+                  tokenId
+                )}
+              >
+                Save
+              </gxg-button>
+            </div>
           ];
         case "fontSizes":
           return [
             <dt-token-font-size
               slot="preview"
               fontSize={tokenValue}
-            ></dt-token-font-size>
+            ></dt-token-font-size>,
+            <div slot="editable">
+              <gxg-form-input
+                type="text"
+                name="name"
+                label="Value"
+                label-position="above"
+                full-width
+                value={tokenValue}
+                style={{ marginBottom: "8px" }}
+              ></gxg-form-input>
+              <gxg-button
+                id={tokenGroup + "-value-save-button-" + tokenId}
+                type="primary-text-only"
+                style={{ float: "right" }}
+                onClick={this.saveNewValueHandler.bind(
+                  this,
+                  [tokenGroup + "-value-save-button-" + tokenId],
+                  tokenGroup,
+                  tokenId
+                )}
+              >
+                Save
+              </gxg-button>
+            </div>
           ];
         case "colors":
           return [
@@ -77,70 +146,290 @@ export class Main {
           ];
         case "spacing":
           return [
-            <dt-token-spacing
-              slot="preview"
-              size={tokenValue}
-            ></dt-token-spacing>
+            [
+              <dt-token-spacing
+                slot="preview"
+                size={tokenValue}
+              ></dt-token-spacing>,
+              <div slot="editable">
+                <gxg-form-input
+                  type="text"
+                  name="name"
+                  label="Value"
+                  label-position="above"
+                  full-width
+                  value={tokenValue}
+                  style={{ marginBottom: "8px" }}
+                ></gxg-form-input>
+                <gxg-button
+                  id={tokenGroup + "-value-save-button-" + tokenId}
+                  type="primary-text-only"
+                  style={{ float: "right" }}
+                  onClick={this.saveNewValueHandler.bind(
+                    this,
+                    [tokenGroup + "-value-save-button-" + tokenId],
+                    tokenGroup,
+                    tokenId
+                  )}
+                >
+                  Save
+                </gxg-button>
+              </div>
+            ]
           ];
         case "borders":
           return [
             <dt-token-border
               slot="preview"
               borderWidth={tokenValue}
-            ></dt-token-border>
+            ></dt-token-border>,
+            <div slot="editable">
+              <gxg-form-input
+                type="text"
+                name="name"
+                label="Value"
+                label-position="above"
+                full-width
+                value={tokenValue}
+                style={{ marginBottom: "8px" }}
+              ></gxg-form-input>
+              <gxg-button
+                id={tokenGroup + "-value-save-button-" + tokenId}
+                type="primary-text-only"
+                style={{ float: "right" }}
+                onClick={this.saveNewValueHandler.bind(
+                  this,
+                  [tokenGroup + "-value-save-button-" + tokenId],
+                  tokenGroup,
+                  tokenId
+                )}
+              >
+                Save
+              </gxg-button>
+            </div>
           ];
         case "radius":
           return [
             <dt-token-radius
               slot="preview"
               radius={tokenValue}
-            ></dt-token-radius>
+            ></dt-token-radius>,
+            <div slot="editable">
+              <gxg-form-input
+                type="text"
+                name="name"
+                label="Value"
+                label-position="above"
+                full-width
+                value={tokenValue}
+                style={{ marginBottom: "8px" }}
+              ></gxg-form-input>
+              <gxg-button
+                id={tokenGroup + "-value-save-button-" + tokenId}
+                type="primary-text-only"
+                style={{ float: "right" }}
+                onClick={this.saveNewValueHandler.bind(
+                  this,
+                  [tokenGroup + "-value-save-button-" + tokenId],
+                  tokenGroup,
+                  tokenId
+                )}
+              >
+                Save
+              </gxg-button>
+            </div>
           ];
         case "shadows":
           return [
             <dt-token-shadow
               slot="preview"
               box-shadow={tokenValue}
-            ></dt-token-shadow>
+            ></dt-token-shadow>,
+            <div slot="editable">
+              <gxg-form-input
+                type="text"
+                name="name"
+                label="Value"
+                label-position="above"
+                full-width
+                value={tokenValue}
+                style={{ marginBottom: "8px" }}
+              ></gxg-form-input>
+              <gxg-button
+                id={tokenGroup + "-value-save-button-" + tokenId}
+                type="primary-text-only"
+                style={{ float: "right" }}
+                onClick={this.saveNewValueHandler.bind(
+                  this,
+                  [tokenGroup + "-value-save-button-" + tokenId],
+                  tokenGroup,
+                  tokenId
+                )}
+              >
+                Save
+              </gxg-button>
+            </div>
           ];
         case "opacity":
           return [
             <dt-token-opacity
               slot="preview"
               opacity={tokenValue}
-            ></dt-token-opacity>
+            ></dt-token-opacity>,
+            <div slot="editable">
+              <gxg-form-input
+                type="text"
+                name="name"
+                label="Value"
+                label-position="above"
+                full-width
+                value={tokenValue}
+                style={{ marginBottom: "8px" }}
+              ></gxg-form-input>
+              <gxg-button
+                id={tokenGroup + "-value-save-button-" + tokenId}
+                type="primary-text-only"
+                style={{ float: "right" }}
+                onClick={this.saveNewValueHandler.bind(
+                  this,
+                  [tokenGroup + "-value-save-button-" + tokenId],
+                  tokenGroup,
+                  tokenId
+                )}
+              >
+                Save
+              </gxg-button>
+            </div>
           ];
         case "zIndex":
           return [
             <dt-token-z-index
               slot="preview"
               zIndex={tokenValue}
-            ></dt-token-z-index>
+            ></dt-token-z-index>,
+            <div slot="editable">
+              <gxg-form-input
+                type="text"
+                name="name"
+                label="Value"
+                label-position="above"
+                full-width
+                value={tokenValue}
+                style={{ marginBottom: "8px" }}
+              ></gxg-form-input>
+              <gxg-button
+                id={tokenGroup + "-value-save-button-" + tokenId}
+                type="primary-text-only"
+                style={{ float: "right" }}
+                onClick={this.saveNewValueHandler.bind(
+                  this,
+                  [tokenGroup + "-value-save-button-" + tokenId],
+                  tokenGroup,
+                  tokenId
+                )}
+              >
+                Save
+              </gxg-button>
+            </div>
           ];
         case "timingFunction":
           return [
             <dt-token-timing-function
               slot="preview"
               timingFunction={tokenValue}
-            ></dt-token-timing-function>
+            ></dt-token-timing-function>,
+            <div slot="editable">
+              <gxg-form-select
+                label="Value"
+                full-width
+                max-visible-options="5"
+                style={{ "margin-bottom": "8px" }}
+              >
+                <option value="linear">Linear</option>
+                <option value="ease">Ease</option>
+                <option value="ease-out">Ease-Out</option>
+                <option selected value="ease-in">
+                  Ease-In
+                </option>
+                <option value="ease-in-out">Ease-In-Out</option>
+              </gxg-form-select>
+              <gxg-button
+                id={tokenGroup + "-value-save-button-" + tokenId}
+                type="primary-text-only"
+                style={{ float: "right" }}
+                onClick={this.saveNewValueHandler.bind(
+                  this,
+                  [tokenGroup + "-value-save-button-" + tokenId],
+                  tokenGroup,
+                  tokenId
+                )}
+              >
+                Save
+              </gxg-button>
+            </div>
           ];
         case "times":
           return [
-            <dt-token-time slot="preview" time={tokenValue}></dt-token-time>
+            <dt-token-time slot="preview" time={tokenValue}></dt-token-time>,
+            <div slot="editable">
+              <gxg-form-input
+                type="text"
+                name="name"
+                label="Value"
+                label-position="above"
+                full-width
+                value={tokenValue}
+                style={{ marginBottom: "8px" }}
+              ></gxg-form-input>
+              <gxg-button
+                id={tokenGroup + "-value-save-button-" + tokenId}
+                type="primary-text-only"
+                style={{ float: "right" }}
+                onClick={this.saveNewValueHandler.bind(
+                  this,
+                  [tokenGroup + "-value-save-button-" + tokenId],
+                  tokenGroup,
+                  tokenId
+                )}
+              >
+                Save
+              </gxg-button>
+            </div>
           ];
         case "mediaQueries":
           return [
             <dt-token-media-query
               slot="preview"
               media-query={tokenValue}
-            ></dt-token-media-query>
+            ></dt-token-media-query>,
+            <div slot="editable">
+              <gxg-form-textarea
+                full-width
+                label="Value"
+                value={tokenValue}
+                style={{ marginBottom: "8px" }}
+              ></gxg-form-textarea>
+              <gxg-button
+                id={tokenGroup + "-value-save-button-" + tokenId}
+                type="primary-text-only"
+                style={{ float: "right" }}
+                onClick={this.saveNewValueHandler.bind(
+                  this,
+                  [tokenGroup + "-value-save-button-" + tokenId],
+                  tokenGroup,
+                  tokenId
+                )}
+              >
+                Save
+              </gxg-button>
+            </div>
           ];
         default:
         // code block
       }
-    }
+    };
 
-    function switchTokenQuote(tokenGroup, tokensLength) {
+    function switchTokenQuote(tokenGroup, tokensLength, needHelpUrl) {
       if (tokensLength === 0) {
         //Only proceed to apply a quote if there are no tokens for the token group.
 
@@ -235,6 +524,7 @@ export class Main {
             token={token}
             quote={quote}
             author={author}
+            needHelpUrl={needHelpUrl}
           ></dt-quote>
         );
       }
@@ -266,7 +556,11 @@ export class Main {
               key={tokenGroup}
               isSelected={this.selectedTokenGroup == tokenGroup}
             >
-              {switchTokenQuote(tokenGroup, model[tokenGroup].tokens.length)}
+              {switchTokenQuote(
+                tokenGroup,
+                model[tokenGroup].tokens.length,
+                "this.needHelpUrl"
+              )}
 
               {model[tokenGroup].tokens.map((token, index) => (
                 <dt-card
@@ -286,7 +580,13 @@ export class Main {
                     )
                   }}
                 >
-                  {switchTokenGroup(tokenGroup, token.value, token.caption)};
+                  {switchTokenGroup(
+                    tokenGroup,
+                    token.value,
+                    token.caption,
+                    token.id
+                  )}
+                  ;
                 </dt-card>
               ))}
 
