@@ -77,7 +77,7 @@ export class Main {
           return [
             <dt-token-font slot="preview" font={tokenValue}></dt-token-font>,
             <div slot="editable">
-              <gxg-form-input
+              <gxg-form-input-text
                 type="text"
                 name="name"
                 label="Value"
@@ -85,7 +85,7 @@ export class Main {
                 full-width
                 value={tokenValue}
                 style={{ marginBottom: "8px" }}
-              ></gxg-form-input>
+              ></gxg-form-input-text>
               <gxg-button
                 id={tokenGroup + "-value-save-button-" + tokenId}
                 type="primary-text-only"
@@ -108,7 +108,7 @@ export class Main {
               fontSize={tokenValue}
             ></dt-token-font-size>,
             <div slot="editable">
-              <gxg-form-input
+              <gxg-form-input-text
                 type="text"
                 name="name"
                 label="Value"
@@ -116,7 +116,7 @@ export class Main {
                 full-width
                 value={tokenValue}
                 style={{ marginBottom: "8px" }}
-              ></gxg-form-input>
+              ></gxg-form-input-text>
               <gxg-button
                 id={tokenGroup + "-value-save-button-" + tokenId}
                 type="primary-text-only"
@@ -152,7 +152,7 @@ export class Main {
                 size={tokenValue}
               ></dt-token-spacing>,
               <div slot="editable">
-                <gxg-form-input
+                <gxg-form-input-text
                   type="text"
                   name="name"
                   label="Value"
@@ -160,7 +160,7 @@ export class Main {
                   full-width
                   value={tokenValue}
                   style={{ marginBottom: "8px" }}
-                ></gxg-form-input>
+                ></gxg-form-input-text>
                 <gxg-button
                   id={tokenGroup + "-value-save-button-" + tokenId}
                   type="primary-text-only"
@@ -184,7 +184,7 @@ export class Main {
               borderWidth={tokenValue}
             ></dt-token-border>,
             <div slot="editable">
-              <gxg-form-input
+              <gxg-form-input-text
                 type="text"
                 name="name"
                 label="Value"
@@ -192,7 +192,7 @@ export class Main {
                 full-width
                 value={tokenValue}
                 style={{ marginBottom: "8px" }}
-              ></gxg-form-input>
+              ></gxg-form-input-text>
               <gxg-button
                 id={tokenGroup + "-value-save-button-" + tokenId}
                 type="primary-text-only"
@@ -215,7 +215,7 @@ export class Main {
               radius={tokenValue}
             ></dt-token-radius>,
             <div slot="editable">
-              <gxg-form-input
+              <gxg-form-input-text
                 type="text"
                 name="name"
                 label="Value"
@@ -223,7 +223,7 @@ export class Main {
                 full-width
                 value={tokenValue}
                 style={{ marginBottom: "8px" }}
-              ></gxg-form-input>
+              ></gxg-form-input-text>
               <gxg-button
                 id={tokenGroup + "-value-save-button-" + tokenId}
                 type="primary-text-only"
@@ -246,7 +246,7 @@ export class Main {
               box-shadow={tokenValue}
             ></dt-token-shadow>,
             <div slot="editable">
-              <gxg-form-input
+              <gxg-form-input-text
                 type="text"
                 name="name"
                 label="Value"
@@ -254,7 +254,7 @@ export class Main {
                 full-width
                 value={tokenValue}
                 style={{ marginBottom: "8px" }}
-              ></gxg-form-input>
+              ></gxg-form-input-text>
               <gxg-button
                 id={tokenGroup + "-value-save-button-" + tokenId}
                 type="primary-text-only"
@@ -277,7 +277,7 @@ export class Main {
               opacity={tokenValue}
             ></dt-token-opacity>,
             <div slot="editable">
-              <gxg-form-input
+              <gxg-form-input-text
                 type="text"
                 name="name"
                 label="Value"
@@ -285,7 +285,7 @@ export class Main {
                 full-width
                 value={tokenValue}
                 style={{ marginBottom: "8px" }}
-              ></gxg-form-input>
+              ></gxg-form-input-text>
               <gxg-button
                 id={tokenGroup + "-value-save-button-" + tokenId}
                 type="primary-text-only"
@@ -308,7 +308,7 @@ export class Main {
               zIndex={tokenValue}
             ></dt-token-z-index>,
             <div slot="editable">
-              <gxg-form-input
+              <gxg-form-input-text
                 type="text"
                 name="name"
                 label="Value"
@@ -316,7 +316,7 @@ export class Main {
                 full-width
                 value={tokenValue}
                 style={{ marginBottom: "8px" }}
-              ></gxg-form-input>
+              ></gxg-form-input-text>
               <gxg-button
                 id={tokenGroup + "-value-save-button-" + tokenId}
                 type="primary-text-only"
@@ -372,7 +372,7 @@ export class Main {
           return [
             <dt-token-time slot="preview" time={tokenValue}></dt-token-time>,
             <div slot="editable">
-              <gxg-form-input
+              <gxg-form-input-text
                 type="text"
                 name="name"
                 label="Value"
@@ -380,7 +380,7 @@ export class Main {
                 full-width
                 value={tokenValue}
                 style={{ marginBottom: "8px" }}
-              ></gxg-form-input>
+              ></gxg-form-input-text>
               <gxg-button
                 id={tokenGroup + "-value-save-button-" + tokenId}
                 type="primary-text-only"
