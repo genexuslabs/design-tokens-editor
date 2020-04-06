@@ -27,6 +27,14 @@ export namespace Components {
     'cardTitle': string;
     'color': string;
   }
+  interface DtEditTokenValue {
+    'inputValue': string;
+    'selectOptions': string;
+    'textAreaValue': string;
+    'tokenGroup': string;
+    'tokenId': string;
+    'type': string;
+  }
   interface DtMain {
     'model': Model;
     'needHelpUrl': string;
@@ -114,6 +122,12 @@ declare global {
   var HTMLDtColorPickerElement: {
     prototype: HTMLDtColorPickerElement;
     new (): HTMLDtColorPickerElement;
+  };
+
+  interface HTMLDtEditTokenValueElement extends Components.DtEditTokenValue, HTMLStencilElement {}
+  var HTMLDtEditTokenValueElement: {
+    prototype: HTMLDtEditTokenValueElement;
+    new (): HTMLDtEditTokenValueElement;
   };
 
   interface HTMLDtMainElement extends Components.DtMain, HTMLStencilElement {}
@@ -238,6 +252,7 @@ declare global {
   interface HTMLElementTagNameMap {
     'dt-card': HTMLDtCardElement;
     'dt-color-picker': HTMLDtColorPickerElement;
+    'dt-edit-token-value': HTMLDtEditTokenValueElement;
     'dt-main': HTMLDtMainElement;
     'dt-quote': HTMLDtQuoteElement;
     'dt-tab': HTMLDtTabElement;
@@ -284,6 +299,15 @@ declare namespace LocalJSX {
     'color'?: string;
     'onNameInputEvent'?: (event: CustomEvent<any>) => void;
     'onSave'?: (event: CustomEvent<any>) => void;
+  }
+  interface DtEditTokenValue {
+    'inputValue'?: string;
+    'onSaveNewValue'?: (event: CustomEvent<any>) => void;
+    'selectOptions'?: string;
+    'textAreaValue'?: string;
+    'tokenGroup'?: string;
+    'tokenId'?: string;
+    'type'?: string;
   }
   interface DtMain {
     'model'?: Model;
@@ -364,6 +388,7 @@ declare namespace LocalJSX {
   interface IntrinsicElements {
     'dt-card': DtCard;
     'dt-color-picker': DtColorPicker;
+    'dt-edit-token-value': DtEditTokenValue;
     'dt-main': DtMain;
     'dt-quote': DtQuote;
     'dt-tab': DtTab;
@@ -395,6 +420,7 @@ declare module "@stencil/core" {
     interface IntrinsicElements {
       'dt-card': LocalJSX.DtCard & JSXBase.HTMLAttributes<HTMLDtCardElement>;
       'dt-color-picker': LocalJSX.DtColorPicker & JSXBase.HTMLAttributes<HTMLDtColorPickerElement>;
+      'dt-edit-token-value': LocalJSX.DtEditTokenValue & JSXBase.HTMLAttributes<HTMLDtEditTokenValueElement>;
       'dt-main': LocalJSX.DtMain & JSXBase.HTMLAttributes<HTMLDtMainElement>;
       'dt-quote': LocalJSX.DtQuote & JSXBase.HTMLAttributes<HTMLDtQuoteElement>;
       'dt-tab': LocalJSX.DtTab & JSXBase.HTMLAttributes<HTMLDtTabElement>;

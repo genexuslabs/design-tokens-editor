@@ -3,7 +3,7 @@ import { Prop, Component, h, Host, Event, EventEmitter } from "@stencil/core";
 @Component({
   tag: "dt-quote",
   styleUrl: "quote.scss",
-  shadow: true
+  shadow: true,
 })
 export class Quote {
   constructor() {

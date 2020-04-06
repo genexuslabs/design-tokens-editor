@@ -6,14 +6,14 @@ import {
   Watch,
   Event,
   EventEmitter,
-  Element
+  Element,
 } from "@stencil/core";
 import { Model } from "../model";
 
 @Component({
   tag: "dt-main",
   styleUrl: "main.scss",
-  shadow: true
+  shadow: true,
 })
 export class Main {
   // Indicate that name should be a public property on the component
@@ -29,15 +29,17 @@ export class Main {
   @Event()
   saveNewValue: EventEmitter;
 
-  saveNewValueHandler(buttonId, tokenGroup, tokenId) {
-    let tokenValue = this.el.shadowRoot.getElementById(buttonId[0])
-      .previousSibling["value"];
-
-    this.saveNewValue.emit({ tokenGroup, tokenId, tokenValue });
-  }
-
   @Listen("cardActivated")
   cardActivatedHandler(event: CustomEvent) {
+    //Update active card
+    this.selectedTokenGroup = event.detail.tokenGroup;
+    this.selectedTokenId = event.detail.tokenId;
+  }
+
+  @Listen("saveNewValue")
+  saveNewValueHandler(event: CustomEvent) {
+    console.log("saveNewValue");
+    console.log(event.detail);
     //Update active card
     this.selectedTokenGroup = event.detail.tokenGroup;
     this.selectedTokenId = event.detail.tokenId;
@@ -77,29 +79,13 @@ export class Main {
           return [
             <dt-token-font slot="preview" font={tokenValue}></dt-token-font>,
             <div slot="editable">
-              <gxg-form-input-text
-                type="text"
-                name="name"
-                label="Value"
-                label-position="above"
-                full-width
-                value={tokenValue}
-                style={{ marginBottom: "8px" }}
-              ></gxg-form-input-text>
-              <gxg-button
-                id={tokenGroup + "-value-save-button-" + tokenId}
-                type="primary-text-only"
-                style={{ float: "right" }}
-                onClick={this.saveNewValueHandler.bind(
-                  this,
-                  [tokenGroup + "-value-save-button-" + tokenId],
-                  tokenGroup,
-                  tokenId
-                )}
-              >
-                Save
-              </gxg-button>
-            </div>
+              <dt-edit-token-value
+                type="input-text"
+                input-value={tokenValue}
+                token-id={tokenId}
+                token-group={tokenGroup}
+              ></dt-edit-token-value>
+            </div>,
           ];
         case "fontSizes":
           return [
@@ -108,29 +94,13 @@ export class Main {
               fontSize={tokenValue}
             ></dt-token-font-size>,
             <div slot="editable">
-              <gxg-form-input-text
-                type="text"
-                name="name"
-                label="Value"
-                label-position="above"
-                full-width
-                value={tokenValue}
-                style={{ marginBottom: "8px" }}
-              ></gxg-form-input-text>
-              <gxg-button
-                id={tokenGroup + "-value-save-button-" + tokenId}
-                type="primary-text-only"
-                style={{ float: "right" }}
-                onClick={this.saveNewValueHandler.bind(
-                  this,
-                  [tokenGroup + "-value-save-button-" + tokenId],
-                  tokenGroup,
-                  tokenId
-                )}
-              >
-                Save
-              </gxg-button>
-            </div>
+              <dt-edit-token-value
+                type="input-text"
+                input-value={tokenValue}
+                token-id={tokenId}
+                token-group={tokenGroup}
+              ></dt-edit-token-value>
+            </div>,
           ];
         case "colors":
           return [
@@ -138,11 +108,13 @@ export class Main {
               slot="preview"
               color={tokenValue}
             ></dt-token-color-palette>,
-            <dt-color-picker
-              color={tokenValue}
-              cardTitle={tokenCaption}
-              slot="editable"
-            ></dt-color-picker>
+            <div slot="editable">
+              <dt-color-picker
+                color={tokenValue}
+                cardTitle={tokenCaption}
+                slot="editable"
+              ></dt-color-picker>
+            </div>,
           ];
         case "spacing":
           return [
@@ -152,30 +124,14 @@ export class Main {
                 size={tokenValue}
               ></dt-token-spacing>,
               <div slot="editable">
-                <gxg-form-input-text
-                  type="text"
-                  name="name"
-                  label="Value"
-                  label-position="above"
-                  full-width
-                  value={tokenValue}
-                  style={{ marginBottom: "8px" }}
-                ></gxg-form-input-text>
-                <gxg-button
-                  id={tokenGroup + "-value-save-button-" + tokenId}
-                  type="primary-text-only"
-                  style={{ float: "right" }}
-                  onClick={this.saveNewValueHandler.bind(
-                    this,
-                    [tokenGroup + "-value-save-button-" + tokenId],
-                    tokenGroup,
-                    tokenId
-                  )}
-                >
-                  Save
-                </gxg-button>
-              </div>
-            ]
+                <dt-edit-token-value
+                  type="input-text"
+                  input-value={tokenValue}
+                  token-id={tokenId}
+                  token-group={tokenGroup}
+                ></dt-edit-token-value>
+              </div>,
+            ],
           ];
         case "borders":
           return [
@@ -184,29 +140,13 @@ export class Main {
               borderWidth={tokenValue}
             ></dt-token-border>,
             <div slot="editable">
-              <gxg-form-input-text
-                type="text"
-                name="name"
-                label="Value"
-                label-position="above"
-                full-width
-                value={tokenValue}
-                style={{ marginBottom: "8px" }}
-              ></gxg-form-input-text>
-              <gxg-button
-                id={tokenGroup + "-value-save-button-" + tokenId}
-                type="primary-text-only"
-                style={{ float: "right" }}
-                onClick={this.saveNewValueHandler.bind(
-                  this,
-                  [tokenGroup + "-value-save-button-" + tokenId],
-                  tokenGroup,
-                  tokenId
-                )}
-              >
-                Save
-              </gxg-button>
-            </div>
+              <dt-edit-token-value
+                type="input-text"
+                input-value={tokenValue}
+                token-id={tokenId}
+                token-group={tokenGroup}
+              ></dt-edit-token-value>
+            </div>,
           ];
         case "radius":
           return [
@@ -215,29 +155,13 @@ export class Main {
               radius={tokenValue}
             ></dt-token-radius>,
             <div slot="editable">
-              <gxg-form-input-text
-                type="text"
-                name="name"
-                label="Value"
-                label-position="above"
-                full-width
-                value={tokenValue}
-                style={{ marginBottom: "8px" }}
-              ></gxg-form-input-text>
-              <gxg-button
-                id={tokenGroup + "-value-save-button-" + tokenId}
-                type="primary-text-only"
-                style={{ float: "right" }}
-                onClick={this.saveNewValueHandler.bind(
-                  this,
-                  [tokenGroup + "-value-save-button-" + tokenId],
-                  tokenGroup,
-                  tokenId
-                )}
-              >
-                Save
-              </gxg-button>
-            </div>
+              <dt-edit-token-value
+                type="input-text"
+                input-value={tokenValue}
+                token-id={tokenId}
+                token-group={tokenGroup}
+              ></dt-edit-token-value>
+            </div>,
           ];
         case "shadows":
           return [
@@ -246,29 +170,13 @@ export class Main {
               box-shadow={tokenValue}
             ></dt-token-shadow>,
             <div slot="editable">
-              <gxg-form-input-text
-                type="text"
-                name="name"
-                label="Value"
-                label-position="above"
-                full-width
-                value={tokenValue}
-                style={{ marginBottom: "8px" }}
-              ></gxg-form-input-text>
-              <gxg-button
-                id={tokenGroup + "-value-save-button-" + tokenId}
-                type="primary-text-only"
-                style={{ float: "right" }}
-                onClick={this.saveNewValueHandler.bind(
-                  this,
-                  [tokenGroup + "-value-save-button-" + tokenId],
-                  tokenGroup,
-                  tokenId
-                )}
-              >
-                Save
-              </gxg-button>
-            </div>
+              <dt-edit-token-value
+                type="input-text"
+                input-value={tokenValue}
+                token-id={tokenId}
+                token-group={tokenGroup}
+              ></dt-edit-token-value>
+            </div>,
           ];
         case "opacity":
           return [
@@ -277,29 +185,13 @@ export class Main {
               opacity={tokenValue}
             ></dt-token-opacity>,
             <div slot="editable">
-              <gxg-form-input-text
-                type="text"
-                name="name"
-                label="Value"
-                label-position="above"
-                full-width
-                value={tokenValue}
-                style={{ marginBottom: "8px" }}
-              ></gxg-form-input-text>
-              <gxg-button
-                id={tokenGroup + "-value-save-button-" + tokenId}
-                type="primary-text-only"
-                style={{ float: "right" }}
-                onClick={this.saveNewValueHandler.bind(
-                  this,
-                  [tokenGroup + "-value-save-button-" + tokenId],
-                  tokenGroup,
-                  tokenId
-                )}
-              >
-                Save
-              </gxg-button>
-            </div>
+              <dt-edit-token-value
+                type="input-text"
+                input-value={tokenValue}
+                token-id={tokenId}
+                token-group={tokenGroup}
+              ></dt-edit-token-value>
+            </div>,
           ];
         case "zIndex":
           return [
@@ -330,7 +222,7 @@ export class Main {
               >
                 Save
               </gxg-button>
-            </div>
+            </div>,
           ];
         case "timingFunction":
           return [
@@ -339,34 +231,13 @@ export class Main {
               timingFunction={tokenValue}
             ></dt-token-timing-function>,
             <div slot="editable">
-              <gxg-form-select
-                label="Value"
-                full-width
-                max-visible-options="5"
-                style={{ "margin-bottom": "8px" }}
-              >
-                <option value="linear">Linear</option>
-                <option value="ease">Ease</option>
-                <option value="ease-out">Ease-Out</option>
-                <option selected value="ease-in">
-                  Ease-In
-                </option>
-                <option value="ease-in-out">Ease-In-Out</option>
-              </gxg-form-select>
-              <gxg-button
-                id={tokenGroup + "-value-save-button-" + tokenId}
-                type="primary-text-only"
-                style={{ float: "right" }}
-                onClick={this.saveNewValueHandler.bind(
-                  this,
-                  [tokenGroup + "-value-save-button-" + tokenId],
-                  tokenGroup,
-                  tokenId
-                )}
-              >
-                Save
-              </gxg-button>
-            </div>
+              <dt-edit-token-value
+                type="select"
+                select-options='{"Linear":"linear","Ease":"ease","Ease-Out":"ease-out","Ease-In":"ease-in","Ease-In-Out":"ease-in-out"}'
+                token-id={tokenId}
+                token-group={tokenGroup}
+              ></dt-edit-token-value>
+            </div>,
           ];
         case "times":
           return [
@@ -394,7 +265,7 @@ export class Main {
               >
                 Save
               </gxg-button>
-            </div>
+            </div>,
           ];
         case "mediaQueries":
           return [
@@ -403,26 +274,13 @@ export class Main {
               media-query={tokenValue}
             ></dt-token-media-query>,
             <div slot="editable">
-              <gxg-form-textarea
-                full-width
-                label="Value"
-                value={tokenValue}
-                style={{ marginBottom: "8px" }}
-              ></gxg-form-textarea>
-              <gxg-button
-                id={tokenGroup + "-value-save-button-" + tokenId}
-                type="primary-text-only"
-                style={{ float: "right" }}
-                onClick={this.saveNewValueHandler.bind(
-                  this,
-                  [tokenGroup + "-value-save-button-" + tokenId],
-                  tokenGroup,
-                  tokenId
-                )}
-              >
-                Save
-              </gxg-button>
-            </div>
+              <dt-edit-token-value
+                type="textarea"
+                text-area-value={tokenValue}
+                token-id={tokenId}
+                token-group={tokenGroup}
+              ></dt-edit-token-value>
+            </div>,
           ];
         default:
         // code block
@@ -540,7 +398,7 @@ export class Main {
       <div class="container">
         <dt-tabs>
           <dt-tab-bar>
-            {Object.keys(model).map(tokenGroup => (
+            {Object.keys(model).map((tokenGroup) => (
               <dt-tab-button
                 slot="tab-bar"
                 tab={tokenGroup}
@@ -550,7 +408,7 @@ export class Main {
             ))}
           </dt-tab-bar>
 
-          {Object.keys(model).map(tokenGroup => (
+          {Object.keys(model).map((tokenGroup) => (
             <dt-tab
               tab={tokenGroup}
               key={tokenGroup}
@@ -577,7 +435,7 @@ export class Main {
                     "--cardAnimationDelay": this.getCardsAnimationDuration(
                       model[tokenGroup].tokens.length,
                       index
-                    )
+                    ),
                   }}
                 >
                   {switchTokenGroup(
@@ -597,7 +455,7 @@ export class Main {
 
         <gxg-alert
           type="more-info"
-          ref={el => (this.alertBox = el as HTMLElement)}
+          ref={(el) => (this.alertBox = el as HTMLElement)}
         >
           The token has been deleted.
         </gxg-alert>
