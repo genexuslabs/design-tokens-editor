@@ -71,13 +71,8 @@ graph TD;
   dt-main --> dt-tab-button
   dt-main --> dt-tab
   dt-main --> gxg-alert
-  dt-edit-token-value --> gxg-form-input-text
   dt-edit-token-value --> dt-color-picker
-  dt-edit-token-value --> gxg-form-select
-  dt-edit-token-value --> gxg-stepper
-  dt-edit-token-value --> gxg-form-textarea
   dt-edit-token-value --> gxg-button
-  gxg-form-input-text --> gxg-icon
   dt-color-picker --> gxg-button-group
   dt-quote --> gxg-button
   dt-card --> gxg-button

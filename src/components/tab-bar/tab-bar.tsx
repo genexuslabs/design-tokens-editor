@@ -108,13 +108,9 @@ export class TabBar {
   }
 
   detectClickOutsideTabBarMenu(event) {
-    console.log("click outside tabar menu");
     const tabMenuContainer = this.el.shadowRoot.querySelector(
       ".tab-bar-menu"
     ) as HTMLElement;
-
-    console.log("tabMenuContainer");
-    console.log(tabMenuContainer);
 
     let x = event.x;
     let y = event.y;

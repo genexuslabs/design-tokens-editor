@@ -19,7 +19,6 @@ export class Template {
 
       ...or combination of those
     */
-    console.log(this.mediaQuery);
 
     let mq = this.mediaQuery.toLowerCase();
     let print = false;
