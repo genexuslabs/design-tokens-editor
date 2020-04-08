@@ -1,5 +1,4 @@
 import {
-  Host,
   Component,
   Prop,
   h,
@@ -16,23 +15,26 @@ import {
 export class EditTokenValue {
   @Prop() type: string = "input-text";
 
-  @Prop() inputValue: string;
-  @Prop() textAreaValue: string;
-  @Prop() selectOptions: string;
-
+  @Prop() value: string;
   @Prop() tokenId: string;
   @Prop() tokenGroup: string;
+  @Prop() tokenTitle: string;
 
   @Event()
-  saveNewValue: EventEmitter;
+  saveNewValues: EventEmitter;
 
   @Element() el: HTMLElement;
 
-  saveNewValueHandler(tokenGroup, tokenId) {
+  saveNewValuesHandler() {
+    const tokenTitle = this.el.shadowRoot
+      .getElementById("token-title")
+      .getAttribute("value");
+    const tokenGroup = this.tokenGroup;
+    const tokenId = this.tokenId;
     let tokenValue = this.el.shadowRoot
       .getElementById(this.type)
       .getAttribute("value");
-    this.saveNewValue.emit({ tokenGroup, tokenId, tokenValue });
+    this.saveNewValues.emit({ tokenTitle, tokenGroup, tokenId, tokenValue });
   }
   createOptions(options) {
     var options = JSON.parse(options);
@@ -44,37 +46,41 @@ export class EditTokenValue {
   }
 
   render() {
-    let returnContent = [];
+    let returnContent = [
+      <gxg-form-input-text
+        id="token-title"
+        type="text"
+        label="Title"
+        label-position="above"
+        full-width
+        value={this.tokenTitle}
+        style={{ marginBottom: "8px" }}
+      ></gxg-form-input-text>,
+    ];
 
+    //If type is color-picker...
+    if (this.type === "color-picker") {
+      returnContent.push(
+        <dt-color-picker id="color-picker" value={this.value}></dt-color-picker>
+      );
+    }
     //If type is input-text...
     if (this.type === "input-text") {
-      returnContent = [
+      returnContent.push(
         <gxg-form-input-text
           id="input-text"
           type="text"
           label="Value"
           label-position="above"
           full-width
-          value={this.inputValue}
+          value={this.value}
           style={{ marginBottom: "8px" }}
-        ></gxg-form-input-text>,
-      ];
-    }
-    //If type is textarea...
-    if (this.type === "textarea") {
-      returnContent = [
-        <gxg-form-textarea
-          id="textarea"
-          full-width
-          label="Value"
-          value={this.textAreaValue}
-          style={{ marginBottom: "8px" }}
-        ></gxg-form-textarea>,
-      ];
+        ></gxg-form-input-text>
+      );
     }
     //If type is select...
     if (this.type === "select") {
-      returnContent = [
+      returnContent.push(
         <gxg-form-select
           id="select"
           label="Value"
@@ -82,20 +88,46 @@ export class EditTokenValue {
           max-visible-options="5"
           style={{ "margin-bottom": "8px" }}
         >
-          {this.createOptions(this.selectOptions)}
-        </gxg-form-select>,
-      ];
+          {this.createOptions(this.value)}
+        </gxg-form-select>
+      );
     }
+    //If type is stepper...
+    if (this.type === "stepper") {
+      returnContent.push(
+        <gxg-stepper
+          id="stepper"
+          label="Value"
+          value={this.value}
+        ></gxg-stepper>
+      );
+    }
+    //If type is textarea...
+    if (this.type === "textarea") {
+      returnContent.push(
+        <gxg-form-textarea
+          id="textarea"
+          full-width
+          label="Value"
+          value={this.value}
+          style={{ marginBottom: "8px" }}
+        ></gxg-form-textarea>
+      );
+    }
+
+    //If type is color-picker...
+    if (this.type === "color-picker") {
+      returnContent.push(
+        <dt-color-picker id="color-picker" value={this.value}></dt-color-picker>
+      );
+    }
+
     //Save button
     returnContent.push(
       <gxg-button
         type="primary-text-only"
         style={{ float: "right" }}
-        onClick={this.saveNewValueHandler.bind(
-          this,
-          this.tokenGroup,
-          this.tokenId
-        )}
+        onClick={this.saveNewValuesHandler.bind(this)}
       >
         Save
       </gxg-button>
@@ -105,4 +137,9 @@ export class EditTokenValue {
   }
 }
 
-export type type = "input-text" | "textarea" | "select";
+export type type =
+  | "color-picker"
+  | "input-text"
+  | "select"
+  | "stepper"
+  | "textarea";

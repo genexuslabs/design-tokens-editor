@@ -5,21 +5,21 @@ import {
   Event,
   EventEmitter,
   Prop,
-  State
+  State,
 } from "@stencil/core";
 import Pickr from "@simonwep/pickr";
 
 @Component({
   tag: "dt-color-picker",
   styleUrl: "color-picker.scss",
-  shadow: true
+  shadow: true,
 })
 export class ColorPicker {
   @Element() element: HTMLElement;
   private pickr: Pickr;
 
   @Prop({ mutable: true }) cardTitle = "";
-  @Prop({ mutable: true }) color = "";
+  @Prop({ mutable: true, reflect: true }) value = "";
   @State() colorRepresentation: "HEXA" | "RGBA" = "HEXA";
   @State() colorInputValue: String = "";
 
@@ -37,9 +37,9 @@ export class ColorPicker {
   //Lyfe cycles
   componentDidLoad() {
     //Detect color representation
-    if (this.color.includes("rgb")) {
+    if (this.value.includes("rgb")) {
       this.colorRepresentation = "RGBA";
-    } else if (this.color.includes("#")) {
+    } else if (this.value.includes("#")) {
       this.colorRepresentation = "HEXA";
     }
 
@@ -56,7 +56,7 @@ export class ColorPicker {
       container: colorPickerMainCtEl,
       inline: true,
       showAlways: true,
-      default: this.color,
+      default: this.value,
       // useAsButton: true,
       components: {
         // Main components
@@ -68,18 +68,18 @@ export class ColorPicker {
         interaction: {
           // hex: true,
           // rgb: true,
-          input: false
+          input: false,
           // save: true
-        }
-      }
+        },
+      },
     });
 
-    this.pickr.on("change", color => {
+    this.pickr.on("change", (color) => {
       this.colorObject = color;
       if (this.colorRepresentation === "HEXA") {
-        this.color = this.colorObject.toHEXA().toString();
+        this.value = this.colorObject.toHEXA().toString();
       } else if (this.colorRepresentation === "RGBA") {
-        this.color = this.colorObject.toRGBA().toString(0);
+        this.value = this.colorObject.toRGBA().toString(0);
       }
     });
 
@@ -90,10 +90,10 @@ export class ColorPicker {
     let options = {
       root: document.querySelector("body"),
       rootMargin: "0px",
-      threshold: 1.0
+      threshold: 1.0,
     };
     let observer = new IntersectionObserver(() => {
-      this.pickr.setColor(this.color); //We have to set the color by force, because we need to get the color at this time, and pickr seems to defer it.
+      this.pickr.setColor(this.value); //We have to set the color by force, because we need to get the color at this time, and pickr seems to defer it.
     }, options);
     observer.observe(this.element);
   }
@@ -106,15 +106,15 @@ export class ColorPicker {
   handleHexaButtonClick() {
     this.colorChangedFromInput = false;
     this.colorRepresentation = "HEXA";
-    this.color = this.colorObject.toHEXA().toString();
+    this.value = this.colorObject.toHEXA().toString();
   }
   handleRgbaButtonClick() {
     this.colorChangedFromInput = false;
     this.colorRepresentation = "RGBA";
-    this.color = this.colorObject.toRGBA().toString(0);
+    this.value = this.colorObject.toRGBA().toString(0);
   }
   handleSaveButtonClick() {
-    this.save.emit({ cardTitle: this.cardTitle, color: this.color });
+    this.save.emit({ cardTitle: this.cardTitle, color: this.value });
   }
   handleTitleValueChange(ev: InputEvent) {
     const element = ev.target as HTMLInputElement;
@@ -149,9 +149,9 @@ export class ColorPicker {
   }
 
   setActiveButton() {
-    if (this.color.includes("rgb")) {
+    if (this.value.includes("rgb")) {
       return "RGBA";
-    } else if (this.color.includes("#")) {
+    } else if (this.value.includes("#")) {
       return "HEXA";
     }
   }
@@ -159,19 +159,6 @@ export class ColorPicker {
   render() {
     return (
       <div class="color-picker-main-container" id="color-picker-main-container">
-        <label
-          htmlFor="cp-color-name"
-          class="color-picker-main-container-label"
-        >
-          name
-        </label>
-        <input
-          type="text"
-          id="cp-color-name"
-          value={this.cardTitle}
-          class="color-picker-main-container-textbox"
-          onInput={this.handleTitleValueChange.bind(this)}
-        />
         <div class="color-picker"></div>
         <div class="cp-gxg-buttons before-color-value" slot="editable">
           <gxg-button-group selected-button-id={this.setActiveButton()}>
@@ -192,14 +179,7 @@ export class ColorPicker {
           onInput={this.handleColorValueChange.bind(this)}
           onKeyDown={this.handleKeyDown.bind(this)}
         />
-        <div class="cp-gxg-buttons after-color-value" slot="editable">
-          <gxg-button
-            type="primary-text-only"
-            onClick={this.handleSaveButtonClick.bind(this)}
-          >
-            Save
-          </gxg-button>
-        </div>
+        <div class="cp-gxg-buttons after-color-value" slot="editable"></div>
       </div>
     );
   }

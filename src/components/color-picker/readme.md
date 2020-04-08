@@ -10,7 +10,7 @@
 | Property    | Attribute    | Description | Type     | Default |
 | ----------- | ------------ | ----------- | -------- | ------- |
 | `cardTitle` | `card-title` |             | `string` | `""`    |
-| `color`     | `color`      |             | `string` | `""`    |
+| `value`     | `value`      |             | `string` | `""`    |
 
 
 ## Events
@@ -25,19 +25,17 @@
 
 ### Used by
 
- - [dt-main](../main)
+ - [dt-edit-token-value](../edit-token-value)
 
 ### Depends on
 
 - gxg-button-group
-- gxg-button
 
 ### Graph
 ```mermaid
 graph TD;
   dt-color-picker --> gxg-button-group
-  dt-color-picker --> gxg-button
-  dt-main --> dt-color-picker
+  dt-edit-token-value --> dt-color-picker
   style dt-color-picker fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

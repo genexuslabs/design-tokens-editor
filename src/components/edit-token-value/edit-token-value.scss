@@ -1,0 +1,10 @@
+:host {
+}
+
+:host > * {
+  margin-bottom: var(--spacing-lay-01);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

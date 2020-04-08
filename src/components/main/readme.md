@@ -10,9 +10,17 @@
 | Property             | Attribute              | Description | Type      | Default     |
 | -------------------- | ---------------------- | ----------- | --------- | ----------- |
 | `model`              | --                     |             | `Model`   | `undefined` |
+| `needHelpUrl`        | `need-help-url`        |             | `string`  | `"#"`       |
 | `selectedTokenGroup` | `selected-token-group` |             | `string`  | `undefined` |
 | `selectedTokenId`    | `selected-token-id`    |             | `string`  | `undefined` |
 | `tokenDeleted`       | `token-deleted`        |             | `boolean` | `undefined` |
+
+
+## Events
+
+| Event          | Description | Type               |
+| -------------- | ----------- | ------------------ |
+| `saveNewValue` |             | `CustomEvent<any>` |
 
 
 ## Dependencies
@@ -20,9 +28,9 @@
 ### Depends on
 
 - [dt-token-font](../token-font)
+- [dt-edit-token-value](../edit-token-value)
 - [dt-token-font-size](../token-font-size)
 - [dt-token-color-palette](../token-color-palette)
-- [dt-color-picker](../color-picker)
 - [dt-token-spacing](../token-spacing)
 - [dt-token-border](../token-border)
 - [dt-token-radius](../token-radius)
@@ -44,9 +52,9 @@
 ```mermaid
 graph TD;
   dt-main --> dt-token-font
+  dt-main --> dt-edit-token-value
   dt-main --> dt-token-font-size
   dt-main --> dt-token-color-palette
-  dt-main --> dt-color-picker
   dt-main --> dt-token-spacing
   dt-main --> dt-token-border
   dt-main --> dt-token-radius
@@ -63,8 +71,14 @@ graph TD;
   dt-main --> dt-tab-button
   dt-main --> dt-tab
   dt-main --> gxg-alert
+  dt-edit-token-value --> gxg-form-input-text
+  dt-edit-token-value --> dt-color-picker
+  dt-edit-token-value --> gxg-form-select
+  dt-edit-token-value --> gxg-stepper
+  dt-edit-token-value --> gxg-form-textarea
+  dt-edit-token-value --> gxg-button
+  gxg-form-input-text --> gxg-icon
   dt-color-picker --> gxg-button-group
-  dt-color-picker --> gxg-button
   dt-quote --> gxg-button
   dt-card --> gxg-button
   dt-card --> gxg-icon

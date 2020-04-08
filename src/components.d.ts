@@ -25,15 +25,14 @@ export namespace Components {
   }
   interface DtColorPicker {
     'cardTitle': string;
-    'color': string;
+    'value': string;
   }
   interface DtEditTokenValue {
-    'inputValue': string;
-    'selectOptions': string;
-    'textAreaValue': string;
     'tokenGroup': string;
     'tokenId': string;
+    'tokenTitle': string;
     'type': string;
+    'value': string;
   }
   interface DtMain {
     'model': Model;
@@ -296,18 +295,17 @@ declare namespace LocalJSX {
   }
   interface DtColorPicker {
     'cardTitle'?: string;
-    'color'?: string;
     'onNameInputEvent'?: (event: CustomEvent<any>) => void;
     'onSave'?: (event: CustomEvent<any>) => void;
+    'value'?: string;
   }
   interface DtEditTokenValue {
-    'inputValue'?: string;
-    'onSaveNewValue'?: (event: CustomEvent<any>) => void;
-    'selectOptions'?: string;
-    'textAreaValue'?: string;
+    'onSaveNewValues'?: (event: CustomEvent<any>) => void;
     'tokenGroup'?: string;
     'tokenId'?: string;
+    'tokenTitle'?: string;
     'type'?: string;
+    'value'?: string;
   }
   interface DtMain {
     'model'?: Model;

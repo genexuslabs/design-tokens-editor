@@ -36,15 +36,6 @@ export class Main {
     this.selectedTokenId = event.detail.tokenId;
   }
 
-  @Listen("saveNewValue")
-  saveNewValueHandler(event: CustomEvent) {
-    console.log("saveNewValue");
-    console.log(event.detail);
-    //Update active card
-    this.selectedTokenGroup = event.detail.tokenGroup;
-    this.selectedTokenId = event.detail.tokenId;
-  }
-
   componentDidLoad() {
     if (this.tokenDeleted === true) {
       setTimeout(() => {
@@ -81,7 +72,8 @@ export class Main {
             <div slot="editable">
               <dt-edit-token-value
                 type="input-text"
-                input-value={tokenValue}
+                value={tokenValue}
+                token-title={tokenCaption}
                 token-id={tokenId}
                 token-group={tokenGroup}
               ></dt-edit-token-value>
@@ -96,7 +88,8 @@ export class Main {
             <div slot="editable">
               <dt-edit-token-value
                 type="input-text"
-                input-value={tokenValue}
+                value={tokenValue}
+                token-title={tokenCaption}
                 token-id={tokenId}
                 token-group={tokenGroup}
               ></dt-edit-token-value>
@@ -109,12 +102,19 @@ export class Main {
               color={tokenValue}
             ></dt-token-color-palette>,
             <div slot="editable">
-              <dt-color-picker
-                color={tokenValue}
-                cardTitle={tokenCaption}
-                slot="editable"
-              ></dt-color-picker>
+              <dt-edit-token-value
+                type="color-picker"
+                value={tokenValue}
+                token-title={tokenCaption}
+                token-id={tokenId}
+                token-group={tokenGroup}
+              ></dt-edit-token-value>
             </div>,
+            // <dt-color-picker
+            //   color={tokenValue}
+            //   cardTitle={tokenCaption}
+            //   slot="editable"
+            // ></dt-color-picker>,
           ];
         case "spacing":
           return [
@@ -126,7 +126,8 @@ export class Main {
               <div slot="editable">
                 <dt-edit-token-value
                   type="input-text"
-                  input-value={tokenValue}
+                  value={tokenValue}
+                  token-title={tokenCaption}
                   token-id={tokenId}
                   token-group={tokenGroup}
                 ></dt-edit-token-value>
@@ -142,7 +143,8 @@ export class Main {
             <div slot="editable">
               <dt-edit-token-value
                 type="input-text"
-                input-value={tokenValue}
+                value={tokenValue}
+                token-title={tokenCaption}
                 token-id={tokenId}
                 token-group={tokenGroup}
               ></dt-edit-token-value>
@@ -157,7 +159,8 @@ export class Main {
             <div slot="editable">
               <dt-edit-token-value
                 type="input-text"
-                input-value={tokenValue}
+                value={tokenValue}
+                token-title={tokenCaption}
                 token-id={tokenId}
                 token-group={tokenGroup}
               ></dt-edit-token-value>
@@ -172,7 +175,8 @@ export class Main {
             <div slot="editable">
               <dt-edit-token-value
                 type="input-text"
-                input-value={tokenValue}
+                value={tokenValue}
+                token-title={tokenCaption}
                 token-id={tokenId}
                 token-group={tokenGroup}
               ></dt-edit-token-value>
@@ -187,7 +191,8 @@ export class Main {
             <div slot="editable">
               <dt-edit-token-value
                 type="input-text"
-                input-value={tokenValue}
+                value={tokenValue}
+                token-title={tokenCaption}
                 token-id={tokenId}
                 token-group={tokenGroup}
               ></dt-edit-token-value>
@@ -200,28 +205,13 @@ export class Main {
               zIndex={tokenValue}
             ></dt-token-z-index>,
             <div slot="editable">
-              <gxg-form-input-text
-                type="text"
-                name="name"
-                label="Value"
-                label-position="above"
-                full-width
+              <dt-edit-token-value
+                type="stepper"
                 value={tokenValue}
-                style={{ marginBottom: "8px" }}
-              ></gxg-form-input-text>
-              <gxg-button
-                id={tokenGroup + "-value-save-button-" + tokenId}
-                type="primary-text-only"
-                style={{ float: "right" }}
-                onClick={this.saveNewValueHandler.bind(
-                  this,
-                  [tokenGroup + "-value-save-button-" + tokenId],
-                  tokenGroup,
-                  tokenId
-                )}
-              >
-                Save
-              </gxg-button>
+                token-title={tokenCaption}
+                token-id={tokenId}
+                token-group={tokenGroup}
+              ></dt-edit-token-value>
             </div>,
           ];
         case "timingFunction":
@@ -233,7 +223,7 @@ export class Main {
             <div slot="editable">
               <dt-edit-token-value
                 type="select"
-                select-options='{"Linear":"linear","Ease":"ease","Ease-Out":"ease-out","Ease-In":"ease-in","Ease-In-Out":"ease-in-out"}'
+                value='{"Linear":"linear","Ease":"ease","Ease-Out":"ease-out","Ease-In":"ease-in","Ease-In-Out":"ease-in-out"}'
                 token-id={tokenId}
                 token-group={tokenGroup}
               ></dt-edit-token-value>
@@ -243,28 +233,13 @@ export class Main {
           return [
             <dt-token-time slot="preview" time={tokenValue}></dt-token-time>,
             <div slot="editable">
-              <gxg-form-input-text
-                type="text"
-                name="name"
-                label="Value"
-                label-position="above"
-                full-width
+              <dt-edit-token-value
+                type="input-text"
                 value={tokenValue}
-                style={{ marginBottom: "8px" }}
-              ></gxg-form-input-text>
-              <gxg-button
-                id={tokenGroup + "-value-save-button-" + tokenId}
-                type="primary-text-only"
-                style={{ float: "right" }}
-                onClick={this.saveNewValueHandler.bind(
-                  this,
-                  [tokenGroup + "-value-save-button-" + tokenId],
-                  tokenGroup,
-                  tokenId
-                )}
-              >
-                Save
-              </gxg-button>
+                token-title={tokenCaption}
+                token-id={tokenId}
+                token-group={tokenGroup}
+              ></dt-edit-token-value>
             </div>,
           ];
         case "mediaQueries":
@@ -276,7 +251,8 @@ export class Main {
             <div slot="editable">
               <dt-edit-token-value
                 type="textarea"
-                text-area-value={tokenValue}
+                value={tokenValue}
+                token-title={tokenCaption}
                 token-id={tokenId}
                 token-group={tokenGroup}
               ></dt-edit-token-value>
