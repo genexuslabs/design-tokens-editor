@@ -6,14 +6,14 @@ import {
   Watch,
   Event,
   EventEmitter,
-  Element,
+  Element
 } from "@stencil/core";
 import { Model } from "../model";
 
 @Component({
   tag: "dt-main",
   styleUrl: "main.scss",
-  shadow: true,
+  shadow: true
 })
 export class Main {
   // Indicate that name should be a public property on the component
@@ -77,7 +77,7 @@ export class Main {
                 token-id={tokenId}
                 token-group={tokenGroup}
               ></dt-edit-token-value>
-            </div>,
+            </div>
           ];
         case "fontSizes":
           return [
@@ -93,7 +93,7 @@ export class Main {
                 token-id={tokenId}
                 token-group={tokenGroup}
               ></dt-edit-token-value>
-            </div>,
+            </div>
           ];
         case "colors":
           return [
@@ -109,7 +109,7 @@ export class Main {
                 token-id={tokenId}
                 token-group={tokenGroup}
               ></dt-edit-token-value>
-            </div>,
+            </div>
             // <dt-color-picker
             //   color={tokenValue}
             //   cardTitle={tokenCaption}
@@ -131,8 +131,8 @@ export class Main {
                   token-id={tokenId}
                   token-group={tokenGroup}
                 ></dt-edit-token-value>
-              </div>,
-            ],
+              </div>
+            ]
           ];
         case "borders":
           return [
@@ -148,7 +148,7 @@ export class Main {
                 token-id={tokenId}
                 token-group={tokenGroup}
               ></dt-edit-token-value>
-            </div>,
+            </div>
           ];
         case "radius":
           return [
@@ -164,7 +164,7 @@ export class Main {
                 token-id={tokenId}
                 token-group={tokenGroup}
               ></dt-edit-token-value>
-            </div>,
+            </div>
           ];
         case "shadows":
           return [
@@ -180,7 +180,7 @@ export class Main {
                 token-id={tokenId}
                 token-group={tokenGroup}
               ></dt-edit-token-value>
-            </div>,
+            </div>
           ];
         case "opacity":
           return [
@@ -196,7 +196,7 @@ export class Main {
                 token-id={tokenId}
                 token-group={tokenGroup}
               ></dt-edit-token-value>
-            </div>,
+            </div>
           ];
         case "zIndex":
           return [
@@ -212,7 +212,7 @@ export class Main {
                 token-id={tokenId}
                 token-group={tokenGroup}
               ></dt-edit-token-value>
-            </div>,
+            </div>
           ];
         case "timingFunction":
           return [
@@ -227,7 +227,7 @@ export class Main {
                 token-id={tokenId}
                 token-group={tokenGroup}
               ></dt-edit-token-value>
-            </div>,
+            </div>
           ];
         case "times":
           return [
@@ -240,7 +240,7 @@ export class Main {
                 token-id={tokenId}
                 token-group={tokenGroup}
               ></dt-edit-token-value>
-            </div>,
+            </div>
           ];
         case "mediaQueries":
           return [
@@ -256,7 +256,7 @@ export class Main {
                 token-id={tokenId}
                 token-group={tokenGroup}
               ></dt-edit-token-value>
-            </div>,
+            </div>
           ];
         default:
         // code block
@@ -374,7 +374,7 @@ export class Main {
       <div class="container">
         <dt-tabs>
           <dt-tab-bar>
-            {Object.keys(model).map((tokenGroup) => (
+            {Object.keys(model).map(tokenGroup => (
               <dt-tab-button
                 slot="tab-bar"
                 tab={tokenGroup}
@@ -384,7 +384,7 @@ export class Main {
             ))}
           </dt-tab-bar>
 
-          {Object.keys(model).map((tokenGroup) => (
+          {Object.keys(model).map(tokenGroup => (
             <dt-tab
               tab={tokenGroup}
               key={tokenGroup}
@@ -411,7 +411,7 @@ export class Main {
                     "--cardAnimationDelay": this.getCardsAnimationDuration(
                       model[tokenGroup].tokens.length,
                       index
-                    ),
+                    )
                   }}
                 >
                   {switchTokenGroup(
@@ -431,7 +431,7 @@ export class Main {
 
         <gxg-alert
           type="more-info"
-          ref={(el) => (this.alertBox = el as HTMLElement)}
+          ref={el => (this.alertBox = el as HTMLElement)}
         >
           The token has been deleted.
         </gxg-alert>

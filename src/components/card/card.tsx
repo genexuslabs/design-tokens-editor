@@ -9,14 +9,14 @@ import {
   Watch,
   Host,
   State,
-  getAssetPath,
+  getAssetPath
 } from "@stencil/core";
 
 @Component({
   tag: "dt-card",
   styleUrl: "card.scss",
   shadow: true,
-  assetsDirs: ["card-assets"],
+  assetsDirs: ["card-assets"]
 })
 export class Card {
   constructor() {
@@ -55,11 +55,11 @@ export class Card {
 
   tokenDeletedEventData: Object = {
     tokenId: this.tokenId,
-    tokenGroup: this.tokenGroup,
+    tokenGroup: this.tokenGroup
   };
   tokenDuplicatedEventData: Object = {
     tokenId: this.tokenId,
-    tokenGroup: this.tokenGroup,
+    tokenGroup: this.tokenGroup
   };
 
   @Listen("save")
@@ -68,7 +68,7 @@ export class Card {
       tokenId: this.tokenId,
       tokenGroup: this.tokenGroup,
       tokenTitle: event.detail.cardTitle,
-      tokenValue: event.detail.color,
+      tokenValue: event.detail.color
     });
 
     //close the card
@@ -132,7 +132,7 @@ export class Card {
   activateCard() {
     this.cardActivated.emit({
       tokenId: this.tokenId,
-      tokenGroup: this.tokenGroup,
+      tokenGroup: this.tokenGroup
     });
   }
   newCardOnClick() {
@@ -143,7 +143,7 @@ export class Card {
     this.element.setAttribute("class", "card--selected");
     this.cardActivated.emit({
       tokenId: this.tokenId,
-      tokenGroup: this.tokenGroup,
+      tokenGroup: this.tokenGroup
     });
   }
 
@@ -156,11 +156,11 @@ export class Card {
       return (
         <Host
           style={{
-            "min-height": this.cardMinHeight,
+            "min-height": this.cardMinHeight
           }}
           class={{
             new: true,
-            "card--selected": this.isSelected === true,
+            "card--selected": this.isSelected === true
           }}
           onClick={this.newCardOnClick.bind(this)}
           tabIndex=""
@@ -180,11 +180,11 @@ export class Card {
       return (
         <Host
           style={{
-            "min-height": this.cardMinHeight,
+            "min-height": this.cardMinHeight
           }}
           class={{
             "editable-mode-on": this.mode === "editable",
-            "card--selected": this.isSelected === true,
+            "card--selected": this.isSelected === true
           }}
           onMouseEnter={this.activateCard.bind(this)}
           tabIndex=""
@@ -192,7 +192,7 @@ export class Card {
           <div
             class={{
               card: true,
-              "card--editable": this.mode === "editable",
+              "card--editable": this.mode === "editable"
             }}
             data-tokenId={this.tokenId}
           >
@@ -219,6 +219,17 @@ export class Card {
                       title="duplicate token"
                     >
                       <gxg-icon slot="icon" type="duplicate"></gxg-icon>
+                    </gxg-button>
+                    <gxg-button
+                      type="secondary-icon-only"
+                      onClick={this.duplicateCard.bind(this)}
+                      title="duplicate token"
+                    >
+                      <gxg-icon
+                        slot="icon"
+                        size="small"
+                        type="duplicate"
+                      ></gxg-icon>
                     </gxg-button>
                     <gxg-button
                       type="secondary-icon-only"
