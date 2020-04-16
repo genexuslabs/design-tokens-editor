@@ -38,7 +38,6 @@
     "@simonwep/pickr": "^1.5.1",
     "@types/node": "^13.7.1",
     "chokidar": "^3.2.2",
-    "muuri": "^0.8.0",
     "stencil-fragment": "^1.0.1"
   }
 }

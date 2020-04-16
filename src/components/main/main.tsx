@@ -110,11 +110,6 @@ export class Main {
                 token-group={tokenGroup}
               ></dt-edit-token-value>
             </div>
-            // <dt-color-picker
-            //   color={tokenValue}
-            //   cardTitle={tokenCaption}
-            //   slot="editable"
-            // ></dt-color-picker>,
           ];
         case "spacing":
           return [

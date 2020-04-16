@@ -222,17 +222,6 @@ export class Card {
                     </gxg-button>
                     <gxg-button
                       type="secondary-icon-only"
-                      onClick={this.duplicateCard.bind(this)}
-                      title="duplicate token"
-                    >
-                      <gxg-icon
-                        slot="icon"
-                        size="small"
-                        type="duplicate"
-                      ></gxg-icon>
-                    </gxg-button>
-                    <gxg-button
-                      type="secondary-icon-only"
                       onClick={this.deleteCard.bind(this)}
                       title="delete token"
                     >

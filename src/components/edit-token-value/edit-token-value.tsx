@@ -4,13 +4,13 @@ import {
   h,
   Event,
   EventEmitter,
-  Element,
+  Element
 } from "@stencil/core";
 
 @Component({
   tag: "dt-edit-token-value",
   styleUrl: "edit-token-value.scss",
-  shadow: true,
+  shadow: true
 })
 export class EditTokenValue {
   @Prop() type: string = "input-text";
@@ -47,7 +47,7 @@ export class EditTokenValue {
 
   render() {
     let returnContent = [
-      <gxg-form-input-text
+      <gxg-form-text
         id="token-title"
         type="text"
         label="Title"
@@ -55,7 +55,7 @@ export class EditTokenValue {
         full-width
         value={this.tokenTitle}
         style={{ marginBottom: "8px" }}
-      ></gxg-form-input-text>,
+      ></gxg-form-text>
     ];
 
     //If type is color-picker...
@@ -67,7 +67,7 @@ export class EditTokenValue {
     //If type is input-text...
     if (this.type === "input-text") {
       returnContent.push(
-        <gxg-form-input-text
+        <gxg-form-text
           id="input-text"
           type="text"
           label="Value"
@@ -75,7 +75,7 @@ export class EditTokenValue {
           full-width
           value={this.value}
           style={{ marginBottom: "8px" }}
-        ></gxg-form-input-text>
+        ></gxg-form-text>
       );
     }
     //If type is select...
@@ -112,13 +112,6 @@ export class EditTokenValue {
           value={this.value}
           style={{ marginBottom: "8px" }}
         ></gxg-form-textarea>
-      );
-    }
-
-    //If type is color-picker...
-    if (this.type === "color-picker") {
-      returnContent.push(
-        <dt-color-picker id="color-picker" value={this.value}></dt-color-picker>
       );
     }
 
