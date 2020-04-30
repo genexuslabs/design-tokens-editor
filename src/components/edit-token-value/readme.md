@@ -32,14 +32,11 @@
 ### Depends on
 
 - [dt-color-picker](../color-picker)
-- gxg-button
 
 ### Graph
 ```mermaid
 graph TD;
   dt-edit-token-value --> dt-color-picker
-  dt-edit-token-value --> gxg-button
-  dt-color-picker --> gxg-button-group
   dt-main --> dt-edit-token-value
   style dt-edit-token-value fill:#f9f,stroke:#333,stroke-width:4px
 ```

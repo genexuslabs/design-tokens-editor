@@ -218,7 +218,11 @@ export class Card {
                       onClick={this.duplicateCard.bind(this)}
                       title="duplicate token"
                     >
-                      <gxg-icon slot="icon" type="duplicate"></gxg-icon>
+                      <gxg-icon
+                        slot="icon"
+                        type="duplicate"
+                        size="small"
+                      ></gxg-icon>
                     </gxg-button>
                     <gxg-button
                       type="secondary-icon-only"

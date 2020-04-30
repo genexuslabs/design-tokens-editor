@@ -139,25 +139,11 @@ $card-animation-opacity-initial: 0;
         animation-duration: 0.75s;
         animation-iteration-count: 1;
         animation-delay: 0;
-
-        @keyframes slideUp {
-          0% {
-            top: 5px;
-            opacity: 0;
-          }
-          100% {
-            top: 0px;
-            opacity: 100%;
-          }
-        }
       }
       &-preview,
       &-editable {
         display: flex;
         min-height: 64px;
-
-        ::slotted([slot="editable"]) {
-        }
       }
     }
 

@@ -38,16 +38,9 @@
 
  - [dt-main](../main)
 
-### Depends on
-
-- gxg-button
-- gxg-icon
-
 ### Graph
 ```mermaid
 graph TD;
-  dt-card --> gxg-button
-  dt-card --> gxg-icon
   dt-main --> dt-card
   style dt-card fill:#f9f,stroke:#333,stroke-width:4px
 ```
