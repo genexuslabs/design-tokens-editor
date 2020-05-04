@@ -34,7 +34,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@genexus/gemini": "^0.1.24",
+    "@genexus/gemini": "^0.1.33",
     "@simonwep/pickr": "^1.5.1",
     "@types/node": "^13.7.1",
     "chokidar": "^3.2.2",
