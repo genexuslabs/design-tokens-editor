@@ -49,7 +49,6 @@ export class EditTokenValue {
     let returnContent = [
       <gxg-form-text
         id="token-title"
-        type="text"
         label="Title"
         label-position="above"
         full-width
@@ -69,7 +68,6 @@ export class EditTokenValue {
       returnContent.push(
         <gxg-form-text
           id="input-text"
-          type="text"
           label="Value"
           label-position="above"
           full-width
@@ -98,7 +96,7 @@ export class EditTokenValue {
         <gxg-stepper
           id="stepper"
           label="Value"
-          value={this.value}
+          value={parseInt(this.value)}
         ></gxg-stepper>
       );
     }
