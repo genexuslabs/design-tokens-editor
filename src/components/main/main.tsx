@@ -36,6 +36,11 @@ export class Main {
     this.selectedTokenId = event.detail.tokenId;
   }
 
+  @Listen("saveNewValues")
+  saveNewValuesHandler(event: CustomEvent) {
+    //Update active card
+  }
+
   componentDidLoad() {
     if (this.tokenDeleted === true) {
       setTimeout(() => {

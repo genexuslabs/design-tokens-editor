@@ -62,7 +62,7 @@ export class Card {
     tokenGroup: this.tokenGroup
   };
 
-  @Listen("save")
+  @Listen("saveNewValues")
   saveHandler(event: CustomEvent) {
     this.tokenSaved.emit({
       tokenId: this.tokenId,
