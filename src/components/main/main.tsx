@@ -425,10 +425,14 @@ export class Main {
         </dt-tabs>
 
         <gxg-alert
+          active-time="06"
+          alert-title="Token has been deleted"
           type="more-info"
           ref={el => (this.alertBox = el as HTMLElement)}
+          bottom="8px"
+          left="8px"
         >
-          The token has been deleted.
+          (Press ctrl + Z to undo)
         </gxg-alert>
       </div>
     );

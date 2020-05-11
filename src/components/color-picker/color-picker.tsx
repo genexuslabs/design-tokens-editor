@@ -5,14 +5,14 @@ import {
   Event,
   EventEmitter,
   Prop,
-  State,
+  State
 } from "@stencil/core";
 import Pickr from "@simonwep/pickr";
 
 @Component({
   tag: "dt-color-picker",
   styleUrl: "color-picker.scss",
-  shadow: true,
+  shadow: true
 })
 export class ColorPicker {
   @Element() element: HTMLElement;
@@ -68,13 +68,13 @@ export class ColorPicker {
         interaction: {
           // hex: true,
           // rgb: true,
-          input: false,
+          input: false
           // save: true
-        },
-      },
+        }
+      }
     });
 
-    this.pickr.on("change", (color) => {
+    this.pickr.on("change", color => {
       this.colorObject = color;
       if (this.colorRepresentation === "HEXA") {
         this.value = this.colorObject.toHEXA().toString();
@@ -90,7 +90,7 @@ export class ColorPicker {
     let options = {
       root: document.querySelector("body"),
       rootMargin: "0px",
-      threshold: 1.0,
+      threshold: 1.0
     };
     let observer = new IntersectionObserver(() => {
       this.pickr.setColor(this.value); //We have to set the color by force, because we need to get the color at this time, and pickr seems to defer it.
