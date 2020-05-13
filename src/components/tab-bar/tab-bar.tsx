@@ -20,11 +20,29 @@ export class TabBar {
   @State() tabBarMenuHeight: string = "100px";
 
   toggleMenu(event) {
-    event.stopPropagation();
+    if (
+      event.type === "click" ||
+      (event.type === "keyup" && event.keyCode === 13)
+    ) {
+      event.stopPropagation();
+      this.tabBarMenu.classList.toggle("tab-bar-menu--collapsed");
+      let menuButtons = this.el.querySelectorAll("[slot=tab-menu]");
 
-    this.tabBarMenu.classList.toggle("tab-bar-menu--collapsed");
+      if (this.tabBarMenu.classList.contains("tab-bar-menu--collapsed")) {
+        //If tabBarMenu is collapsed, add tabindex="-1" to items inside, to prevent tabbing navigation
+        menuButtons.forEach(button => {
+          (button as HTMLElement).setAttribute("tabindex", "-1");
+        });
+      } else {
+        console.log("menu not collapsed");
+        //else remove tabindex="-1" to enable tabbing navigation
+        menuButtons.forEach(button => {
+          (button as HTMLElement).removeAttribute("tabindex");
+        });
+      }
 
-    document.addEventListener("click", this.detectClickOutsideTabBarMenu);
+      document.addEventListener("click", this.detectClickOutsideTabBarMenu);
+    }
   }
 
   appendTabItemsToMenu() {
@@ -45,13 +63,15 @@ export class TabBar {
     if (calculateButtonPadding() < 20) {
       while (calculateButtonPadding() < 20) {
         //if button "padding" is lower than 10px, then, the buttons are too short.
-        //it is time to cut off the LAST button, and put it into the menu!
+        //it is time to cut off the LAST button, and push it into the menu!
         let tabButtons = this.el.querySelectorAll("[slot=tab-bar]");
         //get the last item of the nodeList
         let lastTabButton = tabButtons[tabButtons.length - 1];
         //add "menu-button" class to button component, in order to stylize the buttons inside the menu differently
         lastTabButton.setAttribute("class", "menu-button");
         lastTabButton.setAttribute("slot", "tab-menu");
+        lastTabButton.setAttribute("tabindex", "-1");
+
         this.appendedButtons++;
       }
     } else if (calculateButtonPadding() > 35 && this.appendedButtons > 0) {
@@ -98,6 +118,7 @@ export class TabBar {
         <div class="tab-bar__menu">
           <gxg-button
             onClick={this.toggleMenu.bind(this)}
+            onKeyDown={this.toggleMenu.bind(this)}
             type="secondary-icon-only"
           >
             <gxg-icon slot="icon" type="show-more"></gxg-icon>
@@ -128,6 +149,12 @@ export class TabBar {
     } else {
       //Click happened outside the menu
       tabMenuContainer.classList.add("tab-bar-menu--collapsed");
+
+      let menuButtons = this.el.querySelectorAll("[slot=tab-menu]");
+      //If tabBarMenu is collapsed, add tabindex="-1" to items inside, to prevent tabbing navigation
+      menuButtons.forEach(button => {
+        (button as HTMLElement).setAttribute("tabindex", "-1");
+      });
     }
   }
 
