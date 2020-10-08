@@ -540,16 +540,23 @@ export class Main {
           </gxg-columns>
         </div>
         <div id="main-container">
-          <gxg-accordion mode="classical">
+          <gxg-accordion padding="0" mode="classical">
             {Object.keys(model).map(tokenGroup => (
-              <gxg-accordion-item itemTitle={tokenGroup} itemId={tokenGroup}>
-                <div
+              <gxg-accordion-item
+                status="open"
+                itemTitle={tokenGroup}
+                itemId={tokenGroup}
+              >
+                {this.cardAsListItem ? (<div
                   style={{
                     "flex-wrap": "wrap",
                     "align-content": "flex-start",
-                    display: "flex"
-                  }}
-                >
+                    display: "flex",
+                    margin: "0 -4px 0 -4px",
+                    "margin-bottom": "-8px"
+                  >) : null}
+                  
+                
                   {model[tokenGroup].tokens.map((token, index) =>
                     this.cardAsListItem ? (
                       <dt-list-item
