@@ -14,3 +14,11 @@
   box-sizing: border-box;
   border-width: min(var(--borderWidthTokenBorderWidth), 20px);
 }
+
+// As list item
+:host(.listItem:not(tokenOverflow)) {
+  .square {
+    width: 27px;
+    height: 27px;
+  }
+}

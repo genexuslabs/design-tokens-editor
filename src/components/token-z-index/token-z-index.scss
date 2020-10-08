@@ -55,3 +55,30 @@ $activeColor: var(--gray-04);
     }
   }
 }
+
+// As list item
+:host(.listItem) {
+  padding-top: 0;
+  .stack {
+    width: 30px;
+    height: 2px;
+    margin-bottom: 1px;
+  }
+  .stack__above:before {
+    border-bottom: 3px solid var(--gray-02);
+    top: -4px;
+  }
+  .stack__above:before,
+  .stack__above:after,
+  .stack__below:before,
+  .stack__below:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    display: block;
+    position: relative;
+    left: 5px;
+  }
+}

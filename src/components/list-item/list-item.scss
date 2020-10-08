@@ -1,0 +1,336 @@
+:host {
+  width: 100%;
+  border-bottom-width: var(--border-width-sm);
+  border-bottom-style: var(--border-style-regular);
+  border-bottom-color: var(--gray-02);
+  .col-left {
+    display: flex;
+  }
+  .col-right {
+    display: flex;
+  }
+  .container {
+    display: flex;
+    justify-content: space-between;
+    height: 32px;
+  }
+  .preview {
+    width: 60px;
+    display: flex;
+    align-items: center;
+
+    //Token Font
+    ::slotted(dt-token-font) {
+      font-size: 12px;
+    }
+    //Token Color
+    ::slotted(dt-token-color-palette) {
+      width: var(--spacing-comp-05);
+      height: var(--spacing-comp-05);
+    }
+    ::slotted(dt-token-color-palette) {
+      .color-palette-row-box {
+        min-height: 20px;
+      }
+    }
+    //Token Shadow
+  }
+  .title-container {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    .item-title {
+      font-family: var(--font-family-primary);
+      font-weight: var(--font-weight-regular);
+      font-size: var(--font-size-sm);
+      margin: 0;
+      width: 160px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+  .token-value {
+    font-family: var(--font-family-primary);
+    font-weight: var(--font-weight-regular);
+    font-size: var(--font-size-sm);
+    display: flex;
+    align-items: center;
+  }
+  .item-menu {
+    display: flex;
+    align-items: center;
+  }
+}
+// :host(.editable-mode-on) {
+//   z-index: 10;
+// }
+// :host(.card--selected) {
+//   // border-color: var(--color-primary-active);
+//   .card-header-menu {
+//     opacity: 1;
+//   }
+//   box-shadow: var(--box-shadow-02);
+// }
+// .card-header-menu:focus {
+//   opacity: 1;
+// }
+
+// $card-animation-top-initial: -5px;
+// $card-animation-opacity-initial: 0;
+
+// @keyframes slideUp {
+//   0% {
+//     top: $card-animation-top-initial;
+//     opacity: $card-animation-opacity-initial;
+//   }
+//   100% {
+//     top: 0;
+//     opacity: 1;
+//   }
+// }
+
+// :host {
+//   .token-title-list {
+//     display: none;
+//   }
+
+//   @include ui-animation(box-shadow);
+//   //animation
+//   --card-animation-delay: 0;
+//   z-index: 1;
+//   position: relative;
+//   animation-name: slideUp;
+//   animation-duration: 0.75s;
+//   animation-iteration-count: 1;
+//   animation-delay: var(--cardAnimationDelay);
+//   animation-fill-mode: forwards;
+//   top: $card-animation-top-initial;
+//   opacity: $card-animation-opacity-initial;
+
+//   display: block;
+//   //flex: 0 0 calc((100% - var(--spacing-comp-02) * 2) / 3);
+//   width: var(--cardWidth);
+//   margin: 0 var(--spacing-comp-01);
+//   margin-bottom: var(--spacing-comp-02);
+
+//   border-width: var(--cardBorderWidth);
+//   border-style: var(--border-style-regular);
+//   border-color: var(--gray-03);
+
+//   .card {
+//     display: flex;
+//     padding: var(--spacing-comp-02);
+
+//     &-main-container {
+//       flex: 1;
+//       box-shadow: 0;
+//       // @include ui-animation(box-shadow);
+//       background: var(--color-background);
+//     }
+//     &-header {
+//       display: flex !important;
+//       margin-bottom: var(--spacing-comp-02);
+//       line-height: 0;
+
+//       &-title {
+//         flex: 1 1 auto !important;
+//         align-self: flex-end !important;
+//         margin: 0;
+//         padding: var(--spacing-comp-01) var(--spacing-comp-01)
+//           var(--spacing-comp-01) 0;
+//         font-family: var(--font-family-primary);
+//         font-weight: var(--font-weight-bold);
+//         font-size: var(--font-size-md);
+//         line-height: 1;
+//         white-space: nowrap;
+//         width: 0;
+//         overflow: hidden;
+//         text-overflow: ellipsis;
+//       }
+
+//       &-menu {
+//         @include ui-animation(opacity);
+//         opacity: 0;
+
+//         display: flex !important;
+//         line-height: 0;
+
+//         &-button {
+//           background: transparent;
+//           border: none;
+//           padding: var(--spacing-comp-01);
+//           line-height: 0;
+//           &:hover {
+//             cursor: pointer;
+//             img {
+//               opacity: 0.75;
+//             }
+//           }
+
+//           img {
+//             height: var(--spacing-comp-03);
+//           }
+//         }
+//       }
+//     }
+
+//     &-content {
+//       font-family: var(--font-family-primary);
+//       line-height: 1;
+//       &-preview {
+//         .col {
+//           .token-value {
+//             text-transform: capitalize;
+//             line-height: 1.4em;
+//           }
+//           &.col-left {
+//             overflow: hidden;
+//             flex: calc(1 / 3);
+//             padding-right: var(--spacing-comp-02);
+//             border-right-width: var(--border-width-sm);
+//             border-right-style: var(--border-style-regular);
+//             border-right-color: var(--gray-03);
+//             font-size: var(--font-size-md);
+//           }
+//           &.col-right {
+//             flex: calc(1 / 3 + 1 / 3);
+//             padding-left: var(--spacing-comp-02);
+//             font-size: var(--font-size-sm);
+//           }
+//         }
+//       }
+//       &-editable {
+//         flex-direction: column;
+//         position: relative;
+//         animation-name: slideUp;
+//         animation-duration: 0.75s;
+//         animation-iteration-count: 1;
+//         animation-delay: 0;
+//       }
+//       &-preview,
+//       &-editable {
+//         display: flex;
+//         min-height: 64px;
+//       }
+//     }
+
+//     &.card--editable {
+//       box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+//         0px 2px 1px -1px rgba(0, 0, 0, 0.12), 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
+
+//       padding: 0;
+//       position: relative;
+//       border-color: transparent;
+
+//       .card-header {
+//         padding: var(--spacing-comp-02) var(--spacing-comp-02) 0
+//           var(--spacing-comp-02); /*should be same padding as .card */
+//       }
+//       .card-content {
+//         padding: 0 var(--spacing-comp-02) var(--spacing-comp-02)
+//           var(--spacing-comp-02); /*should be same padding as .card */
+//       }
+//       .card-main-container {
+//         z-index: 1;
+//         box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+//           0px 2px 1px -1px rgba(0, 0, 0, 0.12),
+//           0px 1px 3px 0px rgba(0, 0, 0, 0.2);
+//         position: absolute;
+//         width: 100%;
+//         left: 0;
+//         top: 0;
+//       }
+//     }
+//   }
+// }
+// :host(.new) {
+//   animation-delay: 1.5s;
+//   @include ui-animation(transform);
+
+//   $cardSize: 100px;
+//   width: auto;
+//   background-color: var(--gray-01);
+
+//   .card {
+//     padding: 0;
+//     display: flex;
+//     height: 100%;
+//     align-items: center;
+//     justify-content: center;
+//   }
+
+//   .plus-sign {
+//     font-size: 30px;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     font-weight: var(--font-weight-semibold);
+
+//     .image {
+//       width: 112px;
+//     }
+//   }
+// }
+// :host(.new:hover) {
+//   transform: scale(1.025, 1.025);
+//   cursor: pointer;
+// }
+
+// // DISPLAY CARD AS LIST ITEM
+// :host(.card-as-list-item) {
+//   .token-title-list {
+//     display: inline-block;
+//     width: 140px;
+//   }
+
+//   margin-bottom: 2px;
+//   width: 100%;
+//   height: 30px;
+//   min-height: 0 !important;
+//   border-top: 0;
+//   border-right: 0;
+//   border-left: 0;
+
+//   .card {
+//     padding: var(--spacing-comp-01);
+//     &-header {
+//       margin-bottom: 0;
+//       &-title {
+//         display: none;
+//       }
+//       &-menu {
+//         opacity: 1;
+//       }
+//     }
+//     &-content {
+//       width: 100%;
+//       display: flex;
+//       align-items: center;
+//       &-preview {
+//         width: 100%;
+//       }
+//     }
+//     &-content-preview,
+//     &-content-editable {
+//       min-height: 0;
+//     }
+//     &-main-container {
+//       display: inline-flex;
+//       flex-direction: row-reverse;
+//       justify-content: space-between;
+//     }
+//     .col-left {
+//       border-right: 0;
+//       display: flex;
+//       align-items: center;
+//       flex: 0 0 80px;
+//     }
+//     .col-right {
+//       flex: 1;
+//     }
+//   }
+// }
+// :host(.card-as-list-item.card--selected) {
+//   box-shadow: none;
+// }

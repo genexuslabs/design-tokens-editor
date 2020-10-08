@@ -26,3 +26,11 @@
     left: calc(100% - 16px);
   }
 }
+
+//As list item
+:host(.listItem) {
+  .circle {
+    width: 10px;
+    height: 10px;
+  }
+}

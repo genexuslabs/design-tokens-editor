@@ -1,3 +1,4 @@
+import { State } from "@genexus/gemini/dist/types/stencil-public-runtime";
 import {
   Component,
   Prop,
@@ -22,6 +23,8 @@ export class Main {
   @Prop({ mutable: true }) selectedTokenId: string;
   @Prop({ mutable: true, reflect: true }) tokenDeleted: boolean;
   @Prop() needHelpUrl: string = "#";
+
+  @State() cardAsListItem: boolean = false;
 
   alertBox!: HTMLElement;
   @Element() el: HTMLElement;
@@ -61,6 +64,18 @@ export class Main {
     return index * delay + "s";
   }
 
+  changeDisplay(e) {
+    let btnId = e.target.id;
+
+    if (btnId === "card-view") {
+      //change view to cards
+      this.cardAsListItem = false;
+    } else if (btnId === "list-view") {
+      //change view to list
+      this.cardAsListItem = true;
+    }
+  }
+
   render() {
     const { model } = this;
 
@@ -80,26 +95,47 @@ export class Main {
             </div>
           ];
         case "fontSizes":
-          return [
-            <dt-token-font-size
-              slot="preview"
-              fontSize={tokenValue}
-            ></dt-token-font-size>,
-            <div slot="editable">
-              <dt-edit-token-value
-                type="input-text"
-                value={tokenValue}
-                token-title={tokenCaption}
-                token-id={tokenId}
-                token-group={tokenGroup}
-              ></dt-edit-token-value>
-            </div>
-          ];
+          if (
+            parseInt(tokenValue.substring(0, tokenValue.length - 2), 10) > 27 &&
+            this.cardAsListItem
+          ) {
+            return [
+              <dt-token-overflow slot="preview">
+                <dt-token-font-size fontSize={tokenValue}></dt-token-font-size>
+              </dt-token-overflow>,
+              <div slot="editable">
+                <dt-edit-token-value
+                  type="input-text"
+                  value={tokenValue}
+                  token-title={tokenCaption}
+                  token-id={tokenId}
+                  token-group={tokenGroup}
+                ></dt-edit-token-value>
+              </div>
+            ];
+          } else {
+            return [
+              <dt-token-font-size
+                slot="preview"
+                fontSize={tokenValue}
+              ></dt-token-font-size>,
+              <div slot="editable">
+                <dt-edit-token-value
+                  type="input-text"
+                  value={tokenValue}
+                  token-title={tokenCaption}
+                  token-id={tokenId}
+                  token-group={tokenGroup}
+                ></dt-edit-token-value>
+              </div>
+            ];
+          }
         case "colors":
           return [
             <dt-token-color-palette
               slot="preview"
               color={tokenValue}
+              class={{ listItem: this.cardAsListItem }}
             ></dt-token-color-palette>,
             <div slot="editable">
               <dt-edit-token-value
@@ -112,12 +148,14 @@ export class Main {
             </div>
           ];
         case "spacing":
-          return [
-            [
-              <dt-token-spacing
-                slot="preview"
-                size={tokenValue}
-              ></dt-token-spacing>,
+          if (
+            parseInt(tokenValue.substring(0, tokenValue.length - 2), 10) > 27 &&
+            this.cardAsListItem
+          ) {
+            return [
+              <dt-token-overflow slot="preview">
+                <dt-token-spacing size={tokenValue}></dt-token-spacing>
+              </dt-token-overflow>,
               <div slot="editable">
                 <dt-edit-token-value
                   type="input-text"
@@ -127,61 +165,155 @@ export class Main {
                   token-group={tokenGroup}
                 ></dt-edit-token-value>
               </div>
-            ]
-          ];
+            ];
+          } else {
+            return [
+              [
+                <dt-token-spacing
+                  slot="preview"
+                  size={tokenValue}
+                ></dt-token-spacing>,
+                <div slot="editable">
+                  <dt-edit-token-value
+                    type="input-text"
+                    value={tokenValue}
+                    token-title={tokenCaption}
+                    token-id={tokenId}
+                    token-group={tokenGroup}
+                  ></dt-edit-token-value>
+                </div>
+              ]
+            ];
+          }
+
         case "borders":
-          return [
-            <dt-token-border
-              slot="preview"
-              borderWidth={tokenValue}
-            ></dt-token-border>,
-            <div slot="editable">
-              <dt-edit-token-value
-                type="input-text"
-                value={tokenValue}
-                token-title={tokenCaption}
-                token-id={tokenId}
-                token-group={tokenGroup}
-              ></dt-edit-token-value>
-            </div>
-          ];
+          if (
+            parseInt(tokenValue.substring(0, tokenValue.length - 2), 10) > 11
+          ) {
+            return [
+              <dt-token-overflow slot="preview">
+                <dt-token-border
+                  borderWidth={tokenValue}
+                  class={{
+                    tokenOverflow: true
+                  }}
+                ></dt-token-border>
+              </dt-token-overflow>,
+              <div slot="editable">
+                <dt-edit-token-value
+                  type="input-text"
+                  value={tokenValue}
+                  token-title={tokenCaption}
+                  token-id={tokenId}
+                  token-group={tokenGroup}
+                ></dt-edit-token-value>
+              </div>
+            ];
+          } else {
+            return [
+              <dt-token-border
+                slot="preview"
+                borderWidth={tokenValue}
+                class={{
+                  listItem: this.cardAsListItem
+                }}
+              ></dt-token-border>,
+              <div slot="editable">
+                <dt-edit-token-value
+                  type="input-text"
+                  value={tokenValue}
+                  token-title={tokenCaption}
+                  token-id={tokenId}
+                  token-group={tokenGroup}
+                ></dt-edit-token-value>
+              </div>
+            ];
+          }
+
         case "radius":
-          return [
-            <dt-token-radius
-              slot="preview"
-              radius={tokenValue}
-            ></dt-token-radius>,
-            <div slot="editable">
-              <dt-edit-token-value
-                type="input-text"
-                value={tokenValue}
-                token-title={tokenCaption}
-                token-id={tokenId}
-                token-group={tokenGroup}
-              ></dt-edit-token-value>
-            </div>
-          ];
+          if (
+            parseInt(tokenValue.substring(0, tokenValue.length - 2), 10) > 16
+          ) {
+            return [
+              <dt-token-overflow slot="preview">
+                <dt-token-radius
+                  radius={tokenValue}
+                  class={{
+                    tokenOverflow: true
+                  }}
+                ></dt-token-radius>
+              </dt-token-overflow>,
+              <div slot="editable">
+                <dt-edit-token-value
+                  type="input-text"
+                  value={tokenValue}
+                  token-title={tokenCaption}
+                  token-id={tokenId}
+                  token-group={tokenGroup}
+                ></dt-edit-token-value>
+              </div>
+            ];
+          } else {
+            return [
+              <dt-token-radius
+                slot="preview"
+                radius={tokenValue}
+                class={{ listItem: this.cardAsListItem }}
+              ></dt-token-radius>,
+              <div slot="editable">
+                <dt-edit-token-value
+                  type="input-text"
+                  value={tokenValue}
+                  token-title={tokenCaption}
+                  token-id={tokenId}
+                  token-group={tokenGroup}
+                ></dt-edit-token-value>
+              </div>
+            ];
+          }
         case "shadows":
-          return [
-            <dt-token-shadow
-              slot="preview"
-              box-shadow={tokenValue}
-            ></dt-token-shadow>,
-            <div slot="editable">
-              <dt-edit-token-value
-                type="input-text"
-                value={tokenValue}
-                token-title={tokenCaption}
-                token-id={tokenId}
-                token-group={tokenGroup}
-              ></dt-edit-token-value>
-            </div>
-          ];
+          if (this.cardAsListItem) {
+            return [
+              <dt-token-overflow bigger slot="preview">
+                <dt-token-shadow
+                  class={{ listItem: true }}
+                  box-shadow={tokenValue}
+                ></dt-token-shadow>
+              </dt-token-overflow>,
+              <div slot="editable">
+                <dt-edit-token-value
+                  type="input-text"
+                  value={tokenValue}
+                  token-title={tokenCaption}
+                  token-id={tokenId}
+                  token-group={tokenGroup}
+                ></dt-edit-token-value>
+              </div>
+            ];
+          } else {
+            return [
+              <dt-token-shadow
+                slot="preview"
+                box-shadow={tokenValue}
+              ></dt-token-shadow>,
+              <div slot="editable">
+                <dt-edit-token-value
+                  type="input-text"
+                  value={tokenValue}
+                  token-title={tokenCaption}
+                  token-id={tokenId}
+                  token-group={tokenGroup}
+                ></dt-edit-token-value>
+              </div>
+            ];
+          }
+
         case "opacity":
           return [
             <dt-token-opacity
               slot="preview"
               opacity={tokenValue}
+              class={{ listItem: this.cardAsListItem }}
             ></dt-token-opacity>,
             <div slot="editable">
               <dt-edit-token-value
@@ -198,6 +330,7 @@ export class Main {
             <dt-token-z-index
               slot="preview"
               zIndex={tokenValue}
+              class={{ listItem: this.cardAsListItem }}
             ></dt-token-z-index>,
             <div slot="editable">
               <dt-edit-token-value
@@ -214,6 +347,7 @@ export class Main {
             <dt-token-timing-function
               slot="preview"
               timingFunction={tokenValue}
+              class={{ listItem: this.cardAsListItem }}
             ></dt-token-timing-function>,
             <div slot="editable">
               <dt-edit-token-value
@@ -226,7 +360,11 @@ export class Main {
           ];
         case "times":
           return [
-            <dt-token-time slot="preview" time={tokenValue}></dt-token-time>,
+            <dt-token-time
+              slot="preview"
+              time={tokenValue}
+              class={{ listItem: this.cardAsListItem }}
+            ></dt-token-time>,
             <div slot="editable">
               <dt-edit-token-value
                 type="input-text"
@@ -367,73 +505,122 @@ export class Main {
 
     return (
       <div class="container">
-        <dt-tabs>
-          <dt-tab-bar>
+        <div id="filter">
+          <gxg-columns align-y="bottom" space="s">
+            <gxg-column width="1/4">
+              <gxg-select label="Themes">
+                <gxg-option value="dark">Dark</gxg-option>
+                <gxg-option value="light">Light</gxg-option>
+              </gxg-select>
+            </gxg-column>
+            <gxg-column width="1/4" style={{ "line-height": "0px" }}>
+              <gxg-button
+                onClick={this.changeDisplay.bind(this)}
+                type="tertiary"
+                icon="gemini-tools/list-view"
+                id="list-view"
+                class="filter-button"
+              ></gxg-button>
+              <gxg-spacer-one space="xs"></gxg-spacer-one>
+              <gxg-button
+                onClick={this.changeDisplay.bind(this)}
+                type="tertiary"
+                icon="gemini-tools/card-view"
+                id="card-view"
+                class="filter-button"
+              ></gxg-button>
+            </gxg-column>
+            <gxg-column width="1/2">
+              <gxg-form-text
+                placeholder="Search"
+                icon-position="start"
+                icon="gemini-tools/search"
+              ></gxg-form-text>
+            </gxg-column>
+          </gxg-columns>
+        </div>
+        <div id="main-container">
+          <gxg-accordion mode="classical">
             {Object.keys(model).map(tokenGroup => (
-              <dt-tab-button
-                slot="tab-bar"
-                tab={tokenGroup}
-                key={tokenGroup}
-                isSelected={this.selectedTokenGroup == tokenGroup}
-              ></dt-tab-button>
-            ))}
-          </dt-tab-bar>
-
-          {Object.keys(model).map(tokenGroup => (
-            <dt-tab
-              tab={tokenGroup}
-              key={tokenGroup}
-              isSelected={this.selectedTokenGroup == tokenGroup}
-            >
-              {switchTokenQuote(
-                tokenGroup,
-                model[tokenGroup].tokens.length,
-                "this.needHelpUrl"
-              )}
-
-              {model[tokenGroup].tokens.map((token, index) => (
-                <dt-card
-                  //si token.mode es distinto de null, que sea editable
-                  cardTitle={token.caption}
-                  tokenId={token.id}
-                  tokenValue={token.value}
-                  tokenGroup={tokenGroup}
-                  readOnly={model[tokenGroup].readOnly}
-                  index={index}
-                  key={token.id}
-                  isSelected={this.selectedTokenId == token.id}
+              <gxg-accordion-item itemTitle={tokenGroup} itemId={tokenGroup}>
+                <div
                   style={{
-                    "--cardAnimationDelay": this.getCardsAnimationDuration(
-                      model[tokenGroup].tokens.length,
-                      index
-                    )
+                    "flex-wrap": "wrap",
+                    "align-content": "flex-start",
+                    display: "flex"
                   }}
                 >
-                  {switchTokenGroup(
-                    tokenGroup,
-                    token.value,
-                    token.caption,
-                    token.id
+                  {model[tokenGroup].tokens.map((token, index) =>
+                    this.cardAsListItem ? (
+                      <dt-list-item
+                        //si token.mode es distinto de null, que sea editable
+                        itemTitle={token.caption}
+                        tokenId={token.id}
+                        tokenValue={token.value}
+                        tokenGroup={tokenGroup}
+                        readOnly={model[tokenGroup].readOnly}
+                        index={index}
+                        key={token.id}
+                        isSelected={this.selectedTokenId == token.id}
+                        style={{
+                          "--cardAnimationDelay": this.getCardsAnimationDuration(
+                            model[tokenGroup].tokens.length,
+                            index
+                          )
+                        }}
+                      >
+                        {switchTokenGroup(
+                          tokenGroup,
+                          token.value,
+                          token.caption,
+                          token.id
+                        )}
+                        ;
+                      </dt-list-item>
+                    ) : (
+                      <dt-card
+                        //si token.mode es distinto de null, que sea editable
+                        cardTitle={token.caption}
+                        tokenId={token.id}
+                        tokenValue={token.value}
+                        tokenGroup={tokenGroup}
+                        readOnly={model[tokenGroup].readOnly}
+                        index={index}
+                        key={token.id}
+                        isSelected={this.selectedTokenId == token.id}
+                        style={{
+                          "--cardAnimationDelay": this.getCardsAnimationDuration(
+                            model[tokenGroup].tokens.length,
+                            index
+                          )
+                        }}
+                      >
+                        {switchTokenGroup(
+                          tokenGroup,
+                          token.value,
+                          token.caption,
+                          token.id
+                        )}
+                        ;
+                      </dt-card>
+                    )
                   )}
-                  ;
-                </dt-card>
-              ))}
+                </div>
+              </gxg-accordion-item>
+            ))}
+          </gxg-accordion>
 
-              {printNewCard(tokenGroup, model[tokenGroup].tokens.length)}
-            </dt-tab>
-          ))}
-        </dt-tabs>
-
-        <gxg-alert
-          active-time="06"
-          alert-title="Token has been deleted"
-          type="more-info"
-          ref={el => (this.alertBox = el as HTMLElement)}
-          bottom="8px"
-          left="8px"
-        >
-          (Press ctrl + Z to undo)
-        </gxg-alert>
+          <gxg-alert
+            active-time="06"
+            alert-title="Token has been deleted"
+            type="notice"
+            ref={el => (this.alertBox = el as HTMLElement)}
+            bottom="xs"
+            left-right="xs"
+          >
+            (Press ctrl + Z to undo)
+          </gxg-alert>
+        </div>
       </div>
     );
   }

@@ -15,3 +15,11 @@
   margin-left: $squareSize/2 * -1;
   margin-top: $squareSize/2 * -1;
 }
+
+// as list item
+:host(.listItem) {
+  left: 0;
+  top: 0;
+  margin-left: 0;
+  margin-top: 0;
+}

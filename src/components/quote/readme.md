@@ -38,6 +38,7 @@
 ```mermaid
 graph TD;
   dt-quote --> gxg-button
+  gxg-button --> gxg-icon
   dt-main --> dt-quote
   style dt-quote fill:#f9f,stroke:#333,stroke-width:4px
 ```

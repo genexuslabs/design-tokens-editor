@@ -140,7 +140,7 @@ export class Card {
   }
   @Listen("focus")
   handleFocus() {
-    this.element.setAttribute("class", "card--selected");
+    this.element.classList.add("card--selected");
     this.cardActivated.emit({
       tokenId: this.tokenId,
       tokenGroup: this.tokenGroup
@@ -210,36 +210,28 @@ export class Card {
                           ? "edit token (comming soon)"
                           : "edit token"
                       }
-                    >
-                      <gxg-icon slot="icon" type="edit"></gxg-icon>
-                    </gxg-button>
+                      icon="gemini-tools/edit"
+                    ></gxg-button>
                     <gxg-button
                       type="secondary-icon-only"
                       onClick={this.duplicateCard.bind(this)}
                       title="duplicate token"
-                    >
-                      <gxg-icon
-                        slot="icon"
-                        type="duplicate"
-                        size="small"
-                      ></gxg-icon>
-                    </gxg-button>
+                      icon="gemini-tools/duplicate"
+                    ></gxg-button>
                     <gxg-button
                       type="secondary-icon-only"
                       onClick={this.deleteCard.bind(this)}
                       title="delete token"
-                    >
-                      <gxg-icon slot="icon" type="deleted"></gxg-icon>
-                    </gxg-button>
+                      icon="gemini-tools/delete"
+                    ></gxg-button>
                   </div>
                 ) : (
                   <div class="card-header-menu">
                     <gxg-button
                       type="secondary-icon-only"
                       onClick={this.closeCard.bind(this)}
-                    >
-                      <gxg-icon slot="icon" type="close"></gxg-icon>
-                    </gxg-button>
+                      icon="gemini-tools/close"
+                    ></gxg-button>
                   </div>
                 )}
               </header>
@@ -250,6 +242,7 @@ export class Card {
                       <slot name="preview"></slot>
                     </div>
                     <div class="col col-right">
+                      <span class="token-title-list">{this.cardTitle}</span>
                       <span class="token-value">{this.tokenValue}</span>
                     </div>
                   </div>
