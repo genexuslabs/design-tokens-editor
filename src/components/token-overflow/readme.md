@@ -5,6 +5,7 @@
 <!-- Auto Generated Below -->
 
 
+<<<<<<< HEAD
 ## Properties
 
 | Property | Attribute | Description | Type      | Default |
@@ -12,6 +13,8 @@
 | `bigger` | `bigger`  |             | `boolean` | `false` |
 
 
+=======
+>>>>>>> e709df1c0f7352c2e742aae97d46c64e62afb39d
 ## Dependencies
 
 ### Used by

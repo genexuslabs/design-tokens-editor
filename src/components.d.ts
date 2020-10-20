@@ -55,6 +55,13 @@ export namespace Components {
     'selectedTokenId': string;
     'tokenDeleted': boolean;
   }
+  interface DtMainCopy {
+    'model': Model;
+    'needHelpUrl': string;
+    'selectedTokenGroup': string;
+    'selectedTokenId': string;
+    'tokenDeleted': boolean;
+  }
   interface DtQuote {
     'author': string;
     'buttonLabel': string;
@@ -156,6 +163,12 @@ declare global {
   var HTMLDtMainElement: {
     prototype: HTMLDtMainElement;
     new (): HTMLDtMainElement;
+  };
+
+  interface HTMLDtMainCopyElement extends Components.DtMainCopy, HTMLStencilElement {}
+  var HTMLDtMainCopyElement: {
+    prototype: HTMLDtMainCopyElement;
+    new (): HTMLDtMainCopyElement;
   };
 
   interface HTMLDtQuoteElement extends Components.DtQuote, HTMLStencilElement {}
@@ -283,6 +296,7 @@ declare global {
     'dt-edit-token-value': HTMLDtEditTokenValueElement;
     'dt-list-item': HTMLDtListItemElement;
     'dt-main': HTMLDtMainElement;
+    'dt-main-copy': HTMLDtMainCopyElement;
     'dt-quote': HTMLDtQuoteElement;
     'dt-tab': HTMLDtTabElement;
     'dt-tab-bar': HTMLDtTabBarElement;
@@ -367,6 +381,14 @@ declare namespace LocalJSX {
     'selectedTokenId'?: string;
     'tokenDeleted'?: boolean;
   }
+  interface DtMainCopy {
+    'model'?: Model;
+    'needHelpUrl'?: string;
+    'onSaveNewValue'?: (event: CustomEvent<any>) => void;
+    'selectedTokenGroup'?: string;
+    'selectedTokenId'?: string;
+    'tokenDeleted'?: boolean;
+  }
   interface DtQuote {
     'author'?: string;
     'buttonLabel'?: string;
@@ -444,6 +466,7 @@ declare namespace LocalJSX {
     'dt-edit-token-value': DtEditTokenValue;
     'dt-list-item': DtListItem;
     'dt-main': DtMain;
+    'dt-main-copy': DtMainCopy;
     'dt-quote': DtQuote;
     'dt-tab': DtTab;
     'dt-tab-bar': DtTabBar;
@@ -478,6 +501,7 @@ declare module "@stencil/core" {
       'dt-edit-token-value': LocalJSX.DtEditTokenValue & JSXBase.HTMLAttributes<HTMLDtEditTokenValueElement>;
       'dt-list-item': LocalJSX.DtListItem & JSXBase.HTMLAttributes<HTMLDtListItemElement>;
       'dt-main': LocalJSX.DtMain & JSXBase.HTMLAttributes<HTMLDtMainElement>;
+      'dt-main-copy': LocalJSX.DtMainCopy & JSXBase.HTMLAttributes<HTMLDtMainCopyElement>;
       'dt-quote': LocalJSX.DtQuote & JSXBase.HTMLAttributes<HTMLDtQuoteElement>;
       'dt-tab': LocalJSX.DtTab & JSXBase.HTMLAttributes<HTMLDtTabElement>;
       'dt-tab-bar': LocalJSX.DtTabBar & JSXBase.HTMLAttributes<HTMLDtTabBarElement>;
