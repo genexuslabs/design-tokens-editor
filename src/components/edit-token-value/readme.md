@@ -7,13 +7,14 @@
 
 ## Properties
 
-| Property     | Attribute     | Description | Type     | Default        |
-| ------------ | ------------- | ----------- | -------- | -------------- |
-| `tokenGroup` | `token-group` |             | `string` | `undefined`    |
-| `tokenId`    | `token-id`    |             | `string` | `undefined`    |
-| `tokenTitle` | `token-title` |             | `string` | `undefined`    |
-| `type`       | `type`        |             | `string` | `"input-text"` |
-| `value`      | `value`       |             | `string` | `undefined`    |
+| Property     | Attribute     | Description | Type      | Default        |
+| ------------ | ------------- | ----------- | --------- | -------------- |
+| `listItem`   | `list-item`   |             | `boolean` | `false`        |
+| `tokenGroup` | `token-group` |             | `string`  | `undefined`    |
+| `tokenId`    | `token-id`    |             | `string`  | `undefined`    |
+| `tokenTitle` | `token-title` |             | `string`  | `undefined`    |
+| `type`       | `type`        |             | `string`  | `"input-text"` |
+| `value`      | `value`       |             | `string`  | `undefined`    |
 
 
 ## Events
@@ -33,7 +34,6 @@
 
 - gxg-form-text
 - [dt-color-picker](../color-picker)
-- gxg-form-select
 - gxg-stepper
 - gxg-form-textarea
 - gxg-button
@@ -43,12 +43,15 @@
 graph TD;
   dt-edit-token-value --> gxg-form-text
   dt-edit-token-value --> dt-color-picker
-  dt-edit-token-value --> gxg-form-select
   dt-edit-token-value --> gxg-stepper
   dt-edit-token-value --> gxg-form-textarea
   dt-edit-token-value --> gxg-button
   gxg-form-text --> gxg-icon
+  gxg-form-text --> gxg-form-message
+  gxg-form-message --> gxg-icon
   dt-color-picker --> gxg-button-group
+  gxg-form-textarea --> gxg-form-message
+  gxg-button --> gxg-icon
   dt-main --> dt-edit-token-value
   style dt-edit-token-value fill:#f9f,stroke:#333,stroke-width:4px
 ```

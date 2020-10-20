@@ -4,3 +4,10 @@
 :host .image {
   width: 50px;
 }
+//As list item
+:host(.listItem) {
+  display: flex;
+  .image {
+    width: 22px;
+  }
+}

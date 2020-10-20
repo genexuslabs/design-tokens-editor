@@ -8,3 +8,27 @@
     margin-bottom: 0;
   }
 }
+
+:host(.list-item) {
+  display: flex;
+
+  .edit-container {
+    width: 160px;
+    margin-right: 20px;
+
+    &.value {
+      position: relative;
+      margin-right: 10px;
+    }
+  }
+}
+:host(.list-item) {
+  dt-color-picker {
+    position: absolute;
+    width: 100%;
+  }
+  // position: absolute;
+  // width: 160px;
+  // top: 0;
+  // z-index: 1;
+}

@@ -57,3 +57,14 @@
     }
   }
 }
+
+// Al list item
+:host(.listItem) {
+  .color-palette-row:last-child {
+    .color-palette-row-box {
+      min-height: 0;
+      height: var(--spacing-comp-05);
+      margin-right: 0;
+    }
+  }
+}

@@ -29,6 +29,7 @@ export class Card {
   @Prop() cardTitle: string;
   @Prop() tokenId: string;
   @Prop() tokenGroup: string;
+  @Prop() tokenCategory: string;
   @Prop() tokenValue: string;
   @Prop() mode: string = "preview";
   @Prop() readOnly: boolean = false;
@@ -49,7 +50,7 @@ export class Card {
   @Event()
   tokenSaved: EventEmitter;
   @Event()
-  cardActivated: EventEmitter;
+  itemActivated: EventEmitter;
   @Event()
   addNewToken: EventEmitter;
 
@@ -129,19 +130,23 @@ export class Card {
   closeCard() {
     this.mode = "preview";
   }
-  activateCard() {
-    this.cardActivated.emit({
+  activateItem() {
+    this.itemActivated.emit({
       tokenId: this.tokenId,
       tokenGroup: this.tokenGroup
     });
   }
   newCardOnClick() {
-    this.addNewToken.emit(this.tokenGroup);
+    let newItemData = {
+      "token-group" : this.tokenGroup,
+      "token-category" : this.tokenCategory
+    }
+    this.addNewToken.emit(newItemData);
   }
   @Listen("focus")
   handleFocus() {
-    this.element.setAttribute("class", "card--selected");
-    this.cardActivated.emit({
+    this.element.classList.add("card--selected");
+    this.itemActivated.emit({
       tokenId: this.tokenId,
       tokenGroup: this.tokenGroup
     });
@@ -184,9 +189,9 @@ export class Card {
           }}
           class={{
             "editable-mode-on": this.mode === "editable",
-            "card--selected": this.isSelected === true
+            "item--selected": this.isSelected === true
           }}
-          onMouseEnter={this.activateCard.bind(this)}
+          onMouseEnter={this.activateItem.bind(this)}
           tabIndex=""
         >
           <div
@@ -210,36 +215,28 @@ export class Card {
                           ? "edit token (comming soon)"
                           : "edit token"
                       }
-                    >
-                      <gxg-icon slot="icon" type="edit"></gxg-icon>
-                    </gxg-button>
+                      icon="gemini-tools/edit"
+                    ></gxg-button>
                     <gxg-button
                       type="secondary-icon-only"
                       onClick={this.duplicateCard.bind(this)}
                       title="duplicate token"
-                    >
-                      <gxg-icon
-                        slot="icon"
-                        type="duplicate"
-                        size="small"
-                      ></gxg-icon>
-                    </gxg-button>
+                      icon="gemini-tools/duplicate"
+                    ></gxg-button>
                     <gxg-button
                       type="secondary-icon-only"
                       onClick={this.deleteCard.bind(this)}
                       title="delete token"
-                    >
-                      <gxg-icon slot="icon" type="deleted"></gxg-icon>
-                    </gxg-button>
+                      icon="gemini-tools/delete"
+                    ></gxg-button>
                   </div>
                 ) : (
                   <div class="card-header-menu">
                     <gxg-button
                       type="secondary-icon-only"
                       onClick={this.closeCard.bind(this)}
-                    >
-                      <gxg-icon slot="icon" type="close"></gxg-icon>
-                    </gxg-button>
+                      icon="gemini-tools/close"
+                    ></gxg-button>
                   </div>
                 )}
               </header>
@@ -250,6 +247,7 @@ export class Card {
                       <slot name="preview"></slot>
                     </div>
                     <div class="col col-right">
+                      <span class="token-title-list">{this.cardTitle}</span>
                       <span class="token-value">{this.tokenValue}</span>
                     </div>
                   </div>

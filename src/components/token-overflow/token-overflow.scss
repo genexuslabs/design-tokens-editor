@@ -1,0 +1,60 @@
+:host {
+  width: var(--spacing-comp-05);
+  height: var(--spacing-comp-05);
+  border-width: var(--border-width-sm);
+  border-style: var(--border-style-regular);
+  border-color: var(--color-primary-active);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+
+  .item-overflow-token {
+    position: absolute;
+    padding: 7px;
+    background-color: var(--color-background);
+    border-color: var(--gray-04);
+    border-width: var(--border-width-sm);
+    border-style: var(--border-style-regular);
+    left: 28px;
+    top: -1px;
+    z-index: 10;
+    opacity: 0;
+    overflow: hidden;
+    display: none;
+
+    //Token Font Sizse
+    ::slotted(dt-token-font-size) {
+      line-height: 1.6em;
+    }
+  }
+
+  &:after {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 26px;
+    position: absolute;
+    right: -10px;
+    top: -1px;
+    display: none;
+  }
+}
+:host([bigger]) {
+  .item-overflow-token {
+    padding: 27px;
+  }
+}
+:host(:hover) {
+  border-color: var(--color-primary-hover);
+}
+:host(.visible) {
+  .item-overflow-token {
+    opacity: 1;
+    display: block;
+  }
+  &:after {
+    display: block;
+  }
+}

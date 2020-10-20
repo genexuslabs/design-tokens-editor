@@ -34,7 +34,6 @@ export class TabBar {
           (button as HTMLElement).setAttribute("tabindex", "-1");
         });
       } else {
-        console.log("menu not collapsed");
         //else remove tabindex="-1" to enable tabbing navigation
         menuButtons.forEach(button => {
           (button as HTMLElement).removeAttribute("tabindex");

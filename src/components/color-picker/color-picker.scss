@@ -86,3 +86,11 @@
 .cp-gxg-buttons.after-color-value {
   text-align: right;
 }
+:host(.listItem) {
+  .color-picker-main-container {
+    padding: 5px;
+  }
+  #cp-color-value {
+    margin-bottom: 0;
+  }
+}

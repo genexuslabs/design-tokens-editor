@@ -9,11 +9,11 @@
 
 | Property     | Attribute     | Description | Type      | Default     |
 | ------------ | ------------- | ----------- | --------- | ----------- |
-| `cardTitle`  | `card-title`  |             | `string`  | `undefined` |
 | `index`      | `index`       |             | `number`  | `undefined` |
 | `isSelected` | `is-selected` |             | `boolean` | `false`     |
+| `itemTitle`  | `item-title`  |             | `string`  | `undefined` |
 | `mode`       | `mode`        |             | `string`  | `"preview"` |
-| `newCard`    | `new-card`    |             | `boolean` | `false`     |
+| `newItem`    | `new-item`    |             | `boolean` | `false`     |
 | `readOnly`   | `read-only`   |             | `boolean` | `false`     |
 | `tokenGroup` | `token-group` |             | `string`  | `undefined` |
 | `tokenId`    | `token-id`    |             | `string`  | `undefined` |
@@ -45,10 +45,10 @@
 ### Graph
 ```mermaid
 graph TD;
-  dt-card --> gxg-button
+  dt-list-item --> gxg-button
   gxg-button --> gxg-icon
-  dt-main --> dt-card
-  style dt-card fill:#f9f,stroke:#333,stroke-width:4px
+  dt-main --> dt-list-item
+  style dt-list-item fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

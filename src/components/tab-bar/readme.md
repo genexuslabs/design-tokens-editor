@@ -7,10 +7,6 @@
 
 ## Dependencies
 
-### Used by
-
- - [dt-main](../main)
-
 ### Depends on
 
 - gxg-button
@@ -21,7 +17,7 @@
 graph TD;
   dt-tab-bar --> gxg-button
   dt-tab-bar --> gxg-icon
-  dt-main --> dt-tab-bar
+  gxg-button --> gxg-icon
   style dt-tab-bar fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

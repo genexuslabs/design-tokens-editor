@@ -6,3 +6,8 @@
   width: 40px;
   max-width: 100%;
 }
+:host(.listItem) {
+  .image {
+    width: 20px;
+  }
+}

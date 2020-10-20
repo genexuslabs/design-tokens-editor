@@ -14,3 +14,11 @@
   height: 100%;
   background-color: var(--color-on-background);
 }
+
+// As list item
+:host(.listItem) {
+  .container {
+    width: 24px;
+    height: 24px;
+  }
+}

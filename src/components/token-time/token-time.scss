@@ -1,4 +1,5 @@
-:host-context(dt-card.card--selected) {
+:host-context(dt-card.item--selected),
+:host-context(dt-list-item.item--selected) {
   --animation-play-state-hover: running;
 }
 :host {
@@ -24,5 +25,13 @@
   }
   to {
     left: calc(100% - 16px);
+  }
+}
+
+//As list item
+:host(.listItem) {
+  .circle {
+    width: 10px;
+    height: 10px;
   }
 }

@@ -19,6 +19,7 @@ export namespace Components {
     'mode': string;
     'newCard': boolean;
     'readOnly': boolean;
+    'tokenCategory': string;
     'tokenGroup': string;
     'tokenId': string;
     'tokenValue': string;
@@ -28,11 +29,24 @@ export namespace Components {
     'value': string;
   }
   interface DtEditTokenValue {
+    'listItem': boolean;
     'tokenGroup': string;
     'tokenId': string;
     'tokenTitle': string;
     'type': string;
     'value': string;
+  }
+  interface DtListItem {
+    'index': number;
+    'isSelected': boolean;
+    'itemTitle': string;
+    'mode': string;
+    'newItem': boolean;
+    'readOnly': boolean;
+    'tokenCategory': string;
+    'tokenGroup': string;
+    'tokenId': string;
+    'tokenValue': string;
   }
   interface DtMain {
     'model': Model;
@@ -83,6 +97,9 @@ export namespace Components {
   interface DtTokenOpacity {
     'opacity': string;
   }
+  interface DtTokenOverflow {
+    'bigger': boolean;
+  }
   interface DtTokenRadius {
     'radius': string;
   }
@@ -127,6 +144,12 @@ declare global {
   var HTMLDtEditTokenValueElement: {
     prototype: HTMLDtEditTokenValueElement;
     new (): HTMLDtEditTokenValueElement;
+  };
+
+  interface HTMLDtListItemElement extends Components.DtListItem, HTMLStencilElement {}
+  var HTMLDtListItemElement: {
+    prototype: HTMLDtListItemElement;
+    new (): HTMLDtListItemElement;
   };
 
   interface HTMLDtMainElement extends Components.DtMain, HTMLStencilElement {}
@@ -207,6 +230,12 @@ declare global {
     new (): HTMLDtTokenOpacityElement;
   };
 
+  interface HTMLDtTokenOverflowElement extends Components.DtTokenOverflow, HTMLStencilElement {}
+  var HTMLDtTokenOverflowElement: {
+    prototype: HTMLDtTokenOverflowElement;
+    new (): HTMLDtTokenOverflowElement;
+  };
+
   interface HTMLDtTokenRadiusElement extends Components.DtTokenRadius, HTMLStencilElement {}
   var HTMLDtTokenRadiusElement: {
     prototype: HTMLDtTokenRadiusElement;
@@ -252,6 +281,7 @@ declare global {
     'dt-card': HTMLDtCardElement;
     'dt-color-picker': HTMLDtColorPickerElement;
     'dt-edit-token-value': HTMLDtEditTokenValueElement;
+    'dt-list-item': HTMLDtListItemElement;
     'dt-main': HTMLDtMainElement;
     'dt-quote': HTMLDtQuoteElement;
     'dt-tab': HTMLDtTabElement;
@@ -265,6 +295,7 @@ declare global {
     'dt-token-font-size': HTMLDtTokenFontSizeElement;
     'dt-token-media-query': HTMLDtTokenMediaQueryElement;
     'dt-token-opacity': HTMLDtTokenOpacityElement;
+    'dt-token-overflow': HTMLDtTokenOverflowElement;
     'dt-token-radius': HTMLDtTokenRadiusElement;
     'dt-token-shadow': HTMLDtTokenShadowElement;
     'dt-token-spacing': HTMLDtTokenSpacingElement;
@@ -283,12 +314,13 @@ declare namespace LocalJSX {
     'mode'?: string;
     'newCard'?: boolean;
     'onAddNewToken'?: (event: CustomEvent<any>) => void;
-    'onCardActivated'?: (event: CustomEvent<any>) => void;
     'onCardClosed'?: (event: CustomEvent<any>) => void;
+    'onItemActivated'?: (event: CustomEvent<any>) => void;
     'onTokenDeleted'?: (event: CustomEvent<any>) => void;
     'onTokenDuplicated'?: (event: CustomEvent<any>) => void;
     'onTokenSaved'?: (event: CustomEvent<any>) => void;
     'readOnly'?: boolean;
+    'tokenCategory'?: string;
     'tokenGroup'?: string;
     'tokenId'?: string;
     'tokenValue'?: string;
@@ -300,12 +332,32 @@ declare namespace LocalJSX {
     'value'?: string;
   }
   interface DtEditTokenValue {
+    'listItem'?: boolean;
     'onSaveNewValues'?: (event: CustomEvent<any>) => void;
     'tokenGroup'?: string;
     'tokenId'?: string;
     'tokenTitle'?: string;
     'type'?: string;
     'value'?: string;
+  }
+  interface DtListItem {
+    'index'?: number;
+    'isSelected'?: boolean;
+    'itemTitle'?: string;
+    'mode'?: string;
+    'newItem'?: boolean;
+    'onAddNewToken'?: (event: CustomEvent<any>) => void;
+    'onCardClosed'?: (event: CustomEvent<any>) => void;
+    'onEditToken'?: (event: CustomEvent<any>) => void;
+    'onItemActivated'?: (event: CustomEvent<any>) => void;
+    'onTokenDeleted'?: (event: CustomEvent<any>) => void;
+    'onTokenDuplicated'?: (event: CustomEvent<any>) => void;
+    'onTokenSaved'?: (event: CustomEvent<any>) => void;
+    'readOnly'?: boolean;
+    'tokenCategory'?: string;
+    'tokenGroup'?: string;
+    'tokenId'?: string;
+    'tokenValue'?: string;
   }
   interface DtMain {
     'model'?: Model;
@@ -359,6 +411,9 @@ declare namespace LocalJSX {
   interface DtTokenOpacity {
     'opacity'?: string;
   }
+  interface DtTokenOverflow {
+    'bigger'?: boolean;
+  }
   interface DtTokenRadius {
     'radius'?: string;
   }
@@ -387,6 +442,7 @@ declare namespace LocalJSX {
     'dt-card': DtCard;
     'dt-color-picker': DtColorPicker;
     'dt-edit-token-value': DtEditTokenValue;
+    'dt-list-item': DtListItem;
     'dt-main': DtMain;
     'dt-quote': DtQuote;
     'dt-tab': DtTab;
@@ -400,6 +456,7 @@ declare namespace LocalJSX {
     'dt-token-font-size': DtTokenFontSize;
     'dt-token-media-query': DtTokenMediaQuery;
     'dt-token-opacity': DtTokenOpacity;
+    'dt-token-overflow': DtTokenOverflow;
     'dt-token-radius': DtTokenRadius;
     'dt-token-shadow': DtTokenShadow;
     'dt-token-spacing': DtTokenSpacing;
@@ -419,6 +476,7 @@ declare module "@stencil/core" {
       'dt-card': LocalJSX.DtCard & JSXBase.HTMLAttributes<HTMLDtCardElement>;
       'dt-color-picker': LocalJSX.DtColorPicker & JSXBase.HTMLAttributes<HTMLDtColorPickerElement>;
       'dt-edit-token-value': LocalJSX.DtEditTokenValue & JSXBase.HTMLAttributes<HTMLDtEditTokenValueElement>;
+      'dt-list-item': LocalJSX.DtListItem & JSXBase.HTMLAttributes<HTMLDtListItemElement>;
       'dt-main': LocalJSX.DtMain & JSXBase.HTMLAttributes<HTMLDtMainElement>;
       'dt-quote': LocalJSX.DtQuote & JSXBase.HTMLAttributes<HTMLDtQuoteElement>;
       'dt-tab': LocalJSX.DtTab & JSXBase.HTMLAttributes<HTMLDtTabElement>;
@@ -432,6 +490,7 @@ declare module "@stencil/core" {
       'dt-token-font-size': LocalJSX.DtTokenFontSize & JSXBase.HTMLAttributes<HTMLDtTokenFontSizeElement>;
       'dt-token-media-query': LocalJSX.DtTokenMediaQuery & JSXBase.HTMLAttributes<HTMLDtTokenMediaQueryElement>;
       'dt-token-opacity': LocalJSX.DtTokenOpacity & JSXBase.HTMLAttributes<HTMLDtTokenOpacityElement>;
+      'dt-token-overflow': LocalJSX.DtTokenOverflow & JSXBase.HTMLAttributes<HTMLDtTokenOverflowElement>;
       'dt-token-radius': LocalJSX.DtTokenRadius & JSXBase.HTMLAttributes<HTMLDtTokenRadiusElement>;
       'dt-token-shadow': LocalJSX.DtTokenShadow & JSXBase.HTMLAttributes<HTMLDtTokenShadowElement>;
       'dt-token-spacing': LocalJSX.DtTokenSpacing & JSXBase.HTMLAttributes<HTMLDtTokenSpacingElement>;

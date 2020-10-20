@@ -1,7 +1,10 @@
+:host {
+  background: var(--color-background);
+}
 :host(.editable-mode-on) {
   z-index: 10;
 }
-:host(.card--selected) {
+:host(.item--selected) {
   // border-color: var(--color-primary-active);
   .card-header-menu {
     opacity: 1;
@@ -27,6 +30,10 @@ $card-animation-opacity-initial: 0;
 }
 
 :host {
+  .token-title-list {
+    display: none;
+  }
+
   @include ui-animation(box-shadow);
   //animation
   --card-animation-delay: 0;
@@ -58,7 +65,6 @@ $card-animation-opacity-initial: 0;
       flex: 1;
       box-shadow: 0;
       // @include ui-animation(box-shadow);
-      background: var(--color-background);
     }
     &-header {
       display: flex !important;
@@ -110,6 +116,7 @@ $card-animation-opacity-initial: 0;
     &-content {
       font-family: var(--font-family-primary);
       line-height: 1;
+      background: var(--color-background);
       &-preview {
         .col {
           .token-value {
@@ -207,4 +214,59 @@ $card-animation-opacity-initial: 0;
 :host(.new:hover) {
   transform: scale(1.025, 1.025);
   cursor: pointer;
+}
+
+// DISPLAY CARD AS LIST ITEM
+:host(.card-as-list-item) {
+  .token-title-list {
+    display: inline-block;
+    width: 140px;
+  }
+
+  margin-bottom: 2px;
+  width: 100%;
+  height: 30px;
+  min-height: 0 !important;
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+
+  .card {
+    padding: var(--spacing-comp-01);
+    &-header {
+      margin-bottom: 0;
+      &-title {
+        display: none;
+      }
+      &-menu {
+        opacity: 1;
+      }
+    }
+    &-content {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      &-preview {
+        width: 100%;
+      }
+    }
+    &-content-preview,
+    &-content-editable {
+      min-height: 0;
+    }
+    &-main-container {
+      display: inline-flex;
+      flex-direction: row-reverse;
+      justify-content: space-between;
+    }
+    .col-left {
+      border-right: 0;
+      display: flex;
+      align-items: center;
+      flex: 0 0 80px;
+    }
+    .col-right {
+      flex: 1;
+    }
+  }
 }

@@ -14,3 +14,45 @@
   width: 100%;
   max-width: 500px;
 }
+
+#filter {
+  padding-top: var(--spacing-comp-02);
+  padding-bottom: var(--spacing-comp-02);
+}
+
+#main-container {
+  opacity: 1;
+  @include ui-animation(opacity);
+
+  &.hide {
+    opacity: 0;
+  }
+}
+
+gxg-accordion-item .accordion-inner-container.card-view {
+  flex-wrap: wrap;
+  align-content: flex-start;
+  display: flex;
+  margin-bottom: -8px;
+}
+
+.tokens-container.list.categorized {
+  background-color: var(--color-background);
+}
+.tokens-container.card.categorized {
+  background-color: var(--color-background);
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 auto;
+  padding-top: 7px;
+  margin-left: -4px;
+  margin-right: -4px;
+}
+.tokens-container.card.uncategorized {
+  display: flex;
+  margin-left: -4px;
+  margin-right: -4px;
+}
+.add-new-token-container.list-item.categorized {
+  background-color: var(--color-background);
+}
