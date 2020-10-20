@@ -32,8 +32,10 @@
 
 ### Depends on
 
+- gxg-option
 - gxg-form-text
 - [dt-color-picker](../color-picker)
+- gxg-select
 - gxg-stepper
 - gxg-form-textarea
 - gxg-button
@@ -41,8 +43,10 @@
 ### Graph
 ```mermaid
 graph TD;
+  dt-edit-token-value --> gxg-option
   dt-edit-token-value --> gxg-form-text
   dt-edit-token-value --> dt-color-picker
+  dt-edit-token-value --> gxg-select
   dt-edit-token-value --> gxg-stepper
   dt-edit-token-value --> gxg-form-textarea
   dt-edit-token-value --> gxg-button

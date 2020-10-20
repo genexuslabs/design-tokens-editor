@@ -685,7 +685,7 @@ export class Main {
 										}}
 									>
 										<gxg-accordion padding="0" mode="boxed">
-											{model[tokenGroup].tokens.map((token, index) =>
+											{model[tokenGroup].tokens.map((token) =>
 												this.cardAsListItem ? (                          
 														[
                               token.tokenCategory !== null ? (

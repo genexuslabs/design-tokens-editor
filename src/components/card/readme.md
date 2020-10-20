@@ -7,17 +7,18 @@
 
 ## Properties
 
-| Property     | Attribute     | Description | Type      | Default     |
-| ------------ | ------------- | ----------- | --------- | ----------- |
-| `cardTitle`  | `card-title`  |             | `string`  | `undefined` |
-| `index`      | `index`       |             | `number`  | `undefined` |
-| `isSelected` | `is-selected` |             | `boolean` | `false`     |
-| `mode`       | `mode`        |             | `string`  | `"preview"` |
-| `newCard`    | `new-card`    |             | `boolean` | `false`     |
-| `readOnly`   | `read-only`   |             | `boolean` | `false`     |
-| `tokenGroup` | `token-group` |             | `string`  | `undefined` |
-| `tokenId`    | `token-id`    |             | `string`  | `undefined` |
-| `tokenValue` | `token-value` |             | `string`  | `undefined` |
+| Property        | Attribute        | Description | Type      | Default     |
+| --------------- | ---------------- | ----------- | --------- | ----------- |
+| `cardTitle`     | `card-title`     |             | `string`  | `undefined` |
+| `index`         | `index`          |             | `number`  | `undefined` |
+| `isSelected`    | `is-selected`    |             | `boolean` | `false`     |
+| `mode`          | `mode`           |             | `string`  | `"preview"` |
+| `newCard`       | `new-card`       |             | `boolean` | `false`     |
+| `readOnly`      | `read-only`      |             | `boolean` | `false`     |
+| `tokenCategory` | `token-category` |             | `string`  | `undefined` |
+| `tokenGroup`    | `token-group`    |             | `string`  | `undefined` |
+| `tokenId`       | `token-id`       |             | `string`  | `undefined` |
+| `tokenValue`    | `token-value`    |             | `string`  | `undefined` |
 
 
 ## Events

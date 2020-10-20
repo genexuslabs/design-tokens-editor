@@ -2,6 +2,7 @@
 
 <!-- Auto Generated Below -->
 
+
 ## Dependencies
 
 ### Depends on
@@ -10,7 +11,6 @@
 - gxg-icon
 
 ### Graph
-
 ```mermaid
 graph TD;
   dt-tab-bar --> gxg-button
@@ -19,6 +19,6 @@ graph TD;
   style dt-tab-bar fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
----
+----------------------------------------------
 
-_Built with [StencilJS](https://stenciljs.com/)_
+*Built with [StencilJS](https://stenciljs.com/)*

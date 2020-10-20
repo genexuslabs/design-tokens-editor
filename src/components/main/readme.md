@@ -27,6 +27,8 @@
 
 ### Depends on
 
+- [dt-list-item](../list-item)
+- [dt-card](../card)
 - [dt-token-font](../token-font)
 - [dt-edit-token-value](../edit-token-value)
 - [dt-token-overflow](../token-overflow)
@@ -50,13 +52,13 @@
 - gxg-form-text
 - gxg-accordion
 - gxg-accordion-item
-- [dt-list-item](../list-item)
-- [dt-card](../card)
 - gxg-alert
 
 ### Graph
 ```mermaid
 graph TD;
+  dt-main --> dt-list-item
+  dt-main --> dt-card
   dt-main --> dt-token-font
   dt-main --> dt-edit-token-value
   dt-main --> dt-token-overflow
@@ -80,11 +82,14 @@ graph TD;
   dt-main --> gxg-form-text
   dt-main --> gxg-accordion
   dt-main --> gxg-accordion-item
-  dt-main --> dt-list-item
-  dt-main --> dt-card
   dt-main --> gxg-alert
+  dt-list-item --> gxg-button
+  gxg-button --> gxg-icon
+  dt-card --> gxg-button
+  dt-edit-token-value --> gxg-option
   dt-edit-token-value --> gxg-form-text
   dt-edit-token-value --> dt-color-picker
+  dt-edit-token-value --> gxg-select
   dt-edit-token-value --> gxg-stepper
   dt-edit-token-value --> gxg-form-textarea
   dt-edit-token-value --> gxg-button
@@ -93,11 +98,8 @@ graph TD;
   gxg-form-message --> gxg-icon
   dt-color-picker --> gxg-button-group
   gxg-form-textarea --> gxg-form-message
-  gxg-button --> gxg-icon
   gxg-accordion-item --> gxg-icon
   gxg-accordion-item --> gxg-form-text
-  dt-list-item --> gxg-button
-  dt-card --> gxg-button
   gxg-alert --> gxg-icon
   gxg-alert --> gxg-button
   style dt-main fill:#f9f,stroke:#333,stroke-width:4px

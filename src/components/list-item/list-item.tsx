@@ -6,8 +6,7 @@ import {
   EventEmitter,
   Listen,
   Element,
-  Host,
-  getAssetPath
+  Host
 } from "@stencil/core";
 
 @Component({
