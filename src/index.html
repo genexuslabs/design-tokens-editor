@@ -94,60 +94,94 @@
       const themes = ["dsadsa", "dsasdsa"]
 
       const model = {
-        // fonts: {
-        //   readOnly: false,
-        //   tokens: [
-            // {
-            //   id: "a01",
-            //   caption: "Primaryhffhdsuihfdisuhfdsiuhfidsuhfsdiauh",
-            //   value: "arial",
-            //   metaData: {
-            //     fontPath: ""
-            //   }
-            // },
-            // {
-            //   id: "a02",
-            //   caption: "Secondary Font",
-            //   value: "georgia",
-            //   fontPath: "c:/georgia"
-            // },
-            // {
-            //   id: "a03",
-            //   caption: "code",
-            //   value: "consolas"
-            // },
-            // {
-            //   id: "a04",
-            //   caption: "decorative",
-            //   value: "Palatino Linotype"
-            // }
-        //   ]
-        // },
-        // fontSizes: {
-        //   readOnly: false,
-        //   tokens: [
-        //     {
-        //       id: "b01",
-        //       caption: "XSmall",
-        //       value: "10px"
-        //     },
-        //     {
-        //       id: "b02",
-        //       caption: "Small",
-        //       value: "16px"
-        //     },
-        //     {
-        //       id: "b03",
-        //       caption: "Regular",
-        //       value: "22px"
-        //     },
-        //     {
-        //       id: "b04",
-        //       caption: "Big",
-        //       value: "99px"
-        //     }
-        //   ]
-        // },
+        fonts: {
+          readOnly: false,
+          tokens : [
+            {
+          tokenCategory : null,
+          tokens: [
+            {
+              id: "a01",
+              caption: "Primaryhffhdsuihfdisuhfdsiuhfidsuhfsdiauh",
+              value: "arial",
+              metaData: {
+                fontPath: ""
+              }
+            },
+            {
+              id: "a02",
+              caption: "Secondary Font",
+              value: "georgia",
+              fontPath: "c:/georgia"
+            },
+            {
+              id: "a03",
+              caption: "code",
+              value: "consolas"
+            },
+            {
+              id: "a04",
+              caption: "decorative",
+              value: "lorem"
+            }
+          ]
+          }]
+        },
+        fontSizes: {
+          readOnly: false,
+          tokens: [
+            {
+              tokenCategory : "primary",
+              tokens: [
+                {
+                id: "b01",
+                caption: "XSmall",
+                value: "10px"
+                },
+                {
+                  id: "b02",
+                  caption: "Small",
+                  value: "16px"
+                },
+                {
+                  id: "b03",
+                  caption: "Regular",
+                  value: "22px"
+                },
+                {
+                  id: "b04",
+                  caption: "Big",
+                  value: "99px"
+                }
+              ]
+            },
+            {
+              tokenCategory : "secondary",
+              tokens: [
+                {
+                id: "b05",
+                caption: "XSmall",
+                value: "10px"
+                },
+                {
+                  id: "b06",
+                  caption: "Small",
+                  value: "16px"
+                },
+                {
+                  id: "b07",
+                  caption: "Regular",
+                  value: "22px"
+                },
+                {
+                  id: "b08",
+                  caption: "Big",
+                  value: "99px"
+                }
+              ]
+            }
+          ]
+        },
         colors: {
           readOnly: false,
           tokens: [
@@ -190,12 +224,12 @@
               tokenCategory : "tertiary",
               tokens: [
                 {
-                  id: "c04",
+                  id: "c06",
                   caption: "verde",
                   value: "#ab2"
                 },
                 {
-                  id: "c05",
+                  id: "c07",
                   caption: "verde",
                   value: "#ab2"
                 }
@@ -205,12 +239,12 @@
               tokenCategory : null,
               tokens: [
                 {
-                  id: "c04",
+                  id: "c08",
                   caption: "verde",
                   value: "#ab2"
                 },
                 {
-                  id: "c05",
+                  id: "c09",
                   caption: "verde",
                   value: "#ab2"
                 }
@@ -218,275 +252,321 @@
             }
           ]
         },
-        // spacing: {
-        //   readOnly: false,
-        //   tokens: [
-        //     {
-        //       id: "d01",
-        //       caption: "XSmall",
-        //       value: "8px"
-        //     },
-        //     {
-        //       id: "d02",
-        //       caption: "Small",
-        //       value: "10px"
-        //     },
-        //     {
-        //       id: "d03",
-        //       caption: "Medium",
-        //       value: "15px"
-        //     },
-        //     {
-        //       id: "d04",
-        //       caption: "Large",
-        //       value: "45px"
-        //     }
-        //   ]
-        // },
-        // borders: {
-        //   readOnly: false,
-        //   tokens: [
-        //     {
-        //       id: "e01",
-        //       caption: "XSmall",
-        //       value: "1px"
-        //     },
-        //     {
-        //       id: "e02",
-        //       caption: "Small",
-        //       value: "3px"
-        //     },
-        //     {
-        //       id: "e03",
-        //       caption: "Medium",
-        //       value: "5px"
-        //     },
-        //     {
-        //       id: "e04",
-        //       caption: "Large",
-        //       value: "100px"
-        //     }
-        //   ]
-        // },
-        // radius: {
-        //   readOnly: false,
-        //   tokens: [
-        //     {
-        //       id: "f01",
-        //       caption: "Soft",
-        //       value: "10px"
-        //     },
-        //     {
-        //       id: "f02",
-        //       caption: "Regular",
-        //       value: "16px"
-        //     },
-        //     {
-        //       id: "f03",
-        //       caption: "Medium",
-        //       value: "22px"
-        //     },
-        //     {
-        //       id: "f04",
-        //       caption: "Big",
-        //       value: "40px"
-        //     }
-        //   ]
-        // },
-        // shadows: {
-        //   readOnly: false,
-        //   tokens: [
-        //     {
-        //       id: "g01",
-        //       caption: "Section A",
-        //       value: "0px 0px 5px 0px rgba(0,0,0,0.75)"
-        //     },
-        //     {
-        //       id: "g02",
-        //       caption: "Headers",
-        //       value: "10px 30px 5px #aaaaaa"
-        //     },
-        //     {
-        //       id: "g03",
-        //       caption: "Articles",
-        //       value: "5px 10px inset"
-        //     },
-        //     {
-        //       id: "g04",
-        //       caption: "News",
-        //       value: "5px 5px blue, 10px 10px red, 15px 15px green"
-        //     },
-        //     {
-        //       id: "g05",
-        //       caption: "Footer",
-        //       value: "10px 10px 8px 10px #888888"
-        //     }
-        //   ]
-        // },
-        // opacity: {
-        //   readOnly: false,
-        //   tokens: [
-        //     {
-        //       id: "h01",
-        //       caption: "Section A",
-        //       value: "0.8"
-        //     },
-        //     {
-        //       id: "h02",
-        //       caption: "Headers",
-        //       value: "0.6"
-        //     },
-        //     {
-        //       id: "h03",
-        //       caption: "Articles",
-        //       value: "0.4"
-        //     },
-        //     {
-        //       id: "h04",
-        //       caption: "News",
-        //       value: "0.2"
-        //     },
-        //     {
-        //       id: "h05",
-        //       caption: "Footer",
-        //       value: "0.1"
-        //     }
-        //   ]
-        // },
-        // zIndex: {
-        //   readOnly: false,
-        //   tokens: [
-        //     {
-        //       id: "i01",
-        //       caption: "Title",
-        //       value: "0"
-        //     },
-        //     {
-        //       id: "i02",
-        //       caption: "Title",
-        //       value: "1"
-        //     },
-        //     {
-        //       id: "i03",
-        //       caption: "Title",
-        //       value: "2"
-        //     },
-        //     {
-        //       id: "i04",
-        //       caption: "Title",
-        //       value: "3"
-        //     },
-        //     {
-        //       id: "i05",
-        //       caption: "Title",
-        //       value: "4"
-        //     },
-        //     {
-        //       id: "i06",
-        //       caption: "Title",
-        //       value: "5"
-        //     },
-        //     {
-        //       id: "i07",
-        //       caption: "Title",
-        //       value: "6"
-        //     }
-        //   ]
-        // },
-        // timingFunction: {
-        //   readOnly: false,
-        //   tokens: [
-        //     {
-        //       id: "j01",
-        //       caption: "Linear",
-        //       value: "linear"
-        //     },
-        //     {
-        //       id: "j02",
-        //       caption: "Linear",
-        //       value: "ease"
-        //     },
-        //     {
-        //       id: "j03",
-        //       caption: "Linear",
-        //       value: "ease-out"
-        //     },
-        //     {
-        //       id: "j04",
-        //       caption: "Linear",
-        //       value: "ease-in"
-        //     },
-        //     {
-        //       id: "j05",
-        //       caption: "Linear",
-        //       value: "ease-in-out"
-        //     }
-        //   ]
-        // },
-        // times: {
-        //   readOnly: false,
-        //   tokens: [
-        //     {
-        //       id: "k01",
-        //       caption: "snail",
-        //       value: "3s"
-        //     },
-        //     {
-        //       id: "k02",
-        //       caption: "rabbit",
-        //       value: "1s"
-        //     },
-        //     {
-        //       id: "k03",
-        //       caption: "horse",
-        //       value: "0.3s"
-        //     }
-        //   ]
-        // },
-        // mediaQueries: {
-        //   readOnly: false,
-        //   tokens: [
-        //     {
-        //       id: "m01",
-        //       caption: "Section A",
-        //       value: "speech and (min-width: 30em) and (orientation: landscape)"
-        //     },
-        //     {
-        //       id: "m02",
-        //       caption: "Section A",
-        //       value: "print and (min-width: 30em) and (orientation: landscape)"
-        //     },
-        //     {
-        //       id: "m03",
-        //       caption: "Section A",
-        //       value: "screen and (min-width: 30em) and (orientation: landscape)"
-        //     },
-        //     {
-        //       id: "m04",
-        //       caption: "Headers",
-        //       value:
-        //         "print and screen and (min-width: 30em) and (orientation: landscape)"
-        //     },
-        //     {
-        //       id: "m05",
-        //       caption: "Articles",
-        //       value:
-        //         "print and speech and (min-width: 30em) and (orientation: landscape)"
-        //     },
-        //     {
-        //       id: "m06",
-        //       caption: "News",
-        //       value:
-        //         "speech and screen and (min-width: 30em) and (orientation: landscape)"
-        //     },
-        //     {
-        //       id: "m07",
-        //       caption: "News",
-        //       value:
-        //         "speech and screen and print and (min-width: 30em) and (orientation: landscape)"
-        //     }
-        //   ]
-        // }
+        spacing: {
+          readOnly: false,
+          tokens: [
+           { 
+              tokenCategory : null,
+              tokens: [
+                  {
+                    id: "d01",
+                    caption: "XSmall",
+                    value: "8px"
+                  },
+                  {
+                    id: "d02",
+                    caption: "Small",
+                    value: "10px"
+                  },
+                  {
+                    id: "d03",
+                    caption: "Medium",
+                    value: "15px"
+                  },
+                  {
+                    id: "d04",
+                    caption: "Large",
+                    value: "45px"
+                  }
+              ]
+            }
+          ]
+        },
+        
+        borders: {
+          readOnly: false,
+          tokens: [
+            {
+              tokenCategory : null,
+              tokens: [
+            {
+              id: "e01",
+              caption: "XSmall",
+              value: "1px"
+            },
+            {
+              id: "e02",
+              caption: "Small",
+              value: "3px"
+            },
+            {
+              id: "e03",
+              caption: "Medium",
+              value: "5px"
+            },
+            {
+              id: "e04",
+              caption: "Large",
+              value: "100px"
+            }
+              ]
+            }
+          ]
+        },
+        radius: {
+          readOnly: false,
+          tokens: [
+            {
+              tokenCategory : null,
+              tokens: [
+            {
+              id: "f01",
+              caption: "Soft",
+              value: "10px"
+            },
+            {
+              id: "f02",
+              caption: "Regular",
+              value: "16px"
+            },
+            {
+              id: "f03",
+              caption: "Medium",
+              value: "22px"
+            },
+            {
+              id: "f04",
+              caption: "Big",
+              value: "40px"
+            }
+              ]
+            }
+          ]
+        },
+        shadows: {
+          readOnly: false,
+          tokens: [
+            {
+              tokenCategory : null,
+              tokens: [
+            {
+              id: "g01",
+              caption: "Section A",
+              value: "0px 0px 5px 0px rgba(0,0,0,0.75)"
+            },
+            {
+              id: "g02",
+              caption: "Headers",
+              value: "10px 30px 5px #aaaaaa"
+            },
+            {
+              id: "g03",
+              caption: "Articles",
+              value: "5px 10px inset"
+            },
+            {
+              id: "g04",
+              caption: "News",
+              value: "5px 5px blue, 10px 10px red, 15px 15px green"
+            },
+            {
+              id: "g05",
+              caption: "Footer",
+              value: "10px 10px 8px 10px #888888"
+            }
+              ]
+            }
+          ]
+        },
+        opacity: {
+          readOnly: false,
+          tokens: [
+            {
+              tokenCategory: null,
+              tokens: [
+            {
+              id: "h01",
+              caption: "Section A",
+              value: "0.8"
+            },
+            {
+              id: "h02",
+              caption: "Headers",
+              value: "0.6"
+            },
+            {
+              id: "h03",
+              caption: "Articles",
+              value: "0.4"
+            },
+            {
+              id: "h04",
+              caption: "News",
+              value: "0.2"
+            },
+            {
+              id: "h05",
+              caption: "Footer",
+              value: "0.1"
+            }
+              ]
+            }
+          ]
+        },
+        zIndex: {
+          readOnly: false,
+          tokens: [
+            {
+              tokenCategory: null,
+              tokens: [
+            {
+              id: "i01",
+              caption: "Title",
+              value: "0"
+            },
+            {
+              id: "i02",
+              caption: "Title",
+              value: "1"
+            },
+            {
+              id: "i03",
+              caption: "Title",
+              value: "2"
+            },
+            {
+              id: "i04",
+              caption: "Title",
+              value: "3"
+            },
+            {
+              id: "i05",
+              caption: "Title",
+              value: "4"
+            },
+            {
+              id: "i06",
+              caption: "Title",
+              value: "5"
+            },
+            {
+              id: "i07",
+              caption: "Title",
+              value: "6"
+            }
+              ]
+            }
+          ]
+        },
+        timingFunction: {
+          readOnly: false,
+          tokens: [
+            {
+              tokenCategory : null,
+              tokens: [
+            {
+              id: "j01",
+              caption: "Linear",
+              value: "linear"
+            },
+            {
+              id: "j02",
+              caption: "Linear",
+              value: "ease"
+            },
+            {
+              id: "j03",
+              caption: "Linear",
+              value: "ease-out"
+            },
+            {
+              id: "j04",
+              caption: "Linear",
+              value: "ease-in"
+            },
+            {
+              id: "j05",
+              caption: "Linear",
+              value: "ease-in-out"
+            }
+              ]
+            }
+          ]
+        },
+        times: {
+          readOnly: false,
+          tokens: [
+            {
+              tokenCategory:null,
+              tokens: [
+            {
+              id: "k01",
+              caption: "snail",
+              value: "3s"
+            },
+            {
+              id: "k02",
+              caption: "rabbit",
+              value: "1s"
+            },
+            {
+              id: "k03",
+              caption: "horse",
+              value: "0.3s"
+            }
+              ]
+            }
+          ]
+        },
+        mediaQueries: {
+          readOnly: false,
+          tokens: [
+            {
+              tokenCategory:null,
+              tokens: [
+            {
+              id: "m01",
+              caption: "Section A",
+              value: "speech and (min-width: 30em) and (orientation: landscape)"
+            },
+            {
+              id: "m02",
+              caption: "Section A",
+              value: "print and (min-width: 30em) and (orientation: landscape)"
+            },
+            {
+              id: "m03",
+              caption: "Section A",
+              value: "screen and (min-width: 30em) and (orientation: landscape)"
+            },
+            {
+              id: "m04",
+              caption: "Headers",
+              value:
+                "print and screen and (min-width: 30em) and (orientation: landscape)"
+            },
+            {
+              id: "m05",
+              caption: "Articles",
+              value:
+                "print and speech and (min-width: 30em) and (orientation: landscape)"
+            },
+            {
+              id: "m06",
+              caption: "News",
+              value:
+                "speech and screen and (min-width: 30em) and (orientation: landscape)"
+            },
+            {
+              id: "m07",
+              caption: "News",
+              value:
+                "speech and screen and print and (min-width: 30em) and (orientation: landscape)"
+              }
+              ]
+            }
+          ]
+        }
       };
 
       //Card "Header buttons" Event Listeners

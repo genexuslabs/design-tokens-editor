@@ -157,7 +157,6 @@ export class Main {
 
 	render() {
 		const { model } = this;
-
 		let switchTokenGroup = (tokenGroup, tokenValue, tokenCaption, tokenId) => {
 			switch (tokenGroup) {
 				case "fonts":
@@ -614,9 +613,10 @@ export class Main {
 		// }
 
 		return (
+			this.model !== undefined ? (
 			<div class="container">
 				<div id="filter">
-					<gxg-columns align-y="bottom" space="s">
+					{/* <gxg-columns align-y="bottom" space="s">
 						<gxg-column width="1/5">
 							<gxg-select label="Themes" id="themeSelect">
 								<gxg-option value="light" selected>
@@ -666,7 +666,62 @@ export class Main {
 								})}
 							</gxg-select>
 						</gxg-column>
-					</gxg-columns>
+					</gxg-columns> */}
+					<div class="filter-container">
+						<div class="col-left">
+							<div class="themes">
+							<gxg-select label="Themes" id="themeSelect">
+								<gxg-option value="light" selected>
+									Light
+								</gxg-option>
+								<gxg-option value="dark">Dark</gxg-option>
+							</gxg-select>
+							</div>
+							<div class="display">
+							<gxg-button
+								onClick={this.changeDisplay.bind(this)}
+								type="tertiary"
+								icon="gemini-tools/list-view"
+								id="list-view"
+								class="filter-button"
+							></gxg-button>
+							<gxg-spacer-one space="xs"></gxg-spacer-one>
+							<gxg-button
+								onClick={this.changeDisplay.bind(this)}
+								type="tertiary"
+								icon="gemini-tools/card-view"
+								id="card-view"
+								class="filter-button"
+							></gxg-button>
+							</div>
+						</div>
+						<div class="col-right">
+							<div class="search">
+							<gxg-form-text
+								placeholder="Search"
+								icon-position="start"
+								icon="gemini-tools/search"
+								id="filterTokens"
+							></gxg-form-text>
+							</div>
+							<div class="category">
+							<gxg-select id="selectTokenGroup" size="8">
+								<gxg-option value="all" selected>
+									All
+								</gxg-option>
+								{Object.keys(model).map((tokenGroup) => {
+									const tokenGroupCapitalized =
+										tokenGroup.charAt(0).toUpperCase() + tokenGroup.slice(1);
+									return (
+										<gxg-option value={tokenGroupCapitalized}>
+											{tokenGroupCapitalized}
+										</gxg-option>
+									);
+								})}
+							</gxg-select>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div id="main-container" class={{ hide: this.hideMainContainer }}>
 					<gxg-accordion padding="0" mode="classical">
@@ -893,6 +948,7 @@ export class Main {
 					</gxg-alert>
 				</div>
 			</div>
+			) : null
 		);
 	}
 }

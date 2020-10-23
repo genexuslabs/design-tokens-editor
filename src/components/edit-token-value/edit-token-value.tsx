@@ -78,11 +78,26 @@ export class EditTokenValue {
 
     //If type is color-picker...
     if (this.type === "color-picker") {
-      returnContent.push(
-        <div class="edit-container value">
-        <dt-color-picker id="color-picker" class={{listItem: this.listItem}} value={this.value}></dt-color-picker>
-        </div>
-      );
+      if(this.listItem) {
+        returnContent.push(
+          <div class="edit-container value">
+            <gxg-form-text
+              id="input-text"
+              label="Value"
+              label-position={this.labelPosition()}
+              full-width
+              value={this.value}
+              style={this.styles()}
+            ></gxg-form-text>
+          </div>
+        );
+      } else {
+        returnContent.push(
+          <div class="edit-container value">
+          <dt-color-picker id="color-picker" class={{listItem: this.listItem}} value={this.value}></dt-color-picker>
+          </div>
+        );
+      }
     }
     //If type is input-text...
     if (this.type === "input-text") {
@@ -156,6 +171,7 @@ export class EditTokenValue {
     //Save button
     returnContent.push(
       <gxg-button
+        class={{"list-item": this.listItem}}
         type="primary-text-only"
         style={{ float: "right" }}
         onClick={this.saveNewValuesHandler.bind(this)}

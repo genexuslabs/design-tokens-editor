@@ -11,14 +11,15 @@
 
 :host(.list-item) {
   display: flex;
-
+  margin-right: var(--spacing-comp-02);
   .edit-container {
-    width: 160px;
+    width: 40%;
+    max-width: 160px;
     margin-right: 20px;
 
     &.value {
       position: relative;
-      margin-right: 10px;
+      margin-right: var(--spacing-comp-02);
     }
   }
 }
