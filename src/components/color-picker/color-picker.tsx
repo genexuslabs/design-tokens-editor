@@ -5,7 +5,8 @@ import {
   Event,
   EventEmitter,
   Prop,
-  State
+  State,
+  Watch
 } from "@stencil/core";
 import Pickr from "@simonwep/pickr";
 
@@ -154,6 +155,11 @@ export class ColorPicker {
     } else if (this.value.includes("#")) {
       return "HEXA";
     }
+  }
+
+  @Watch("value")
+  watchHandler(newValue: string) {
+    this.pickr.setColor(newValue);
   }
 
   render() {

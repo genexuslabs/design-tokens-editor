@@ -29,16 +29,17 @@ export class Card {
   @Prop() cardTitle: string;
   @Prop() tokenId: string;
   @Prop() tokenGroup: string;
-  @Prop() tokenCategory: string;
+  @Prop() tokenCategory: string = null;
   @Prop() tokenValue: string;
-  @Prop() mode: string = "preview";
   @Prop() readOnly: boolean = false;
   @Prop() index: number; //index is for applying an increasing delay to the cards animation
   @Prop() isSelected: boolean = false;
   @Prop() newCard: boolean = false;
 
   //State
-  @State() cardMinHeight: string; //index is for applying an increasing delay to the cards animation
+  @State() cardMinHeight: string;
+  @State() focusableButtons: boolean = false;
+  @State() mode: string = "preview";
 
   //Events
   @Event()
@@ -49,6 +50,8 @@ export class Card {
   cardClosed: EventEmitter;
   @Event()
   tokenSaved: EventEmitter;
+  @Event()
+  modeChanged: EventEmitter;
   @Event()
   itemActivated: EventEmitter;
   @Event()
@@ -63,17 +66,17 @@ export class Card {
     tokenGroup: this.tokenGroup
   };
 
-  @Listen("saveNewValues")
-  saveHandler(event: CustomEvent) {
-    this.tokenSaved.emit({
-      tokenId: this.tokenId,
-      tokenGroup: this.tokenGroup,
-      tokenTitle: event.detail.cardTitle,
-      tokenValue: event.detail.color
-    });
-
-    //close the card
-    this.mode = "preview";
+  @Listen("editModeClosed")
+  todoCompletedHandler(event) {
+    if (event.detail === "escape") {
+      this.mode = "preview";
+      this.element.focus();
+      this.isSelected = true;
+      this.focusableButtons = false;
+    } else if ("tab") {
+      this.mode = "preview";
+      this.focusableButtons = false;
+    }
   }
 
   @Watch("mode")
@@ -84,10 +87,42 @@ export class Card {
     } else {
       document.removeEventListener("click", this.detectClickOutsideCard);
     }
+    this.modeChanged.emit(this.mode);
+  }
+
+  @Watch("focusableButtons")
+  focusableButtonsHandler(newValue: boolean) {
+    let cardHeaderMenuButtons = this.element.shadowRoot.querySelectorAll(
+      ".card-header-menu > gxg-button"
+    );
+    if (newValue === true) {
+      cardHeaderMenuButtons.forEach(gxgButton => {
+        gxgButton.removeAttribute("tabindex");
+      });
+    } else {
+      cardHeaderMenuButtons.forEach(gxgButton => {
+        gxgButton.setAttribute("tabindex", "-1");
+      });
+    }
   }
 
   detectClickOutsideCard(event) {
-    if (event.isTrusted) {
+    let cardFounded = false;
+    for (let index = 0; index < event.path.length; index++) {
+      if ((event.path[index] as HTMLElement).classList !== undefined) {
+        if (
+          (event.path[index] as HTMLElement).classList.contains(
+            "dt-card-edit-mode"
+          )
+        ) {
+          cardFounded = true;
+          break;
+        }
+      }
+    }
+
+    if (event.isTrusted && !cardFounded) {
+      event.stopPropagation();
       //If event.isTrusted is false, it means it was a click simulated by pickr, on the setColor method (color-picker.tsx) If this is the case, ignore everything.
       const cardMainContainer = this.element.shadowRoot.querySelector(
         ".card-main-container"
@@ -113,34 +148,68 @@ export class Card {
     }
   }
 
+  componentDidLoad() {}
+
+  componentDidUpdate() {}
+
   componentDidUnload() {
     document.removeEventListener("click", this.detectClickOutsideCard);
   }
 
   //Click functions
-  editCard() {
-    this.mode = "editable";
+  editCard(e) {
+    e.stopPropagation();
+    if (e.clientX !== 0 && e.clientY !== 0) {
+      this.mode = "editable";
+    }
   }
-  duplicateCard() {
-    this.tokenDuplicated.emit(this.tokenId);
+  duplicateCard(e) {
+    e.stopPropagation();
+    const tokenGroup = this.tokenGroup;
+    const tokenCategory = this.tokenCategory;
+    const tokenId = this.tokenId;
+    this.tokenDuplicated.emit({
+      tokenGroup,
+      tokenCategory,
+      tokenId
+    });
   }
-  deleteCard() {
-    this.tokenDeleted.emit(this.tokenDeletedEventData);
+  deleteCard(e) {
+    e.stopPropagation();
+    const tokenGroup = this.tokenGroup;
+    const tokenCategory = this.tokenCategory;
+    const tokenId = this.tokenId;
+    this.tokenDeleted.emit({
+      tokenGroup,
+      tokenCategory,
+      tokenId
+    });
   }
   closeCard() {
     this.mode = "preview";
+    this.element.focus();
+    this.isSelected = true;
   }
   activateItem() {
+    console.log("activate item");
     this.itemActivated.emit({
       tokenId: this.tokenId,
       tokenGroup: this.tokenGroup
     });
+    this.element.focus();
   }
+  // deactivateItem() {
+  //   console.log("deactivate item");
+  //   this.itemActivated.emit({
+  //     tokenId: null,
+  //     tokenGroup: null
+  //   });
+  // }
   newCardOnClick() {
     let newItemData = {
-      "token-group" : this.tokenGroup,
-      "token-category" : this.tokenCategory
-    }
+      "token-group": this.tokenGroup,
+      "token-category": this.tokenCategory
+    };
     this.addNewToken.emit(newItemData);
   }
   @Listen("focus")
@@ -156,6 +225,49 @@ export class Card {
     return "./card-assets/new-card.svg";
   }
 
+  handleCardKeyDown(e) {
+    if (!this.focusableButtons) {
+      if (e.key === "Enter") {
+        this.focusableButtons = true;
+        let firstMenuGxgButton = this.element.shadowRoot.querySelector(
+          ".card-header-menu > gxg-button:first-child"
+        );
+        let firstButton = firstMenuGxgButton.shadowRoot.querySelector("button");
+        firstButton.focus();
+      }
+    }
+  }
+
+  editButtonKeyDownHandler(e) {
+    e.stopPropagation();
+    if (e.key === "Enter") {
+      this.mode = "editable";
+    } else if (e.key === "Escape") {
+      this.element.focus();
+      this.focusableButtons = false;
+    } else if (e.key === "Tab" && e.shiftKey) {
+      this.focusableButtons = false;
+    }
+  }
+
+  duplicateButtonKeyDownHandler(e) {
+    e.stopPropagation();
+    if (e.key === "Escape") {
+      this.element.focus();
+      this.focusableButtons = false;
+    }
+  }
+
+  deleteButtonKeyDownHandler(e) {
+    e.stopPropagation();
+    if (e.key === "Escape") {
+      this.element.focus();
+      this.focusableButtons = false;
+    } else if (e.key === "Tab" && e.key !== e.shiftKey) {
+      this.focusableButtons = false;
+    }
+  }
+
   render() {
     if (this.newCard === true) {
       return (
@@ -168,7 +280,7 @@ export class Card {
             "card--selected": this.isSelected === true
           }}
           onClick={this.newCardOnClick.bind(this)}
-          tabIndex=""
+          tabIndex="0"
         >
           <div class="card" data-tokenId={this.tokenId}>
             <span class="plus-sign">
@@ -189,10 +301,14 @@ export class Card {
           }}
           class={{
             "editable-mode-on": this.mode === "editable",
-            "item--selected": this.isSelected === true
+            "item--selected": this.isSelected === true,
+            "dt-card-edit-mode": this.mode === "editable",
+            "focus-on-buttons": this.focusableButtons === true
           }}
           onMouseEnter={this.activateItem.bind(this)}
-          tabIndex=""
+          // onMouseOut={this.deactivateItem.bind(this)}
+          tabIndex="0"
+          onKeyDown={this.handleCardKeyDown.bind(this)}
         >
           <div
             class={{
@@ -216,18 +332,27 @@ export class Card {
                           : "edit token"
                       }
                       icon="gemini-tools/edit"
+                      tabindex="-1"
+                      onKeyDown={this.editButtonKeyDownHandler.bind(this)}
+                      key="1"
                     ></gxg-button>
                     <gxg-button
                       type="secondary-icon-only"
                       onClick={this.duplicateCard.bind(this)}
                       title="duplicate token"
                       icon="gemini-tools/duplicate"
+                      tabindex="-1"
+                      onKeyDown={this.duplicateButtonKeyDownHandler.bind(this)}
+                      key="2"
                     ></gxg-button>
                     <gxg-button
                       type="secondary-icon-only"
                       onClick={this.deleteCard.bind(this)}
                       title="delete token"
                       icon="gemini-tools/delete"
+                      tabindex="-1"
+                      onKeyDown={this.deleteButtonKeyDownHandler.bind(this)}
+                      key="3"
                     ></gxg-button>
                   </div>
                 ) : (
@@ -236,6 +361,7 @@ export class Card {
                       type="secondary-icon-only"
                       onClick={this.closeCard.bind(this)}
                       icon="gemini-tools/close"
+                      key="4"
                     ></gxg-button>
                   </div>
                 )}

@@ -4,6 +4,10 @@
     border-bottom-width: var(--border-width-sm);
     border-bottom-style: var(--border-style-regular);
     border-bottom-color: var(--gray-02);
+
+    &:focus {
+      outline: none;
+    }
   }
   .col-left {
     display: flex;

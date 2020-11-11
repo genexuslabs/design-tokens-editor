@@ -16,12 +16,12 @@
 
 ### Used by
 
- - [dt-main](../main)
+ - [dt-token-container](../token-container)
 
 ### Graph
 ```mermaid
 graph TD;
-  dt-main --> dt-token-border
+  dt-token-container --> dt-token-border
   style dt-token-border fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

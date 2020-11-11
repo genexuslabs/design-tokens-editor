@@ -16,7 +16,6 @@ export namespace Components {
     'cardTitle': string;
     'index': number;
     'isSelected': boolean;
-    'mode': string;
     'newCard': boolean;
     'readOnly': boolean;
     'tokenCategory': string;
@@ -30,6 +29,8 @@ export namespace Components {
   }
   interface DtEditTokenValue {
     'listItem': boolean;
+    'options': string;
+    'tokenCategory': string;
     'tokenGroup': string;
     'tokenId': string;
     'tokenTitle': string;
@@ -84,6 +85,21 @@ export namespace Components {
   }
   interface DtTokenColorPalette {
     'color': string;
+  }
+  interface DtTokenContainer {
+    'cardAsListItem': boolean;
+    'index': number;
+    'isSelected': boolean;
+    'key': string;
+    'listItem': boolean;
+    'readOnly': boolean;
+    'selectedTokenGroup': string;
+    'selectedTokenId': string;
+    'tokenCategory': string;
+    'tokenGroup': string;
+    'tokenId': string;
+    'tokenTitle': string;
+    'tokenValue': string;
   }
   interface DtTokenFont {
     'font': string;
@@ -206,6 +222,12 @@ declare global {
     new (): HTMLDtTokenColorPaletteElement;
   };
 
+  interface HTMLDtTokenContainerElement extends Components.DtTokenContainer, HTMLStencilElement {}
+  var HTMLDtTokenContainerElement: {
+    prototype: HTMLDtTokenContainerElement;
+    new (): HTMLDtTokenContainerElement;
+  };
+
   interface HTMLDtTokenFontElement extends Components.DtTokenFont, HTMLStencilElement {}
   var HTMLDtTokenFontElement: {
     prototype: HTMLDtTokenFontElement;
@@ -291,6 +313,7 @@ declare global {
     'dt-template': HTMLDtTemplateElement;
     'dt-token-border': HTMLDtTokenBorderElement;
     'dt-token-color-palette': HTMLDtTokenColorPaletteElement;
+    'dt-token-container': HTMLDtTokenContainerElement;
     'dt-token-font': HTMLDtTokenFontElement;
     'dt-token-font-size': HTMLDtTokenFontSizeElement;
     'dt-token-media-query': HTMLDtTokenMediaQueryElement;
@@ -311,11 +334,11 @@ declare namespace LocalJSX {
     'cardTitle'?: string;
     'index'?: number;
     'isSelected'?: boolean;
-    'mode'?: string;
     'newCard'?: boolean;
     'onAddNewToken'?: (event: CustomEvent<any>) => void;
     'onCardClosed'?: (event: CustomEvent<any>) => void;
     'onItemActivated'?: (event: CustomEvent<any>) => void;
+    'onModeChanged'?: (event: CustomEvent<any>) => void;
     'onTokenDeleted'?: (event: CustomEvent<any>) => void;
     'onTokenDuplicated'?: (event: CustomEvent<any>) => void;
     'onTokenSaved'?: (event: CustomEvent<any>) => void;
@@ -333,7 +356,10 @@ declare namespace LocalJSX {
   }
   interface DtEditTokenValue {
     'listItem'?: boolean;
+    'onEditModeClosed'?: (event: CustomEvent<any>) => void;
     'onSaveNewValues'?: (event: CustomEvent<any>) => void;
+    'options'?: string;
+    'tokenCategory'?: string;
     'tokenGroup'?: string;
     'tokenId'?: string;
     'tokenTitle'?: string;
@@ -350,6 +376,7 @@ declare namespace LocalJSX {
     'onCardClosed'?: (event: CustomEvent<any>) => void;
     'onEditToken'?: (event: CustomEvent<any>) => void;
     'onItemActivated'?: (event: CustomEvent<any>) => void;
+    'onModeChanged'?: (event: CustomEvent<any>) => void;
     'onTokenDeleted'?: (event: CustomEvent<any>) => void;
     'onTokenDuplicated'?: (event: CustomEvent<any>) => void;
     'onTokenSaved'?: (event: CustomEvent<any>) => void;
@@ -398,6 +425,21 @@ declare namespace LocalJSX {
   }
   interface DtTokenColorPalette {
     'color'?: string;
+  }
+  interface DtTokenContainer {
+    'cardAsListItem'?: boolean;
+    'index'?: number;
+    'isSelected'?: boolean;
+    'key'?: string;
+    'listItem'?: boolean;
+    'readOnly'?: boolean;
+    'selectedTokenGroup'?: string;
+    'selectedTokenId'?: string;
+    'tokenCategory'?: string;
+    'tokenGroup'?: string;
+    'tokenId'?: string;
+    'tokenTitle'?: string;
+    'tokenValue'?: string;
   }
   interface DtTokenFont {
     'font'?: string;
@@ -452,6 +494,7 @@ declare namespace LocalJSX {
     'dt-template': DtTemplate;
     'dt-token-border': DtTokenBorder;
     'dt-token-color-palette': DtTokenColorPalette;
+    'dt-token-container': DtTokenContainer;
     'dt-token-font': DtTokenFont;
     'dt-token-font-size': DtTokenFontSize;
     'dt-token-media-query': DtTokenMediaQuery;
@@ -486,6 +529,7 @@ declare module "@stencil/core" {
       'dt-template': LocalJSX.DtTemplate & JSXBase.HTMLAttributes<HTMLDtTemplateElement>;
       'dt-token-border': LocalJSX.DtTokenBorder & JSXBase.HTMLAttributes<HTMLDtTokenBorderElement>;
       'dt-token-color-palette': LocalJSX.DtTokenColorPalette & JSXBase.HTMLAttributes<HTMLDtTokenColorPaletteElement>;
+      'dt-token-container': LocalJSX.DtTokenContainer & JSXBase.HTMLAttributes<HTMLDtTokenContainerElement>;
       'dt-token-font': LocalJSX.DtTokenFont & JSXBase.HTMLAttributes<HTMLDtTokenFontElement>;
       'dt-token-font-size': LocalJSX.DtTokenFontSize & JSXBase.HTMLAttributes<HTMLDtTokenFontSizeElement>;
       'dt-token-media-query': LocalJSX.DtTokenMediaQuery & JSXBase.HTMLAttributes<HTMLDtTokenMediaQueryElement>;

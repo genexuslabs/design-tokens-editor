@@ -16,12 +16,12 @@
 
 ### Used by
 
- - [dt-main](../main)
+ - [dt-token-container](../token-container)
 
 ### Graph
 ```mermaid
 graph TD;
-  dt-main --> dt-token-timing-function
+  dt-token-container --> dt-token-timing-function
   style dt-token-timing-function fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

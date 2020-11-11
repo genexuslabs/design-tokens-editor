@@ -1,6 +1,9 @@
 :host {
   background: var(--color-background);
 }
+:host(:focus) {
+  outline: none;
+}
 :host(.editable-mode-on) {
   z-index: 10;
 }
@@ -11,23 +14,26 @@
   }
   box-shadow: var(--box-shadow-02);
 }
+:host(.item--selected.focus-on-buttons) {
+  box-shadow: none;
+}
 .card-header-menu:focus {
   opacity: 1;
 }
 
-$card-animation-top-initial: -5px;
-$card-animation-opacity-initial: 0;
+// $card-animation-top-initial: -5px;
+// $card-animation-opacity-initial: 0;
 
-@keyframes slideUp {
-  0% {
-    top: $card-animation-top-initial;
-    opacity: $card-animation-opacity-initial;
-  }
-  100% {
-    top: 0;
-    opacity: 1;
-  }
-}
+// @keyframes slideUp {
+//   0% {
+//     top: $card-animation-top-initial;
+//     opacity: $card-animation-opacity-initial;
+//   }
+//   100% {
+//     top: 0;
+//     opacity: 1;
+//   }
+// }
 
 :host {
   .token-title-list {
@@ -35,17 +41,18 @@ $card-animation-opacity-initial: 0;
   }
 
   @include ui-animation(box-shadow);
+
   //animation
   --card-animation-delay: 0;
   z-index: 1;
   position: relative;
-  animation-name: slideUp;
-  animation-duration: 0.75s;
-  animation-iteration-count: 1;
-  animation-delay: var(--cardAnimationDelay);
-  animation-fill-mode: forwards;
-  top: $card-animation-top-initial;
-  opacity: $card-animation-opacity-initial;
+  // animation-name: slideUp;
+  // animation-duration: 0.75s;
+  // animation-iteration-count: 1;
+  // animation-delay: var(--cardAnimationDelay);
+  // animation-fill-mode: forwards;
+  // top: $card-animation-top-initial;
+  // opacity: $card-animation-opacity-initial;
 
   display: block;
   //flex: 0 0 calc((100% - var(--spacing-comp-02) * 2) / 3);
@@ -185,11 +192,11 @@ $card-animation-opacity-initial: 0;
 }
 :host(.new) {
   animation-delay: 1.5s;
-  @include ui-animation(transform);
+  box-shadow: 0;
+  @include ui-animation(box-shadow);
 
   $cardSize: 100px;
   width: auto;
-  background-color: var(--gray-01);
 
   .card {
     padding: 0;
@@ -207,12 +214,13 @@ $card-animation-opacity-initial: 0;
     font-weight: var(--font-weight-semibold);
 
     .image {
-      width: 112px;
+      width: 108px;
     }
   }
 }
+:host(.new:focus),
 :host(.new:hover) {
-  transform: scale(1.025, 1.025);
+  box-shadow: var(--box-shadow-02);
   cursor: pointer;
 }
 

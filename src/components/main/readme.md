@@ -29,22 +29,6 @@
 
 - [dt-list-item](../list-item)
 - [dt-card](../card)
-- [dt-token-font](../token-font)
-- [dt-edit-token-value](../edit-token-value)
-- [dt-token-overflow](../token-overflow)
-- [dt-token-font-size](../token-font-size)
-- [dt-token-color-palette](../token-color-palette)
-- [dt-token-spacing](../token-spacing)
-- [dt-token-border](../token-border)
-- [dt-token-radius](../token-radius)
-- [dt-token-shadow](../token-shadow)
-- [dt-token-opacity](../token-opacity)
-- [dt-token-z-index](../token-z-index)
-- [dt-token-timing-function](../token-timing-function)
-- [dt-token-time](../token-time)
-- [dt-token-media-query](../token-media-query)
-- gxg-columns
-- gxg-column
 - gxg-select
 - gxg-option
 - gxg-button
@@ -52,6 +36,7 @@
 - gxg-form-text
 - gxg-accordion
 - gxg-accordion-item
+- [dt-token-container](../token-container)
 - gxg-alert
 
 ### Graph
@@ -59,22 +44,6 @@
 graph TD;
   dt-main --> dt-list-item
   dt-main --> dt-card
-  dt-main --> dt-token-font
-  dt-main --> dt-edit-token-value
-  dt-main --> dt-token-overflow
-  dt-main --> dt-token-font-size
-  dt-main --> dt-token-color-palette
-  dt-main --> dt-token-spacing
-  dt-main --> dt-token-border
-  dt-main --> dt-token-radius
-  dt-main --> dt-token-shadow
-  dt-main --> dt-token-opacity
-  dt-main --> dt-token-z-index
-  dt-main --> dt-token-timing-function
-  dt-main --> dt-token-time
-  dt-main --> dt-token-media-query
-  dt-main --> gxg-columns
-  dt-main --> gxg-column
   dt-main --> gxg-select
   dt-main --> gxg-option
   dt-main --> gxg-button
@@ -82,10 +51,32 @@ graph TD;
   dt-main --> gxg-form-text
   dt-main --> gxg-accordion
   dt-main --> gxg-accordion-item
+  dt-main --> dt-token-container
   dt-main --> gxg-alert
   dt-list-item --> gxg-button
   gxg-button --> gxg-icon
   dt-card --> gxg-button
+  gxg-form-text --> gxg-icon
+  gxg-form-text --> gxg-form-message
+  gxg-form-message --> gxg-icon
+  gxg-accordion-item --> gxg-icon
+  gxg-accordion-item --> gxg-form-text
+  dt-token-container --> dt-token-font
+  dt-token-container --> dt-edit-token-value
+  dt-token-container --> dt-token-overflow
+  dt-token-container --> dt-token-font-size
+  dt-token-container --> dt-token-color-palette
+  dt-token-container --> dt-token-spacing
+  dt-token-container --> dt-token-border
+  dt-token-container --> dt-token-radius
+  dt-token-container --> dt-token-shadow
+  dt-token-container --> dt-token-opacity
+  dt-token-container --> dt-token-z-index
+  dt-token-container --> dt-token-timing-function
+  dt-token-container --> dt-token-time
+  dt-token-container --> dt-token-media-query
+  dt-token-container --> dt-list-item
+  dt-token-container --> dt-card
   dt-edit-token-value --> gxg-option
   dt-edit-token-value --> gxg-form-text
   dt-edit-token-value --> dt-color-picker
@@ -93,13 +84,8 @@ graph TD;
   dt-edit-token-value --> gxg-stepper
   dt-edit-token-value --> gxg-form-textarea
   dt-edit-token-value --> gxg-button
-  gxg-form-text --> gxg-icon
-  gxg-form-text --> gxg-form-message
-  gxg-form-message --> gxg-icon
   dt-color-picker --> gxg-button-group
   gxg-form-textarea --> gxg-form-message
-  gxg-accordion-item --> gxg-icon
-  gxg-accordion-item --> gxg-form-text
   gxg-alert --> gxg-icon
   gxg-alert --> gxg-button
   style dt-main fill:#f9f,stroke:#333,stroke-width:4px

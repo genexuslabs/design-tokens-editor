@@ -7,28 +7,31 @@
 
 ## Properties
 
-| Property     | Attribute     | Description | Type      | Default        |
-| ------------ | ------------- | ----------- | --------- | -------------- |
-| `listItem`   | `list-item`   |             | `boolean` | `false`        |
-| `tokenGroup` | `token-group` |             | `string`  | `undefined`    |
-| `tokenId`    | `token-id`    |             | `string`  | `undefined`    |
-| `tokenTitle` | `token-title` |             | `string`  | `undefined`    |
-| `type`       | `type`        |             | `string`  | `"input-text"` |
-| `value`      | `value`       |             | `string`  | `undefined`    |
+| Property        | Attribute        | Description | Type      | Default        |
+| --------------- | ---------------- | ----------- | --------- | -------------- |
+| `listItem`      | `list-item`      |             | `boolean` | `false`        |
+| `options`       | `options`        |             | `string`  | `undefined`    |
+| `tokenCategory` | `token-category` |             | `string`  | `null`         |
+| `tokenGroup`    | `token-group`    |             | `string`  | `undefined`    |
+| `tokenId`       | `token-id`       |             | `string`  | `undefined`    |
+| `tokenTitle`    | `token-title`    |             | `string`  | `undefined`    |
+| `type`          | `type`           |             | `string`  | `"input-text"` |
+| `value`         | `value`          |             | `string`  | `undefined`    |
 
 
 ## Events
 
-| Event           | Description | Type               |
-| --------------- | ----------- | ------------------ |
-| `saveNewValues` |             | `CustomEvent<any>` |
+| Event            | Description | Type               |
+| ---------------- | ----------- | ------------------ |
+| `editModeClosed` |             | `CustomEvent<any>` |
+| `saveNewValues`  |             | `CustomEvent<any>` |
 
 
 ## Dependencies
 
 ### Used by
 
- - [dt-main](../main)
+ - [dt-token-container](../token-container)
 
 ### Depends on
 
@@ -56,7 +59,7 @@ graph TD;
   dt-color-picker --> gxg-button-group
   gxg-form-textarea --> gxg-form-message
   gxg-button --> gxg-icon
-  dt-main --> dt-edit-token-value
+  dt-token-container --> dt-edit-token-value
   style dt-edit-token-value fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

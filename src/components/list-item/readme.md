@@ -29,6 +29,7 @@
 | `cardClosed`      |             | `CustomEvent<any>` |
 | `editToken`       |             | `CustomEvent<any>` |
 | `itemActivated`   |             | `CustomEvent<any>` |
+| `modeChanged`     |             | `CustomEvent<any>` |
 | `tokenDeleted`    |             | `CustomEvent<any>` |
 | `tokenDuplicated` |             | `CustomEvent<any>` |
 | `tokenSaved`      |             | `CustomEvent<any>` |
@@ -39,6 +40,7 @@
 ### Used by
 
  - [dt-main](../main)
+ - [dt-token-container](../token-container)
 
 ### Depends on
 
@@ -50,6 +52,7 @@ graph TD;
   dt-list-item --> gxg-button
   gxg-button --> gxg-icon
   dt-main --> dt-list-item
+  dt-token-container --> dt-list-item
   style dt-list-item fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

@@ -104,15 +104,11 @@
               id: "a01",
               caption: "Primaryhffhdsuihfdisuhfdsiuhfidsuhfsdiauh",
               value: "arial",
-              metaData: {
-                fontPath: ""
-              }
             },
             {
               id: "a02",
               caption: "Secondary Font",
               value: "georgia",
-              fontPath: "c:/georgia"
             },
             {
               id: "a03",
@@ -196,7 +192,7 @@
                 {
                   id: "c02",
                   caption: "celeste",
-                  value: "rgb(123,123,123)"
+                  value: "rgba(123,123,123,1)"
                 },
                 {
                   id: "c03",
@@ -595,6 +591,13 @@
       main.addEventListener("saveNewValues", event => {
         console.log(
           "Received the token 'save' button pressed event",
+          event.detail
+        );
+      });
+      //"New card" button was pressed
+      main.addEventListener("addNewToken", event => {
+        console.log(
+          "Received the token 'new' button pressed event",
           event.detail
         );
       });

@@ -6,7 +6,9 @@ import {
   EventEmitter,
   Listen,
   Element,
-  Host
+  Host,
+  State,
+  Watch
 } from "@stencil/core";
 
 @Component({
@@ -16,7 +18,6 @@ import {
   assetsDirs: ["list-item-assets"]
 })
 export class Card {
-
   @Element() element: HTMLElement;
 
   // Indicate that name should be a public property on the component
@@ -30,6 +31,8 @@ export class Card {
   @Prop() index: number; //index is for applying an increasing delay to the cards animation
   @Prop() isSelected: boolean = false;
   @Prop() newItem: boolean = false;
+
+  @State() focusableButtons: boolean = true;
 
   //Events
   @Event()
@@ -46,6 +49,8 @@ export class Card {
   addNewToken: EventEmitter;
   @Event()
   editToken: EventEmitter;
+  @Event()
+  modeChanged: EventEmitter;
 
   tokenDeletedEventData: Object = {
     tokenId: this.tokenId,
@@ -69,19 +74,64 @@ export class Card {
     this.mode = "preview";
   }
 
+  @Watch("mode")
+  watchHandler(newValue: string) {
+    this.modeChanged.emit(newValue);
+  }
+
+  @Watch("focusableButtons")
+  focusableButtonsHandler(newValue: boolean) {
+    let cardHeaderMenuButtons = this.element.shadowRoot.querySelectorAll(
+      ".item-menu > gxg-button"
+    );
+    if (newValue === true) {
+      cardHeaderMenuButtons.forEach(gxgButton => {
+        gxgButton.removeAttribute("tabindex");
+      });
+    } else {
+      cardHeaderMenuButtons.forEach(gxgButton => {
+        gxgButton.setAttribute("tabindex", "-1");
+      });
+    }
+  }
+
+  componentDidLoad() {
+    this.focusableButtons = false;
+  }
+
   //Click functions
-  editItem() {
-    this.mode = "editable";
-    this.editToken.emit(this.tokenId);
+  editItem(e) {
+    e.stopPropagation();
+    if (e.clientX !== 0 && e.clientY !== 0) {
+      this.mode = "editable";
+    }
   }
-  duplicateItem() {
-    this.tokenDuplicated.emit(this.tokenId);
+  duplicateItem(e) {
+    e.stopPropagation();
+    const tokenGroup = this.tokenGroup;
+    const tokenCategory = this.tokenCategory;
+    const tokenId = this.tokenId;
+    this.tokenDuplicated.emit({
+      tokenGroup,
+      tokenCategory,
+      tokenId
+    });
   }
-  deleteItem() {
-    this.tokenDeleted.emit(this.tokenDeletedEventData);
+  deleteItem(e) {
+    e.stopPropagation();
+    const tokenGroup = this.tokenGroup;
+    const tokenCategory = this.tokenCategory;
+    const tokenId = this.tokenId;
+    this.tokenDeleted.emit({
+      tokenGroup,
+      tokenCategory,
+      tokenId
+    });
   }
   closeItem() {
     this.mode = "preview";
+    this.element.focus();
+    this.isSelected = true;
   }
   activateItem() {
     this.itemActivated.emit({
@@ -91,9 +141,9 @@ export class Card {
   }
   newItemOnClick() {
     let newItemData = {
-      "token-group" : this.tokenGroup,
-      "token-category" : this.tokenCategory
-    }
+      "token-group": this.tokenGroup,
+      "token-category": this.tokenCategory
+    };
     this.addNewToken.emit(newItemData);
   }
   @Listen("focus")
@@ -103,6 +153,49 @@ export class Card {
       tokenId: this.tokenId,
       tokenGroup: this.tokenGroup
     });
+  }
+
+  handleItemKeyDown(e) {
+    if (!this.focusableButtons) {
+      if (e.key === "Enter") {
+        this.focusableButtons = true;
+        let firstMenuGxgButton = this.element.shadowRoot.querySelector(
+          ".item-menu > gxg-button:first-child"
+        );
+        let firstButton = firstMenuGxgButton.shadowRoot.querySelector("button");
+        firstButton.focus();
+      }
+    }
+  }
+
+  editButtonKeyDownHandler(e) {
+    e.stopPropagation();
+    if (e.key === "Enter") {
+      this.mode = "editable";
+    } else if (e.key === "Escape") {
+      this.element.focus();
+      this.focusableButtons = false;
+    } else if (e.key === "Tab" && e.shiftKey) {
+      this.focusableButtons = false;
+    }
+  }
+
+  duplicateButtonKeyDownHandler(e) {
+    e.stopPropagation();
+    if (e.key === "Escape") {
+      this.element.focus();
+      this.focusableButtons = false;
+    }
+  }
+
+  deleteButtonKeyDownHandler(e) {
+    e.stopPropagation();
+    if (e.key === "Escape") {
+      this.element.focus();
+      this.focusableButtons = false;
+    } else if (e.key === "Tab" && e.key !== e.shiftKey) {
+      this.focusableButtons = false;
+    }
   }
 
   render() {
@@ -116,10 +209,14 @@ export class Card {
           }}
           onClick={this.newItemOnClick.bind(this)}
           onMouseEnter={this.activateItem.bind(this)}
-          tabIndex=""
         >
           <div class="item" data-tokenId={this.tokenId}>
-            <gxg-button type="secondary-text-icon" icon="gemini-tools/add-circle">Add new token</gxg-button>
+            <gxg-button
+              type="secondary-text-icon"
+              icon="gemini-tools/add-circle"
+            >
+              Add new token
+            </gxg-button>
           </div>
         </Host>
       );
@@ -131,14 +228,15 @@ export class Card {
             "item--selected": this.isSelected === true
           }}
           onMouseEnter={this.activateItem.bind(this)}
-          tabIndex=""
         >
           <div
+            tabindex="1"
             class={{
               item: true,
               "item--editable": this.mode === "editable"
             }}
             data-tokenId={this.tokenId}
+            onKeyDown={this.handleItemKeyDown.bind(this)}
           >
             {this.mode === "preview" ? (
               <div class="container">
@@ -155,6 +253,7 @@ export class Card {
                 <div class="col-right">
                   <div class="item-menu">
                     <gxg-button
+                      id="edit-button"
                       type="secondary-icon-only"
                       onClick={this.editItem.bind(this)}
                       disabled={this.readOnly}
@@ -164,18 +263,29 @@ export class Card {
                           : "edit token"
                       }
                       icon="gemini-tools/edit"
+                      tabindex="-1"
+                      onKeyDown={this.editButtonKeyDownHandler.bind(this)}
+                      key="1"
                     ></gxg-button>
                     <gxg-button
+                      id="duplicate-button"
                       type="secondary-icon-only"
                       onClick={this.duplicateItem.bind(this)}
                       title="duplicate token"
                       icon="gemini-tools/duplicate"
+                      tabindex="-1"
+                      onKeyDown={this.duplicateButtonKeyDownHandler.bind(this)}
+                      key="2"
                     ></gxg-button>
                     <gxg-button
+                      id="delete-button"
                       type="secondary-icon-only"
                       onClick={this.deleteItem.bind(this)}
                       title="delete token"
                       icon="gemini-tools/delete"
+                      tabindex="-1"
+                      onKeyDown={this.deleteButtonKeyDownHandler.bind(this)}
+                      key="3"
                     ></gxg-button>
                   </div>
                 </div>
@@ -196,18 +306,6 @@ export class Card {
                       type="secondary-icon-only"
                       onClick={this.closeItem.bind(this)}
                       icon="gemini-tools/close"
-                    ></gxg-button>
-                    <gxg-button
-                      type="secondary-icon-only"
-                      onClick={this.duplicateItem.bind(this)}
-                      title="duplicate token"
-                      icon="gemini-tools/duplicate"
-                    ></gxg-button>
-                    <gxg-button
-                      type="secondary-icon-only"
-                      onClick={this.deleteItem.bind(this)}
-                      title="delete token"
-                      icon="gemini-tools/delete"
                     ></gxg-button>
                   </div>
                 </div>
