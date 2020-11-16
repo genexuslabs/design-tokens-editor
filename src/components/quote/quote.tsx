@@ -15,7 +15,7 @@ export class Quote {
   @Prop() token: string;
   @Prop() tokenGroup: string;
   @Prop() buttonLabel: string;
-  @Prop() needHelpUrl: string = "dsfs";
+
 
   //Events
   @Event()
@@ -65,9 +65,6 @@ export class Quote {
             {this.printButtonLabel()}
           </gxg-button>
         </div>
-        <a href={this.needHelpUrl} class="need-help" target="_blank">
-          Need help?
-        </a>
       </Host>
     );
   }

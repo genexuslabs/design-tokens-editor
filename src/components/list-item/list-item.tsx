@@ -17,7 +17,7 @@ import {
   shadow: true,
   assetsDirs: ["list-item-assets"]
 })
-export class Card {
+export class ListItem {
   @Element() element: HTMLElement;
 
   // Indicate that name should be a public property on the component
@@ -239,7 +239,7 @@ export class Card {
             onKeyDown={this.handleItemKeyDown.bind(this)}
           >
             {this.mode === "preview" ? (
-              <div class="container">
+              <div class="container preview-mode">
                 <div class="col-left">
                   <div class="preview">
                     <slot name="preview"></slot>
@@ -291,7 +291,7 @@ export class Card {
                 </div>
               </div>
             ) : (
-              <div class="container">
+              <div class="container edit-mode">
                 <div class="col-left">
                   <div class="preview">
                     <slot name="preview"></slot>

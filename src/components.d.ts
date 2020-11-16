@@ -7,9 +7,7 @@
 
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
-import {
-  Model,
-} from './components/model';
+
 
 export namespace Components {
   interface DtCard {
@@ -22,6 +20,9 @@ export namespace Components {
     'tokenGroup': string;
     'tokenId': string;
     'tokenValue': string;
+  }
+  interface DtCategoriesSelect {
+    'selectedModel': object;
   }
   interface DtColorPicker {
     'cardTitle': string;
@@ -49,8 +50,19 @@ export namespace Components {
     'tokenId': string;
     'tokenValue': string;
   }
+  interface DtListItemHeader {
+    'tokenGroup': string;
+  }
   interface DtMain {
-    'model': Model;
+    'avaiableOptions': object;
+    'model': object;
+    'needHelpUrl': string;
+    'selectedTokenGroup': string;
+    'selectedTokenId': string;
+    'tokenDeleted': boolean;
+  }
+  interface DtMainCopy {
+    'model': object;
     'needHelpUrl': string;
     'selectedTokenGroup': string;
     'selectedTokenId': string;
@@ -59,7 +71,6 @@ export namespace Components {
   interface DtQuote {
     'author': string;
     'buttonLabel': string;
-    'needHelpUrl': string;
     'quote': string;
     'token': string;
     'tokenGroup': string;
@@ -150,6 +161,12 @@ declare global {
     new (): HTMLDtCardElement;
   };
 
+  interface HTMLDtCategoriesSelectElement extends Components.DtCategoriesSelect, HTMLStencilElement {}
+  var HTMLDtCategoriesSelectElement: {
+    prototype: HTMLDtCategoriesSelectElement;
+    new (): HTMLDtCategoriesSelectElement;
+  };
+
   interface HTMLDtColorPickerElement extends Components.DtColorPicker, HTMLStencilElement {}
   var HTMLDtColorPickerElement: {
     prototype: HTMLDtColorPickerElement;
@@ -168,10 +185,22 @@ declare global {
     new (): HTMLDtListItemElement;
   };
 
+  interface HTMLDtListItemHeaderElement extends Components.DtListItemHeader, HTMLStencilElement {}
+  var HTMLDtListItemHeaderElement: {
+    prototype: HTMLDtListItemHeaderElement;
+    new (): HTMLDtListItemHeaderElement;
+  };
+
   interface HTMLDtMainElement extends Components.DtMain, HTMLStencilElement {}
   var HTMLDtMainElement: {
     prototype: HTMLDtMainElement;
     new (): HTMLDtMainElement;
+  };
+
+  interface HTMLDtMainCopyElement extends Components.DtMainCopy, HTMLStencilElement {}
+  var HTMLDtMainCopyElement: {
+    prototype: HTMLDtMainCopyElement;
+    new (): HTMLDtMainCopyElement;
   };
 
   interface HTMLDtQuoteElement extends Components.DtQuote, HTMLStencilElement {}
@@ -301,10 +330,13 @@ declare global {
   };
   interface HTMLElementTagNameMap {
     'dt-card': HTMLDtCardElement;
+    'dt-categories-select': HTMLDtCategoriesSelectElement;
     'dt-color-picker': HTMLDtColorPickerElement;
     'dt-edit-token-value': HTMLDtEditTokenValueElement;
     'dt-list-item': HTMLDtListItemElement;
+    'dt-list-item-header': HTMLDtListItemHeaderElement;
     'dt-main': HTMLDtMainElement;
+    'dt-main-copy': HTMLDtMainCopyElement;
     'dt-quote': HTMLDtQuoteElement;
     'dt-tab': HTMLDtTabElement;
     'dt-tab-bar': HTMLDtTabBarElement;
@@ -348,6 +380,9 @@ declare namespace LocalJSX {
     'tokenId'?: string;
     'tokenValue'?: string;
   }
+  interface DtCategoriesSelect {
+    'selectedModel'?: object;
+  }
   interface DtColorPicker {
     'cardTitle'?: string;
     'onNameInputEvent'?: (event: CustomEvent<any>) => void;
@@ -386,8 +421,20 @@ declare namespace LocalJSX {
     'tokenId'?: string;
     'tokenValue'?: string;
   }
+  interface DtListItemHeader {
+    'tokenGroup'?: string;
+  }
   interface DtMain {
-    'model'?: Model;
+    'avaiableOptions'?: object;
+    'model'?: object;
+    'needHelpUrl'?: string;
+    'onSaveNewValue'?: (event: CustomEvent<any>) => void;
+    'selectedTokenGroup'?: string;
+    'selectedTokenId'?: string;
+    'tokenDeleted'?: boolean;
+  }
+  interface DtMainCopy {
+    'model'?: object;
     'needHelpUrl'?: string;
     'onSaveNewValue'?: (event: CustomEvent<any>) => void;
     'selectedTokenGroup'?: string;
@@ -397,7 +444,6 @@ declare namespace LocalJSX {
   interface DtQuote {
     'author'?: string;
     'buttonLabel'?: string;
-    'needHelpUrl'?: string;
     'onAddFirstToken'?: (event: CustomEvent<any>) => void;
     'quote'?: string;
     'token'?: string;
@@ -482,10 +528,13 @@ declare namespace LocalJSX {
 
   interface IntrinsicElements {
     'dt-card': DtCard;
+    'dt-categories-select': DtCategoriesSelect;
     'dt-color-picker': DtColorPicker;
     'dt-edit-token-value': DtEditTokenValue;
     'dt-list-item': DtListItem;
+    'dt-list-item-header': DtListItemHeader;
     'dt-main': DtMain;
+    'dt-main-copy': DtMainCopy;
     'dt-quote': DtQuote;
     'dt-tab': DtTab;
     'dt-tab-bar': DtTabBar;
@@ -517,10 +566,13 @@ declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
       'dt-card': LocalJSX.DtCard & JSXBase.HTMLAttributes<HTMLDtCardElement>;
+      'dt-categories-select': LocalJSX.DtCategoriesSelect & JSXBase.HTMLAttributes<HTMLDtCategoriesSelectElement>;
       'dt-color-picker': LocalJSX.DtColorPicker & JSXBase.HTMLAttributes<HTMLDtColorPickerElement>;
       'dt-edit-token-value': LocalJSX.DtEditTokenValue & JSXBase.HTMLAttributes<HTMLDtEditTokenValueElement>;
       'dt-list-item': LocalJSX.DtListItem & JSXBase.HTMLAttributes<HTMLDtListItemElement>;
+      'dt-list-item-header': LocalJSX.DtListItemHeader & JSXBase.HTMLAttributes<HTMLDtListItemHeaderElement>;
       'dt-main': LocalJSX.DtMain & JSXBase.HTMLAttributes<HTMLDtMainElement>;
+      'dt-main-copy': LocalJSX.DtMainCopy & JSXBase.HTMLAttributes<HTMLDtMainCopyElement>;
       'dt-quote': LocalJSX.DtQuote & JSXBase.HTMLAttributes<HTMLDtQuoteElement>;
       'dt-tab': LocalJSX.DtTab & JSXBase.HTMLAttributes<HTMLDtTabElement>;
       'dt-tab-bar': LocalJSX.DtTabBar & JSXBase.HTMLAttributes<HTMLDtTabBarElement>;

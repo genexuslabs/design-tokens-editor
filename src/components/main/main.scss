@@ -64,12 +64,15 @@ gxg-accordion-item .accordion-inner-container.card-view {
 .filter-container {
   display: flex;
   .col-left {
-    width: 40%;
+    width: 50%;
     display: flex;
     align-items: flex-end;
-    .themes {
+    .modes {
       width: 30%;
-      min-width: 80px;
+      padding-right: var(--spacing-comp-02);
+    }
+    .platforms {
+      width: 30%;
       padding-right: var(--spacing-comp-02);
     }
     .display {
@@ -77,14 +80,14 @@ gxg-accordion-item .accordion-inner-container.card-view {
     }
   }
   .col-right {
-    width: 60%;
+    width: 50%;
     display: flex;
     align-items: flex-end;
     .search {
       width: 60%;
       padding-right: var(--spacing-comp-02);
     }
-    .category {
+    .categories {
       width: 40%;
     }
   }
@@ -104,14 +107,14 @@ gxg-accordion-item .accordion-inner-container.card-view {
       .search {
         width: 70%;
       }
-      .category {
+      .categories {
         width: 30%;
       }
     }
   }
 }
 
-.no-tokens-found {
+.message {
   position: absolute;
   top: 50%;
   left: 50%;

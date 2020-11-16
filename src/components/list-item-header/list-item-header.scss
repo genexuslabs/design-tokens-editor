@@ -1,0 +1,31 @@
+:host {
+  border-bottom-width: var(--border-width-sm);
+  border-bottom-style: var(--border-style-regular);
+  border-bottom-color: var(--gray-02);
+  padding-top: 8px;
+  padding-bottom: 8px;
+  display: block;
+  .list-item-header-container {
+    display: flex;
+    text-transform: uppercase;
+    font-size: 10px;
+    width: calc(100% - 60px);
+    padding-right: 8px;
+    box-sizing: border-box;
+
+    &__name {
+      font-size: inherit;
+      margin: 0;
+      margin-left: 60px;
+      padding-right: 20px;
+      width: calc(50% - 30px);
+      max-width: 150px;
+      box-sizing: border-box;
+    }
+    &__value-type {
+      font-size: inherit;
+      margin: 0;
+      width: calc(50% - 30px);
+    }
+  }
+}
