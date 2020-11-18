@@ -213,7 +213,7 @@ export class ListItem {
           <div class="item" data-tokenId={this.tokenId}>
             <gxg-button
               type="secondary-text-icon"
-              icon="gemini-tools/add-circle"
+              icon="gemini-tools/add"
               full-width
             >
               Add new token

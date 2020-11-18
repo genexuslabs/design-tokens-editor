@@ -9,7 +9,8 @@
 
 | Property             | Attribute              | Description | Type      | Default     |
 | -------------------- | ---------------------- | ----------- | --------- | ----------- |
-| `model`              | --                     |             | `Model`   | `undefined` |
+| `avaiableOptions`    | --                     |             | `object`  | `undefined` |
+| `model`              | --                     |             | `object`  | `undefined` |
 | `needHelpUrl`        | `need-help-url`        |             | `string`  | `"#"`       |
 | `selectedTokenGroup` | `selected-token-group` |             | `string`  | `undefined` |
 | `selectedTokenId`    | `selected-token-id`    |             | `string`  | `undefined` |
@@ -29,14 +30,16 @@
 
 - [dt-list-item](../list-item)
 - [dt-card](../card)
+- [dt-quote](../quote)
+- [dt-token-container](../token-container)
+- [dt-list-item-header](../list-item-header)
+- gxg-accordion
+- gxg-accordion-item
 - gxg-select
 - gxg-option
 - gxg-button
 - gxg-spacer-one
 - gxg-form-text
-- gxg-accordion
-- gxg-accordion-item
-- [dt-token-container](../token-container)
 - gxg-alert
 
 ### Graph
@@ -44,23 +47,21 @@
 graph TD;
   dt-main --> dt-list-item
   dt-main --> dt-card
+  dt-main --> dt-quote
+  dt-main --> dt-token-container
+  dt-main --> dt-list-item-header
+  dt-main --> gxg-accordion
+  dt-main --> gxg-accordion-item
   dt-main --> gxg-select
   dt-main --> gxg-option
   dt-main --> gxg-button
   dt-main --> gxg-spacer-one
   dt-main --> gxg-form-text
-  dt-main --> gxg-accordion
-  dt-main --> gxg-accordion-item
-  dt-main --> dt-token-container
   dt-main --> gxg-alert
   dt-list-item --> gxg-button
   gxg-button --> gxg-icon
   dt-card --> gxg-button
-  gxg-form-text --> gxg-icon
-  gxg-form-text --> gxg-form-message
-  gxg-form-message --> gxg-icon
-  gxg-accordion-item --> gxg-icon
-  gxg-accordion-item --> gxg-form-text
+  dt-quote --> gxg-button
   dt-token-container --> dt-token-font
   dt-token-container --> dt-edit-token-value
   dt-token-container --> dt-token-overflow
@@ -84,8 +85,13 @@ graph TD;
   dt-edit-token-value --> gxg-stepper
   dt-edit-token-value --> gxg-form-textarea
   dt-edit-token-value --> gxg-button
+  gxg-form-text --> gxg-icon
+  gxg-form-text --> gxg-form-message
+  gxg-form-message --> gxg-icon
   dt-color-picker --> gxg-button-group
   gxg-form-textarea --> gxg-form-message
+  gxg-accordion-item --> gxg-icon
+  gxg-accordion-item --> gxg-form-text
   gxg-alert --> gxg-icon
   gxg-alert --> gxg-button
   style dt-main fill:#f9f,stroke:#333,stroke-width:4px

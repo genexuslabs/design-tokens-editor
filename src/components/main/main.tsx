@@ -146,6 +146,8 @@ export class Main {
     }
   }
 
+  showOptions() {}
+
   printNewToken(tokenGroup, tokenCategory) {
     if (this.cardAsListItem) {
       return (
@@ -470,7 +472,7 @@ export class Main {
                 <gxg-select
                   label="Platform"
                   id="platformsSelect"
-                  onChange={this.updatePlatform.bind(this)}
+                  onChange={this.updateMode.bind(this)}
                 >
                   <gxg-option value="" selected>
                     none
@@ -489,7 +491,10 @@ export class Main {
                   type="tertiary"
                   icon="gemini-tools/list-view"
                   id="list-view"
-                  class="filter-button"
+                  class={{
+                    "filter-button": true,
+                    selected: this.cardAsListItem
+                  }}
                 ></gxg-button>
                 <gxg-spacer-one space="xs"></gxg-spacer-one>
                 <gxg-button
@@ -497,8 +502,16 @@ export class Main {
                   type="tertiary"
                   icon="gemini-tools/card-view"
                   id="card-view"
-                  class="filter-button"
+                  class={{
+                    "filter-button": true,
+                    selected: this.cardAsListItem === false
+                  }}
                 ></gxg-button>
+                {/* <gxg-button
+                  onClick={this.showOptions.bind(this)}
+                  type="tertiary"
+                  icon="gemini-tools/settings"
+                ></gxg-button> */}
               </div>
             </div>
             <div class="col-right">

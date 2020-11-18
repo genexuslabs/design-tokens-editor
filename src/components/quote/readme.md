@@ -7,14 +7,13 @@
 
 ## Properties
 
-| Property      | Attribute       | Description | Type     | Default     |
-| ------------- | --------------- | ----------- | -------- | ----------- |
-| `author`      | `author`        |             | `string` | `undefined` |
-| `buttonLabel` | `button-label`  |             | `string` | `undefined` |
-| `needHelpUrl` | `need-help-url` |             | `string` | `"dsfs"`    |
-| `quote`       | `quote`         |             | `string` | `undefined` |
-| `token`       | `token`         |             | `string` | `undefined` |
-| `tokenGroup`  | `token-group`   |             | `string` | `undefined` |
+| Property      | Attribute      | Description | Type     | Default     |
+| ------------- | -------------- | ----------- | -------- | ----------- |
+| `author`      | `author`       |             | `string` | `undefined` |
+| `buttonLabel` | `button-label` |             | `string` | `undefined` |
+| `quote`       | `quote`        |             | `string` | `undefined` |
+| `token`       | `token`        |             | `string` | `undefined` |
+| `tokenGroup`  | `token-group`  |             | `string` | `undefined` |
 
 
 ## Events
@@ -26,6 +25,10 @@
 
 ## Dependencies
 
+### Used by
+
+ - [dt-main](../main)
+
 ### Depends on
 
 - gxg-button
@@ -35,6 +38,7 @@
 graph TD;
   dt-quote --> gxg-button
   gxg-button --> gxg-icon
+  dt-main --> dt-quote
   style dt-quote fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

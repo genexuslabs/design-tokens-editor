@@ -10,16 +10,6 @@ export class Template {
   @Prop() mediaQuery: string;
 
   imagePath() {
-    /*
-      Media types:
-      all
-      print
-      screen
-      speech
-
-      ...or combination of those
-    */
-
     let mq = this.mediaQuery.toLowerCase();
     let print = false;
     let screen = false;
