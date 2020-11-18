@@ -30,34 +30,25 @@
   }
 }
 
-gxg-accordion-item .accordion-inner-container.card-view {
-  flex-wrap: wrap;
-  align-content: flex-start;
-  display: flex;
-  margin-bottom: -8px;
-}
-
-.tokens-container.list.categorized {
-  background-color: var(--color-background);
-}
-.tokens-container.card.categorized {
-  background-color: var(--color-background);
+//Tokens containers
+.tokens-container.card {
   display: flex;
   flex-wrap: wrap;
-  flex: 1 1 auto;
-  padding-top: 7px;
-  margin-left: -4px;
-  margin-right: -4px;
 }
+.tokens-container.list-item.uncategorized {
+  margin-bottom: var(--spacing-comp-02);
+}
+.tokens-container.slim.card,
 .tokens-container.card.uncategorized {
-  display: flex;
-  flex-wrap: wrap;
-  flex: 1 1 auto;
-  margin-left: -4px;
-  margin-right: -4px;
+  margin-left: calc(var(--spacing-comp-01) * -1);
+  margin-right: calc(var(--spacing-comp-01) * -1);
 }
-.add-new-token-container.list-item.categorized {
-  background-color: var(--color-background);
+.tokens-container.slim.card {
+  margin-top: var(--spacing-comp-02);
+}
+.tokens-container.classical.categorized {
+  margin-top: var(--spacing-comp-02);
+  margin-bottom: calc(var(--spacing-comp-01) * - 1);
 }
 
 //Filter

@@ -9,7 +9,6 @@ import {
   EventEmitter,
   Element
 } from "@stencil/core";
-import { isNull } from "util";
 
 @Component({
   tag: "dt-main",
@@ -111,12 +110,6 @@ export class Main {
     }
   }
 
-  // getCardsAnimationDuration(numberOfTokens, index) {
-  //   const totalAmountOfSeconds = 1;
-  //   let delay = totalAmountOfSeconds / numberOfTokens;
-  //   return index * delay + "s";
-  // }
-
   changeDisplay(e) {
     let btnId = e.target.id;
 
@@ -153,25 +146,23 @@ export class Main {
     }
   }
 
-  printNewCard(tokenGroup, tokenCategory, numberOfTokens) {
-    if (numberOfTokens > 0) {
-      if (this.cardAsListItem) {
-        return (
-          <dt-list-item
-            newItem={true}
-            token-category={tokenCategory}
-            token-group={tokenGroup}
-          ></dt-list-item>
-        );
-      } else {
-        return (
-          <dt-card
-            newCard={true}
-            token-category={tokenCategory}
-            token-group={tokenGroup}
-          ></dt-card>
-        );
-      }
+  printNewToken(tokenGroup, tokenCategory) {
+    if (this.cardAsListItem) {
+      return (
+        <dt-list-item
+          newItem={true}
+          token-category={tokenCategory}
+          token-group={tokenGroup}
+        ></dt-list-item>
+      );
+    } else {
+      return (
+        <dt-card
+          newCard={true}
+          token-category={tokenCategory}
+          token-group={tokenGroup}
+        ></dt-card>
+      );
     }
   }
 
@@ -199,7 +190,6 @@ export class Main {
   }
 
   tokenGroupEmptyMessage(tokenGroup) {
-
     let token = "";
     let quote = "";
     let author = "";
@@ -268,8 +258,7 @@ export class Main {
 
       case "times":
         token = "time";
-        quote =
-          "Time has a wonderful way of showing us what really matters.";
+        quote = "Time has a wonderful way of showing us what really matters.";
         author = "Margaret Petters";
         break;
 
@@ -296,64 +285,19 @@ export class Main {
   }
 
   returnTokenContainer(token, tokenGroup, index) {
-    return <dt-token-container
-    token-title={token.caption}
-    token-id={token.id}
-    token-value={token.value}
-    token-group={tokenGroup}
-    token-category={token.tokenCategory}
-    card-as-list-item={this.cardAsListItem}
-    index={index}
-    key={token.id}
-    is-selected={this.selectedTokenId == token.id}
-    ></dt-token-container>
-  }
-
-  firstCategoryIsNullContent(tokenGroup) {
-
-    let returnedContent = [];
-
-    //If first category is null, return only the tokens
-    this.selectedModel[tokenGroup][0].tokens.map( (token,index) => 
-      this.tokenMatch(token) ? (
-        returnedContent.push(this.returnTokenContainer(token, tokenGroup, index))
-      ) : null
-    )
-
-    //If there are more categories, none of them should be null, thus, wrapp each category
-    //within a gxg-accordion-item within a gxg-accordion mode="boxed"
-    if(this.selectedModel[tokenGroup].length > 1) {
-      if(this.someCategoryHasAMatch(this.selectedModel[tokenGroup])){
-        returnedContent.push(
-          <gxg-accordion padding="0" mode="boxed">
-            {
-              this.selectedModel[tokenGroup].map( (category,index) => {
-              if(index !== 0) {
-                if(this.categoryHasAMatch(category)) {
-                  return (
-                    <gxg-accordion-item
-                    status="open"
-                    itemTitle={category.tokenCategory}
-                    itemId={category.tokenCategory}
-                    >
-                      {
-                      category.tokens.map( (token,index) => 
-                        this.tokenMatch(token) ? (
-                          this.returnTokenContainer(token, tokenGroup, index)
-                        ) : null
-                      )
-                      }
-                    </gxg-accordion-item>
-                  )
-                }
-              }  
-              })
-            }
-          </gxg-accordion>
-        )
-      }
-    }
-    return returnedContent;
+    return (
+      <dt-token-container
+        token-title={token.caption}
+        token-id={token.id}
+        token-value={token.value}
+        token-group={tokenGroup}
+        token-category={token.tokenCategory}
+        card-as-list-item={this.cardAsListItem}
+        index={index}
+        key={token.id}
+        is-selected={this.selectedTokenId == token.id}
+      ></dt-token-container>
+    );
   }
 
   /****************************
@@ -362,14 +306,10 @@ export class Main {
 
   tokenMatch(token) {
     if (
-      token.caption
-        .toLowerCase()
-        .includes(this.filterValue.toLowerCase()) ||
-      token.value
-        .toLowerCase()
-        .includes(this.filterValue.toLowerCase())
+      token.caption.toLowerCase().includes(this.filterValue.toLowerCase()) ||
+      token.value.toLowerCase().includes(this.filterValue.toLowerCase())
     ) {
-      return true
+      return true;
     } else {
       return false;
     }
@@ -378,7 +318,7 @@ export class Main {
   categoryHasAMatch(category) {
     let tokenFound = false;
     for (let i = 0; i < category.tokens.length; i++) {
-      if(this.tokenMatch(category.tokens[i])){
+      if (this.tokenMatch(category.tokens[i])) {
         tokenFound = true;
         break;
       }
@@ -386,78 +326,121 @@ export class Main {
     return tokenFound;
   }
 
-  someCategoryHasAMatch(tokenGroup){
+  someCategoryHasAMatch(tokenGroup) {
     let someCateogryHasAMatch = false;
-    for (let i = 0; i < tokenGroup.length; i++) {
-      for (let j = 0; j < tokenGroup[i].tokens.length; j++) {
-        if(this.tokenMatch(tokenGroup[i].tokens[j])){
-          someCateogryHasAMatch = true;
-          break;
+    if (tokenGroup === null) {
+      if (this.filterValue !== "") {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      for (let i = 0; i < tokenGroup.length; i++) {
+        for (let j = 0; j < tokenGroup[i].tokens.length; j++) {
+          if (this.tokenMatch(tokenGroup[i].tokens[j])) {
+            someCateogryHasAMatch = true;
+            break;
+          }
         }
       }
     }
     return someCateogryHasAMatch;
   }
-  
-  // tokenFound(model) {
-  //   for (const [key, value] of Object.entries(model)) {
-  //     for (let i = 0; i < value["tokens"].length; i++) {
-  //       for (let j = 0; j < value["tokens"][i].tokens.length; j++) {
-  //         if (
-  //           value["tokens"][i].tokens[j].caption
-  //             .toLowerCase()
-  //             .includes(this.filterValue.toLowerCase()) ||
-  //           value["tokens"][i].tokens[j].value
-  //             .toLowerCase()
-  //             .includes(this.filterValue.toLowerCase())
-  //         ) {
-  //           // A token´s caption or title matches the filter value
-  //           return null;
-  //         }
-  //       }
-  //     }
-  //   }
-  //   // No token´s caption or title matches the filter value
-  //   return <div class="no-tokens-found">No tokens matched your search.</div>;
-  // }
 
-  tokenGroupFilterHasAMatch(tokenGroup) {
-    return true; //(borrar después)
-    // let tokenMatch = false;
-    // for (let i = 0; i < tokens.length; i++) {
-    //   for (let j = 0; j < tokens[i].tokens.length; j++) {
-    //     if (
-    //       tokens[i].tokens[j].caption
-    //         .toLowerCase()
-    //         .includes(this.filterValue.toLowerCase()) ||
-    //       tokens[i].tokens[j].value
-    //         .toLowerCase()
-    //         .includes(this.filterValue.toLowerCase())
-    //     ) {
-    //       someCategoryHasAToken = true;
-    //       break;
-    //     }
-    //   }
-    // }
-    // return tokenMatch;
-  }
-
-  tokensFilterHasAMatch(tokens) {
-    let tokenExist = false;
-    for (let i = 0; i < tokens.tokens.length; i++) {
-      if (
-        tokens.tokens[i].caption
-          .toLowerCase()
-          .includes(this.filterValue.toLowerCase()) ||
-        tokens.tokens[i].value
-          .toLowerCase()
-          .includes(this.filterValue.toLowerCase())
-      ) {
-        tokenExist = true;
+  someTokenGroupHasAMatch(model) {
+    let someTokenGroupHasAMatch = false;
+    let modelArray = Object.values(model);
+    for (let i = 0; i < modelArray.length; i++) {
+      if (this.someCategoryHasAMatch(modelArray[i])) {
+        someTokenGroupHasAMatch = true;
         break;
       }
     }
-    return tokenExist;
+    return someTokenGroupHasAMatch;
+  }
+
+  firstCategoryIsNullContent(tokenGroup) {
+    let returnedContent = [];
+    let tokensWithoutCategory = [];
+
+    this.selectedModel[tokenGroup][0].tokens.map((token, index) =>
+      this.tokenMatch(token)
+        ? tokensWithoutCategory.push(
+            this.returnTokenContainer(token, tokenGroup, index)
+          )
+        : null
+    );
+
+    //If first category is null, return only the tokens
+    returnedContent.push(
+      <div
+        class={{
+          "tokens-container": true,
+          card: this.cardAsListItem === false,
+          "list-item": this.cardAsListItem === true,
+          uncategorized: true
+        }}
+      >
+        {this.cardAsListItem ? (
+          <dt-list-item-header tokenGroup={tokenGroup}></dt-list-item-header>
+        ) : null}
+        {tokensWithoutCategory}
+        {this.printNewToken(tokenGroup, null)}
+      </div>
+    );
+
+    //If there are more categories, none of them should be null, thus, wrapp each category
+    //within a gxg-accordion-item within a gxg-accordion mode="slim"
+    if (this.selectedModel[tokenGroup].length > 1) {
+      if (this.someCategoryHasAMatch(this.selectedModel[tokenGroup])) {
+        returnedContent.push(
+          <gxg-accordion mode="slim" no-padding>
+            {this.selectedModel[tokenGroup].map((category, index) => {
+              if (index !== 0) {
+                //avoid first category group, since it has already been printed above.
+                if (this.categoryHasAMatch(category)) {
+                  return (
+                    <gxg-accordion-item
+                      status="open"
+                      itemTitle={category.tokenCategory}
+                      itemId={category.tokenCategory}
+                    >
+                      <div
+                        class={{
+                          "tokens-container": true,
+                          slim: true,
+                          categorized: true,
+                          card: this.cardAsListItem === false,
+                          "list-item": this.cardAsListItem === true
+                        }}
+                      >
+                        {this.cardAsListItem ? (
+                          <dt-list-item-header
+                            tokenGroup={tokenGroup}
+                          ></dt-list-item-header>
+                        ) : null}
+
+                        {category.tokens.map((token, index) =>
+                          this.tokenMatch(token)
+                            ? this.returnTokenContainer(
+                                token,
+                                tokenGroup,
+                                index
+                              )
+                            : null
+                        )}
+                        {this.printNewToken(tokenGroup, category.tokenCategory)}
+                      </div>
+                    </gxg-accordion-item>
+                  );
+                }
+              }
+            })}
+          </gxg-accordion>
+        );
+      }
+    }
+    return returnedContent;
   }
 
   render() {
@@ -546,91 +529,101 @@ export class Main {
         </div>
         <div id="main-container" class={{ hide: this.hideMainContainer }}>
           {Object.keys(this.selectedModel).length > 0 ? (
-            <gxg-accordion padding="0" mode="classical">
-              {
-
-                Object.keys(this.selectedModel).map(tokenGroup => 
-
-                  {
-
-                    return this.filterTokenGroup === "all" ||
-                    this.filterTokenGroup === tokenGroup.toLowerCase() &&
-                    this.tokenGroupFilterHasAMatch(tokenGroup) ? (
-                      
+            this.someTokenGroupHasAMatch(this.selectedModel) ? (
+              <gxg-accordion mode="classical" no-padding>
+                {Object.keys(this.selectedModel).map(tokenGroup => {
+                  return this.filterTokenGroup === "all" ||
+                    this.filterTokenGroup === tokenGroup.toLowerCase() ? (
+                    this.someCategoryHasAMatch(
+                      this.selectedModel[tokenGroup]
+                    ) ? (
                       <gxg-accordion-item
-                      status="open"
-                      itemTitle={tokenGroup}
-                      itemId={tokenGroup}
-                      key={tokenGroup}
+                        status="open"
+                        itemTitle={tokenGroup}
+                        itemId={tokenGroup}
+                        key={tokenGroup}
                       >
-
-                      {
-                         this.selectedModel[tokenGroup] !== null ? (
-                        
-                          this.selectedModel[tokenGroup][0].tokenCategory === null ? ( 
-                            
-                            //First category is null
-                            this.firstCategoryIsNullContent(tokenGroup)
-
-                          ) : (
-                            
-                            this.someCategoryHasAMatch(this.selectedModel[tokenGroup]) ? (
-
-                              //First category is not null, and thus, none of the following categories should be null.                           
-                              <gxg-accordion padding="0" mode="boxed">
-                              {
-                              this.selectedModel[tokenGroup].map(tokenCategory => 
-
-                                this.categoryHasAMatch(tokenCategory) ? (
-
-                                  <gxg-accordion-item
-                                    status="open"
-                                    itemTitle={tokenCategory.tokenCategory}
-                                    itemId={tokenCategory.tokenCategory}
-                                  >
-                                    {
-                                    tokenCategory.tokens.map((token, index) =>
-                                      this.tokenMatch(token) ? (
-                                        this.returnTokenContainer(token, tokenGroup, index)
-                                      ) : null
-                                    )
-                                    }
-                                  </gxg-accordion-item>
-
-                                ) : 
-                                //Token category filter does not has a match
-                                null
-                              )}
+                        <div
+                          class={{
+                            "tokens-container": true,
+                            classical: true,
+                            categorized: true,
+                            card: this.cardAsListItem === false,
+                            "list-item": this.cardAsListItem === true
+                          }}
+                        >
+                          {this.selectedModel[tokenGroup] !== null ? (
+                            this.selectedModel[tokenGroup][0].tokenCategory ===
+                            null ? (
+                              //First category is null
+                              this.firstCategoryIsNullContent(tokenGroup)
+                            ) : this.someCategoryHasAMatch(
+                                this.selectedModel[tokenGroup]
+                              ) ? (
+                              //First category is not null, and thus, none of the following categories should be null.
+                              <gxg-accordion mode="slim" no-padding>
+                                {this.selectedModel[tokenGroup].map(
+                                  tokenCategory =>
+                                    this.categoryHasAMatch(tokenCategory) ? (
+                                      <gxg-accordion-item
+                                        status="open"
+                                        itemTitle={tokenCategory.tokenCategory}
+                                        itemId={tokenCategory.tokenCategory}
+                                      >
+                                        <div
+                                          class={{
+                                            "tokens-container": true,
+                                            slim: true,
+                                            categorized: true,
+                                            card: this.cardAsListItem === false,
+                                            "list-item":
+                                              this.cardAsListItem === true
+                                          }}
+                                        >
+                                          {this.cardAsListItem ? (
+                                            <dt-list-item-header
+                                              tokenGroup={tokenGroup}
+                                            ></dt-list-item-header>
+                                          ) : null}
+                                          {tokenCategory.tokens.map(
+                                            (token, index) =>
+                                              this.tokenMatch(token)
+                                                ? this.returnTokenContainer(
+                                                    token,
+                                                    tokenGroup,
+                                                    index
+                                                  )
+                                                : null
+                                          )}
+                                          {this.printNewToken(
+                                            tokenGroup,
+                                            tokenCategory.tokenCategory
+                                          )}
+                                        </div>
+                                      </gxg-accordion-item>
+                                    ) : //Token category filter does not has a match
+                                    null
+                                )}
                               </gxg-accordion>
-
                             ) : null
-                            
-
-                            
-                          )
-
-
-                        ) : (
-                          //Token group is null
-                          this.tokenGroupEmptyMessage(tokenGroup)
-                        )
-                      }
-                        
+                          ) : (
+                            //Token group is null
+                            this.tokenGroupEmptyMessage(tokenGroup)
+                          )}
+                        </div>
                       </gxg-accordion-item>
-
                     ) : null
-                
-                  }
-                )
-
-              }
-            </gxg-accordion>
+                  ) : null;
+                })}
+              </gxg-accordion>
+            ) : (
+              //The filter didn´t match any token on the entire model
+              <div class="message">Your search did not match any token.</div>
+            )
           ) : (
             // The selected model has no token groups
             <div class="message">The selected model has no token groups.</div>
           )}
-
-          {/* {this.tokenFound(this.model)} */}
 
           <gxg-alert
             active-time="06"

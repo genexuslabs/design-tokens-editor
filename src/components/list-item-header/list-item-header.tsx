@@ -1,14 +1,7 @@
 import {
   Component,
   Prop,
-  h,
-  Event,
-  EventEmitter,
-  Listen,
-  Element,
-  Host,
-  State,
-  Watch
+  h
 } from "@stencil/core";
 
 @Component({

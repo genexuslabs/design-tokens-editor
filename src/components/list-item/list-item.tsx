@@ -214,6 +214,7 @@ export class ListItem {
             <gxg-button
               type="secondary-text-icon"
               icon="gemini-tools/add-circle"
+              full-width
             >
               Add new token
             </gxg-button>
