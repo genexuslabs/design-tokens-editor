@@ -24,7 +24,9 @@
     @include ui-animation(border-bottom-color);
 
     &.preview-mode {
-      padding-left: var(--spacing-comp-01);
+      .preview {
+        padding-left: var(--spacing-comp-01);
+      }
       .col-left {
         width: calc(100% - 60px);
       }

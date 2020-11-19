@@ -31,6 +31,7 @@ export class ListItem {
   @Prop() index: number; //index is for applying an increasing delay to the cards animation
   @Prop() isSelected: boolean = false;
   @Prop() newItem: boolean = false;
+  @Prop() modePlatform: string = null;
 
   @State() focusableButtons: boolean = true;
 
@@ -141,6 +142,7 @@ export class ListItem {
   }
   newItemOnClick() {
     let newItemData = {
+      model: this.modePlatform,
       "token-group": this.tokenGroup,
       "token-category": this.tokenCategory
     };

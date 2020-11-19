@@ -26,7 +26,6 @@ export class TokenContainer {
 
   @Listen("modeChanged")
   modeChangedHandler(event: CustomEvent) {
-    console.log("mode changed");
     this.mode = event.detail;
   }
 

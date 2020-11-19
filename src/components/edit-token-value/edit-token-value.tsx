@@ -85,9 +85,7 @@ export class EditTokenValue {
     }
   }
 
-  componentDidUpdate() {
-    console.log("edit token value updated");
-  }
+  componentDidUpdate() {}
 
   componentDidLoad() {
     let tokenTitle = this.el.shadowRoot

@@ -14,6 +14,7 @@ export namespace Components {
     'cardTitle': string;
     'index': number;
     'isSelected': boolean;
+    'modePlatform': string;
     'newCard': boolean;
     'readOnly': boolean;
     'tokenCategory': string;
@@ -43,6 +44,7 @@ export namespace Components {
     'isSelected': boolean;
     'itemTitle': string;
     'mode': string;
+    'modePlatform': string;
     'newItem': boolean;
     'readOnly': boolean;
     'tokenCategory': string;
@@ -352,6 +354,7 @@ declare namespace LocalJSX {
     'cardTitle'?: string;
     'index'?: number;
     'isSelected'?: boolean;
+    'modePlatform'?: string;
     'newCard'?: boolean;
     'onAddNewToken'?: (event: CustomEvent<any>) => void;
     'onCardClosed'?: (event: CustomEvent<any>) => void;
@@ -392,6 +395,7 @@ declare namespace LocalJSX {
     'isSelected'?: boolean;
     'itemTitle'?: string;
     'mode'?: string;
+    'modePlatform'?: string;
     'newItem'?: boolean;
     'onAddNewToken'?: (event: CustomEvent<any>) => void;
     'onCardClosed'?: (event: CustomEvent<any>) => void;

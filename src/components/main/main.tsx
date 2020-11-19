@@ -155,6 +155,7 @@ export class Main {
           newItem={true}
           token-category={tokenCategory}
           token-group={tokenGroup}
+          mode-platform={this.modePlatform}
         ></dt-list-item>
       );
     } else {
@@ -163,6 +164,7 @@ export class Main {
           newCard={true}
           token-category={tokenCategory}
           token-group={tokenGroup}
+          mode-platform={this.modePlatform}
         ></dt-card>
       );
     }
@@ -180,12 +182,15 @@ export class Main {
   updateModePlatform() {
     if (this.mode === "" && this.platform === "") {
       this.modePlatform = "";
-    } else if (this.mode === "") {
-      this.modePlatform = this.platform;
-    } else if (this.platform === "") {
+    } else if (this.mode !== "" && this.platform === "") {
       this.modePlatform = this.mode;
+      console.log(this.modePlatform);
+    } else if (this.platform !== "" && this.mode === "") {
+      this.modePlatform = this.platform;
+      console.log(this.modePlatform);
     } else {
       this.modePlatform = this.mode + "%" + this.platform;
+      console.log(this.modePlatform);
     }
     //this.selectedModel = this.model[this.modePlatform];
     this.selectedModel = this.model[this.modePlatform];
@@ -286,14 +291,14 @@ export class Main {
     );
   }
 
-  returnTokenContainer(token, tokenGroup, index) {
+  returnTokenContainer(token, tokenGroup, tokenCategory, index) {
     return (
       <dt-token-container
         token-title={token.caption}
         token-id={token.id}
         token-value={token.value}
         token-group={tokenGroup}
-        token-category={token.tokenCategory}
+        token-category={tokenCategory}
         card-as-list-item={this.cardAsListItem}
         index={index}
         key={token.id}
@@ -368,7 +373,7 @@ export class Main {
     this.selectedModel[tokenGroup][0].tokens.map((token, index) =>
       this.tokenMatch(token)
         ? tokensWithoutCategory.push(
-            this.returnTokenContainer(token, tokenGroup, index)
+            this.returnTokenContainer(token, tokenGroup, null, index)
           )
         : null
     );
@@ -427,6 +432,7 @@ export class Main {
                             ? this.returnTokenContainer(
                                 token,
                                 tokenGroup,
+                                category.tokenCategory,
                                 index
                               )
                             : null
@@ -446,8 +452,6 @@ export class Main {
   }
 
   render() {
-    console.log("render method was fired");
-
     return this.selectedModel !== undefined ? (
       <div class="container">
         <div id="filter">
@@ -472,7 +476,7 @@ export class Main {
                 <gxg-select
                   label="Platform"
                   id="platformsSelect"
-                  onChange={this.updateMode.bind(this)}
+                  onChange={this.updatePlatform.bind(this)}
                 >
                   <gxg-option value="" selected>
                     none
@@ -604,6 +608,7 @@ export class Main {
                                                 ? this.returnTokenContainer(
                                                     token,
                                                     tokenGroup,
+                                                    tokenCategory.tokenCategory,
                                                     index
                                                   )
                                                 : null

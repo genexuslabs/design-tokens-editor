@@ -11,7 +11,6 @@ export class CategoriesSelect {
   @Prop() selectedModel: object;
 
   componentDidLoad() {
-    console.log("the selectedModel");
     this.selectedModel;
   }
 

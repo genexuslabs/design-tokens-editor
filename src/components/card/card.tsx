@@ -35,6 +35,7 @@ export class Card {
   @Prop() index: number; //index is for applying an increasing delay to the cards animation
   @Prop() isSelected: boolean = false;
   @Prop() newCard: boolean = false;
+  @Prop() modePlatform: string = null;
 
   //State
   @State() cardMinHeight: string;
@@ -143,7 +144,9 @@ export class Card {
         //Click happened inside the card
       } else {
         //Click happened outside the card
-        this.mode = "preview";
+        if (event.screenX !== 0 && event.screenY !== 0) {
+          this.mode = "preview";
+        }
       }
     }
   }
@@ -158,10 +161,7 @@ export class Card {
 
   //Click functions
   editCard(e) {
-    e.stopPropagation();
-    if (e.clientX !== 0 && e.clientY !== 0) {
-      this.mode = "editable";
-    }
+    this.mode = "editable";
   }
   duplicateCard(e) {
     e.stopPropagation();
@@ -191,22 +191,16 @@ export class Card {
     this.isSelected = true;
   }
   activateItem() {
-    console.log("activate item");
     this.itemActivated.emit({
       tokenId: this.tokenId,
       tokenGroup: this.tokenGroup
     });
     this.element.focus();
   }
-  // deactivateItem() {
-  //   console.log("deactivate item");
-  //   this.itemActivated.emit({
-  //     tokenId: null,
-  //     tokenGroup: null
-  //   });
-  // }
+
   newCardOnClick() {
     let newItemData = {
+      model: this.modePlatform,
       "token-group": this.tokenGroup,
       "token-category": this.tokenCategory
     };
@@ -228,6 +222,7 @@ export class Card {
   handleCardKeyDown(e) {
     if (!this.focusableButtons) {
       if (e.key === "Enter") {
+        e.preventDefault();
         this.focusableButtons = true;
         let firstMenuGxgButton = this.element.shadowRoot.querySelector(
           ".card-header-menu > gxg-button:first-child"
@@ -267,7 +262,17 @@ export class Card {
       this.focusableButtons = false;
     }
   }
-
+  closeButtonKeyDownHandler(e) {
+    e.stopPropagation();
+    if (e.key === "Escape" || e.key === "Enter") {
+      this.mode = "preview";
+      this.element.focus();
+      this.focusableButtons = false;
+    }
+  }
+  newCardButtonKeyDownHandler() {
+    this.newCardOnClick();
+  }
   render() {
     if (this.newCard === true) {
       return (
@@ -280,6 +285,7 @@ export class Card {
             "card--selected": this.isSelected === true
           }}
           onClick={this.newCardOnClick.bind(this)}
+          onKeyDown={this.newCardButtonKeyDownHandler.bind(this)}
           tabIndex="0"
         >
           <div class="card" data-tokenId={this.tokenId}>
@@ -361,6 +367,7 @@ export class Card {
                       type="secondary-icon-only"
                       onClick={this.closeCard.bind(this)}
                       icon="gemini-tools/close"
+                      onKeyDown={this.closeButtonKeyDownHandler.bind(this)}
                       key="4"
                     ></gxg-button>
                   </div>
