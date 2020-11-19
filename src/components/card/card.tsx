@@ -160,7 +160,7 @@ export class Card {
   }
 
   //Click functions
-  editCard(e) {
+  editCard() {
     this.mode = "editable";
   }
   duplicateCard(e) {
