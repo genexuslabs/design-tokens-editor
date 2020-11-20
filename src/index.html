@@ -14,6 +14,7 @@
 </head>
 
 <body>
+  <button id="new-model-btn">new model</button>
   <dt-main></dt-main>
   <script>
 
@@ -336,6 +337,198 @@
       }
     };
 
+    const modelWithoutEmptyModelName = {
+      "mode_light%platform_linux": {
+        fontSizes: [
+          {
+            tokenCategory: "mode_light",
+            tokens: [
+              {
+                id: "b01",
+                caption: "XSmall",
+                value: "10px"
+              },
+              {
+                id: "b02",
+                caption: "Small",
+                value: "16px"
+              },
+              {
+                id: "b03",
+                caption: "Regular",
+                value: "22px"
+              },
+              {
+                id: "b04",
+                caption: "Big",
+                value: "99px"
+              }
+            ]
+          },
+          {
+            tokenCategory: "secondary",
+            tokens: [
+              {
+                id: "b05",
+                caption: "XSmall",
+                value: "10px"
+              },
+              {
+                id: "b06",
+                caption: "Small",
+                value: "16px"
+              },
+              {
+                id: "b07",
+                caption: "Regular",
+                value: "22px"
+              },
+              {
+                id: "b08",
+                caption: "Big",
+                value: "99px"
+              }
+            ]
+          }
+        ]
+      },
+      "platform_linux": {
+        fontSizes: [
+          {
+            tokenCategory: "platform_linux",
+            tokens: [
+              {
+                id: "b01",
+                caption: "XSmall",
+                value: "10px"
+              },
+              {
+                id: "b02",
+                caption: "Small",
+                value: "16px"
+              },
+              {
+                id: "b03",
+                caption: "Regular",
+                value: "22px"
+              },
+              {
+                id: "b04",
+                caption: "Big",
+                value: "99px"
+              }
+            ]
+          },
+          {
+            tokenCategory: "secondary",
+            tokens: [
+              {
+                id: "b05",
+                caption: "XSmall",
+                value: "10px"
+              },
+              {
+                id: "b06",
+                caption: "Small",
+                value: "16px"
+              },
+              {
+                id: "b07",
+                caption: "Regular",
+                value: "22px"
+              },
+              {
+                id: "b08",
+                caption: "Big",
+                value: "99px"
+              }
+            ]
+          }
+        ],
+        spacing: [
+          {
+            tokenCategory: null,
+            tokens: [
+              {
+                id: "d01",
+                caption: "XSmall",
+                value: "8px"
+              },
+              {
+                id: "d02",
+                caption: "Small",
+                value: "10px"
+              },
+              {
+                id: "d03",
+                caption: "Medium",
+                value: "15px"
+              },
+              {
+                id: "d04",
+                caption: "Large",
+                value: "45px"
+              }
+            ]
+          }
+        ]
+      },
+      "mode_light%platform_linux": {
+        fontSizes: [
+          {
+            tokenCategory: "mode_light platform_linux",
+            tokens: [
+              {
+                id: "b01",
+                caption: "XSmall",
+                value: "10px"
+              },
+              {
+                id: "b02",
+                caption: "Small",
+                value: "16px"
+              },
+              {
+                id: "b03",
+                caption: "Regular",
+                value: "22px"
+              },
+              {
+                id: "b04",
+                caption: "Big",
+                value: "99px"
+              }
+            ]
+          },
+          {
+            tokenCategory: "secondary",
+            tokens: [
+              {
+                id: "b05",
+                caption: "XSmall",
+                value: "10px"
+              },
+              {
+                id: "b06",
+                caption: "Small",
+                value: "16px"
+              },
+              {
+                id: "b07",
+                caption: "Regular",
+                value: "22px"
+              },
+              {
+                id: "b08",
+                caption: "Big",
+                value: "99px"
+              }
+            ]
+          }
+        ]
+      }
+    };
+
     const modelMaxi = {
     "": {
         "colors": [
@@ -364,6 +557,11 @@
     main.selectedTokenId = "01";
     main.tokenDeleted = true;
     main.needHelpUrl = "http://need-help.com";
+
+    let newModelBtn = document.querySelector("#new-model-btn");
+    newModelBtn.addEventListener("click", function(){
+      main.model = modelWithoutEmptyModelName;
+    })
 
     main.addEventListener("tokenDuplicated", event => {
       console.log(

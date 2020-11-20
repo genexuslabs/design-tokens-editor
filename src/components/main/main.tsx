@@ -58,7 +58,8 @@ export class Main {
 
   componentWillLoad() {
     //Set selected model
-    this.updateModePlatform();
+    this.setSelectedModel();
+    // this.updateModePlatform();
   }
 
   componentDidLoad() {
@@ -110,6 +111,11 @@ export class Main {
         this.tokenDeleted = false;
       }, 250);
     }
+  }
+
+  @Watch("model")
+  modelHandler() {
+    this.setSelectedModel();
   }
 
   changeDisplay(e) {
@@ -186,17 +192,47 @@ export class Main {
       this.modePlatform = "";
     } else if (this.mode !== "" && this.platform === "") {
       this.modePlatform = this.mode;
-      console.log(this.modePlatform);
     } else if (this.platform !== "" && this.mode === "") {
       this.modePlatform = this.platform;
-      console.log(this.modePlatform);
     } else {
       this.modePlatform = this.mode + "%" + this.platform;
-      console.log(this.modePlatform);
     }
     //this.selectedModel = this.model[this.modePlatform];
     if (this.selectedModel !== null) {
       this.selectedModel = this.model[this.modePlatform];
+    }
+  }
+  setSelectedModel() {
+    if (this.model !== null) {
+      //If empty model name exists, set that as the selected model.
+      let modelHasEmptyModelName = this.model.hasOwnProperty("");
+      if (modelHasEmptyModelName) {
+        this.selectedModel = this.model[""];
+      } else {
+        //If empty model name does not exists, set the first sub-model as the selected model
+        this.selectedModel = this.model[Object.keys(this.model)[0]];
+
+        //Set gxg-select options to match the selected model
+        let selectedModelName = Object.getOwnPropertyNames(this.model)[0];
+        if (selectedModelName.search("%") === -1) {
+          if (selectedModelName.search("model") === -1) {
+            this.platform = selectedModelName;
+          } else {
+            this.mode = selectedModelName;
+          }
+        } else {
+          //selectedModelName has two options
+          console.log("selectedModeName has two options");
+          let options = selectedModelName.split("%");
+          options.forEach(option => {
+            if (option.search("mode") === -1) {
+              this.platform = option;
+            } else {
+              this.mode = option;
+            }
+          });
+        }
+      }
     }
   }
 
@@ -456,6 +492,7 @@ export class Main {
   }
 
   render() {
+    console.log(this.model);
     return this.selectedModel !== null ? (
       <div class="container">
         <div id="filter">
@@ -464,31 +501,51 @@ export class Main {
               <div class="modes">
                 <gxg-select
                   label="Mode"
-                  id="modeSelect"
+                  id="mode"
                   onChange={this.updateMode.bind(this)}
                 >
-                  <gxg-option value="" selected>
+                  <gxg-option
+                    value=""
+                    selected={true ? this.mode === "" : false}
+                  >
                     none
                   </gxg-option>
                   {this.avaiableOptions["mode"].map(mode => {
                     let modeValue = "mode_" + mode;
-                    return <gxg-option value={modeValue}>{mode}</gxg-option>;
+                    return (
+                      <gxg-option
+                        value={modeValue}
+                        selected={true ? this.mode === modeValue : false}
+                      >
+                        {mode}
+                      </gxg-option>
+                    );
                   })}
                 </gxg-select>
               </div>
               <div class="platforms">
                 <gxg-select
                   label="Platform"
-                  id="platformsSelect"
+                  id="platform"
                   onChange={this.updatePlatform.bind(this)}
                 >
-                  <gxg-option value="" selected>
+                  <gxg-option
+                    value=""
+                    selected={true ? this.platform === "" : false}
+                  >
                     none
                   </gxg-option>
                   {this.avaiableOptions["platform"].map(platform => {
                     let platformValue = "platform_" + platform;
                     return (
-                      <gxg-option value={platformValue}>{platform}</gxg-option>
+                      <gxg-option
+                        value={platformValue}
+                        selected={
+                          true ? this.platform === platformValue : false
+                        }
+                      >
+                        {platform}
+                      </gxg-option>
                     );
                   })}
                 </gxg-select>
