@@ -1,6 +1,6 @@
 {
   "name": "@genexus/design-tokens-editor",
-  "version": "0.1.79",
+  "version": "0.1.80",
   "description": "GeneXus Design Tokens Editor",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
