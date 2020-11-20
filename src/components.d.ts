@@ -360,6 +360,7 @@ declare namespace LocalJSX {
     'onCardClosed'?: (event: CustomEvent<any>) => void;
     'onItemActivated'?: (event: CustomEvent<any>) => void;
     'onModeChanged'?: (event: CustomEvent<any>) => void;
+    'onShiftTabOnEditButton'?: (event: CustomEvent<any>) => void;
     'onTokenDeleted'?: (event: CustomEvent<any>) => void;
     'onTokenDuplicated'?: (event: CustomEvent<any>) => void;
     'onTokenSaved'?: (event: CustomEvent<any>) => void;

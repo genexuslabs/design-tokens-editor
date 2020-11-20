@@ -86,18 +86,20 @@ export class Main {
     // });
 
     //Filter tokens
-    let filterTokens = this.el.shadowRoot.querySelector("#filterTokens");
-    filterTokens.addEventListener("input", event => {
-      this.filterValue = (event.target as HTMLGxgFormTextElement).value;
-    });
+    if (this.selectedModel !== null) {
+      let filterTokens = this.el.shadowRoot.querySelector("#filterTokens");
+      filterTokens.addEventListener("input", event => {
+        this.filterValue = (event.target as HTMLGxgFormTextElement).value;
+      });
 
-    //Select change token group
-    let selectTokenGroup = this.el.shadowRoot.querySelector(
-      "#selectTokenGroup"
-    );
-    selectTokenGroup.addEventListener("change", event => {
-      this.filterTokenGroup = (event as CustomEvent).detail.toLowerCase();
-    });
+      //Select change token group
+      let selectTokenGroup = this.el.shadowRoot.querySelector(
+        "#selectTokenGroup"
+      );
+      selectTokenGroup.addEventListener("change", event => {
+        this.filterTokenGroup = (event as CustomEvent).detail.toLowerCase();
+      });
+    }
   }
 
   @Watch("tokenDeleted")
@@ -193,7 +195,9 @@ export class Main {
       console.log(this.modePlatform);
     }
     //this.selectedModel = this.model[this.modePlatform];
-    this.selectedModel = this.model[this.modePlatform];
+    if (this.selectedModel !== null) {
+      this.selectedModel = this.model[this.modePlatform];
+    }
   }
 
   tokenGroupEmptyMessage(tokenGroup) {
@@ -452,7 +456,7 @@ export class Main {
   }
 
   render() {
-    return this.selectedModel !== undefined ? (
+    return this.selectedModel !== null ? (
       <div class="container">
         <div id="filter">
           <div class="filter-container">
@@ -655,6 +659,8 @@ export class Main {
           </gxg-alert>
         </div>
       </div>
-    ) : null;
+    ) : (
+      <div class="message">The model is empty.</div>
+    );
   }
 }

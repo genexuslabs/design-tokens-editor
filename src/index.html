@@ -336,9 +336,28 @@
       }
     };
 
+    const modelMaxi = {
+    "": {
+        "colors": [
+            {
+                "tokenCategory":null,
+                "tokens": [
+                    {
+                        "id":"_colors_Primary",
+                        "caption":"Primary",
+                        "value":"red"
+                    }
+                ]
+            }
+        ]
+      }
+  }
+
+   const modelNull = null;
+
     //Card "Header buttons" Event Listeners
     const main = document.querySelector("dt-main");
-    main.model = model;
+    main.model = modelNull;
     main.avaiableOptions = avaiableOptions;
 
     main.selectedTokenGroup = "spacing";

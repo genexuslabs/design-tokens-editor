@@ -57,6 +57,8 @@ export class Card {
   itemActivated: EventEmitter;
   @Event()
   addNewToken: EventEmitter;
+  @Event()
+  shiftTabOnEditButton: EventEmitter;
 
   tokenDeletedEventData: Object = {
     tokenId: this.tokenId,
@@ -69,6 +71,7 @@ export class Card {
 
   @Listen("editModeClosed")
   todoCompletedHandler(event) {
+    console.log(event.detail);
     if (event.detail === "escape") {
       this.mode = "preview";
       this.element.focus();
@@ -76,6 +79,8 @@ export class Card {
       this.focusableButtons = false;
     } else if ("tab") {
       this.mode = "preview";
+      (document.activeElement as HTMLElement).blur();
+      this.element.focus();
       this.focusableButtons = false;
     }
   }
@@ -238,16 +243,19 @@ export class Card {
     if (e.key === "Enter") {
       this.mode = "editable";
     } else if (e.key === "Escape") {
+      (document.activeElement as HTMLElement).blur();
       this.element.focus();
       this.focusableButtons = false;
     } else if (e.key === "Tab" && e.shiftKey) {
       this.focusableButtons = false;
+      this.shiftTabOnEditButton.emit(this.mode);
     }
   }
 
   duplicateButtonKeyDownHandler(e) {
     e.stopPropagation();
     if (e.key === "Escape") {
+      (document.activeElement as HTMLElement).blur();
       this.element.focus();
       this.focusableButtons = false;
     }
@@ -256,9 +264,10 @@ export class Card {
   deleteButtonKeyDownHandler(e) {
     e.stopPropagation();
     if (e.key === "Escape") {
+      (document.activeElement as HTMLElement).blur();
       this.element.focus();
       this.focusableButtons = false;
-    } else if (e.key === "Tab" && e.key !== e.shiftKey) {
+    } else if (e.key === "Tab" && !e.shiftKey) {
       this.focusableButtons = false;
     }
   }

@@ -12,6 +12,12 @@
   .col-left {
     display: flex;
     padding-right: var(--spacing-comp-02);
+    width: calc(100% - 60px);
+    box-sizing: border-box;
+    &__title-value-container {
+      width: calc(100% - 60px);
+      display: flex;
+    }
   }
   .col-right {
     display: flex;
@@ -24,18 +30,16 @@
     @include ui-animation(border-bottom-color);
 
     &.preview-mode {
-      .preview {
-        padding-left: var(--spacing-comp-01);
-      }
-      .col-left {
-        width: calc(100% - 60px);
+      &__container {
       }
     }
     &.edit-mode {
     }
   }
   .preview {
+    padding-left: var(--spacing-comp-01);
     width: 60px;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
 
@@ -61,16 +65,15 @@
   .title-container {
     display: flex;
     align-items: center;
-    padding-right: 20px;
-    width: calc(50% - 30px);
-    max-width: 150px;
+    width: 40%;
+    max-width: 160px;
+    margin-right: var(--spacing-comp-05);
     box-sizing: border-box;
     .item-title {
       font-family: var(--font-family-primary);
       font-weight: var(--font-weight-regular);
       font-size: var(--font-size-sm);
       margin: 0;
-      width: 160px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -82,19 +85,27 @@
     font-size: var(--font-size-sm);
     display: flex;
     align-items: center;
-    width: calc(50% - 30px);
+    width: 40%;
+    max-width: 160px;
+    margin-right: 80px;
   }
   .item-menu {
+    width: 60px;
     display: flex;
     align-items: center;
+    justify-content: flex-end;
   }
   .list-content-editable {
     display: flex;
     align-items: center;
+    width: calc(100% - 60px);
+  }
+  ::slotted([slot="editable"]) {
+    width: 100%;
   }
 }
 
-:host(.item--selected) {
+:host(.item--selected:not(.focus-on-buttons)) {
   .item {
     border-bottom-color: var(--color-primary-active);
   }

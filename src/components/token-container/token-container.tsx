@@ -1,4 +1,4 @@
-import { Component, Prop, h, Listen, State } from "@stencil/core";
+import { Component, Prop, h, Listen, Element, State } from "@stencil/core";
 
 @Component({
   tag: "dt-token-container",
@@ -7,6 +7,8 @@ import { Component, Prop, h, Listen, State } from "@stencil/core";
   assetsDirs: ["token-container-assets"]
 })
 export class TokenContainer {
+  @Element() el: HTMLElement;
+
   @Prop() tokenTitle: string;
   @Prop() tokenId: string;
   @Prop() tokenValue: string;
@@ -27,6 +29,14 @@ export class TokenContainer {
   @Listen("modeChanged")
   modeChangedHandler(event: CustomEvent) {
     this.mode = event.detail;
+  }
+
+  @Listen("shiftTabOnEditButton")
+  itemActivatedHandler(event: CustomEvent) {
+    console.log("shit + tab keys pressed on edit button");
+    console.log(this.el);
+    (document.activeElement as HTMLElement).blur();
+    console.log(this.el.previousSibling as HTMLElement);
   }
 
   componentDidLoad() {}

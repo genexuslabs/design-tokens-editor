@@ -95,6 +95,7 @@ export class EditTokenValue {
   }
 
   titleKeyDownHandler(e) {
+    console.log("title key handler");
     e.stopPropagation();
     if (e.key === "Escape") {
       this.editModeClosed.emit("escape");
@@ -114,7 +115,7 @@ export class EditTokenValue {
     e.stopPropagation();
     if (e.key === "Escape") {
       this.editModeClosed.emit("escape");
-    } else if (e.key === "Tab" && !e.shiftKey) {
+    } else if (e.key === "Tab" && !e.shiftKey && !this.listItem) {
       this.editModeClosed.emit("tab");
     }
   }
@@ -248,15 +249,22 @@ export class EditTokenValue {
 
     //Save button
     returnContent.push(
-      <gxg-button
-        class={{ "list-item": this.listItem }}
-        type="primary-text-only"
-        style={{ float: "right" }}
-        onClick={this.saveNewValuesHandler.bind(this)}
-        onKeyDown={this.saveKeyDownHandler.bind(this)}
+      <div
+        class={{
+          "save-button": true
+        }}
       >
-        Save
-      </gxg-button>
+        <gxg-button
+          class={{ "list-item": this.listItem }}
+          type="primary-text-only"
+          style={{ float: "right" }}
+          onClick={this.saveNewValuesHandler.bind(this)}
+          onKeyDown={this.saveKeyDownHandler.bind(this)}
+          full-width={true ? this.listItem : false}
+        >
+          Save
+        </gxg-button>
+      </div>
     );
 
     return returnContent;

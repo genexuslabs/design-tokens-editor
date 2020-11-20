@@ -11,13 +11,12 @@
 
 :host(.list-item) {
   display: flex;
-  margin-right: var(--spacing-comp-02);
   .edit-container {
     width: 40%;
     max-width: 160px;
-    // min-width: 120px;
-    margin-right: 20px;
-
+    &.title {
+      margin-right: var(--spacing-comp-05);
+    }
     &.value {
       position: relative;
       margin-right: var(--spacing-comp-02);
@@ -29,8 +28,7 @@
     position: absolute;
     width: 100%;
   }
-  // position: absolute;
-  // width: 160px;
-  // top: 0;
-  // z-index: 1;
+  .save-button {
+    width: 72px;
+  }
 }
