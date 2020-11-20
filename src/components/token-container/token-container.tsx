@@ -32,7 +32,7 @@ export class TokenContainer {
   }
 
   @Listen("shiftTabOnEditButton")
-  itemActivatedHandler(event: CustomEvent) {
+  itemActivatedHandler() {
     console.log("shit + tab keys pressed on edit button");
     console.log(this.el);
     (document.activeElement as HTMLElement).blur();
