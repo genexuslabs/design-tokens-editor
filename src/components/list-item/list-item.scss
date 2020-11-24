@@ -1,3 +1,11 @@
+:host(:focus) {
+  outline: none;
+}
+:host([last-item]) {
+  .item {
+    margin-bottom: calc(var(--spacing-comp-01) * -1);
+  }
+}
 :host {
   width: 100%;
   .item {
@@ -88,6 +96,7 @@
     width: 40%;
     max-width: 160px;
     margin-right: 80px;
+    word-break: break-all;
   }
   .item-menu {
     width: 60px;
@@ -105,7 +114,7 @@
   }
 }
 
-:host(.item--selected:not(.focus-on-buttons)) {
+:host(.item--selected:not(.focus-on-buttons):not(.add-new-token)) {
   .item {
     border-bottom-color: var(--color-primary-active);
   }

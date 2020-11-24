@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <button id="new-model-btn">new model</button>
+  <!-- <button id="new-model-btn">new model</button> -->
   <dt-main></dt-main>
   <script>
 
@@ -550,7 +550,7 @@
 
     //Card "Header buttons" Event Listeners
     const main = document.querySelector("dt-main");
-    main.model = modelNull;
+    main.model = model;
     main.avaiableOptions = avaiableOptions;
 
     main.selectedTokenGroup = "spacing";
@@ -558,10 +558,10 @@
     main.tokenDeleted = true;
     main.needHelpUrl = "http://need-help.com";
 
-    let newModelBtn = document.querySelector("#new-model-btn");
-    newModelBtn.addEventListener("click", function(){
-      main.model = modelWithoutEmptyModelName;
-    })
+    // let newModelBtn = document.querySelector("#new-model-btn");
+    // newModelBtn.addEventListener("click", function(){
+    //   main.model = modelWithoutEmptyModelName;
+    // })
 
     main.addEventListener("tokenDuplicated", event => {
       console.log(

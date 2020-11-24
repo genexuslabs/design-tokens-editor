@@ -36,6 +36,7 @@ export class Card {
   @Prop() isSelected: boolean = false;
   @Prop() newCard: boolean = false;
   @Prop() modePlatform: string = null;
+  @Prop() optionsToken: object;
 
   //State
   @State() cardMinHeight: string;
@@ -70,16 +71,15 @@ export class Card {
   };
 
   @Listen("editModeClosed")
-  todoCompletedHandler(event) {
-    console.log(event.detail);
+  editModeClosedHandler(event) {
     if (event.detail === "escape") {
       this.mode = "preview";
       this.element.focus();
       this.isSelected = true;
       this.focusableButtons = false;
+      console.log(this.element);
     } else if ("tab") {
       this.mode = "preview";
-      (document.activeElement as HTMLElement).blur();
       this.element.focus();
       this.focusableButtons = false;
     }
@@ -173,10 +173,12 @@ export class Card {
     const tokenGroup = this.tokenGroup;
     const tokenCategory = this.tokenCategory;
     const tokenId = this.tokenId;
+    const options = this.optionsToken;
     this.tokenDuplicated.emit({
       tokenGroup,
       tokenCategory,
-      tokenId
+      tokenId,
+      options
     });
   }
   deleteCard(e) {
@@ -184,10 +186,12 @@ export class Card {
     const tokenGroup = this.tokenGroup;
     const tokenCategory = this.tokenCategory;
     const tokenId = this.tokenId;
+    const options = this.optionsToken;
     this.tokenDeleted.emit({
       tokenGroup,
       tokenCategory,
-      tokenId
+      tokenId,
+      options
     });
   }
   closeCard() {
@@ -205,15 +209,14 @@ export class Card {
 
   newCardOnClick() {
     let newItemData = {
-      model: this.modePlatform,
       "token-group": this.tokenGroup,
-      "token-category": this.tokenCategory
+      "token-category": this.tokenCategory,
+      options: this.optionsToken
     };
     this.addNewToken.emit(newItemData);
   }
   @Listen("focus")
   handleFocus() {
-    this.element.classList.add("card--selected");
     this.itemActivated.emit({
       tokenId: this.tokenId,
       tokenGroup: this.tokenGroup
@@ -248,7 +251,6 @@ export class Card {
       this.focusableButtons = false;
     } else if (e.key === "Tab" && e.shiftKey) {
       this.focusableButtons = false;
-      this.shiftTabOnEditButton.emit(this.mode);
     }
   }
 
@@ -269,6 +271,9 @@ export class Card {
       this.focusableButtons = false;
     } else if (e.key === "Tab" && !e.shiftKey) {
       this.focusableButtons = false;
+      e.preventDefault();
+      (document.activeElement as HTMLElement).blur();
+      this.element.focus();
     }
   }
   closeButtonKeyDownHandler(e) {
@@ -277,6 +282,8 @@ export class Card {
       this.mode = "preview";
       this.element.focus();
       this.focusableButtons = false;
+    } else if (e.key === "Tab" && e.shiftKey) {
+      e.preventDefault();
     }
   }
   newCardButtonKeyDownHandler() {
@@ -290,8 +297,7 @@ export class Card {
             "min-height": this.cardMinHeight
           }}
           class={{
-            new: true,
-            "card--selected": this.isSelected === true
+            new: true
           }}
           onClick={this.newCardOnClick.bind(this)}
           onKeyDown={this.newCardButtonKeyDownHandler.bind(this)}
@@ -321,7 +327,6 @@ export class Card {
             "focus-on-buttons": this.focusableButtons === true
           }}
           onMouseEnter={this.activateItem.bind(this)}
-          // onMouseOut={this.deactivateItem.bind(this)}
           tabIndex="0"
           onKeyDown={this.handleCardKeyDown.bind(this)}
         >

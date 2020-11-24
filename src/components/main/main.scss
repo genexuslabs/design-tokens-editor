@@ -95,6 +95,13 @@
       opacity: 1;
     }
   }
+
+  //accordion slim fix
+
+  gxg-accordion {
+    margin-bottom: 20px;
+  }
+
   @media screen and (max-width: 380px) {
     display: block;
     .col-left {
@@ -124,4 +131,12 @@
   left: 50%;
   transform: translateX(-50%);
   font-family: var(--font-family-primary);
+
+  position: absolute;
+  top: 50%;
+  font-family: var(--font-family-primary);
+  width: 100%;
+  text-align: center;
+  padding: 0 var(--spacing-comp-06);
+  box-sizing: border-box;
 }

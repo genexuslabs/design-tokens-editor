@@ -95,12 +95,13 @@ export class EditTokenValue {
   }
 
   titleKeyDownHandler(e) {
-    console.log("title key handler");
     e.stopPropagation();
     if (e.key === "Escape") {
       this.editModeClosed.emit("escape");
     } else if (e.key === "Enter") {
       this.saveNewValuesHandler();
+    } else if (e.key === "Tab" && e.shiftKey && this.listItem) {
+      e.preventDefault();
     }
   }
   valueKeyDownHandler(e) {
@@ -116,7 +117,8 @@ export class EditTokenValue {
     if (e.key === "Escape") {
       this.editModeClosed.emit("escape");
     } else if (e.key === "Tab" && !e.shiftKey && !this.listItem) {
-      this.editModeClosed.emit("tab");
+      //this.editModeClosed.emit("tab");
+      e.preventDefault();
     }
   }
 

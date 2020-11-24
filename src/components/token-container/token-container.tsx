@@ -1,4 +1,12 @@
-import { Component, Prop, h, Listen, Element, State } from "@stencil/core";
+import {
+  Component,
+  Prop,
+  h,
+  Listen,
+  Element,
+  State,
+  Watch
+} from "@stencil/core";
 
 @Component({
   tag: "dt-token-container",
@@ -20,6 +28,7 @@ export class TokenContainer {
   @Prop() key: string;
   @Prop() cardAsListItem: boolean = false;
   @Prop() isSelected: boolean = false;
+  @Prop() optionsToken: object;
 
   @Prop({ mutable: true }) selectedTokenGroup: string;
   @Prop({ mutable: true }) selectedTokenId: string;
@@ -30,16 +39,6 @@ export class TokenContainer {
   modeChangedHandler(event: CustomEvent) {
     this.mode = event.detail;
   }
-
-  @Listen("shiftTabOnEditButton")
-  itemActivatedHandler() {
-    console.log("shit + tab keys pressed on edit button");
-    console.log(this.el);
-    (document.activeElement as HTMLElement).blur();
-    console.log(this.el.previousSibling as HTMLElement);
-  }
-
-  componentDidLoad() {}
 
   render() {
     let switchTokenGroup = (tokenGroup, tokenValue, tokenCaption, tokenId) => {
@@ -596,6 +595,7 @@ export class TokenContainer {
         index={this.index}
         key={this.key}
         is-selected={this.isSelected}
+        optionsToken={this.optionsToken}
       >
         {switchTokenGroup(
           this.tokenGroup,
@@ -615,6 +615,7 @@ export class TokenContainer {
         index={this.index}
         key={this.key}
         is-selected={this.isSelected}
+        optionsToken={this.optionsToken}
         // style={{
         //   "--cardAnimationDelay": this.getCardsAnimationDuration(
         //     model[tokenGroup].tokens.length,

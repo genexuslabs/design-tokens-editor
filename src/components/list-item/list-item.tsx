@@ -14,8 +14,7 @@ import {
 @Component({
   tag: "dt-list-item",
   styleUrl: "list-item.scss",
-  shadow: true,
-  assetsDirs: ["list-item-assets"]
+  shadow: true
 })
 export class ListItem {
   constructor() {
@@ -35,6 +34,8 @@ export class ListItem {
   @Prop() isSelected: boolean = false;
   @Prop() newItem: boolean = false;
   @Prop() modePlatform: string = null;
+  @Prop() optionsToken: object;
+  @Prop({ reflect: true }) lastItem: boolean = false;
 
   @State() focusableButtons: boolean = false;
 
@@ -66,14 +67,17 @@ export class ListItem {
   };
 
   @Listen("editModeClosed")
-  todoCompletedHandler(event) {
+  editModeClosedHandler(event) {
     if (event.detail === "escape") {
       this.mode = "preview";
+      (document.activeElement as HTMLElement).blur();
       this.element.focus();
       this.isSelected = true;
       this.focusableButtons = false;
+      console.log(this.element);
     } else if ("tab") {
       this.mode = "preview";
+      this.element.focus();
       this.focusableButtons = false;
     }
   }
@@ -111,7 +115,6 @@ export class ListItem {
         gxgButton.removeAttribute("tabindex");
       });
     } else {
-      console.log("remove focus from buttons");
       itemHeaderMenuButtons.forEach(gxgButton => {
         gxgButton.setAttribute("tabindex", "-1");
       });
@@ -177,10 +180,12 @@ export class ListItem {
     const tokenGroup = this.tokenGroup;
     const tokenCategory = this.tokenCategory;
     const tokenId = this.tokenId;
+    const options = this.optionsToken;
     this.tokenDuplicated.emit({
       tokenGroup,
       tokenCategory,
-      tokenId
+      tokenId,
+      options
     });
   }
   deleteItem(e) {
@@ -188,10 +193,12 @@ export class ListItem {
     const tokenGroup = this.tokenGroup;
     const tokenCategory = this.tokenCategory;
     const tokenId = this.tokenId;
+    const options = this.optionsToken;
     this.tokenDeleted.emit({
       tokenGroup,
       tokenCategory,
-      tokenId
+      tokenId,
+      options
     });
   }
   closeItem() {
@@ -207,9 +214,9 @@ export class ListItem {
   }
   newItemOnClick() {
     let newItemData = {
-      model: this.modePlatform,
       "token-group": this.tokenGroup,
-      "token-category": this.tokenCategory
+      "token-category": this.tokenCategory,
+      options: this.optionsToken
     };
     this.addNewToken.emit(newItemData);
   }
@@ -266,6 +273,20 @@ export class ListItem {
       this.focusableButtons = false;
     } else if (e.key === "Tab" && !e.shiftKey) {
       this.focusableButtons = false;
+      e.preventDefault();
+      (document.activeElement as HTMLElement).blur();
+      this.element.focus();
+    }
+  }
+
+  closeButtonKeyDownHandler(e) {
+    e.stopPropagation();
+    if (e.key === "Escape" || e.key === "Enter") {
+      this.mode = "preview";
+      this.element.focus();
+      this.focusableButtons = false;
+    } else if (e.key === "Tab" && !e.shiftKey) {
+      e.preventDefault();
     }
   }
 
@@ -301,16 +322,16 @@ export class ListItem {
             "focus-on-buttons": this.focusableButtons === true
           }}
           onMouseEnter={this.activateItem.bind(this)}
+          tabIndex="0"
+          onKeyDown={this.handleItemKeyDown.bind(this)}
         >
           <div class="item-main-container">
             <div
-              tabindex="1"
               class={{
                 item: true,
                 "item--editable": this.mode === "editable"
               }}
               data-tokenId={this.tokenId}
-              onKeyDown={this.handleItemKeyDown.bind(this)}
             >
               {this.mode === "preview" ? (
                 <div class="container preview-mode">
@@ -384,6 +405,7 @@ export class ListItem {
                         type="secondary-icon-only"
                         onClick={this.closeItem.bind(this)}
                         icon="gemini-tools/close"
+                        onKeyDown={this.closeButtonKeyDownHandler.bind(this)}
                       ></gxg-button>
                     </div>
                   </div>

@@ -12,7 +12,7 @@ import {
   tag: "dt-token-overflow",
   styleUrl: "token-overflow.scss",
   shadow: true,
-  assetsDirs: ["token-overlfow-assets"]
+  assetsDirs: ["token-overflow-assets"]
 })
 export class TokenOverflow {
   @Element() el: HTMLElement;
@@ -20,7 +20,7 @@ export class TokenOverflow {
   @State() visible: boolean = false;
 
   searchImage() {
-    return "./token-overlfow-assets/search.svg";
+    return "./token-overflow-assets/search.svg";
   }
 
   changeVisibility() {

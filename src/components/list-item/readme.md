@@ -13,6 +13,7 @@
 | `isSelected`    | `is-selected`    |             | `boolean` | `false`     |
 | `itemTitle`     | `item-title`     |             | `string`  | `undefined` |
 | `mode`          | `mode`           |             | `string`  | `"preview"` |
+| `modePlatform`  | `mode-platform`  |             | `string`  | `null`      |
 | `newItem`       | `new-item`       |             | `boolean` | `false`     |
 | `readOnly`      | `read-only`      |             | `boolean` | `false`     |
 | `tokenCategory` | `token-category` |             | `string`  | `undefined` |

@@ -12,6 +12,7 @@
 | `cardTitle`     | `card-title`     |             | `string`  | `undefined` |
 | `index`         | `index`          |             | `number`  | `undefined` |
 | `isSelected`    | `is-selected`    |             | `boolean` | `false`     |
+| `modePlatform`  | `mode-platform`  |             | `string`  | `null`      |
 | `newCard`       | `new-card`       |             | `boolean` | `false`     |
 | `readOnly`      | `read-only`      |             | `boolean` | `false`     |
 | `tokenCategory` | `token-category` |             | `string`  | `null`      |
@@ -22,15 +23,16 @@
 
 ## Events
 
-| Event             | Description | Type               |
-| ----------------- | ----------- | ------------------ |
-| `addNewToken`     |             | `CustomEvent<any>` |
-| `cardClosed`      |             | `CustomEvent<any>` |
-| `itemActivated`   |             | `CustomEvent<any>` |
-| `modeChanged`     |             | `CustomEvent<any>` |
-| `tokenDeleted`    |             | `CustomEvent<any>` |
-| `tokenDuplicated` |             | `CustomEvent<any>` |
-| `tokenSaved`      |             | `CustomEvent<any>` |
+| Event                  | Description | Type               |
+| ---------------------- | ----------- | ------------------ |
+| `addNewToken`          |             | `CustomEvent<any>` |
+| `cardClosed`           |             | `CustomEvent<any>` |
+| `itemActivated`        |             | `CustomEvent<any>` |
+| `modeChanged`          |             | `CustomEvent<any>` |
+| `shiftTabOnEditButton` |             | `CustomEvent<any>` |
+| `tokenDeleted`         |             | `CustomEvent<any>` |
+| `tokenDuplicated`      |             | `CustomEvent<any>` |
+| `tokenSaved`           |             | `CustomEvent<any>` |
 
 
 ## Dependencies

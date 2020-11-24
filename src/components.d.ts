@@ -16,6 +16,7 @@ export namespace Components {
     'isSelected': boolean;
     'modePlatform': string;
     'newCard': boolean;
+    'optionsToken': object;
     'readOnly': boolean;
     'tokenCategory': string;
     'tokenGroup': string;
@@ -43,9 +44,11 @@ export namespace Components {
     'index': number;
     'isSelected': boolean;
     'itemTitle': string;
+    'lastItem': boolean;
     'mode': string;
     'modePlatform': string;
     'newItem': boolean;
+    'optionsToken': object;
     'readOnly': boolean;
     'tokenCategory': string;
     'tokenGroup': string;
@@ -98,6 +101,7 @@ export namespace Components {
     'isSelected': boolean;
     'key': string;
     'listItem': boolean;
+    'optionsToken': object;
     'readOnly': boolean;
     'selectedTokenGroup': string;
     'selectedTokenId': string;
@@ -364,6 +368,7 @@ declare namespace LocalJSX {
     'onTokenDeleted'?: (event: CustomEvent<any>) => void;
     'onTokenDuplicated'?: (event: CustomEvent<any>) => void;
     'onTokenSaved'?: (event: CustomEvent<any>) => void;
+    'optionsToken'?: object;
     'readOnly'?: boolean;
     'tokenCategory'?: string;
     'tokenGroup'?: string;
@@ -395,6 +400,7 @@ declare namespace LocalJSX {
     'index'?: number;
     'isSelected'?: boolean;
     'itemTitle'?: string;
+    'lastItem'?: boolean;
     'mode'?: string;
     'modePlatform'?: string;
     'newItem'?: boolean;
@@ -406,6 +412,7 @@ declare namespace LocalJSX {
     'onTokenDeleted'?: (event: CustomEvent<any>) => void;
     'onTokenDuplicated'?: (event: CustomEvent<any>) => void;
     'onTokenSaved'?: (event: CustomEvent<any>) => void;
+    'optionsToken'?: object;
     'readOnly'?: boolean;
     'tokenCategory'?: string;
     'tokenGroup'?: string;
@@ -461,6 +468,7 @@ declare namespace LocalJSX {
     'isSelected'?: boolean;
     'key'?: string;
     'listItem'?: boolean;
+    'optionsToken'?: object;
     'readOnly'?: boolean;
     'selectedTokenGroup'?: string;
     'selectedTokenId'?: string;
