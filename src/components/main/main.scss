@@ -38,10 +38,14 @@
 .tokens-container.list-item.uncategorized {
   // margin-bottom: var(--spacing-comp-02);
 }
+.tokens-container.slim.card {
+  margin-bottom: calc(var(--spacing-comp-01) * -1);
+}
 .tokens-container.slim.card,
 .tokens-container.card.uncategorized {
   margin-left: calc(var(--spacing-comp-01) * -1);
   margin-right: calc(var(--spacing-comp-01) * -1);
+  margin-top: var(--spacing-comp-01);
 }
 .tokens-container.slim.card {
   margin-top: var(--spacing-comp-02);
