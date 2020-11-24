@@ -1,12 +1,4 @@
-import {
-  Component,
-  Prop,
-  h,
-  Listen,
-  Element,
-  State,
-  Watch
-} from "@stencil/core";
+import { Component, Prop, h, Listen, Element, State } from "@stencil/core";
 
 @Component({
   tag: "dt-token-container",
