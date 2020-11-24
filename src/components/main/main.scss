@@ -36,7 +36,7 @@
   flex-wrap: wrap;
 }
 .tokens-container.list-item.uncategorized {
-  margin-bottom: var(--spacing-comp-02);
+  // margin-bottom: var(--spacing-comp-02);
 }
 .tokens-container.slim.card,
 .tokens-container.card.uncategorized {
@@ -47,7 +47,7 @@
   margin-top: var(--spacing-comp-02);
 }
 .tokens-container.classical.categorized {
-  margin-top: var(--spacing-comp-02);
+  margin-top: var(--spacing-comp-01);
   margin-bottom: calc(var(--spacing-comp-01) * - 1);
 }
 

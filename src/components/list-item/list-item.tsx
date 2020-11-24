@@ -74,7 +74,6 @@ export class ListItem {
       this.element.focus();
       this.isSelected = true;
       this.focusableButtons = false;
-      console.log(this.element);
     } else if ("tab") {
       this.mode = "preview";
       this.element.focus();

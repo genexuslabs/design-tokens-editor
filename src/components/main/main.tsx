@@ -125,7 +125,7 @@ export class Main {
 
   showOptions() {}
 
-  printNewToken(tokenGroup, tokenCategory) {
+  printNewToken(tokenGroup, tokenCategory, lastCategory) {
     if (this.cardAsListItem) {
       return (
         <dt-list-item
@@ -134,6 +134,7 @@ export class Main {
           token-group={tokenGroup}
           mode-platform={this.modePlatform}
           optionsToken={this.options}
+          lastItem={lastCategory}
         ></dt-list-item>
       );
     } else {
@@ -394,6 +395,12 @@ export class Main {
         : null
     );
 
+    let numberOfCategories = this.selectedModel[tokenGroup].length;
+    let lastCategory = false;
+    if (numberOfCategories === 1) {
+      lastCategory = true;
+    }
+
     //If first category is null, return only the tokens
     returnedContent.push(
       <div
@@ -408,7 +415,7 @@ export class Main {
           <dt-list-item-header tokenGroup={tokenGroup}></dt-list-item-header>
         ) : null}
         {tokensWithoutCategory}
-        {this.printNewToken(tokenGroup, null)}
+        {this.printNewToken(tokenGroup, null, lastCategory)}
       </div>
     );
 
@@ -420,6 +427,9 @@ export class Main {
           <gxg-accordion mode="slim" no-padding>
             {this.selectedModel[tokenGroup].map((category, index) => {
               if (index !== 0) {
+                if (index === numberOfCategories - 1) {
+                  lastCategory = true;
+                }
                 //avoid first category group, since it has already been printed above.
                 if (this.categoryHasAMatch(category)) {
                   return (
@@ -453,7 +463,11 @@ export class Main {
                               )
                             : null
                         )}
-                        {this.printNewToken(tokenGroup, category.tokenCategory)}
+                        {this.printNewToken(
+                          tokenGroup,
+                          category.tokenCategory,
+                          lastCategory
+                        )}
                       </div>
                     </gxg-accordion-item>
                   );
@@ -476,8 +490,6 @@ export class Main {
   }
 
   render() {
-    console.log("this.options outside the component");
-    console.log(this.options);
     return this.selectedModel !== null ? (
       <div class="container">
         <div id="filter">
@@ -632,7 +644,7 @@ export class Main {
                                 //First category is not null, and thus, none of the following categories should be null.
                                 <gxg-accordion mode="slim" no-padding>
                                   {this.selectedModel[tokenGroup].map(
-                                    tokenCategory =>
+                                    (tokenCategory, index) =>
                                       this.categoryHasAMatch(tokenCategory) ? (
                                         <gxg-accordion-item
                                           status="open"
@@ -670,7 +682,13 @@ export class Main {
                                             )}
                                             {this.printNewToken(
                                               tokenGroup,
-                                              tokenCategory.tokenCategory
+                                              tokenCategory.tokenCategory,
+                                              true
+                                                ? this.selectedModel[tokenGroup]
+                                                    .length -
+                                                    1 ===
+                                                    index
+                                                : false
                                             )}
                                           </div>
                                         </gxg-accordion-item>
