@@ -35,10 +35,13 @@
 - [dt-list-item-header](../list-item-header)
 - gxg-accordion
 - gxg-accordion-item
-- gxg-select
-- gxg-option
 - gxg-button
 - gxg-spacer-one
+- gxg-card
+- gxg-spacer-layout
+- gxg-title
+- gxg-select
+- gxg-option
 - gxg-form-text
 - gxg-alert
 
@@ -52,10 +55,13 @@ graph TD;
   dt-main --> dt-list-item-header
   dt-main --> gxg-accordion
   dt-main --> gxg-accordion-item
-  dt-main --> gxg-select
-  dt-main --> gxg-option
   dt-main --> gxg-button
   dt-main --> gxg-spacer-one
+  dt-main --> gxg-card
+  dt-main --> gxg-spacer-layout
+  dt-main --> gxg-title
+  dt-main --> gxg-select
+  dt-main --> gxg-option
   dt-main --> gxg-form-text
   dt-main --> gxg-alert
   dt-list-item --> gxg-button

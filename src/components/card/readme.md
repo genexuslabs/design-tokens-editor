@@ -7,18 +7,19 @@
 
 ## Properties
 
-| Property        | Attribute        | Description | Type      | Default     |
-| --------------- | ---------------- | ----------- | --------- | ----------- |
-| `cardTitle`     | `card-title`     |             | `string`  | `undefined` |
-| `index`         | `index`          |             | `number`  | `undefined` |
-| `isSelected`    | `is-selected`    |             | `boolean` | `false`     |
-| `modePlatform`  | `mode-platform`  |             | `string`  | `null`      |
-| `newCard`       | `new-card`       |             | `boolean` | `false`     |
-| `readOnly`      | `read-only`      |             | `boolean` | `false`     |
-| `tokenCategory` | `token-category` |             | `string`  | `null`      |
-| `tokenGroup`    | `token-group`    |             | `string`  | `undefined` |
-| `tokenId`       | `token-id`       |             | `string`  | `undefined` |
-| `tokenValue`    | `token-value`    |             | `string`  | `undefined` |
+| Property            | Attribute             | Description | Type      | Default     |
+| ------------------- | --------------------- | ----------- | --------- | ----------- |
+| `cardTitle`         | `card-title`          |             | `string`  | `undefined` |
+| `index`             | `index`               |             | `number`  | `undefined` |
+| `isSelected`        | `is-selected`         |             | `boolean` | `false`     |
+| `newCard`           | `new-card`            |             | `boolean` | `false`     |
+| `optionsToken`      | --                    |             | `object`  | `undefined` |
+| `readOnly`          | `read-only`           |             | `boolean` | `false`     |
+| `selectedModelName` | `selected-model-name` |             | `string`  | `null`      |
+| `tokenCategory`     | `token-category`      |             | `string`  | `null`      |
+| `tokenGroup`        | `token-group`         |             | `string`  | `undefined` |
+| `tokenId`           | `token-id`            |             | `string`  | `undefined` |
+| `tokenValue`        | `token-value`         |             | `string`  | `undefined` |
 
 
 ## Events

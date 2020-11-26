@@ -21,16 +21,35 @@
 
     const avaiableOptions = {
       mode: ["light", "dark"],
-      platform: ["linux", "windows", "mac"]
+      platform: ["linux", "windows", "mac"],
+      resolution: ["small", "medium", "large"]
     }
+
+    const tinyModel = {
+      "" : {
+        fontSizes: [
+          {
+            tokenCategory: "empty name",
+            tokens: [
+              {
+                id: "b01",  
+                caption: "XSmall",
+                value: "50px"
+              }
+            ]
+          }
+        ]
+      }
+    }
+
     const model = {
       "": {
         fontSizes: [
           {
-            tokenCategory: "empty model",
+            tokenCategory: "empty name",
             tokens: [
               {
-                id: "b01",
+                id: "b01",  
                 caption: "XSmall",
                 value: "50px"
               },
@@ -281,10 +300,10 @@
           }
         ]
       },
-      "mode_light%platform_linux": {
+      "platform_linux%mode_dark": {
         fontSizes: [
           {
-            tokenCategory: "mode_light platform_linux",
+            tokenCategory: "mode_dark%platform_linux",
             tokens: [
               {
                 id: "b01",
@@ -550,8 +569,9 @@
 
     //Card "Header buttons" Event Listeners
     const main = document.querySelector("dt-main");
-    main.model = model;
     main.avaiableOptions = avaiableOptions;
+    main.model = model;
+    //main.model = tinyModel;
 
     main.selectedTokenGroup = "spacing";
     main.selectedTokenId = "01";

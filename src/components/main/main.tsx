@@ -1,4 +1,5 @@
 import { State } from "@genexus/gemini/dist/types/stencil-public-runtime";
+import { GxgFormSelect } from "@genexus/gemini/dist/types/components/form-select/gxg-select";
 import {
   Component,
   Prop,
@@ -28,11 +29,11 @@ export class Main {
   @State() filterValue: string = "";
   @State() filterTokenGroup: string = "all";
 
-  @State() mode: string = "";
-  @State() platform: string = "";
+  //Model
   @State() options: Object = { mode: null, platform: null };
-  @State() modePlatform: string = "";
   @State() selectedModel: Object = null;
+  @State() selectedModelName: string = null;
+  @State() selectedOptions = [];
 
   alertBox!: HTMLElement;
   @Element() el: HTMLElement;
@@ -58,19 +59,10 @@ export class Main {
   }
 
   componentWillLoad() {
-    //Set selected model
-    this.setSelectedModel();
-    // this.updateModePlatform();
+    this.setInitalSelectedModel();
   }
 
-  componentDidLoad() {
-    if (this.tokenDeleted === true) {
-      setTimeout(() => {
-        this.alertBox.setAttribute("active", "active");
-        this.tokenDeleted = false;
-      }, 250);
-    }
-  }
+  componentDidLoad() {}
 
   @Watch("tokenDeleted")
   tokenDeletedHandler(newValue: boolean) {
@@ -80,11 +72,6 @@ export class Main {
         this.tokenDeleted = false;
       }, 250);
     }
-  }
-
-  @Watch("model")
-  modelHandler() {
-    this.setSelectedModel();
   }
 
   changeDisplay(e) {
@@ -132,7 +119,7 @@ export class Main {
           newItem={true}
           token-category={tokenCategory}
           token-group={tokenGroup}
-          mode-platform={this.modePlatform}
+          selectedModelName={this.selectedModelName}
           optionsToken={this.options}
           lastItem={lastCategory}
         ></dt-list-item>
@@ -143,72 +130,10 @@ export class Main {
           newCard={true}
           token-category={tokenCategory}
           token-group={tokenGroup}
-          mode-platform={this.modePlatform}
+          selectedModelName={this.selectedModelName}
           optionsToken={this.options}
         ></dt-card>
       );
-    }
-  }
-
-  //Mode and Platform
-  updateMode(e) {
-    this.mode = e.detail;
-    this.options["mode"] = this.mode;
-    this.updateModePlatform();
-  }
-  updatePlatform(e) {
-    this.platform = e.detail;
-    this.options["platform"] = this.platform;
-    this.updateModePlatform();
-  }
-  updateModePlatform() {
-    if (this.mode === "" && this.platform === "") {
-      this.modePlatform = "";
-    } else if (this.mode !== "" && this.platform === "") {
-      this.modePlatform = this.mode;
-    } else if (this.platform !== "" && this.mode === "") {
-      this.modePlatform = this.platform;
-    } else {
-      this.modePlatform = this.mode + "%" + this.platform;
-    }
-    //this.selectedModel = this.model[this.modePlatform];
-    if (this.selectedModel !== null) {
-      this.selectedModel = this.model[this.modePlatform];
-    }
-  }
-  setSelectedModel() {
-    if (this.model !== null) {
-      //If empty model name exists, set that as the selected model.
-      let modelHasEmptyModelName = this.model.hasOwnProperty("");
-      if (modelHasEmptyModelName) {
-        this.selectedModel = this.model[""];
-      } else {
-        //If empty model name does not exists, set the first sub-model as the selected model
-        this.selectedModel = this.model[Object.keys(this.model)[0]];
-
-        //Set gxg-select options to match the selected model
-        let selectedModelName = Object.getOwnPropertyNames(this.model)[0];
-        if (selectedModelName.search("%") === -1) {
-          if (selectedModelName.search("model") === -1) {
-            this.platform = selectedModelName;
-          } else {
-            this.mode = selectedModelName;
-          }
-        } else {
-          //selectedModelName has two options
-          let options = selectedModelName.split("%");
-          options.forEach(option => {
-            if (option.search("mode") === -1) {
-              this.platform = option;
-            } else {
-              this.mode = option;
-            }
-          });
-        }
-        //update options
-        this.options["mode"] = this.mode;
-        this.options["platform"] = this.platform;
-      }
     }
   }
 
@@ -325,6 +250,108 @@ export class Main {
   }
 
   /****************************
+   * MODEL FUNCTIONS
+   ****************************/
+
+  @Watch("model")
+  modelHandler() {
+    this.setInitalSelectedModel();
+  }
+
+  setInitalSelectedModel() {
+    if (this.model !== null && this.model !== undefined) {
+      this.selectedModelName = Object.keys(this.model)[0];
+      this.selectedModel = this.model[Object.keys(this.model)[0]];
+      this.updateSelectedOptions();
+    } else {
+      this.model = null;
+    }
+  }
+
+  updateSelectedOptions() {
+    //reset options
+    this.selectedOptions = [];
+    if (this.selectedModelName !== "") {
+      if (this.selectedModelName.includes("%")) {
+        this.selectedOptions = this.selectedModelName.split("%");
+      } else {
+        this.selectedOptions[0] = this.selectedModelName;
+      }
+    }
+  }
+
+  setSelectedOption(optionType, optionValue) {
+    let returnValue = false;
+    if (this.selectedOptions.length !== 0) {
+      for (let i = 0; i < this.selectedOptions.length; i++) {
+        let optionArray = this.selectedOptions[i].split("_");
+        let arrayOptionKey = optionArray[0];
+        let arrayOptionValue = optionArray[1];
+        if (optionType === arrayOptionKey) {
+          if (optionValue === arrayOptionValue) {
+            returnValue = true;
+            break;
+          }
+        }
+      }
+      return returnValue;
+    }
+  }
+
+  updateSelectedModel() {
+    //Update selected model name
+    let selectedModelName = "";
+    let optionsSelects = this.el.shadowRoot.querySelectorAll(".select-options");
+    optionsSelects.forEach(select => {
+      let selectLabel = ((select as unknown) as GxgFormSelect).label.toLowerCase();
+      let selectValue = ((select as unknown) as GxgFormSelect).value;
+      if (selectValue !== "") {
+        if (selectedModelName !== "") {
+          selectedModelName =
+            selectedModelName + "%" + selectLabel + "_" + selectValue;
+        } else {
+          selectedModelName = selectLabel + "_" + selectValue;
+        }
+      }
+    });
+    this.selectedModelName = selectedModelName;
+    this.updateSelectedOptions();
+    this.setSelectedModel();
+  }
+
+  setSelectedModel() {
+    if (this.selectedOptions.length === 0) {
+      if (this.model.hasOwnProperty("")) {
+        this.selectedModel = this.model[""];
+      } else {
+        this.selectedModel = null;
+      }
+    } else {
+      let modelFound = false;
+      loop1: for (const [modelKey] of Object.entries(this.model)) {
+        let modelKeyLength = modelKey.split("%").length;
+        if (modelKeyLength === this.selectedOptions.length) {
+          loop2: for (let i = 0; i < this.selectedOptions.length; i++) {
+            if (!modelKey.includes(this.selectedOptions[i])) {
+              modelFound = false;
+              break loop2;
+            } else {
+              modelFound = true;
+            }
+          }
+        }
+        if (modelFound) {
+          this.selectedModel = this.model[modelKey];
+          break loop1;
+        }
+      }
+      if (!modelFound) {
+        this.selectedModel = null;
+      }
+    }
+  }
+
+  /****************************
    * FILTER FUNCTIONS
    ****************************/
 
@@ -408,7 +435,8 @@ export class Main {
           "tokens-container": true,
           card: this.cardAsListItem === false,
           "list-item": this.cardAsListItem === true,
-          uncategorized: true
+          uncategorized: true,
+          "last-category": lastCategory
         }}
       >
         {this.cardAsListItem ? (
@@ -490,64 +518,24 @@ export class Main {
   }
 
   render() {
-    return this.selectedModel !== null ? (
+    // console.log("this.model");
+    // console.log(this.model);
+
+    // console.log("this.selectedModel");
+    // console.log(this.selectedModel);
+
+    // console.log("this.selectedOptions");
+    // console.log(this.selectedOptions);
+
+    // console.log("this.selectedModelName");
+    // console.log(this.selectedModelName);
+
+    return (
       <div class="container">
         <div id="filter">
           <div class="filter-container">
             <div class="col-left">
-              <div class="modes">
-                <gxg-select
-                  label="Mode"
-                  id="mode"
-                  onChange={this.updateMode.bind(this)}
-                >
-                  <gxg-option
-                    value=""
-                    selected={true ? this.mode === "" : false}
-                  >
-                    none
-                  </gxg-option>
-                  {this.avaiableOptions["mode"].map(mode => {
-                    let modeValue = "mode_" + mode;
-                    return (
-                      <gxg-option
-                        value={modeValue}
-                        selected={true ? this.mode === modeValue : false}
-                      >
-                        {mode}
-                      </gxg-option>
-                    );
-                  })}
-                </gxg-select>
-              </div>
-              <div class="platforms">
-                <gxg-select
-                  label="Platform"
-                  id="platform"
-                  onChange={this.updatePlatform.bind(this)}
-                >
-                  <gxg-option
-                    value=""
-                    selected={true ? this.platform === "" : false}
-                  >
-                    none
-                  </gxg-option>
-                  {this.avaiableOptions["platform"].map(platform => {
-                    let platformValue = "platform_" + platform;
-                    return (
-                      <gxg-option
-                        value={platformValue}
-                        selected={
-                          true ? this.platform === platformValue : false
-                        }
-                      >
-                        {platform}
-                      </gxg-option>
-                    );
-                  })}
-                </gxg-select>
-              </div>
-              <div class="display">
+              <div class="menu">
                 <gxg-button
                   onClick={this.changeDisplay.bind(this)}
                   type="tertiary"
@@ -569,11 +557,80 @@ export class Main {
                     selected: this.cardAsListItem === false
                   }}
                 ></gxg-button>
-                {/* <gxg-button
-                  onClick={this.showOptions.bind(this)}
-                  type="tertiary"
-                  icon="gemini-tools/settings"
-                ></gxg-button> */}
+                <gxg-spacer-one space="xs"></gxg-spacer-one>
+                <div class="options-container">
+                  <gxg-button
+                    onClick={this.showOptions.bind(this)}
+                    type="tertiary"
+                    icon="gemini-tools/settings"
+                  ></gxg-button>
+                  <gxg-card
+                    elevation="01"
+                    padding="m"
+                    class="options-card"
+                    max-width="300px"
+                  >
+                    <header class="options-card__header">
+                      <gxg-spacer-layout
+                        space="s"
+                        orientation="horizontal"
+                        justify-content="space-between"
+                      >
+                        <gxg-title type="title-04">Options</gxg-title>
+                        <gxg-button
+                          onClick={this.showOptions.bind(this)}
+                          type="tertiary"
+                          icon="gemini-tools/close"
+                        ></gxg-button>
+                      </gxg-spacer-layout>
+                    </header>
+
+                    <div class="options-card__select-container">
+                      <gxg-spacer-layout space="m" orientation="vertical">
+                        {Object.keys(this.avaiableOptions).map(optionType => (
+                          <gxg-select
+                            label={
+                              optionType.charAt(0).toUpperCase() +
+                              optionType.slice(1)
+                            }
+                            class="select-options"
+                          >
+                            <gxg-option value="">None</gxg-option>
+                            {this.avaiableOptions[optionType].map(option => (
+                              <gxg-option
+                                value={option}
+                                selected={this.setSelectedOption(
+                                  optionType,
+                                  option
+                                )}
+                              >
+                                {option}
+                              </gxg-option>
+                            ))}
+                          </gxg-select>
+                        ))}
+                      </gxg-spacer-layout>
+                    </div>
+
+                    <footer class="options-card__footer">
+                      <gxg-spacer-layout
+                        space="s"
+                        orientation="horizontal"
+                        justify-content="end"
+                      >
+                        <gxg-button type="secondary-text-only">
+                          Cancel
+                        </gxg-button>
+                        <gxg-button
+                          onClick={this.updateSelectedModel.bind(this)}
+                          type="primary-text-only"
+                        >
+                          Save
+                        </gxg-button>
+                      </gxg-spacer-layout>
+                    </footer>
+                  </gxg-card>
+                </div>
               </div>
             </div>
             <div class="col-right">
@@ -593,7 +650,7 @@ export class Main {
                   <gxg-option value="all" selected>
                     All
                   </gxg-option>
-                  {this.selectedModel !== undefined
+                  {this.selectedModel !== null
                     ? Object.keys(this.selectedModel).map(tokenGroup => {
                         return (
                           <gxg-option key={tokenGroup} value={tokenGroup}>
@@ -607,132 +664,142 @@ export class Main {
             </div>
           </div>
         </div>
-        <div id="main-container" class={{ hide: this.hideMainContainer }}>
-          {this.selectedModel !== undefined ? (
-            Object.keys(this.selectedModel).length > 0 ? (
-              this.someTokenGroupHasAMatch(this.selectedModel) ? (
-                <gxg-accordion mode="classical" no-padding>
-                  {Object.keys(this.selectedModel).map(tokenGroup => {
-                    return this.filterTokenGroup === "all" ||
-                      this.filterTokenGroup === tokenGroup.toLowerCase() ? (
-                      this.someCategoryHasAMatch(
-                        this.selectedModel[tokenGroup]
-                      ) ? (
-                        <gxg-accordion-item
-                          status="open"
-                          itemTitle={tokenGroup}
-                          itemId={tokenGroup}
-                          key={tokenGroup}
-                        >
-                          <div
-                            class={{
-                              "tokens-container": true,
-                              classical: true,
-                              categorized: true,
-                              card: this.cardAsListItem === false,
-                              "list-item": this.cardAsListItem === true
-                            }}
+
+        {this.selectedModel !== null ? (
+          <div id="main-container" class={{ hide: this.hideMainContainer }}>
+            {this.selectedModel !== undefined ? (
+              Object.keys(this.selectedModel).length > 0 ? (
+                this.someTokenGroupHasAMatch(this.selectedModel) ? (
+                  <gxg-accordion mode="classical" no-padding>
+                    {Object.keys(this.selectedModel).map(tokenGroup => {
+                      return this.filterTokenGroup === "all" ||
+                        this.filterTokenGroup === tokenGroup.toLowerCase() ? (
+                        this.someCategoryHasAMatch(
+                          this.selectedModel[tokenGroup]
+                        ) ? (
+                          <gxg-accordion-item
+                            status="open"
+                            itemTitle={tokenGroup}
+                            itemId={tokenGroup}
+                            key={tokenGroup}
                           >
-                            {this.selectedModel[tokenGroup] !== null ? (
-                              this.selectedModel[tokenGroup][0]
-                                .tokenCategory === null ? (
-                                //First category is null
-                                this.firstCategoryIsNullContent(tokenGroup)
-                              ) : this.someCategoryHasAMatch(
-                                  this.selectedModel[tokenGroup]
-                                ) ? (
-                                //First category is not null, and thus, none of the following categories should be null.
-                                <gxg-accordion mode="slim" no-padding>
-                                  {this.selectedModel[tokenGroup].map(
-                                    (tokenCategory, index) =>
-                                      this.categoryHasAMatch(tokenCategory) ? (
-                                        <gxg-accordion-item
-                                          status="open"
-                                          itemTitle={
-                                            tokenCategory.tokenCategory
-                                          }
-                                          itemId={tokenCategory.tokenCategory}
-                                        >
-                                          <div
-                                            class={{
-                                              "tokens-container": true,
-                                              slim: true,
-                                              categorized: true,
-                                              card:
-                                                this.cardAsListItem === false,
-                                              "list-item":
-                                                this.cardAsListItem === true
-                                            }}
+                            <div
+                              class={{
+                                "tokens-container": true,
+                                classical: true,
+                                categorized: true,
+                                card: this.cardAsListItem === false,
+                                "list-item": this.cardAsListItem === true
+                              }}
+                            >
+                              {this.selectedModel[tokenGroup] !== null ? (
+                                this.selectedModel[tokenGroup][0]
+                                  .tokenCategory === null ? (
+                                  //First category is null
+                                  this.firstCategoryIsNullContent(tokenGroup)
+                                ) : this.someCategoryHasAMatch(
+                                    this.selectedModel[tokenGroup]
+                                  ) ? (
+                                  //First category is not null, and thus, none of the following categories should be null.
+                                  <gxg-accordion mode="slim" no-padding>
+                                    {this.selectedModel[tokenGroup].map(
+                                      (tokenCategory, index) =>
+                                        this.categoryHasAMatch(
+                                          tokenCategory
+                                        ) ? (
+                                          <gxg-accordion-item
+                                            status="open"
+                                            itemTitle={
+                                              tokenCategory.tokenCategory
+                                            }
+                                            itemId={tokenCategory.tokenCategory}
                                           >
-                                            {this.cardAsListItem ? (
-                                              <dt-list-item-header
-                                                tokenGroup={tokenGroup}
-                                              ></dt-list-item-header>
-                                            ) : null}
-                                            {tokenCategory.tokens.map(
-                                              (token, index) =>
-                                                this.tokenMatch(token)
-                                                  ? this.returnTokenContainer(
-                                                      token,
-                                                      tokenGroup,
-                                                      tokenCategory.tokenCategory,
+                                            <div
+                                              class={{
+                                                "tokens-container": true,
+                                                slim: true,
+                                                categorized: true,
+                                                card:
+                                                  this.cardAsListItem === false,
+                                                "list-item":
+                                                  this.cardAsListItem === true
+                                              }}
+                                            >
+                                              {this.cardAsListItem ? (
+                                                <dt-list-item-header
+                                                  tokenGroup={tokenGroup}
+                                                ></dt-list-item-header>
+                                              ) : null}
+                                              {tokenCategory.tokens.map(
+                                                (token, index) =>
+                                                  this.tokenMatch(token)
+                                                    ? this.returnTokenContainer(
+                                                        token,
+                                                        tokenGroup,
+                                                        tokenCategory.tokenCategory,
+                                                        index
+                                                      )
+                                                    : null
+                                              )}
+                                              {this.printNewToken(
+                                                tokenGroup,
+                                                tokenCategory.tokenCategory,
+                                                true
+                                                  ? this.selectedModel[
+                                                      tokenGroup
+                                                    ].length -
+                                                      1 ===
                                                       index
-                                                    )
-                                                  : null
-                                            )}
-                                            {this.printNewToken(
-                                              tokenGroup,
-                                              tokenCategory.tokenCategory,
-                                              true
-                                                ? this.selectedModel[tokenGroup]
-                                                    .length -
-                                                    1 ===
-                                                    index
-                                                : false
-                                            )}
-                                          </div>
-                                        </gxg-accordion-item>
-                                      ) : //Token category filter does not has a match
-                                      null
-                                  )}
-                                </gxg-accordion>
-                              ) : null
-                            ) : (
-                              //Token group is null
-                              this.tokenGroupEmptyMessage(tokenGroup)
-                            )}
-                          </div>
-                        </gxg-accordion-item>
-                      ) : null
-                    ) : null;
-                  })}
-                </gxg-accordion>
+                                                  : false
+                                              )}
+                                            </div>
+                                          </gxg-accordion-item>
+                                        ) : //Token category filter does not has a match
+                                        null
+                                    )}
+                                  </gxg-accordion>
+                                ) : null
+                              ) : (
+                                //Token group is null
+                                this.tokenGroupEmptyMessage(tokenGroup)
+                              )}
+                            </div>
+                          </gxg-accordion-item>
+                        ) : null
+                      ) : null;
+                    })}
+                  </gxg-accordion>
+                ) : (
+                  //The filter didn´t match any token on the entire model
+                  <div class="message">
+                    Your search did not match any token.
+                  </div>
+                )
               ) : (
-                //The filter didn´t match any token on the entire model
-                <div class="message">Your search did not match any token.</div>
+                // The selected model has no token groups
+                <div class="message">
+                  The selected model has no token groups.
+                </div>
               )
             ) : (
-              // The selected model has no token groups
-              <div class="message">The selected model has no token groups.</div>
-            )
-          ) : (
-            <div class="message">The selected model does not exists.</div>
-          )}
+              <div class="message">The selected model does not exists.</div>
+            )}
 
-          <gxg-alert
-            active-time="06"
-            alert-title="Token has been deleted"
-            type="notice"
-            ref={el => (this.alertBox = el as HTMLElement)}
-            bottom="xs"
-            left-right="xs"
-          >
-            (Press ctrl + Z to undo)
-          </gxg-alert>
-        </div>
+            <gxg-alert
+              active-time="fast"
+              alert-title="Token has been deleted"
+              type="notice"
+              ref={el => (this.alertBox = el as HTMLElement)}
+              bottom="s"
+              left-right="s"
+            >
+              (Press ctrl + Z to undo)
+            </gxg-alert>
+          </div>
+        ) : (
+          <div class="message">The model is empty.</div>
+        )}
       </div>
-    ) : (
-      <div class="message">The model is empty.</div>
     );
   }
 }

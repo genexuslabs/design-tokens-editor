@@ -35,7 +35,7 @@ export class Card {
   @Prop() index: number; //index is for applying an increasing delay to the cards animation
   @Prop() isSelected: boolean = false;
   @Prop() newCard: boolean = false;
-  @Prop() modePlatform: string = null;
+  @Prop() selectedModelName: string = null;
   @Prop() optionsToken: object;
 
   //State

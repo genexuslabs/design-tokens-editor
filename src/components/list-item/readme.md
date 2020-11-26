@@ -7,19 +7,21 @@
 
 ## Properties
 
-| Property        | Attribute        | Description | Type      | Default     |
-| --------------- | ---------------- | ----------- | --------- | ----------- |
-| `index`         | `index`          |             | `number`  | `undefined` |
-| `isSelected`    | `is-selected`    |             | `boolean` | `false`     |
-| `itemTitle`     | `item-title`     |             | `string`  | `undefined` |
-| `mode`          | `mode`           |             | `string`  | `"preview"` |
-| `modePlatform`  | `mode-platform`  |             | `string`  | `null`      |
-| `newItem`       | `new-item`       |             | `boolean` | `false`     |
-| `readOnly`      | `read-only`      |             | `boolean` | `false`     |
-| `tokenCategory` | `token-category` |             | `string`  | `undefined` |
-| `tokenGroup`    | `token-group`    |             | `string`  | `undefined` |
-| `tokenId`       | `token-id`       |             | `string`  | `undefined` |
-| `tokenValue`    | `token-value`    |             | `string`  | `undefined` |
+| Property            | Attribute             | Description | Type      | Default     |
+| ------------------- | --------------------- | ----------- | --------- | ----------- |
+| `index`             | `index`               |             | `number`  | `undefined` |
+| `isSelected`        | `is-selected`         |             | `boolean` | `false`     |
+| `itemTitle`         | `item-title`          |             | `string`  | `undefined` |
+| `lastItem`          | `last-item`           |             | `boolean` | `false`     |
+| `mode`              | `mode`                |             | `string`  | `"preview"` |
+| `newItem`           | `new-item`            |             | `boolean` | `false`     |
+| `optionsToken`      | --                    |             | `object`  | `undefined` |
+| `readOnly`          | `read-only`           |             | `boolean` | `false`     |
+| `selectedModelName` | `selected-model-name` |             | `string`  | `null`      |
+| `tokenCategory`     | `token-category`      |             | `string`  | `undefined` |
+| `tokenGroup`        | `token-group`         |             | `string`  | `undefined` |
+| `tokenId`           | `token-id`            |             | `string`  | `undefined` |
+| `tokenValue`        | `token-value`         |             | `string`  | `undefined` |
 
 
 ## Events
