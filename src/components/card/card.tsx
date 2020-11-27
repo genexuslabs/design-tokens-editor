@@ -36,7 +36,7 @@ export class Card {
   @Prop() isSelected: boolean = false;
   @Prop() newCard: boolean = false;
   @Prop() selectedModelName: string = null;
-  @Prop() optionsToken: object;
+  @Prop() optionsToken: string;
 
   //State
   @State() cardMinHeight: string;
@@ -155,7 +155,9 @@ export class Card {
     }
   }
 
-  componentDidLoad() {}
+  componentDidLoad() {
+    console.log(this.optionsToken);
+  }
 
   componentDidUpdate() {}
 
@@ -208,8 +210,8 @@ export class Card {
 
   newCardOnClick() {
     let newItemData = {
-      "token-group": this.tokenGroup,
-      "token-category": this.tokenCategory,
+      group: this.tokenGroup,
+      category: this.tokenCategory,
       options: this.optionsToken
     };
     this.addNewToken.emit(newItemData);

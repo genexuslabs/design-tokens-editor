@@ -20,7 +20,7 @@ export class TokenContainer {
   @Prop() key: string;
   @Prop() cardAsListItem: boolean = false;
   @Prop() isSelected: boolean = false;
-  @Prop() optionsToken: object;
+  @Prop() optionsToken: string;
 
   @Prop({ mutable: true }) selectedTokenGroup: string;
   @Prop({ mutable: true }) selectedTokenId: string;
@@ -30,6 +30,11 @@ export class TokenContainer {
   @Listen("modeChanged")
   modeChangedHandler(event: CustomEvent) {
     this.mode = event.detail;
+  }
+
+  componentDidLoad() {
+    console.log("this.optionsToken token-container");
+    console.log(this.optionsToken);
   }
 
   render() {

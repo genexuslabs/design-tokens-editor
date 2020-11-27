@@ -128,7 +128,7 @@ export class Main {
           token-category={tokenCategory}
           token-group={tokenGroup}
           selectedModelName={this.selectedModelName}
-          optionsToken={this.options}
+          optionsToken={this.selectedModelName}
           lastItem={lastCategory}
         ></dt-list-item>
       );
@@ -139,7 +139,7 @@ export class Main {
           token-category={tokenCategory}
           token-group={tokenGroup}
           selectedModelName={this.selectedModelName}
-          optionsToken={this.options}
+          optionsToken={this.selectedModelName}
         ></dt-card>
       );
     }
@@ -252,7 +252,7 @@ export class Main {
         index={index}
         key={token.id}
         is-selected={this.selectedTokenId == token.id}
-        optionsToken={this.options}
+        optionsToken={this.selectedModelName}
       ></dt-token-container>
     );
   }
@@ -263,7 +263,19 @@ export class Main {
 
   @Watch("model")
   modelHandler() {
+    console.log("model changed");
+    console.log(this.model);
     this.setInitalSelectedModel();
+  }
+  @Watch("selectedModel")
+  selectedModelHandler() {
+    console.log("selectedModel changed");
+    console.log(this.selectedModel);
+  }
+  @Watch("selectedModelName")
+  selectedModelNameHandler() {
+    console.log("selectedModelName changed");
+    console.log(this.selectedModelName);
   }
 
   setInitalSelectedModel() {
@@ -660,9 +672,9 @@ export class Main {
               </div>
               <div class="categories">
                 <gxg-select
+                  disabled={true ? this.selectedModel === null : false}
                   size="8"
                   onChange={this.updateTokenGroup.bind(this)}
-                  disabled={true ? this.selectedModel === null : false}
                 >
                   <gxg-option value="all" selected>
                     All

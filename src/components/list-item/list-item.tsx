@@ -34,7 +34,7 @@ export class ListItem {
   @Prop() isSelected: boolean = false;
   @Prop() newItem: boolean = false;
   @Prop() selectedModelName: string = null;
-  @Prop() optionsToken: object;
+  @Prop() optionsToken: string;
   @Prop({ reflect: true }) lastItem: boolean = false;
 
   @State() focusableButtons: boolean = false;
@@ -213,8 +213,8 @@ export class ListItem {
   }
   newItemOnClick() {
     let newItemData = {
-      "token-group": this.tokenGroup,
-      "token-category": this.tokenCategory,
+      group: this.tokenGroup,
+      category: this.tokenCategory,
       options: this.optionsToken
     };
     this.addNewToken.emit(newItemData);
