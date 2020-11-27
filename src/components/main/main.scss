@@ -16,11 +16,6 @@
   max-width: 500px;
 }
 
-#filter {
-  padding-top: var(--spacing-comp-02);
-  padding-bottom: var(--spacing-comp-02);
-}
-
 #main-container {
   opacity: 1;
   @include ui-animation(opacity);
@@ -61,88 +56,98 @@
 // FITLER
 //**************************
 
-.filter-container {
-  display: flex;
-  .col-left {
-    width: 50%;
+#filter {
+  padding-top: var(--spacing-comp-02);
+  padding-bottom: var(--spacing-comp-02);
+
+  .filter-container {
     display: flex;
-    align-items: flex-end;
-    .modes {
-      width: 30%;
-      padding-right: var(--spacing-comp-02);
-    }
-    .platforms {
-      width: 30%;
-      padding-right: var(--spacing-comp-02);
-    }
-    .menu {
-      display: flex;
-      //Options card
-      .options-card {
-        position: absolute;
-        z-index: 10;
-        width: 100%;
-        left: 240px;
-
-        &__header {
-          margin-bottom: var(--spacing-lay-m);
-        }
-        &__select-container {
-          max-width: 200px;
-          margin-bottom: var(--spacing-lay-m);
-        }
-        &__footer {
-        }
-      }
-    }
-  }
-  .col-right {
-    width: 50%;
-    display: flex;
-    align-items: flex-end;
-    .search {
-      width: 60%;
-      padding-right: var(--spacing-comp-02);
-    }
-    .categories {
-      width: 40%;
-    }
-  }
-  .filter-button {
-    @include ui-animation(opacity);
-    opacity: 0.3;
-    &.selected {
-      opacity: 1;
-    }
-    &:hover {
-      opacity: 1;
-    }
-  }
-
-  //accordion slim fix
-
-  gxg-accordion {
-    margin-bottom: 20px;
-  }
-
-  @media screen and (max-width: 380px) {
-    display: block;
     .col-left {
-      width: 100%;
-      margin-bottom: var(--spacing-comp-01);
-
-      .display {
-        width: 70%;
-        justify-content: flex-end;
+      width: 50%;
+      display: flex;
+      align-items: flex-end;
+      .modes {
+        width: 30%;
+        padding-right: var(--spacing-comp-02);
+      }
+      .platforms {
+        width: 30%;
+        padding-right: var(--spacing-comp-02);
+      }
+      .menu {
+        display: flex;
+        //Options card
+        .options-card {
+          position: absolute;
+          z-index: 10;
+          width: 100%;
+          opacity: 0;
+          top: 30px;
+          @include ui-animation(all);
+          &__header {
+            margin-bottom: var(--spacing-lay-m);
+          }
+          &__select-container {
+            max-width: 200px;
+            margin-bottom: var(--spacing-lay-m);
+          }
+          &__footer {
+          }
+        }
       }
     }
     .col-right {
-      width: 100%;
+      width: 50%;
+      display: flex;
+      align-items: flex-end;
       .search {
-        width: 70%;
+        width: 60%;
+        padding-right: var(--spacing-comp-02);
       }
       .categories {
-        width: 30%;
+        width: 40%;
+      }
+    }
+    .filter-button {
+      @include ui-animation(opacity);
+      opacity: 0.3;
+      &.selected {
+        opacity: 1;
+      }
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    @media screen and (max-width: 380px) {
+      display: block;
+      .col-left {
+        width: 100%;
+        margin-bottom: var(--spacing-comp-01);
+
+        .display {
+          width: 70%;
+          justify-content: flex-end;
+        }
+      }
+      .col-right {
+        width: 100%;
+        .search {
+          width: 70%;
+        }
+        .categories {
+          width: 30%;
+        }
+      }
+    }
+  }
+  &.show-options {
+    .filter-container {
+      .menu {
+        .options-card {
+          opacity: 1;
+          top: 35px;
+        }
       }
     }
   }

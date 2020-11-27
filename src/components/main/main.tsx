@@ -35,6 +35,9 @@ export class Main {
   @State() selectedModelName: string = null;
   @State() selectedOptions = [];
 
+  //Options
+  @State() optionsVisible: boolean = false;
+
   alertBox!: HTMLElement;
   @Element() el: HTMLElement;
 
@@ -110,7 +113,12 @@ export class Main {
     }
   }
 
-  showOptions() {}
+  showOptions() {
+    this.optionsVisible = true;
+  }
+  hideOptions() {
+    this.optionsVisible = false;
+  }
 
   printNewToken(tokenGroup, tokenCategory, lastCategory) {
     if (this.cardAsListItem) {
@@ -532,7 +540,13 @@ export class Main {
 
     return (
       <div class="container">
-        <div id="filter">
+        <div
+          id="filter"
+          class={{
+            "show-options": this.optionsVisible,
+            "model-null": this.selectedModel === null
+          }}
+        >
           <div class="filter-container">
             <div class="col-left">
               <div class="menu">
@@ -564,6 +578,7 @@ export class Main {
                     type="tertiary"
                     icon="gemini-tools/settings"
                   ></gxg-button>
+
                   <gxg-card
                     elevation="01"
                     padding="m"
@@ -578,7 +593,7 @@ export class Main {
                       >
                         <gxg-title type="title-04">Options</gxg-title>
                         <gxg-button
-                          onClick={this.showOptions.bind(this)}
+                          onClick={this.hideOptions.bind(this)}
                           type="tertiary"
                           icon="gemini-tools/close"
                         ></gxg-button>
@@ -640,12 +655,14 @@ export class Main {
                   icon-position="start"
                   icon="gemini-tools/search"
                   onInput={this.filterTokens.bind(this)}
+                  disabled={true ? this.selectedModel === null : false}
                 ></gxg-form-text>
               </div>
               <div class="categories">
                 <gxg-select
                   size="8"
                   onChange={this.updateTokenGroup.bind(this)}
+                  disabled={true ? this.selectedModel === null : false}
                 >
                   <gxg-option value="all" selected>
                     All
