@@ -32,10 +32,7 @@ export class TokenContainer {
     this.mode = event.detail;
   }
 
-  componentDidLoad() {
-    console.log("this.optionsToken token-container");
-    console.log(this.optionsToken);
-  }
+  componentDidLoad() {}
 
   render() {
     let switchTokenGroup = (tokenGroup, tokenValue, tokenCaption, tokenId) => {

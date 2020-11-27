@@ -3,7 +3,7 @@ import { Prop, Component, h, Host, Event, EventEmitter } from "@stencil/core";
 @Component({
   tag: "dt-quote",
   styleUrl: "quote.scss",
-  shadow: true,
+  shadow: true
 })
 export class Quote {
   constructor() {
@@ -15,7 +15,7 @@ export class Quote {
   @Prop() token: string;
   @Prop() tokenGroup: string;
   @Prop() buttonLabel: string;
-
+  @Prop() optionsToken: string;
 
   //Events
   @Event()
@@ -48,7 +48,10 @@ export class Quote {
   componentDidLoad() {}
 
   addFirstTokenFunction() {
-    this.addFirstToken.emit(this.tokenGroup);
+    this.addFirstToken.emit({
+      group: this.tokenGroup,
+      options: this.optionsToken
+    });
   }
 
   render() {

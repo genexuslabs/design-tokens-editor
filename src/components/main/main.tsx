@@ -236,6 +236,7 @@ export class Main {
         token={token}
         quote={quote}
         author={author}
+        optionsToken={this.selectedModelName}
       ></dt-quote>
     );
   }
@@ -362,6 +363,7 @@ export class Main {
         }
         if (modelFound) {
           this.selectedModel = this.model[modelKey];
+          this.selectedModelName = modelKey;
           break loop1;
         }
       }
@@ -537,6 +539,31 @@ export class Main {
     this.filterValue = (e.target as HTMLGxgFormTextElement).value;
   }
 
+  pillContent() {
+    //First option
+    let pillContent = "";
+    let firstOptionArr = this.selectedOptions[0].split("_");
+    let firstOptionKey =
+      firstOptionArr[0].charAt(0).toUpperCase() + firstOptionArr[0].slice(1);
+    let firstOptionValue = firstOptionArr[1];
+    pillContent += firstOptionKey + ": " + firstOptionValue;
+    //If number of options is more than 1...
+    if (this.selectedOptions.length > 1) {
+      let secondOptionArr = this.selectedOptions[1].split("_");
+      let secondOptionKey =
+        secondOptionArr[0].charAt(0).toUpperCase() +
+        secondOptionArr[0].slice(1);
+      let secondOptionValue = secondOptionArr[1];
+      pillContent += " | " + secondOptionKey + ": " + secondOptionValue;
+    }
+    //If number of options is more than 2...
+    if (this.selectedOptions.length > 2) {
+      let selectedOptionsExcess = this.selectedOptions.length - 2;
+      pillContent += " +" + selectedOptionsExcess;
+    }
+    return pillContent;
+  }
+
   render() {
     // console.log("this.model");
     // console.log(this.model);
@@ -547,15 +574,11 @@ export class Main {
     // console.log("this.selectedOptions");
     // console.log(this.selectedOptions);
 
-    // console.log("this.selectedModelName");
-    // console.log(this.selectedModelName);
-
     return (
-      <div class="container">
+      <div class={{ container: true, "show-options": this.optionsVisible }}>
         <div
           id="filter"
           class={{
-            "show-options": this.optionsVisible,
             "model-null": this.selectedModel === null
           }}
         >
@@ -603,7 +626,7 @@ export class Main {
                         orientation="horizontal"
                         justify-content="space-between"
                       >
-                        <gxg-title type="title-04">Options</gxg-title>
+                        <gxg-title type="title-04">Model options</gxg-title>
                         <gxg-button
                           onClick={this.hideOptions.bind(this)}
                           type="tertiary"
@@ -652,13 +675,21 @@ export class Main {
                           onClick={this.updateSelectedModel.bind(this)}
                           type="primary-text-only"
                         >
-                          Save
+                          Update model
                         </gxg-button>
                       </gxg-spacer-layout>
                     </footer>
                   </gxg-card>
                 </div>
               </div>
+              {this.selectedOptions.length > 0 ? (
+                <gxg-pill
+                  style={{ "margin-left": "var(--spacing-comp-02)" }}
+                  type="static"
+                >
+                  {this.pillContent()}
+                </gxg-pill>
+              ) : null}
             </div>
             <div class="col-right">
               <div class="search">

@@ -69,6 +69,7 @@ export namespace Components {
   interface DtQuote {
     'author': string;
     'buttonLabel': string;
+    'optionsToken': string;
     'quote': string;
     'token': string;
     'tokenGroup': string;
@@ -435,6 +436,7 @@ declare namespace LocalJSX {
     'author'?: string;
     'buttonLabel'?: string;
     'onAddFirstToken'?: (event: CustomEvent<any>) => void;
+    'optionsToken'?: string;
     'quote'?: string;
     'token'?: string;
     'tokenGroup'?: string;
