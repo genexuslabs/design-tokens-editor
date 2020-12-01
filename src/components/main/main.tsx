@@ -442,7 +442,7 @@ export class Main {
                   100
                 );
               }.bind(this),
-              10000
+              800
             );
           }.bind(this),
           100
