@@ -453,7 +453,6 @@ export class Main {
   }
 
   setSelectedModel() {
-    let actualModel = this.selectedModel;
     if (this.selectedOptions.length === 0) {
       if (this.model.hasOwnProperty("")) {
         this.selectedModel = this.model[""];
