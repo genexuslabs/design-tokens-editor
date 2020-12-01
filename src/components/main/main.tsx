@@ -361,6 +361,7 @@ export class Main {
   }
 
   setInitalSelectedModel() {
+    console.log("hola");
     if (this.model !== null && this.model !== undefined) {
       this.selectedModelName = Object.keys(this.model)[0];
       this.selectedModel = this.model[Object.keys(this.model)[0]];
@@ -368,6 +369,8 @@ export class Main {
     } else {
       this.model = null;
     }
+    console.log("this.selectedOptions here");
+    console.log(this.selectedOptions);
   }
 
   updateSelectedOptions() {
@@ -687,8 +690,38 @@ export class Main {
   }
 
   resetFilter() {
-    this.setInitalSelectedModel();
-    this.searchValue = "";
+    setTimeout(
+      function() {
+        this.hideMainContainer = true;
+
+        setTimeout(
+          function() {
+            this.updatingModel = true;
+
+            this.setInitalSelectedModel();
+            this.cancelOptions();
+            let searchInput = this.el.shadowRoot.querySelector("#searchFilter");
+            searchInput.value = "";
+            this.filterValue = "";
+
+            setTimeout(
+              function() {
+                this.updatingModel = false;
+                setTimeout(
+                  function() {
+                    this.hideMainContainer = false;
+                  }.bind(this),
+                  100
+                );
+              }.bind(this),
+              800
+            );
+          }.bind(this),
+          100
+        );
+      }.bind(this),
+      150
+    );
   }
 
   /********************************
@@ -886,7 +919,7 @@ export class Main {
                   icon="gemini-tools/search"
                   onInput={this.filterTokens.bind(this)}
                   disabled={true ? this.selectedModel === null : false}
-                  value={this.searchValue}
+                  id="searchFilter"
                 ></gxg-form-text>
               </div>
               <div class="categories">
