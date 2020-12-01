@@ -42,7 +42,9 @@
 - gxg-title
 - gxg-select
 - gxg-option
+- gxg-pill
 - gxg-form-text
+- [dt-loader](../loader)
 - gxg-alert
 
 ### Graph
@@ -62,7 +64,9 @@ graph TD;
   dt-main --> gxg-title
   dt-main --> gxg-select
   dt-main --> gxg-option
+  dt-main --> gxg-pill
   dt-main --> gxg-form-text
+  dt-main --> dt-loader
   dt-main --> gxg-alert
   dt-list-item --> gxg-button
   gxg-button --> gxg-icon
@@ -98,6 +102,7 @@ graph TD;
   gxg-form-textarea --> gxg-form-message
   gxg-accordion-item --> gxg-icon
   gxg-accordion-item --> gxg-form-text
+  gxg-pill --> gxg-icon
   gxg-alert --> gxg-icon
   gxg-alert --> gxg-button
   style dt-main fill:#f9f,stroke:#333,stroke-width:4px

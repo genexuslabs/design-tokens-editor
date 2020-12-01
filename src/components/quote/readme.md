@@ -7,13 +7,14 @@
 
 ## Properties
 
-| Property      | Attribute      | Description | Type     | Default     |
-| ------------- | -------------- | ----------- | -------- | ----------- |
-| `author`      | `author`       |             | `string` | `undefined` |
-| `buttonLabel` | `button-label` |             | `string` | `undefined` |
-| `quote`       | `quote`        |             | `string` | `undefined` |
-| `token`       | `token`        |             | `string` | `undefined` |
-| `tokenGroup`  | `token-group`  |             | `string` | `undefined` |
+| Property       | Attribute       | Description | Type     | Default     |
+| -------------- | --------------- | ----------- | -------- | ----------- |
+| `author`       | `author`        |             | `string` | `undefined` |
+| `buttonLabel`  | `button-label`  |             | `string` | `undefined` |
+| `optionsToken` | `options-token` |             | `string` | `undefined` |
+| `quote`        | `quote`         |             | `string` | `undefined` |
+| `token`        | `token`         |             | `string` | `undefined` |
+| `tokenGroup`   | `token-group`   |             | `string` | `undefined` |
 
 
 ## Events

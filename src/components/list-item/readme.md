@@ -15,7 +15,7 @@
 | `lastItem`          | `last-item`           |             | `boolean` | `false`     |
 | `mode`              | `mode`                |             | `string`  | `"preview"` |
 | `newItem`           | `new-item`            |             | `boolean` | `false`     |
-| `optionsToken`      | --                    |             | `object`  | `undefined` |
+| `optionsToken`      | `options-token`       |             | `string`  | `undefined` |
 | `readOnly`          | `read-only`           |             | `boolean` | `false`     |
 | `selectedModelName` | `selected-model-name` |             | `string`  | `null`      |
 | `tokenCategory`     | `token-category`      |             | `string`  | `undefined` |
@@ -31,7 +31,6 @@
 | `addNewToken`     |             | `CustomEvent<any>` |
 | `cardClosed`      |             | `CustomEvent<any>` |
 | `editToken`       |             | `CustomEvent<any>` |
-| `itemActivated`   |             | `CustomEvent<any>` |
 | `modeChanged`     |             | `CustomEvent<any>` |
 | `tokenDeleted`    |             | `CustomEvent<any>` |
 | `tokenDuplicated` |             | `CustomEvent<any>` |

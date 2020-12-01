@@ -13,7 +13,7 @@
 | `index`             | `index`               |             | `number`  | `undefined` |
 | `isSelected`        | `is-selected`         |             | `boolean` | `false`     |
 | `newCard`           | `new-card`            |             | `boolean` | `false`     |
-| `optionsToken`      | --                    |             | `object`  | `undefined` |
+| `optionsToken`      | `options-token`       |             | `string`  | `undefined` |
 | `readOnly`          | `read-only`           |             | `boolean` | `false`     |
 | `selectedModelName` | `selected-model-name` |             | `string`  | `null`      |
 | `tokenCategory`     | `token-category`      |             | `string`  | `null`      |
@@ -28,7 +28,6 @@
 | ---------------------- | ----------- | ------------------ |
 | `addNewToken`          |             | `CustomEvent<any>` |
 | `cardClosed`           |             | `CustomEvent<any>` |
-| `itemActivated`        |             | `CustomEvent<any>` |
 | `modeChanged`          |             | `CustomEvent<any>` |
 | `shiftTabOnEditButton` |             | `CustomEvent<any>` |
 | `tokenDeleted`         |             | `CustomEvent<any>` |

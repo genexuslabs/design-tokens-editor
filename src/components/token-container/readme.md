@@ -14,7 +14,7 @@
 | `isSelected`         | `is-selected`          |             | `boolean` | `false`     |
 | `key`                | `key`                  |             | `string`  | `undefined` |
 | `listItem`           | `list-item`            |             | `boolean` | `undefined` |
-| `optionsToken`       | --                     |             | `object`  | `undefined` |
+| `optionsToken`       | `options-token`        |             | `string`  | `undefined` |
 | `readOnly`           | `read-only`            |             | `boolean` | `undefined` |
 | `selectedTokenGroup` | `selected-token-group` |             | `string`  | `undefined` |
 | `selectedTokenId`    | `selected-token-id`    |             | `string`  | `undefined` |
