@@ -49,8 +49,6 @@ export class ListItem {
   @Event()
   tokenSaved: EventEmitter;
   @Event()
-  itemActivated: EventEmitter;
-  @Event()
   addNewToken: EventEmitter;
   @Event()
   editToken: EventEmitter;
@@ -205,12 +203,7 @@ export class ListItem {
     this.element.focus();
     this.isSelected = true;
   }
-  activateItem() {
-    this.itemActivated.emit({
-      tokenId: this.tokenId,
-      tokenGroup: this.tokenGroup
-    });
-  }
+
   newItemOnClick() {
     let newItemData = {
       group: this.tokenGroup,
@@ -218,14 +211,6 @@ export class ListItem {
       options: this.optionsToken
     };
     this.addNewToken.emit(newItemData);
-  }
-  @Listen("focus")
-  handleFocus() {
-    this.element.classList.add("item--selected");
-    this.itemActivated.emit({
-      tokenId: this.tokenId,
-      tokenGroup: this.tokenGroup
-    });
   }
 
   handleItemKeyDown(e) {
@@ -299,7 +284,6 @@ export class ListItem {
             "add-new-token": true
           }}
           onClick={this.newItemOnClick.bind(this)}
-          onMouseEnter={this.activateItem.bind(this)}
         >
           <div class="item" data-tokenId={this.tokenId}>
             <gxg-button
@@ -320,97 +304,93 @@ export class ListItem {
             "item--selected": this.isSelected === true,
             "focus-on-buttons": this.focusableButtons === true
           }}
-          onMouseEnter={this.activateItem.bind(this)}
           tabIndex="0"
           onKeyDown={this.handleItemKeyDown.bind(this)}
         >
-          <div class="item-main-container">
-            <div
-              class={{
-                item: true,
-                "item--editable": this.mode === "editable"
-              }}
-              data-tokenId={this.tokenId}
-            >
-              {this.mode === "preview" ? (
-                <div class="container preview-mode">
-                  <div class="col-left">
-                    <div class="preview">
-                      <slot name="preview"></slot>
-                    </div>
-                    <div class="col-left__title-value-container">
-                      <div class="title-container">
-                        <h3 class="item-title">{this.itemTitle}</h3>
-                      </div>
-                      <span class="token-value">{this.tokenValue}</span>
-                    </div>
+          <div
+            class={{
+              item: true,
+              "item-new": this.newItem,
+              "item--editable": this.mode === "editable"
+            }}
+            data-tokenId={this.tokenId}
+          >
+            {this.mode === "preview" ? (
+              <div class="container preview-mode">
+                <div class="col-left">
+                  <div class="preview">
+                    <slot name="preview"></slot>
                   </div>
+                  <div class="col-left__title-value-container">
+                    <div class="title-container">
+                      <h3 class="item-title">{this.itemTitle}</h3>
+                    </div>
+                    <span class="token-value">{this.tokenValue}</span>
+                  </div>
+                </div>
 
-                  <div class="col-right">
-                    <div class="item-menu">
-                      <gxg-button
-                        id="edit-button"
-                        type="secondary-icon-only"
-                        onClick={this.editItem.bind(this)}
-                        disabled={this.readOnly}
-                        title={
-                          this.readOnly === true
-                            ? "edit token (comming soon)"
-                            : "edit token"
-                        }
-                        icon="gemini-tools/edit"
-                        tabindex="-1"
-                        onKeyDown={this.editButtonKeyDownHandler.bind(this)}
-                        key="1"
-                      ></gxg-button>
-                      <gxg-button
-                        id="duplicate-button"
-                        type="secondary-icon-only"
-                        onClick={this.duplicateItem.bind(this)}
-                        title="duplicate token"
-                        icon="gemini-tools/duplicate"
-                        tabindex="-1"
-                        onKeyDown={this.duplicateButtonKeyDownHandler.bind(
-                          this
-                        )}
-                        key="2"
-                      ></gxg-button>
-                      <gxg-button
-                        id="delete-button"
-                        type="secondary-icon-only"
-                        onClick={this.deleteItem.bind(this)}
-                        title="delete token"
-                        icon="gemini-tools/delete"
-                        tabindex="-1"
-                        onKeyDown={this.deleteButtonKeyDownHandler.bind(this)}
-                        key="3"
-                      ></gxg-button>
-                    </div>
+                <div class="col-right">
+                  <div class="item-menu">
+                    <gxg-button
+                      id="edit-button"
+                      type="secondary-icon-only"
+                      onClick={this.editItem.bind(this)}
+                      disabled={this.readOnly}
+                      title={
+                        this.readOnly === true
+                          ? "edit token (comming soon)"
+                          : "edit token"
+                      }
+                      icon="gemini-tools/edit"
+                      tabindex="-1"
+                      onKeyDown={this.editButtonKeyDownHandler.bind(this)}
+                      key="1"
+                    ></gxg-button>
+                    <gxg-button
+                      id="duplicate-button"
+                      type="secondary-icon-only"
+                      onClick={this.duplicateItem.bind(this)}
+                      title="duplicate token"
+                      icon="gemini-tools/duplicate"
+                      tabindex="-1"
+                      onKeyDown={this.duplicateButtonKeyDownHandler.bind(this)}
+                      key="2"
+                    ></gxg-button>
+                    <gxg-button
+                      id="delete-button"
+                      type="secondary-icon-only"
+                      onClick={this.deleteItem.bind(this)}
+                      title="delete token"
+                      icon="gemini-tools/delete"
+                      tabindex="-1"
+                      onKeyDown={this.deleteButtonKeyDownHandler.bind(this)}
+                      key="3"
+                    ></gxg-button>
                   </div>
                 </div>
-              ) : (
-                <div class="container edit-mode">
-                  <div class="col-left">
-                    <div class="preview">
-                      <slot name="preview"></slot>
-                    </div>
-                    <div class="list-content-editable">
-                      <slot name="editable"></slot>
-                    </div>
+              </div>
+            ) : (
+              <div class="container edit-mode">
+                <div class="col-left">
+                  <div class="preview">
+                    <slot name="preview"></slot>
                   </div>
-                  <div class="col-right">
-                    <div class="item-menu">
-                      <gxg-button
-                        type="secondary-icon-only"
-                        onClick={this.closeItem.bind(this)}
-                        icon="gemini-tools/close"
-                        onKeyDown={this.closeButtonKeyDownHandler.bind(this)}
-                      ></gxg-button>
-                    </div>
+                  <div class="list-content-editable">
+                    <slot name="editable"></slot>
                   </div>
                 </div>
-              )}
-            </div>
+                <div class="col-right">
+                  <div class="item-menu">
+                    <gxg-button
+                      type="secondary-icon-only"
+                      onClick={this.closeItem.bind(this)}
+                      icon="gemini-tools/close"
+                      onKeyDown={this.closeButtonKeyDownHandler.bind(this)}
+                    ></gxg-button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </Host>
       );

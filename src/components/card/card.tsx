@@ -55,8 +55,6 @@ export class Card {
   @Event()
   modeChanged: EventEmitter;
   @Event()
-  itemActivated: EventEmitter;
-  @Event()
   addNewToken: EventEmitter;
   @Event()
   shiftTabOnEditButton: EventEmitter;
@@ -200,13 +198,6 @@ export class Card {
     this.element.focus();
     this.isSelected = true;
   }
-  activateItem() {
-    this.itemActivated.emit({
-      tokenId: this.tokenId,
-      tokenGroup: this.tokenGroup
-    });
-    this.element.focus();
-  }
 
   newCardOnClick() {
     let newItemData = {
@@ -215,13 +206,6 @@ export class Card {
       options: this.optionsToken
     };
     this.addNewToken.emit(newItemData);
-  }
-  @Listen("focus")
-  handleFocus() {
-    this.itemActivated.emit({
-      tokenId: this.tokenId,
-      tokenGroup: this.tokenGroup
-    });
   }
 
   newCardImage() {
@@ -327,7 +311,6 @@ export class Card {
             "dt-card-edit-mode": this.mode === "editable",
             "focus-on-buttons": this.focusableButtons === true
           }}
-          onMouseEnter={this.activateItem.bind(this)}
           tabIndex="0"
           onKeyDown={this.handleCardKeyDown.bind(this)}
         >

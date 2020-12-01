@@ -7,55 +7,41 @@
 :host(.editable-mode-on) {
   z-index: 10;
 }
-:host(.item--selected) {
-  // border-color: var(--color-primary-active);
-  .card-header-menu {
-    opacity: 1;
+:host(:not(:focus)) {
+  .card {
+    &:hover {
+      .card-header-menu {
+        opacity: 1;
+      }
+      box-shadow: var(--box-shadow-02);
+    }
   }
-  box-shadow: var(--box-shadow-02);
 }
-:host(.item--selected.focus-on-buttons) {
-  box-shadow: none;
+:host(:focus) {
+  border-color: var(--color-primary-active);
+  box-shadow: inset 0px 0px 0px 1px var(--color-primary-active);
+  .card {
+    .card-header-menu {
+      opacity: 1;
+    }
+  }
 }
-.card-header-menu:focus {
-  opacity: 1;
+:host(.focus-on-buttons) {
+  .card {
+    .card-header-menu {
+      opacity: 1;
+    }
+  }
 }
-
-// $card-animation-top-initial: -5px;
-// $card-animation-opacity-initial: 0;
-
-// @keyframes slideUp {
-//   0% {
-//     top: $card-animation-top-initial;
-//     opacity: $card-animation-opacity-initial;
-//   }
-//   100% {
-//     top: 0;
-//     opacity: 1;
-//   }
-// }
 
 :host {
   .token-title-list {
     display: none;
   }
-
-  @include ui-animation(box-shadow);
-
-  //animation
-  --card-animation-delay: 0;
   z-index: 1;
   position: relative;
-  // animation-name: slideUp;
-  // animation-duration: 0.75s;
-  // animation-iteration-count: 1;
-  // animation-delay: var(--cardAnimationDelay);
-  // animation-fill-mode: forwards;
-  // top: $card-animation-top-initial;
-  // opacity: $card-animation-opacity-initial;
 
   display: block;
-  //flex: 0 0 calc((100% - var(--spacing-comp-02) * 2) / 3);
   width: var(--cardWidth);
   margin: 0 var(--spacing-comp-01);
   margin-bottom: var(--spacing-comp-02);
@@ -67,11 +53,11 @@
   .card {
     display: flex;
     padding: var(--spacing-comp-02);
+    @include ui-animation(box-shadow);
 
     &-main-container {
       flex: 1;
       box-shadow: 0;
-      // @include ui-animation(box-shadow);
     }
     &-header {
       display: flex !important;
@@ -191,9 +177,7 @@
   }
 }
 :host(.new) {
-  animation-delay: 1.5s;
   box-shadow: 0;
-  @include ui-animation(box-shadow);
 
   $cardSize: 100px;
   width: auto;
@@ -218,8 +202,7 @@
     }
   }
 }
-:host(.new:focus),
-:host(.new:hover) {
+:host(.new:hover:not(:focus)) {
   box-shadow: var(--box-shadow-02);
   cursor: pointer;
 }

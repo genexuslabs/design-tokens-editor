@@ -58,6 +58,9 @@ export namespace Components {
   interface DtListItemHeader {
     'tokenGroup': string;
   }
+  interface DtLoader {
+    'message': string;
+  }
   interface DtMain {
     'avaiableOptions': object;
     'model': object;
@@ -189,6 +192,12 @@ declare global {
   var HTMLDtListItemHeaderElement: {
     prototype: HTMLDtListItemHeaderElement;
     new (): HTMLDtListItemHeaderElement;
+  };
+
+  interface HTMLDtLoaderElement extends Components.DtLoader, HTMLStencilElement {}
+  var HTMLDtLoaderElement: {
+    prototype: HTMLDtLoaderElement;
+    new (): HTMLDtLoaderElement;
   };
 
   interface HTMLDtMainElement extends Components.DtMain, HTMLStencilElement {}
@@ -329,6 +338,7 @@ declare global {
     'dt-edit-token-value': HTMLDtEditTokenValueElement;
     'dt-list-item': HTMLDtListItemElement;
     'dt-list-item-header': HTMLDtListItemHeaderElement;
+    'dt-loader': HTMLDtLoaderElement;
     'dt-main': HTMLDtMainElement;
     'dt-quote': HTMLDtQuoteElement;
     'dt-tab': HTMLDtTabElement;
@@ -362,7 +372,6 @@ declare namespace LocalJSX {
     'newCard'?: boolean;
     'onAddNewToken'?: (event: CustomEvent<any>) => void;
     'onCardClosed'?: (event: CustomEvent<any>) => void;
-    'onItemActivated'?: (event: CustomEvent<any>) => void;
     'onModeChanged'?: (event: CustomEvent<any>) => void;
     'onShiftTabOnEditButton'?: (event: CustomEvent<any>) => void;
     'onTokenDeleted'?: (event: CustomEvent<any>) => void;
@@ -407,7 +416,6 @@ declare namespace LocalJSX {
     'onAddNewToken'?: (event: CustomEvent<any>) => void;
     'onCardClosed'?: (event: CustomEvent<any>) => void;
     'onEditToken'?: (event: CustomEvent<any>) => void;
-    'onItemActivated'?: (event: CustomEvent<any>) => void;
     'onModeChanged'?: (event: CustomEvent<any>) => void;
     'onTokenDeleted'?: (event: CustomEvent<any>) => void;
     'onTokenDuplicated'?: (event: CustomEvent<any>) => void;
@@ -422,6 +430,9 @@ declare namespace LocalJSX {
   }
   interface DtListItemHeader {
     'tokenGroup'?: string;
+  }
+  interface DtLoader {
+    'message'?: string;
   }
   interface DtMain {
     'avaiableOptions'?: object;
@@ -526,6 +537,7 @@ declare namespace LocalJSX {
     'dt-edit-token-value': DtEditTokenValue;
     'dt-list-item': DtListItem;
     'dt-list-item-header': DtListItemHeader;
+    'dt-loader': DtLoader;
     'dt-main': DtMain;
     'dt-quote': DtQuote;
     'dt-tab': DtTab;
@@ -563,6 +575,7 @@ declare module "@stencil/core" {
       'dt-edit-token-value': LocalJSX.DtEditTokenValue & JSXBase.HTMLAttributes<HTMLDtEditTokenValueElement>;
       'dt-list-item': LocalJSX.DtListItem & JSXBase.HTMLAttributes<HTMLDtListItemElement>;
       'dt-list-item-header': LocalJSX.DtListItemHeader & JSXBase.HTMLAttributes<HTMLDtListItemHeaderElement>;
+      'dt-loader': LocalJSX.DtLoader & JSXBase.HTMLAttributes<HTMLDtLoaderElement>;
       'dt-main': LocalJSX.DtMain & JSXBase.HTMLAttributes<HTMLDtMainElement>;
       'dt-quote': LocalJSX.DtQuote & JSXBase.HTMLAttributes<HTMLDtQuoteElement>;
       'dt-tab': LocalJSX.DtTab & JSXBase.HTMLAttributes<HTMLDtTabElement>;

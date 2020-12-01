@@ -162,6 +162,8 @@
         }
       }
     }
+  }
+  &.zIndex1 {
     #main-container {
       z-index: 1;
     }
@@ -169,17 +171,41 @@
 }
 
 .message {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: var(--font-family-primary);
-
-  position: absolute;
+  position: fixed;
   top: 50%;
   font-family: var(--font-family-primary);
   width: 100%;
   text-align: center;
   padding: 0 var(--spacing-comp-06);
   box-sizing: border-box;
+  animation-name: message;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+
+  &__container {
+    &.bounce {
+      animation-name: bounce;
+      animation-duration: 0.2s;
+      animation-iteration-count: 3;
+    }
+  }
+}
+@keyframes message {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes bounce {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
