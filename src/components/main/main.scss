@@ -19,6 +19,7 @@
 #main-container {
   opacity: 1;
   position: relative;
+  margin-bottom: var(--spacing-comp-02);
   @include ui-animation(opacity);
   &.hide {
     opacity: 0;

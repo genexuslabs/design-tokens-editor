@@ -361,7 +361,6 @@ export class Main {
   }
 
   setInitalSelectedModel() {
-    console.log("hola");
     if (this.model !== null && this.model !== undefined) {
       this.selectedModelName = Object.keys(this.model)[0];
       this.selectedModel = this.model[Object.keys(this.model)[0]];
@@ -369,8 +368,6 @@ export class Main {
     } else {
       this.model = null;
     }
-    console.log("this.selectedOptions here");
-    console.log(this.selectedOptions);
   }
 
   updateSelectedOptions() {
@@ -445,7 +442,7 @@ export class Main {
                   100
                 );
               }.bind(this),
-              800
+              10000
             );
           }.bind(this),
           100
@@ -703,7 +700,10 @@ export class Main {
             let searchInput = this.el.shadowRoot.querySelector("#searchFilter");
             searchInput.value = "";
             this.filterValue = "";
-
+            let tokenGroupSelect = this.el.shadowRoot.querySelector(
+              "#tokenGroupsSelect"
+            );
+            tokenGroupSelect.value = "all";
             setTimeout(
               function() {
                 this.updatingModel = false;
@@ -768,15 +768,6 @@ export class Main {
   }
 
   render() {
-    // console.log("this.model");
-    // console.log(this.model);
-
-    // console.log("this.selectedModel");
-    // console.log(this.selectedModel);
-
-    // console.log("this.selectedOptions");
-    // console.log(this.selectedOptions);
-
     console.log("selectedOptions");
     console.log(this.selectedOptions);
 
@@ -927,6 +918,7 @@ export class Main {
                   disabled={true ? this.selectedModel === null : false}
                   size="8"
                   onChange={this.updateTokenGroup.bind(this)}
+                  id="tokenGroupsSelect"
                 >
                   <gxg-option value="all" selected>
                     All
