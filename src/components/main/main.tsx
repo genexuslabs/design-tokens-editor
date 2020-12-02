@@ -362,7 +362,7 @@ export class Main {
   modelHandler() {
     console.log("model changed");
     console.log(this.model);
-    this.setInitalSelectedModel();
+    //this.setInitalSelectedModel();
   }
   @Watch("selectedModel")
   selectedModelHandler() {

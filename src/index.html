@@ -25,11 +25,48 @@
       resolution: ["small", "medium", "large"]
     }
 
+    const avaiableOptionsTinyModel = {
+      mode: ["light", "dark"],
+    }
+
     const tinyModel = {
       "" : {
         fontSizes: [
           {
-            tokenCategory: "empty name",
+            tokenCategory: "empty",
+            tokens: [
+              {
+                id: "b01",  
+                caption: "Tiny model",
+                value: "50px"
+              }
+            ]
+          }
+        ]
+      },
+      "mode_light" : {
+        fontSizes: [
+          {
+            tokenCategory: "mode_light",
+            tokens: [
+              {
+                id: "b01",  
+                caption: "XSmall",
+                value: "50px"
+              },
+              {
+                id: "b02",  
+                caption: "XSmall",
+                value: "50px"
+              }
+            ]
+          }
+        ]
+      },
+      "mode_dark" : {
+        fontSizes: [
+          {
+            tokenCategory: "mode_dark",
             tokens: [
               {
                 id: "b01",  
@@ -570,13 +607,10 @@
 
     //Card "Header buttons" Event Listeners
     const main = document.querySelector("dt-main");
-    main.avaiableOptions = avaiableOptions;
-    main.model = model;
+    main.avaiableOptions = avaiableOptionsTinyModel;
+    main.model = tinyModel;
     //main.model = tinyModel;
 
-    main.selectedTokenGroup = "spacing";
-    main.selectedTokenId = "01";
-    main.tokenDeleted = true;
     main.needHelpUrl = "http://need-help.com";
 
     // let newModelBtn = document.querySelector("#new-model-btn");
