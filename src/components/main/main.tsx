@@ -40,6 +40,7 @@ export class Main {
   @State() selectedModel: Object = null;
   @State() selectedModelName: string = null;
   @State() selectedOptions = [];
+  @State() firstModelChange: boolean = true;
 
   @State() modelAlreadyEmpty: boolean = false;
   @State() bounceMessage: boolean = false;
@@ -360,10 +361,13 @@ export class Main {
 
   @Watch("model")
   modelHandler() {
-    console.log("model changed");
-    this.selectedModel = this.model[this.selectedModelName];
-    //this.setInitalSelectedModel();
+    if (this.selectedModelName === null) {
+      this.setInitalSelectedModel();
+    } else {
+      this.selectedModel = this.model[this.selectedModelName];
+    }
   }
+
   @Watch("selectedModel")
   selectedModelHandler() {
     console.log("selectedModel changed");
