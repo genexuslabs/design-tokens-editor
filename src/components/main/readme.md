@@ -44,7 +44,7 @@
 - gxg-option
 - gxg-pill
 - gxg-form-text
-- [dt-loader](../loader)
+- [dt-loader](../dt-loader)
 - gxg-alert
 
 ### Graph

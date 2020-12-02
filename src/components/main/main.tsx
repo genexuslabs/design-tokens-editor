@@ -29,11 +29,11 @@ export class Main {
   @Prop() needHelpUrl: string = "#";
 
   @State() cardAsListItem: boolean = false;
-  @State() hideMainContainer: boolean = false;
+  @State() hideMainContainer: boolean = true;
   @State() filterValue: string = "";
   @State() filterTokenGroup: string = "all";
   @State() searchValue: string = "";
-  @State() updatingModel: boolean = false;
+  @State() updatingModel: boolean = true;
 
   //Model
   @State() options: Object = { mode: null, platform: null };
@@ -64,10 +64,25 @@ export class Main {
   }
 
   componentWillLoad() {
+    console.log("Component will load");
     this.setInitalSelectedModel();
+    setTimeout(
+      function() {
+        this.updatingModel = false;
+        setTimeout(
+          function() {
+            this.hideMainContainer = false;
+          }.bind(this),
+          100
+        );
+      }.bind(this),
+      1000
+    );
   }
 
-  componentDidLoad() {}
+  componentDidLoad() {
+    console.log("Component did load");
+  }
 
   @Watch("tokenDeleted")
   tokenDeletedHandler(newValue: boolean) {
@@ -442,7 +457,7 @@ export class Main {
                   100
                 );
               }.bind(this),
-              800
+              500
             );
           }.bind(this),
           100
@@ -714,7 +729,7 @@ export class Main {
                   100
                 );
               }.bind(this),
-              800
+              500
             );
           }.bind(this),
           100
