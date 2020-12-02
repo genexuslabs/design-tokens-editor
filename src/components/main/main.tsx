@@ -29,19 +29,20 @@ export class Main {
   @Prop() needHelpUrl: string = "#";
 
   @State() cardAsListItem: boolean = false;
-  @State() hideMainContainer: boolean = true;
+  @State() hideContainer: boolean = true;
+  @State() hideMainContainer: boolean = false;
   @State() filterValue: string = "";
   @State() filterTokenGroup: string = "all";
   @State() searchValue: string = "";
-  @State() updatingModel: boolean = true;
+  @State() updatingModel: boolean = false;
 
   //Model
   @State() options: Object = { mode: null, platform: null };
   @State() selectedModel: Object = null;
   @State() selectedModelName: string = null;
   @State() selectedOptions = [];
-  @State() firstModelChange: boolean = true;
 
+  @State() InitialLoad: boolean = true;
   @State() modelAlreadyEmpty: boolean = false;
   @State() bounceMessage: boolean = false;
 
@@ -65,25 +66,22 @@ export class Main {
   }
 
   componentWillLoad() {
-    console.log("Component will load");
     this.setInitalSelectedModel();
     setTimeout(
       function() {
-        this.updatingModel = false;
+        this.InitialLoad = false;
         setTimeout(
           function() {
-            this.hideMainContainer = false;
+            this.hideContainer = false;
           }.bind(this),
           100
         );
       }.bind(this),
-      1000
+      1500
     );
   }
 
-  componentDidLoad() {
-    console.log("Component did load");
-  }
+  componentDidLoad() {}
 
   @Watch("tokenDeleted")
   tokenDeletedHandler(newValue: boolean) {
@@ -366,17 +364,6 @@ export class Main {
     } else {
       this.selectedModel = this.model[this.selectedModelName];
     }
-  }
-
-  @Watch("selectedModel")
-  selectedModelHandler() {
-    console.log("selectedModel changed");
-    console.log(this.selectedModel);
-  }
-  @Watch("selectedModelName")
-  selectedModelNameHandler() {
-    console.log("selectedModelName changed");
-    console.log(this.selectedModelName);
   }
 
   setInitalSelectedModel() {
@@ -787,11 +774,16 @@ export class Main {
   }
 
   render() {
-    console.log("selectedOptions");
-    console.log(this.selectedOptions);
-
-    return (
-      <div class={{ container: true, "show-options": this.optionsVisible }}>
+    return this.InitialLoad ? (
+      <dt-loader></dt-loader>
+    ) : (
+      <div
+        class={{
+          container: true,
+          hide: this.hideContainer,
+          "show-options": this.optionsVisible
+        }}
+      >
         <div
           id="filter"
           class={{

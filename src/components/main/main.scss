@@ -5,6 +5,10 @@
 .container {
   height: 100%;
   min-width: 400px;
+  @include ui-animation(opacity);
+  &.hide {
+    opacity: 0;
+  }
 }
 .dt-tab-container {
   flex-grow: 1;
