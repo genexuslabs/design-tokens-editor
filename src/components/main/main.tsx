@@ -34,20 +34,25 @@ export class Main {
   @State() filterValue: string = "";
   @State() filterTokenGroup: string = "all";
   @State() searchValue: string = "";
-  @State() updatingModel: boolean = false;
+
+  //Loader
+  @State() updatingModel: boolean = true;
+  @State() hideLoader: boolean = false;
 
   //Model
   @State() options: Object = { mode: null, platform: null };
   @State() selectedModel: Object = null;
   @State() selectedModelName: string = null;
   @State() selectedOptions = [];
+  @State() firstLoad: boolean = true;
 
-  @State() InitialLoad: boolean = true;
   @State() modelAlreadyEmpty: boolean = false;
   @State() bounceMessage: boolean = false;
+  @State() hideMessage: boolean = false;
 
   //Options
   @State() optionsVisible: boolean = false;
+  @State() disableOptionsButtons: boolean = true;
 
   alertBox!: HTMLElement;
   @Element() el: HTMLElement;
@@ -66,19 +71,7 @@ export class Main {
   }
 
   componentWillLoad() {
-    this.setInitalSelectedModel();
-    setTimeout(
-      function() {
-        this.InitialLoad = false;
-        setTimeout(
-          function() {
-            this.hideContainer = false;
-          }.bind(this),
-          100
-        );
-      }.bind(this),
-      1500
-    );
+    this.setInitialSelectedModel();
   }
 
   componentDidLoad() {}
@@ -209,6 +202,13 @@ export class Main {
 
   optionsContainerClickHandler(e) {
     e.stopPropagation();
+  }
+
+  optionSelectChangeHandler() {
+    if (Object.keys(this.avaiableOptions).length === 1) {
+      this.updateSelectedModel();
+    }
+    this.disableOptionsButtons = false;
   }
 
   /****************************
@@ -349,6 +349,7 @@ export class Main {
         key={token.id}
         is-selected={this.selectedTokenId == token.id}
         optionsToken={this.selectedModelName}
+        readOnly={token.readonly}
       ></dt-token-container>
     );
   }
@@ -360,19 +361,35 @@ export class Main {
   @Watch("model")
   modelHandler() {
     if (this.selectedModelName === null) {
-      this.setInitalSelectedModel();
+      this.setInitialSelectedModel();
     } else {
       this.selectedModel = this.model[this.selectedModelName];
     }
   }
 
-  setInitalSelectedModel() {
+  setInitialSelectedModel() {
     if (this.model !== null && this.model !== undefined) {
       this.selectedModelName = Object.keys(this.model)[0];
       this.selectedModel = this.model[Object.keys(this.model)[0]];
       this.updateSelectedOptions();
-    } else {
-      this.model = null;
+
+      setTimeout(
+        function() {
+          this.updatingModel = false;
+          if (this.firstLoad) {
+            setTimeout(
+              function() {
+                this.hideContainer = false;
+                this.firstLoad = false;
+              }.bind(this),
+              200
+            );
+          } else {
+            this.hideMainContainer = false;
+          }
+        }.bind(this),
+        500
+      );
     }
   }
 
@@ -408,62 +425,64 @@ export class Main {
   }
 
   updateSelectedModel() {
-    setTimeout(
-      function() {
-        this.hideMainContainer = true;
-
-        setTimeout(
-          function() {
-            //Display Loader
-            this.updatingModel = true;
-
-            //Update selected model name
-            let selectedModelName = "";
-            let optionsSelects = this.el.shadowRoot.querySelectorAll(
-              ".select-options"
-            );
-            optionsSelects.forEach(select => {
-              let selectLabel = ((select as unknown) as GxgFormSelect).label.toLowerCase();
-              let selectValue = ((select as unknown) as GxgFormSelect).value;
-              if (selectValue !== "") {
-                if (selectedModelName !== "") {
-                  selectedModelName =
-                    selectedModelName + "%" + selectLabel + "_" + selectValue;
-                } else {
-                  selectedModelName = selectLabel + "_" + selectValue;
-                }
-              }
-            });
-            this.selectedModelName = selectedModelName;
-            this.updateSelectedOptions();
-            this.setSelectedModel();
-
-            setTimeout(
-              function() {
-                this.updatingModel = false;
-                setTimeout(
-                  function() {
-                    this.hideMainContainer = false;
-                  }.bind(this),
-                  100
-                );
-              }.bind(this),
-              500
-            );
-          }.bind(this),
-          100
-        );
-      }.bind(this),
-      150
-    );
+    let selectedModelName = "";
+    let optionsSelects = this.el.shadowRoot.querySelectorAll(".select-options");
+    optionsSelects.forEach(select => {
+      let selectLabel = ((select as unknown) as GxgFormSelect).label.toLowerCase();
+      let selectValue = ((select as unknown) as GxgFormSelect).value;
+      if (selectValue !== "") {
+        if (selectedModelName !== "") {
+          selectedModelName =
+            selectedModelName + "%" + selectLabel + "_" + selectValue;
+        } else {
+          selectedModelName = selectLabel + "_" + selectValue;
+        }
+      }
+    });
+    this.selectedModelName = selectedModelName;
+    this.updateSelectedOptions();
+    this.setSelectedModel();
   }
 
   setSelectedModel() {
     if (this.selectedOptions.length === 0) {
       if (this.model.hasOwnProperty("")) {
-        this.selectedModel = this.model[""];
+        this.hideOptions();
+        setTimeout(() => {
+          this.disableOptionsButtons;
+        }, 200);
+        if (this.modelAlreadyEmpty) {
+          this.hideMessage = true;
+        }
+        setTimeout(() => {
+          this.hideMainContainer = true;
+          setTimeout(() => {
+            this.updatingModel = true;
+            this.selectedModel = this.model[""];
+            this.modelAlreadyEmpty = false;
+            setTimeout(() => {
+              this.updatingModel = false;
+              setTimeout(() => {
+                this.hideMainContainer = false;
+                this.hideMessage = false;
+              }, 200);
+            }, 500);
+          }, 200);
+        }, 200);
       } else {
-        this.selectedModel = null;
+        this.disableOptionsButtons = true;
+        if (this.modelAlreadyEmpty) {
+          this.bounceMessage = true;
+          setTimeout(() => {
+            this.bounceMessage = false;
+          }, 600);
+        } else {
+          this.hideMainContainer = true;
+          this.modelAlreadyEmpty = true;
+          setTimeout(() => {
+            this.selectedModel = null;
+          }, 200);
+        }
       }
     } else {
       let modelFound = false;
@@ -480,21 +499,43 @@ export class Main {
           }
         }
         if (modelFound) {
-          this.selectedModel = this.model[modelKey];
-          this.selectedModelName = modelKey;
-          this.modelAlreadyEmpty = false;
-          this.bounceMessage = false;
           this.hideOptions();
+          if (this.selectedModel === null) {
+            this.hideMessage = true;
+          }
+          setTimeout(() => {
+            this.disableOptionsButtons = true;
+            this.hideMainContainer = true;
+            setTimeout(() => {
+              this.updatingModel = true;
+              this.selectedModel = this.model[modelKey];
+              this.selectedModelName = modelKey;
+              setTimeout(() => {
+                this.updatingModel = false;
+                setTimeout(() => {
+                  this.hideMainContainer = false;
+                  this.hideMessage = false;
+                }, 200);
+              }, 500);
+            }, 200);
+          }, 200);
+          this.modelAlreadyEmpty = false;
+          //this.bounceMessage = false;
           break loop1;
         }
       }
       if (!modelFound) {
-        if (this.setSelectedModel) this.selectedModel = null;
+        this.disableOptionsButtons = true;
+        this.hideMainContainer = true;
+        setTimeout(() => {
+          this.selectedModel = null;
+        }, 200);
+
         if (this.modelAlreadyEmpty) {
           this.bounceMessage = true;
           setTimeout(() => {
             this.bounceMessage = false;
-          }, 1000);
+          }, 600);
         }
         this.modelAlreadyEmpty = true;
       }
@@ -693,40 +734,35 @@ export class Main {
   }
 
   resetFilter() {
+    if (this.modelAlreadyEmpty) {
+      this.hideMessage = true;
+      setTimeout(() => {
+        this.hideMessage = false;
+      }, 200);
+      this.modelAlreadyEmpty = false;
+    }
+    this.hideMainContainer = true;
     setTimeout(
       function() {
-        this.hideMainContainer = true;
-
-        setTimeout(
-          function() {
-            this.updatingModel = true;
-
-            this.setInitalSelectedModel();
-            this.cancelOptions();
-            let searchInput = this.el.shadowRoot.querySelector("#searchFilter");
-            searchInput.value = "";
-            this.filterValue = "";
-            let tokenGroupSelect = this.el.shadowRoot.querySelector(
-              "#tokenGroupsSelect"
-            );
-            tokenGroupSelect.value = "all";
-            setTimeout(
-              function() {
-                this.updatingModel = false;
-                setTimeout(
-                  function() {
-                    this.hideMainContainer = false;
-                  }.bind(this),
-                  100
-                );
-              }.bind(this),
-              500
-            );
-          }.bind(this),
-          100
+        this.updatingModel = true;
+        this.setInitialSelectedModel();
+        this.cancelOptions();
+        let searchInput = this.el.shadowRoot.querySelector("#searchFilter");
+        searchInput.value = "";
+        this.filterValue = "";
+        let tokenGroupSelect = this.el.shadowRoot.querySelector(
+          "#tokenGroupsSelect"
         );
+        tokenGroupSelect.value = "all";
+
+        setTimeout(() => {
+          this.updatingModel = false;
+          setTimeout(() => {
+            this.hideMainContainer = false;
+          }, 200);
+        }, 500);
       }.bind(this),
-      150
+      200
     );
   }
 
@@ -774,9 +810,10 @@ export class Main {
   }
 
   render() {
-    return this.InitialLoad ? (
-      <dt-loader></dt-loader>
-    ) : (
+    return [
+      <dt-loader
+        class={{ "updating-model": this.updatingModel, hide: this.hideLoader }}
+      ></dt-loader>,
       <div
         class={{
           container: true,
@@ -784,12 +821,7 @@ export class Main {
           "show-options": this.optionsVisible
         }}
       >
-        <div
-          id="filter"
-          class={{
-            "model-null": this.selectedModel === null
-          }}
-        >
+        <div id="filter">
           <div class="filter-container">
             <div class="col-left">
               <div class="menu">
@@ -859,6 +891,7 @@ export class Main {
                             }
                             class={"select-options"}
                             id={optionType}
+                            onChange={this.optionSelectChangeHandler.bind(this)}
                           >
                             <gxg-option value="">None</gxg-option>
                             {this.avaiableOptions[optionType].map(option => (
@@ -878,29 +911,33 @@ export class Main {
                       </gxg-spacer-layout>
                     </div>
 
-                    <footer class="options-card__footer">
-                      <gxg-spacer-layout
-                        space="s"
-                        orientation="horizontal"
-                        justify-content="end"
-                      >
-                        <gxg-button
-                          type="secondary-text-only"
-                          onClick={this.cancelOptions.bind(this)}
+                    {Object.keys(this.avaiableOptions).length > 1 ? (
+                      <footer class="options-card__footer">
+                        <gxg-spacer-layout
+                          space="s"
+                          orientation="horizontal"
+                          justify-content="end"
                         >
-                          Cancel
-                        </gxg-button>
-                        <gxg-button
-                          onClick={this.updateSelectedModel.bind(this)}
-                          type="primary-text-only"
-                          onKeyDown={this.updateSelectedModelButtonHandler.bind(
-                            this
-                          )}
-                        >
-                          Update model
-                        </gxg-button>
-                      </gxg-spacer-layout>
-                    </footer>
+                          <gxg-button
+                            type="secondary-text-only"
+                            onClick={this.cancelOptions.bind(this)}
+                            disabled={true ? this.disableOptionsButtons : false}
+                          >
+                            Cancel
+                          </gxg-button>
+                          <gxg-button
+                            onClick={this.updateSelectedModel.bind(this)}
+                            type="primary-text-only"
+                            onKeyDown={this.updateSelectedModelButtonHandler.bind(
+                              this
+                            )}
+                            disabled={true ? this.disableOptionsButtons : false}
+                          >
+                            Update model
+                          </gxg-button>
+                        </gxg-spacer-layout>
+                      </footer>
+                    ) : null}
                   </gxg-card>
                 </div>
               </div>
@@ -956,156 +993,158 @@ export class Main {
         </div>
 
         {this.selectedModel !== null ? (
-          this.updatingModel ? (
-            <dt-loader></dt-loader>
-          ) : (
-            <div id="main-container" class={{ hide: this.hideMainContainer }}>
-              {this.selectedModel !== undefined ? (
-                Object.keys(this.selectedModel).length > 0 ? (
-                  this.someTokenGroupHasAMatch(this.selectedModel) ? (
-                    <gxg-accordion mode="classical" no-padding>
-                      {Object.keys(this.selectedModel).map(tokenGroup => {
-                        return this.filterTokenGroup === "all" ||
-                          this.filterTokenGroup === tokenGroup.toLowerCase() ? (
-                          this.someCategoryHasAMatch(
-                            this.selectedModel[tokenGroup]
-                          ) ? (
-                            <gxg-accordion-item
-                              status="open"
-                              itemTitle={tokenGroup}
-                              itemId={tokenGroup}
-                              key={tokenGroup}
+          <main
+            class={{ "main-container": true, hide: this.hideMainContainer }}
+          >
+            {this.selectedModel !== undefined ? (
+              Object.keys(this.selectedModel).length > 0 ? (
+                this.someTokenGroupHasAMatch(this.selectedModel) ? (
+                  <gxg-accordion mode="classical" no-padding>
+                    {Object.keys(this.selectedModel).map(tokenGroup => {
+                      return this.filterTokenGroup === "all" ||
+                        this.filterTokenGroup === tokenGroup.toLowerCase() ? (
+                        this.someCategoryHasAMatch(
+                          this.selectedModel[tokenGroup]
+                        ) ? (
+                          <gxg-accordion-item
+                            status="open"
+                            itemTitle={tokenGroup}
+                            itemId={tokenGroup}
+                            key={tokenGroup}
+                          >
+                            <div
+                              class={{
+                                "tokens-container": true,
+                                classical: true,
+                                categorized: true,
+                                card: this.cardAsListItem === false,
+                                "list-item": this.cardAsListItem === true
+                              }}
                             >
-                              <div
-                                class={{
-                                  "tokens-container": true,
-                                  classical: true,
-                                  categorized: true,
-                                  card: this.cardAsListItem === false,
-                                  "list-item": this.cardAsListItem === true
-                                }}
-                              >
-                                {this.selectedModel[tokenGroup] !== null ? (
-                                  this.selectedModel[tokenGroup][0]
-                                    .tokenCategory === null ? (
-                                    //First category is null
-                                    this.firstCategoryIsNullContent(tokenGroup)
-                                  ) : this.someCategoryHasAMatch(
-                                      this.selectedModel[tokenGroup]
-                                    ) ? (
-                                    //First category is not null, and thus, none of the following categories should be null.
-                                    <gxg-accordion mode="slim" no-padding>
-                                      {this.selectedModel[tokenGroup].map(
-                                        (tokenCategory, index) =>
-                                          this.categoryHasAMatch(
-                                            tokenCategory
-                                          ) ? (
-                                            <gxg-accordion-item
-                                              status="open"
-                                              itemTitle={
-                                                tokenCategory.tokenCategory
-                                              }
-                                              itemId={
-                                                tokenCategory.tokenCategory
-                                              }
+                              {this.selectedModel[tokenGroup] !== null ? (
+                                this.selectedModel[tokenGroup][0]
+                                  .tokenCategory === null ? (
+                                  //First category is null
+                                  this.firstCategoryIsNullContent(tokenGroup)
+                                ) : this.someCategoryHasAMatch(
+                                    this.selectedModel[tokenGroup]
+                                  ) ? (
+                                  //First category is not null, and thus, none of the following categories should be null.
+                                  <gxg-accordion mode="slim" no-padding>
+                                    {this.selectedModel[tokenGroup].map(
+                                      (tokenCategory, index) =>
+                                        this.categoryHasAMatch(
+                                          tokenCategory
+                                        ) ? (
+                                          <gxg-accordion-item
+                                            status="open"
+                                            itemTitle={
+                                              tokenCategory.tokenCategory
+                                            }
+                                            itemId={tokenCategory.tokenCategory}
+                                          >
+                                            <div
+                                              class={{
+                                                "tokens-container": true,
+                                                slim: true,
+                                                categorized: true,
+                                                card:
+                                                  this.cardAsListItem === false,
+                                                "list-item":
+                                                  this.cardAsListItem === true
+                                              }}
                                             >
-                                              <div
-                                                class={{
-                                                  "tokens-container": true,
-                                                  slim: true,
-                                                  categorized: true,
-                                                  card:
-                                                    this.cardAsListItem ===
-                                                    false,
-                                                  "list-item":
-                                                    this.cardAsListItem === true
-                                                }}
-                                              >
-                                                {this.cardAsListItem ? (
-                                                  <dt-list-item-header
-                                                    tokenGroup={tokenGroup}
-                                                  ></dt-list-item-header>
-                                                ) : null}
-                                                {tokenCategory.tokens.map(
-                                                  (token, index) =>
-                                                    this.tokenMatch(token)
-                                                      ? this.returnTokenContainer(
-                                                          token,
-                                                          tokenGroup,
-                                                          tokenCategory.tokenCategory,
-                                                          index
-                                                        )
-                                                      : null
-                                                )}
-                                                {this.printNewToken(
-                                                  tokenGroup,
-                                                  tokenCategory.tokenCategory,
-                                                  true
-                                                    ? this.selectedModel[
-                                                        tokenGroup
-                                                      ].length -
-                                                        1 ===
+                                              {this.cardAsListItem ? (
+                                                <dt-list-item-header
+                                                  tokenGroup={tokenGroup}
+                                                ></dt-list-item-header>
+                                              ) : null}
+                                              {tokenCategory.tokens.map(
+                                                (token, index) =>
+                                                  this.tokenMatch(token)
+                                                    ? this.returnTokenContainer(
+                                                        token,
+                                                        tokenGroup,
+                                                        tokenCategory.tokenCategory,
                                                         index
-                                                    : false
-                                                )}
-                                              </div>
-                                            </gxg-accordion-item>
-                                          ) : //Token category filter does not has a match
-                                          null
-                                      )}
-                                    </gxg-accordion>
-                                  ) : null
-                                ) : (
-                                  //Token group is null
-                                  this.tokenGroupEmptyMessage(tokenGroup)
-                                )}
-                              </div>
-                            </gxg-accordion-item>
-                          ) : null
-                        ) : null;
-                      })}
-                    </gxg-accordion>
-                  ) : (
-                    //The filter didn´t match any token on the entire model
-                    <div class="message">
-                      Your search did not match any token.
-                    </div>
-                  )
+                                                      )
+                                                    : null
+                                              )}
+                                              {this.printNewToken(
+                                                tokenGroup,
+                                                tokenCategory.tokenCategory,
+                                                true
+                                                  ? this.selectedModel[
+                                                      tokenGroup
+                                                    ].length -
+                                                      1 ===
+                                                      index
+                                                  : false
+                                              )}
+                                            </div>
+                                          </gxg-accordion-item>
+                                        ) : //Token category filter does not has a match
+                                        null
+                                    )}
+                                  </gxg-accordion>
+                                ) : null
+                              ) : (
+                                //Token group is null
+                                this.tokenGroupEmptyMessage(tokenGroup)
+                              )}
+                            </div>
+                          </gxg-accordion-item>
+                        ) : null
+                      ) : null;
+                    })}
+                  </gxg-accordion>
                 ) : (
-                  // The selected model has no token groups
+                  //The filter didn´t match any token on the entire model
                   <div class="message">
-                    The selected model has no token groups.
+                    Your search did not match any token.
                   </div>
                 )
               ) : (
-                <div class="message">The selected model does not exists.</div>
-              )}
+                // The selected model has no token groups
+                <div class="message">
+                  The selected model has no token groups.
+                </div>
+              )
+            ) : (
+              <div class="message">The selected model does not exists.</div>
+            )}
 
-              <gxg-alert
-                active-time="fast"
-                alert-title="Token has been deleted"
-                type="notice"
-                ref={el => (this.alertBox = el as HTMLElement)}
-                bottom="s"
-                left-right="s"
-              >
-                (Press ctrl + Z to undo)
-              </gxg-alert>
-            </div>
-          )
+            <gxg-alert
+              active-time="fast"
+              alert-title="Token has been deleted"
+              type="notice"
+              ref={el => (this.alertBox = el as HTMLElement)}
+              bottom="s"
+              left-right="s"
+            >
+              (Press ctrl + Z to undo)
+            </gxg-alert>
+          </main>
         ) : (
           <div class="message">
             <div
               class={{
-                message__container: true,
-                bounce: this.bounceMessage
+                opacity: true,
+                hide: this.hideMessage
               }}
             >
-              The model is empty.
+              <div
+                class={{
+                  bouncer: true,
+                  bounce: this.bounceMessage
+                }}
+              >
+                The model is empty.
+              </div>
             </div>
           </div>
         )}
       </div>
-    );
-  }
+    ];
+  } //render
 }

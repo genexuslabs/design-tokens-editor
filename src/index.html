@@ -38,7 +38,8 @@
               {
                 id: "b01",  
                 caption: "Tiny model",
-                value: "50px"
+                value: "50px",
+                readonly:true
               }
             ]
           }
@@ -80,10 +81,10 @@
     }
 
     const model = {
-      "mode_light": {
+      "": {
         fontSizes: [
           {
-            tokenCategory: "mode_light",
+            tokenCategory: "empty model",
             tokens: [
               {
                 id: "b01",  
@@ -607,9 +608,15 @@
 
     //Card "Header buttons" Event Listeners
     const main = document.querySelector("dt-main");
-    main.avaiableOptions = avaiableOptionsTinyModel;
+    
+    main.avaiableOptions = avaiableOptions;
+    //main.avaiableOptions = avaiableOptionsTinyModel;
+    //main.model = model;
+    //main.model = modelWithoutEmptyModelName;
+
+    // main.avaiableOptions = avaiableOptionsTinyModel;
     main.model = tinyModel;
-    //main.model = tinyModel;
+    
 
     main.needHelpUrl = "http://need-help.com";
 

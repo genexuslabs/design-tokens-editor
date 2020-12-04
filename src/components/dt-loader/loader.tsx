@@ -17,7 +17,6 @@ export class Loader {
           <div class="box"></div>
           <div class="box"></div>
         </div>
-        <div class="message">{this.message}</div>
       </Host>
     );
   }

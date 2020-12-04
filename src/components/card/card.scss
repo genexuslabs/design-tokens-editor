@@ -1,8 +1,48 @@
 :host {
   background: var(--color-background);
+  @include ui-animation(box-shadow);
+  .card {
+    &:before {
+      content: "";
+      position: absolute;
+      width: calc(100% + 2px);
+      height: 3px;
+      background-color: transparent;
+      left: -1px;
+      top: -1px;
+      @include ui-animation(background-color);
+    }
+    &:hover {
+      &:before {
+        background-color: var(--color-primary-disabled);
+      }
+    }
+    &:active {
+      &:before {
+        background-color: var(--color-primary-active);
+      }
+    }
+  }
 }
 :host(:focus) {
   outline: none;
+  border-color: var(--color-primary-active);
+  box-shadow: inset 0px 0px 0px 1px var(--color-primary-active);
+  .card {
+    &:before {
+      background-color: var(--color-primary-active);
+    }
+    .card-header-menu {
+      opacity: 1;
+    }
+  }
+}
+:host(.focus-on-buttons) {
+  .card {
+    .card-header-menu {
+      opacity: 1;
+    }
+  }
 }
 :host(.editable-mode-on) {
   z-index: 10;
@@ -13,23 +53,7 @@
       .card-header-menu {
         opacity: 1;
       }
-      box-shadow: var(--box-shadow-02);
-    }
-  }
-}
-:host(:focus) {
-  border-color: var(--color-primary-active);
-  box-shadow: inset 0px 0px 0px 1px var(--color-primary-active);
-  .card {
-    .card-header-menu {
-      opacity: 1;
-    }
-  }
-}
-:host(.focus-on-buttons) {
-  .card {
-    .card-header-menu {
-      opacity: 1;
+      //box-shadow: var(--box-shadow-02);
     }
   }
 }
@@ -203,7 +227,6 @@
   }
 }
 :host(.new:hover:not(:focus)) {
-  box-shadow: var(--box-shadow-02);
   cursor: pointer;
 }
 
@@ -259,5 +282,12 @@
     .col-right {
       flex: 1;
     }
+  }
+}
+//read only
+:host(.read-only) {
+  pointer-events: none;
+  .card-header-menu {
+    opacity: 1;
   }
 }

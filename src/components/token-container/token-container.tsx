@@ -15,7 +15,7 @@ export class TokenContainer {
   @Prop() tokenGroup: string;
   @Prop() tokenCategory: string = null;
   @Prop() listItem: boolean;
-  @Prop() readOnly: boolean;
+  @Prop() readOnly: boolean = false;
   @Prop() index: number;
   @Prop() key: string;
   @Prop() cardAsListItem: boolean = false;
@@ -32,7 +32,10 @@ export class TokenContainer {
     this.mode = event.detail;
   }
 
-  componentDidLoad() {}
+  componentDidLoad() {
+    console.log("read only token container");
+    console.log(this.readOnly);
+  }
 
   render() {
     let switchTokenGroup = (tokenGroup, tokenValue, tokenCaption, tokenId) => {
@@ -585,11 +588,12 @@ export class TokenContainer {
         token-value={this.tokenValue}
         token-group={this.tokenGroup}
         token-category={this.tokenCategory}
-        readOnly={this.readOnly}
         index={this.index}
         key={this.key}
         is-selected={this.isSelected}
         optionsToken={this.optionsToken}
+        readOnly={this.readOnly}
+        class={{ "read-only": this.readOnly }}
       >
         {switchTokenGroup(
           this.tokenGroup,
@@ -605,17 +609,12 @@ export class TokenContainer {
         token-value={this.tokenValue}
         token-group={this.tokenGroup}
         token-category={this.tokenCategory}
-        readOnly={this.readOnly}
         index={this.index}
         key={this.key}
         is-selected={this.isSelected}
         optionsToken={this.optionsToken}
-        // style={{
-        //   "--cardAnimationDelay": this.getCardsAnimationDuration(
-        //     model[tokenGroup].tokens.length,
-        //     index
-        //   ),
-        // }}
+        readOnly={this.readOnly}
+        class={{ "read-only": this.readOnly }}
       >
         {switchTokenGroup(
           this.tokenGroup,

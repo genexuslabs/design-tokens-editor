@@ -146,26 +146,22 @@
   }
 }
 
-// :host(.item--selected:not(.focus-on-buttons):not(.add-new-token)) {
-//   .item {
-//     border-bottom-color: var(--color-primary-active);
-//   }
-// }
-// :host(.item--selected) {
-//   .item-menu {
-//     display: flex;
-//   }
-// }
-
 :host(.add-new-token) {
   text-align: center;
   .item {
     border-bottom-width: var(--border-width-sm);
     border-bottom-style: var(--border-style-regular);
     border-bottom-color: var(--gray-02);
-    height: 29px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+}
+//read only
+:host(.read-only) {
+  pointer-events: none;
+  .item-menu {
+    opacity: 1;
   }
 }

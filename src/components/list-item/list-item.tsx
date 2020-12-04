@@ -273,7 +273,13 @@ export class ListItem {
       e.preventDefault();
     }
   }
-
+  tabIndex() {
+    if (this.readOnly) {
+      return "-1";
+    } else {
+      return "0";
+    }
+  }
   render() {
     if (this.newItem === true) {
       return (
@@ -304,7 +310,7 @@ export class ListItem {
             "item--selected": this.isSelected === true,
             "focus-on-buttons": this.focusableButtons === true
           }}
-          tabIndex="0"
+          tabIndex={this.tabIndex()}
           onKeyDown={this.handleItemKeyDown.bind(this)}
         >
           <div
@@ -331,41 +337,53 @@ export class ListItem {
 
                 <div class="col-right">
                   <div class="item-menu">
-                    <gxg-button
-                      id="edit-button"
-                      type="secondary-icon-only"
-                      onClick={this.editItem.bind(this)}
-                      disabled={this.readOnly}
-                      title={
-                        this.readOnly === true
-                          ? "edit token (comming soon)"
-                          : "edit token"
-                      }
-                      icon="gemini-tools/edit"
-                      tabindex="-1"
-                      onKeyDown={this.editButtonKeyDownHandler.bind(this)}
-                      key="1"
-                    ></gxg-button>
-                    <gxg-button
-                      id="duplicate-button"
-                      type="secondary-icon-only"
-                      onClick={this.duplicateItem.bind(this)}
-                      title="duplicate token"
-                      icon="gemini-tools/duplicate"
-                      tabindex="-1"
-                      onKeyDown={this.duplicateButtonKeyDownHandler.bind(this)}
-                      key="2"
-                    ></gxg-button>
-                    <gxg-button
-                      id="delete-button"
-                      type="secondary-icon-only"
-                      onClick={this.deleteItem.bind(this)}
-                      title="delete token"
-                      icon="gemini-tools/delete"
-                      tabindex="-1"
-                      onKeyDown={this.deleteButtonKeyDownHandler.bind(this)}
-                      key="3"
-                    ></gxg-button>
+                    {this.readOnly ? (
+                      <gxg-button
+                        type="secondary-icon-only"
+                        disabled={true}
+                        icon="gemini-tools/read-only"
+                      ></gxg-button>
+                    ) : (
+                      [
+                        <gxg-button
+                          id="edit-button"
+                          type="secondary-icon-only"
+                          onClick={this.editItem.bind(this)}
+                          disabled={this.readOnly}
+                          title={
+                            this.readOnly === true
+                              ? "edit token (comming soon)"
+                              : "edit token"
+                          }
+                          icon="gemini-tools/edit"
+                          tabindex="-1"
+                          onKeyDown={this.editButtonKeyDownHandler.bind(this)}
+                          key="1"
+                        ></gxg-button>,
+                        <gxg-button
+                          id="duplicate-button"
+                          type="secondary-icon-only"
+                          onClick={this.duplicateItem.bind(this)}
+                          title="duplicate token"
+                          icon="gemini-tools/duplicate"
+                          tabindex="-1"
+                          onKeyDown={this.duplicateButtonKeyDownHandler.bind(
+                            this
+                          )}
+                          key="2"
+                        ></gxg-button>,
+                        <gxg-button
+                          id="delete-button"
+                          type="secondary-icon-only"
+                          onClick={this.deleteItem.bind(this)}
+                          title="delete token"
+                          icon="gemini-tools/delete"
+                          tabindex="-1"
+                          onKeyDown={this.deleteButtonKeyDownHandler.bind(this)}
+                          key="3"
+                        ></gxg-button>
+                      ]
+                    )}
                   </div>
                 </div>
               </div>

@@ -68,6 +68,11 @@ export class Card {
     tokenGroup: this.tokenGroup
   };
 
+  componentDidLoad() {
+    console.log("read only");
+    console.log(this.readOnly);
+  }
+
   @Listen("editModeClosed")
   editModeClosedHandler(event) {
     if (event.detail === "escape") {
@@ -151,10 +156,6 @@ export class Card {
         }
       }
     }
-  }
-
-  componentDidLoad() {
-    console.log(this.optionsToken);
   }
 
   componentDidUpdate() {}
@@ -274,6 +275,14 @@ export class Card {
   newCardButtonKeyDownHandler() {
     this.newCardOnClick();
   }
+
+  tabIndex() {
+    if (this.readOnly) {
+      return "-1";
+    } else {
+      return "0";
+    }
+  }
   render() {
     if (this.newCard === true) {
       return (
@@ -311,7 +320,7 @@ export class Card {
             "dt-card-edit-mode": this.mode === "editable",
             "focus-on-buttons": this.focusableButtons === true
           }}
-          tabIndex="0"
+          tabIndex={this.tabIndex()}
           onKeyDown={this.handleCardKeyDown.bind(this)}
         >
           <div
@@ -326,38 +335,46 @@ export class Card {
                 <h3 class="card-header-title">{this.cardTitle}</h3>
                 {this.mode === "preview" ? (
                   <div class="card-header-menu">
-                    <gxg-button
-                      type="secondary-icon-only"
-                      onClick={this.editCard.bind(this)}
-                      disabled={this.readOnly}
-                      title={
-                        this.readOnly === true
-                          ? "edit token (comming soon)"
-                          : "edit token"
-                      }
-                      icon="gemini-tools/edit"
-                      tabindex="-1"
-                      onKeyDown={this.editButtonKeyDownHandler.bind(this)}
-                      key="1"
-                    ></gxg-button>
-                    <gxg-button
-                      type="secondary-icon-only"
-                      onClick={this.duplicateCard.bind(this)}
-                      title="duplicate token"
-                      icon="gemini-tools/duplicate"
-                      tabindex="-1"
-                      onKeyDown={this.duplicateButtonKeyDownHandler.bind(this)}
-                      key="2"
-                    ></gxg-button>
-                    <gxg-button
-                      type="secondary-icon-only"
-                      onClick={this.deleteCard.bind(this)}
-                      title="delete token"
-                      icon="gemini-tools/delete"
-                      tabindex="-1"
-                      onKeyDown={this.deleteButtonKeyDownHandler.bind(this)}
-                      key="3"
-                    ></gxg-button>
+                    {this.readOnly ? (
+                      <gxg-button
+                        type="secondary-icon-only"
+                        disabled={true}
+                        icon="gemini-tools/read-only"
+                      ></gxg-button>
+                    ) : (
+                      [
+                        <gxg-button
+                          type="secondary-icon-only"
+                          onClick={this.editCard.bind(this)}
+                          title={
+                            this.readOnly === true
+                              ? "edit token (comming soon)"
+                              : "edit token"
+                          }
+                          icon="gemini-tools/edit"
+                          tabindex="-1"
+                          onKeyDown={this.editButtonKeyDownHandler.bind(this)}
+                        ></gxg-button>,
+                        <gxg-button
+                          type="secondary-icon-only"
+                          onClick={this.duplicateCard.bind(this)}
+                          title="duplicate token"
+                          icon="gemini-tools/duplicate"
+                          tabindex="-1"
+                          onKeyDown={this.duplicateButtonKeyDownHandler.bind(
+                            this
+                          )}
+                        ></gxg-button>,
+                        <gxg-button
+                          type="secondary-icon-only"
+                          onClick={this.deleteCard.bind(this)}
+                          title="delete token"
+                          icon="gemini-tools/delete"
+                          tabindex="-1"
+                          onKeyDown={this.deleteButtonKeyDownHandler.bind(this)}
+                        ></gxg-button>
+                      ]
+                    )}
                   </div>
                 ) : (
                   <div class="card-header-menu">

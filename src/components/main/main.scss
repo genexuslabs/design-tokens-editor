@@ -20,7 +20,7 @@
   max-width: 500px;
 }
 
-#main-container {
+.main-container {
   opacity: 1;
   position: relative;
   margin-bottom: var(--spacing-comp-02);
@@ -64,7 +64,7 @@
 // FITLER
 //**************************
 .container {
-  #main-container {
+  .main-container {
     z-index: 3;
   }
   #filter {
@@ -169,7 +169,7 @@
     }
   }
   &.zIndex1 {
-    #main-container {
+    .main-container {
       z-index: 1;
     }
   }
@@ -178,6 +178,7 @@
 .message {
   position: fixed;
   top: 50%;
+  transform: translateY(-50%);
   font-family: var(--font-family-primary);
   width: 100%;
   text-align: center;
@@ -187,8 +188,16 @@
   animation-duration: 1s;
   animation-fill-mode: forwards;
 
-  &__container {
+  .opacity {
+    @include ui-animation(opacity);
+    opacity: 1;
+    &.hide {
+      opacity: 0;
+    }
+  }
+  .bouncer {
     &.bounce {
+      opacity: 1;
       animation-name: bounce;
       animation-duration: 0.2s;
       animation-iteration-count: 3;
