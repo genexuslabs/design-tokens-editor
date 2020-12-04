@@ -35,6 +35,7 @@
 - [dt-list-item-header](../list-item-header)
 - gxg-accordion
 - gxg-accordion-item
+- [dt-loader](../dt-loader)
 - gxg-button
 - gxg-spacer-one
 - gxg-card
@@ -44,7 +45,6 @@
 - gxg-option
 - gxg-pill
 - gxg-form-text
-- [dt-loader](../dt-loader)
 - gxg-alert
 
 ### Graph
@@ -57,6 +57,7 @@ graph TD;
   dt-main --> dt-list-item-header
   dt-main --> gxg-accordion
   dt-main --> gxg-accordion-item
+  dt-main --> dt-loader
   dt-main --> gxg-button
   dt-main --> gxg-spacer-one
   dt-main --> gxg-card
@@ -66,7 +67,6 @@ graph TD;
   dt-main --> gxg-option
   dt-main --> gxg-pill
   dt-main --> gxg-form-text
-  dt-main --> dt-loader
   dt-main --> gxg-alert
   dt-list-item --> gxg-button
   gxg-button --> gxg-icon

@@ -11,6 +11,20 @@
   <link rel="stylesheet" href="/build/design-tokens-editor.css" />
   <!-- 'nano' theme -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --fontSizes_f08: 10px;
+      --fontSizes_f09: 20px;
+      --colors_c08: red;
+      --colors_c09: pink;
+    }
+    [gx-data-platform="linux"]{
+      --fontSizes_f08: 20px;
+      --fontSizes_f09: 40px;
+      --colors_c08: green;
+      --colors_c09: blue;
+    }
+  </style>
 </head>
 
 <body>
@@ -29,7 +43,55 @@
       mode: ["light", "dark"],
     }
 
+    const previewModel = [
+      {
+        group: "colors",
+        id: "c01",  
+        value: "--colors_Primary",
+        readonly:true 
+      },
+      {
+        group: "fontSizes",
+        id: "f01",  
+        value: "--fontSize_Primary",
+        readonly:true
+      }
+    ]
+
     const tinyModel = {
+      "preview" : {
+        fontSizes: [
+          {
+            tokenCategory: null,
+            tokens: [
+              {
+                id: "b01",  
+                value: "--fontSizes_f08",
+                readonly: true
+              },
+              {
+                id: "b02",
+                value: "--fontSizes_f09"
+              }
+            ]
+          }
+        ],
+        colors: [
+          {
+            tokenCategory: null,
+            tokens: [
+              {
+                id: "c08",
+                value: "--colors_c08"
+              },
+              {
+                id: "c09",
+                value: "--colors_c09"
+              }
+            ]
+          }
+        ]
+      },
       "" : {
         fontSizes: [
           {
@@ -54,6 +116,7 @@
                 id: "b01",  
                 caption: "XSmall",
                 value: "50px"
+
               },
               {
                 id: "b02",  

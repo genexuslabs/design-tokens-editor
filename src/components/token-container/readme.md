@@ -15,7 +15,7 @@
 | `key`                | `key`                  |             | `string`  | `undefined` |
 | `listItem`           | `list-item`            |             | `boolean` | `undefined` |
 | `optionsToken`       | `options-token`        |             | `string`  | `undefined` |
-| `readOnly`           | `read-only`            |             | `boolean` | `undefined` |
+| `readOnly`           | `read-only`            |             | `boolean` | `false`     |
 | `selectedTokenGroup` | `selected-token-group` |             | `string`  | `undefined` |
 | `selectedTokenId`    | `selected-token-id`    |             | `string`  | `undefined` |
 | `tokenCategory`      | `token-category`       |             | `string`  | `null`      |

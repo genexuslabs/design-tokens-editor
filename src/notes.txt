@@ -1,0 +1,10 @@
+//Esto se va a ejecutar solo si el modo es preview
+//El clearOptions se ejecuta siempre que volvemos al modo editable.
+//El setOptions se ejecuta siempre que cambiamos al modo preview.
+
+function setOptions(optionName, optionValue){
+    document.documentElement.setAttribute('gx-data-' + optionName, optionValue);
+}
+function clearOptions(optionName){
+    document.documentElement.removeAttribute('gx-data-' + optionName);
+}
