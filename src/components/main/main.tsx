@@ -1144,7 +1144,7 @@ export class Main {
                     <gxg-toggle
                       id="preview-toggle"
                       label="Preview"
-                      onToggleSwitched={ev => this.previewTokensHandler()}
+                      onToggleSwitched={() => this.previewTokensHandler()}
                     ></gxg-toggle>
 
                     {Object.keys(this.avaiableOptions).length > 1 ? (

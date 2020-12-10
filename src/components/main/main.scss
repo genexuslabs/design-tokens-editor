@@ -101,6 +101,7 @@
             width: 100%;
             opacity: 0;
             top: 30px;
+            pointer-events: none;
             @include ui-animation(all);
             &__header {
               margin-bottom: var(--spacing-lay-m);
@@ -167,6 +168,7 @@
           .options-card {
             opacity: 1;
             top: 35px;
+            pointer-events: all;
           }
         }
       }
