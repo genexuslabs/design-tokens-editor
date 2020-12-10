@@ -1,4 +1,3 @@
-import { getRenderingRef } from "@genexus/gemini/dist/types/stencil-public-runtime";
 import { Component, Prop, h, Listen, Element, State } from "@stencil/core";
 
 @Component({

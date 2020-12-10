@@ -1,8 +1,6 @@
 import { State } from "@genexus/gemini/dist/types/stencil-public-runtime";
 import { GxgFormSelect } from "@genexus/gemini/dist/types/components/form-select/gxg-select";
 import { GxgToggle } from "@genexus/gemini/dist/types/components/toggle/toggle";
-//import wizard
-import * as wizard from "./wizard";
 import {
   Component,
   Prop,
@@ -13,7 +11,6 @@ import {
   EventEmitter,
   Element
 } from "@stencil/core";
-import { FontSize } from "../token-font-size/token-font-size";
 
 @Component({
   tag: "dt-main",
@@ -129,7 +126,7 @@ export class Main {
     }
   }
 
-  previewTokensHandler(ev) {
+  previewTokensHandler() {
     this.optionsHaveChanged();
   }
 
@@ -1054,19 +1051,7 @@ export class Main {
           "show-options": this.optionsVisible
         }}
       >
-        <div
-          style={{
-            "font-size": "10px",
-            "font-family": "open sans",
-            "margin-bottom": "10px",
-            position: "absolute",
-            top: "0"
-          }}
-        >
-          model: "" | preview | mode_dark | platform_linux |
-          platform_linux%mode_dark
-        </div>
-        <div id="filter" style={{ "margin-top": "10px" }}>
+        <div id="filter">
           <div class="filter-container">
             <div class="col-left">
               <div class="menu">
@@ -1159,7 +1144,7 @@ export class Main {
                     <gxg-toggle
                       id="preview-toggle"
                       label="Preview"
-                      onToggleSwitched={ev => this.previewTokensHandler(ev)}
+                      onToggleSwitched={ev => this.previewTokensHandler()}
                     ></gxg-toggle>
 
                     {Object.keys(this.avaiableOptions).length > 1 ? (
