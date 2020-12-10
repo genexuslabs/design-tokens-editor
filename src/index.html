@@ -15,14 +15,18 @@
     :root {
       --fontSizes_f08: 10px;
       --fontSizes_f09: 20px;
-      --colors_c08: red;
-      --colors_c09: pink;
+      --colors_c08: yellow;
+      --colors_c09: skyblue;
+      --spacing_c08: 3px;
+      --spacing_c09: 6px;
     }
     [gx-data-platform="linux"]{
       --fontSizes_f08: 20px;
       --fontSizes_f09: 40px;
       --colors_c08: green;
       --colors_c09: blue;
+      --spacing_c08: 6px;
+      --spacing_c09: 12px;
     }
   </style>
 </head>
@@ -59,40 +63,24 @@
     ]
 
     const tinyModel = {
-      "preview" : {
-        fontSizes: [
-          {
-            tokenCategory: null,
-            tokens: [
-              {
-                id: "b01",  
-                value: "--fontSizes_f08",
-                readonly: true
-              },
-              {
-                id: "b02",
-                value: "--fontSizes_f09"
-              }
-            ]
-          }
-        ],
+      "" : {
         colors: [
           {
             tokenCategory: null,
             tokens: [
               {
                 id: "c08",
-                value: "--colors_c08"
+                caption: "blanco",
+                value: "#fff"
               },
               {
                 id: "c09",
-                value: "--colors_c09"
+                caption: "verde",
+                value: "#ab2"
               }
             ]
           }
-        ]
-      },
-      "" : {
+        ],
         fontSizes: [
           {
             tokenCategory: "empty",
@@ -145,6 +133,23 @@
 
     const model = {
       "": {
+        fonts: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "f01",  
+                caption: "Primary",
+                value: "Opens Sans",
+              },
+              {
+                id: "f02",
+                caption: "Secondary",
+                value: "Times New Roman"
+              }
+            ]
+          }
+        ],
         fontSizes: [
           {
             tokenCategory: "empty model",
@@ -204,8 +209,8 @@
             tokens: [
               {
                 id: "c08",
-                caption: "verde",
-                value: "#ab2"
+                caption: "blanco",
+                value: "#fff"
               },
               {
                 id: "c09",
@@ -265,7 +270,235 @@
             ]
           }
         ],
-        opacity: null
+        spacing: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "s01",  
+                caption: "Primary",
+                value: "3px",
+              },
+              {
+                id: "s02",
+                caption: "Secondary",
+                value: "20px"
+              }
+            ]
+          }
+        ],
+        borders: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "b01",  
+                caption: "tiny",
+                value: "3px",
+              },
+              {
+                id: "b02",
+                caption: "big",
+                value: "20px"
+              }
+            ]
+          }
+        ],
+        radius: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "r01",  
+                caption: "tiny",
+                value: "3px",
+              },
+              {
+                id: "r02",
+                caption: "big",
+                value: "20px"
+              }
+            ]
+          }
+        ],
+        shadows: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "s01",  
+                caption: "Primary",
+                value: "5px 10px",
+              },
+              {
+                id: "s02",
+                caption: "Secondary",
+                value: "5px 10px #888888"
+              }
+            ]
+          }
+        ],
+        shadows: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "o01",  
+                caption: "Primary",
+                value: "3px 3px 5px #Aaaaaa",
+              },
+              {
+                id: "o02",
+                caption: "Secondary",
+                value: "13px 13px 5px #Aaaaaa"
+              }
+            ]
+          }
+        ],
+        opacity: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "o01",  
+                caption: "Primary",
+                value: "0.6",
+              },
+              {
+                id: "o02",
+                caption: "Secondary",
+                value: "0.8"
+              }
+            ]
+          }
+        ],
+        zIndex: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "z01",  
+                caption: "Primary",
+                value: "2",
+              },
+              {
+                id: "z02",
+                caption: "Secondary",
+                value: "8"
+              }
+            ]
+          }
+        ],
+        timingFunction: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "tf01",  
+                caption: "Primary",
+                value: "linear",
+              },
+              {
+                id: "tf02",
+                caption: "Secondary",
+                value: "ease-in"
+              }
+            ]
+          }
+        ],
+        times: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "t01",  
+                caption: "Primary",
+                value: "3s",
+              },
+              {
+                id: "t02",
+                caption: "Secondary",
+                value: "1s"
+              }
+            ]
+          }
+        ],
+        mediaQueries: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "mq01",  
+                caption: "Primary",
+                value: "Speech And (Min-Width: 30em) And (Orientation: Landscape)",
+              },
+              {
+                id: "mq02",
+                caption: "Secondary",
+                value: "Print And (Min-Width: 30em) And (Orientation: Landscape)"
+              }
+            ]
+          }
+        ]
+      },
+      "preview" : {
+        fontSizes: [
+          {
+            tokenCategory: null,
+            tokens: [
+              {
+                id: "b01",  
+                caption: "font size 1",
+                value: "--fontSizes_f08",
+                readonly: true
+              },
+              {
+                id: "b02",
+                caption: "font size 2",
+                value: "--fontSizes_f09",
+                readonly: true
+              }
+            ]
+          }
+        ],
+        colors: [
+          {
+            tokenCategory: null,
+            tokens: [
+              {
+                id: "c08",
+                caption: "color 1",
+                value: "--colors_c08",
+                readonly: true
+              },
+              {
+                id: "c09",
+                caption: "color 2",
+                value: "--colors_c09",
+                readonly: true
+              }
+            ]
+          }
+        ]
+        // spacing: [
+        //   {
+        //     tokenCategory: null,
+        //     tokens: [
+        //       {
+        //         id: "s01",
+        //         caption: "spacing 1",
+        //         value: "--spacing_c08",
+        //         readonly: true
+        //       },
+        //       {
+        //         id: "s02",
+        //         caption: "spacing 2",
+        //         value: "--spacing_c09",
+        //         readonly: true
+        //       }
+        //     ]
+        //   }
+        // ]
       },
       "mode_dark": {
         fontSizes: [
@@ -458,11 +691,204 @@
       }
     };
 
-    const modelWithoutEmptyModelName = {
+    const modelWithEmptyModelNull = {
+      "": null,
+      "mode_dark": {
+        fontSizes: [
+          {
+            tokenCategory: "mode_dark",
+            tokens: [
+              {
+                id: "b01",
+                caption: "XSmall",
+                value: "10px"
+              },
+              {
+                id: "b02",
+                caption: "Small",
+                value: "16px"
+              },
+              {
+                id: "b03",
+                caption: "Regular",
+                value: "22px"
+              },
+              {
+                id: "b04",
+                caption: "Big",
+                value: "99px"
+              }
+            ]
+          },
+          {
+            tokenCategory: "secondary",
+            tokens: [
+              {
+                id: "b05",
+                caption: "XSmall",
+                value: "10px"
+              },
+              {
+                id: "b06",
+                caption: "Small",
+                value: "16px"
+              },
+              {
+                id: "b07",
+                caption: "Regular",
+                value: "22px"
+              },
+              {
+                id: "b08",
+                caption: "Big",
+                value: "99px"
+              }
+            ]
+          }
+        ]
+      },
+      "platform_linux": {
+        fontSizes: [
+          {
+            tokenCategory: "platform_linux",
+            tokens: [
+              {
+                id: "b01",
+                caption: "XSmall",
+                value: "10px"
+              },
+              {
+                id: "b02",
+                caption: "Small",
+                value: "16px"
+              },
+              {
+                id: "b03",
+                caption: "Regular",
+                value: "22px"
+              },
+              {
+                id: "b04",
+                caption: "Big",
+                value: "99px"
+              }
+            ]
+          },
+          {
+            tokenCategory: "secondary",
+            tokens: [
+              {
+                id: "b05",
+                caption: "XSmall",
+                value: "10px"
+              },
+              {
+                id: "b06",
+                caption: "Small",
+                value: "16px"
+              },
+              {
+                id: "b07",
+                caption: "Regular",
+                value: "22px"
+              },
+              {
+                id: "b08",
+                caption: "Big",
+                value: "99px"
+              }
+            ]
+          }
+        ],
+        spacing: [
+          {
+            tokenCategory: null,
+            tokens: [
+              {
+                id: "d01",
+                caption: "XSmall",
+                value: "8px"
+              },
+              {
+                id: "d02",
+                caption: "Small",
+                value: "10px"
+              },
+              {
+                id: "d03",
+                caption: "Medium",
+                value: "15px"
+              },
+              {
+                id: "d04",
+                caption: "Large",
+                value: "45px"
+              }
+            ]
+          }
+        ]
+      },
+      "platform_linux%mode_dark": {
+        fontSizes: [
+          {
+            tokenCategory: "platform_linux%mode_dark",
+            tokens: [
+              {
+                id: "b01",
+                caption: "XSmall",
+                value: "10px"
+              },
+              {
+                id: "b02",
+                caption: "Small",
+                value: "16px"
+              },
+              {
+                id: "b03",
+                caption: "Regular",
+                value: "22px"
+              },
+              {
+                id: "b04",
+                caption: "Big",
+                value: "99px"
+              }
+            ]
+          },
+          {
+            tokenCategory: "secondary",
+            tokens: [
+              {
+                id: "b05",
+                caption: "XSmall",
+                value: "10px"
+              },
+              {
+                id: "b06",
+                caption: "Small",
+                value: "16px"
+              },
+              {
+                id: "b07",
+                caption: "Regular",
+                value: "22px"
+              },
+              {
+                id: "b08",
+                caption: "Big",
+                value: "99px"
+              }
+            ]
+          }
+        ]
+      }
+    }; 
+
+    const modelWithoutEmptyModel = {
       "mode_light%platform_linux": {
         fontSizes: [
           {
-            tokenCategory: "mode_light",
+            tokenCategory: "mode_light%platform_linux",
             tokens: [
               {
                 id: "b01",
@@ -650,6 +1076,1009 @@
       }
     };
 
+    const modelWithoutPreview = {
+      "": {
+        fonts: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "f01",  
+                caption: "Primary",
+                value: "Opens Sans",
+              },
+              {
+                id: "f02",
+                caption: "Secondary",
+                value: "Times New Roman"
+              }
+            ]
+          }
+        ],
+        fontSizes: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "b01",  
+                caption: "XSmall",
+                value: "50px",
+                readonly: true
+              },
+              {
+                id: "b02",
+                caption: "Small",
+                value: "16px"
+              },
+              {
+                id: "b03",
+                caption: "Regular",
+                value: "22px"
+              },
+              {
+                id: "b04",
+                caption: "Big",
+                value: "99px"
+              }
+            ]
+          },
+          {
+            tokenCategory: "secondary",
+            tokens: [
+              {
+                id: "b05",
+                caption: "XSmall",
+                value: "10px"
+              },
+              {
+                id: "b06",
+                caption: "Small",
+                value: "16px"
+              },
+              {
+                id: "b07",
+                caption: "Regular",
+                value: "22px"
+              },
+              {
+                id: "b08",
+                caption: "Big",
+                value: "99px"
+              }
+            ]
+          }
+        ],
+        colors: [
+          {
+            tokenCategory: null,
+            tokens: [
+              {
+                id: "c08",
+                caption: "blanco",
+                value: "#fff"
+              },
+              {
+                id: "c09",
+                caption: "verde",
+                value: "#ab2"
+              }
+            ]
+          },
+          {
+            tokenCategory: "primary",
+            tokens: [
+              {
+                id: "c01",
+                caption: "rosa",
+                value: "#40460D"
+              },
+              {
+                id: "c02",
+                caption: "celeste",
+                value: "rgba(123,123,123,1)"
+              },
+              {
+                id: "c03",
+                caption: "verde",
+                value: "#ab2"
+              }
+            ]
+          },
+          {
+            tokenCategory: "secondary",
+            tokens: [
+              {
+                id: "c04",
+                caption: "verde",
+                value: "#ab2"
+              },
+              {
+                id: "c05",
+                caption: "verde",
+                value: "#ab2"
+              }
+            ]
+          },
+          {
+            tokenCategory: "tertiary",
+            tokens: [
+              {
+                id: "c06",
+                caption: "verde",
+                value: "#ab2"
+              },
+              {
+                id: "c07",
+                caption: "verde",
+                value: "#ab2"
+              }
+            ]
+          }
+        ],
+        spacing: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "s01",  
+                caption: "Primary",
+                value: "3px",
+              },
+              {
+                id: "s02",
+                caption: "Secondary",
+                value: "20px"
+              }
+            ]
+          }
+        ],
+        borders: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "b01",  
+                caption: "tiny",
+                value: "3px",
+              },
+              {
+                id: "b02",
+                caption: "big",
+                value: "20px"
+              }
+            ]
+          }
+        ],
+        radius: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "r01",  
+                caption: "tiny",
+                value: "3px",
+              },
+              {
+                id: "r02",
+                caption: "big",
+                value: "20px"
+              }
+            ]
+          }
+        ],
+        shadows: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "s01",  
+                caption: "Primary",
+                value: "5px 10px",
+              },
+              {
+                id: "s02",
+                caption: "Secondary",
+                value: "5px 10px #888888"
+              }
+            ]
+          }
+        ],
+        shadows: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "o01",  
+                caption: "Primary",
+                value: "3px 3px 5px #Aaaaaa",
+              },
+              {
+                id: "o02",
+                caption: "Secondary",
+                value: "13px 13px 5px #Aaaaaa"
+              }
+            ]
+          }
+        ],
+        opacity: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "o01",  
+                caption: "Primary",
+                value: "0.6",
+              },
+              {
+                id: "o02",
+                caption: "Secondary",
+                value: "0.8"
+              }
+            ]
+          }
+        ],
+        zIndex: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "z01",  
+                caption: "Primary",
+                value: "2",
+              },
+              {
+                id: "z02",
+                caption: "Secondary",
+                value: "8"
+              }
+            ]
+          }
+        ],
+        timingFunction: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "tf01",  
+                caption: "Primary",
+                value: "linear",
+              },
+              {
+                id: "tf02",
+                caption: "Secondary",
+                value: "ease-in"
+              }
+            ]
+          }
+        ],
+        times: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "t01",  
+                caption: "Primary",
+                value: "3s",
+              },
+              {
+                id: "t02",
+                caption: "Secondary",
+                value: "1s"
+              }
+            ]
+          }
+        ],
+        mediaQueries: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "mq01",  
+                caption: "Primary",
+                value: "Speech And (Min-Width: 30em) And (Orientation: Landscape)",
+              },
+              {
+                id: "mq02",
+                caption: "Secondary",
+                value: "Print And (Min-Width: 30em) And (Orientation: Landscape)"
+              }
+            ]
+          }
+        ]
+      },
+      "mode_dark": {
+        fontSizes: [
+          {
+            tokenCategory: "mode_dark",
+            tokens: [
+              {
+                id: "b01",
+                caption: "XSmall",
+                value: "10px"
+              },
+              {
+                id: "b02",
+                caption: "Small",
+                value: "16px"
+              },
+              {
+                id: "b03",
+                caption: "Regular",
+                value: "22px"
+              },
+              {
+                id: "b04",
+                caption: "Big",
+                value: "99px"
+              }
+            ]
+          },
+          {
+            tokenCategory: "secondary",
+            tokens: [
+              {
+                id: "b05",
+                caption: "XSmall",
+                value: "10px"
+              },
+              {
+                id: "b06",
+                caption: "Small",
+                value: "16px"
+              },
+              {
+                id: "b07",
+                caption: "Regular",
+                value: "22px"
+              },
+              {
+                id: "b08",
+                caption: "Big",
+                value: "99px"
+              }
+            ]
+          }
+        ]
+      },
+      "platform_linux": {
+        fontSizes: [
+          {
+            tokenCategory: "platform_linux",
+            tokens: [
+              {
+                id: "b01",
+                caption: "XSmall",
+                value: "10px"
+              },
+              {
+                id: "b02",
+                caption: "Small",
+                value: "16px"
+              },
+              {
+                id: "b03",
+                caption: "Regular",
+                value: "22px"
+              },
+              {
+                id: "b04",
+                caption: "Big",
+                value: "99px"
+              }
+            ]
+          },
+          {
+            tokenCategory: "secondary",
+            tokens: [
+              {
+                id: "b05",
+                caption: "XSmall",
+                value: "10px"
+              },
+              {
+                id: "b06",
+                caption: "Small",
+                value: "16px"
+              },
+              {
+                id: "b07",
+                caption: "Regular",
+                value: "22px"
+              },
+              {
+                id: "b08",
+                caption: "Big",
+                value: "99px"
+              }
+            ]
+          }
+        ],
+        spacing: [
+          {
+            tokenCategory: null,
+            tokens: [
+              {
+                id: "d01",
+                caption: "XSmall",
+                value: "8px"
+              },
+              {
+                id: "d02",
+                caption: "Small",
+                value: "10px"
+              },
+              {
+                id: "d03",
+                caption: "Medium",
+                value: "15px"
+              },
+              {
+                id: "d04",
+                caption: "Large",
+                value: "45px"
+              }
+            ]
+          }
+        ]
+      },
+      "platform_linux%mode_dark": {
+        fontSizes: [
+          {
+            tokenCategory: "platform_linux%mode_dark",
+            tokens: [
+              {
+                id: "b01",
+                caption: "XSmall",
+                value: "10px"
+              },
+              {
+                id: "b02",
+                caption: "Small",
+                value: "16px"
+              },
+              {
+                id: "b03",
+                caption: "Regular",
+                value: "22px"
+              },
+              {
+                id: "b04",
+                caption: "Big",
+                value: "99px"
+              }
+            ]
+          },
+          {
+            tokenCategory: "secondary",
+            tokens: [
+              {
+                id: "b05",
+                caption: "XSmall",
+                value: "10px"
+              },
+              {
+                id: "b06",
+                caption: "Small",
+                value: "16px"
+              },
+              {
+                id: "b07",
+                caption: "Regular",
+                value: "22px"
+              },
+              {
+                id: "b08",
+                caption: "Big",
+                value: "99px"
+              }
+            ]
+          }
+        ]
+      }
+    };
+
+    const modelWithPreviewNull = {
+      "": {
+        fonts: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "f01",  
+                caption: "Primary",
+                value: "Opens Sans",
+              },
+              {
+                id: "f02",
+                caption: "Secondary",
+                value: "Times New Roman"
+              }
+            ]
+          }
+        ],
+        fontSizes: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "b01",  
+                caption: "XSmall",
+                value: "50px",
+                readonly: true
+              },
+              {
+                id: "b02",
+                caption: "Small",
+                value: "16px"
+              },
+              {
+                id: "b03",
+                caption: "Regular",
+                value: "22px"
+              },
+              {
+                id: "b04",
+                caption: "Big",
+                value: "99px"
+              }
+            ]
+          },
+          {
+            tokenCategory: "secondary",
+            tokens: [
+              {
+                id: "b05",
+                caption: "XSmall",
+                value: "10px"
+              },
+              {
+                id: "b06",
+                caption: "Small",
+                value: "16px"
+              },
+              {
+                id: "b07",
+                caption: "Regular",
+                value: "22px"
+              },
+              {
+                id: "b08",
+                caption: "Big",
+                value: "99px"
+              }
+            ]
+          }
+        ],
+        colors: [
+          {
+            tokenCategory: null,
+            tokens: [
+              {
+                id: "c08",
+                caption: "blanco",
+                value: "#fff"
+              },
+              {
+                id: "c09",
+                caption: "verde",
+                value: "#ab2"
+              }
+            ]
+          },
+          {
+            tokenCategory: "primary",
+            tokens: [
+              {
+                id: "c01",
+                caption: "rosa",
+                value: "#40460D"
+              },
+              {
+                id: "c02",
+                caption: "celeste",
+                value: "rgba(123,123,123,1)"
+              },
+              {
+                id: "c03",
+                caption: "verde",
+                value: "#ab2"
+              }
+            ]
+          },
+          {
+            tokenCategory: "secondary",
+            tokens: [
+              {
+                id: "c04",
+                caption: "verde",
+                value: "#ab2"
+              },
+              {
+                id: "c05",
+                caption: "verde",
+                value: "#ab2"
+              }
+            ]
+          },
+          {
+            tokenCategory: "tertiary",
+            tokens: [
+              {
+                id: "c06",
+                caption: "verde",
+                value: "#ab2"
+              },
+              {
+                id: "c07",
+                caption: "verde",
+                value: "#ab2"
+              }
+            ]
+          }
+        ],
+        spacing: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "s01",  
+                caption: "Primary",
+                value: "3px",
+              },
+              {
+                id: "s02",
+                caption: "Secondary",
+                value: "20px"
+              }
+            ]
+          }
+        ],
+        borders: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "b01",  
+                caption: "tiny",
+                value: "3px",
+              },
+              {
+                id: "b02",
+                caption: "big",
+                value: "20px"
+              }
+            ]
+          }
+        ],
+        radius: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "r01",  
+                caption: "tiny",
+                value: "3px",
+              },
+              {
+                id: "r02",
+                caption: "big",
+                value: "20px"
+              }
+            ]
+          }
+        ],
+        shadows: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "s01",  
+                caption: "Primary",
+                value: "5px 10px",
+              },
+              {
+                id: "s02",
+                caption: "Secondary",
+                value: "5px 10px #888888"
+              }
+            ]
+          }
+        ],
+        shadows: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "o01",  
+                caption: "Primary",
+                value: "3px 3px 5px #Aaaaaa",
+              },
+              {
+                id: "o02",
+                caption: "Secondary",
+                value: "13px 13px 5px #Aaaaaa"
+              }
+            ]
+          }
+        ],
+        opacity: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "o01",  
+                caption: "Primary",
+                value: "0.6",
+              },
+              {
+                id: "o02",
+                caption: "Secondary",
+                value: "0.8"
+              }
+            ]
+          }
+        ],
+        zIndex: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "z01",  
+                caption: "Primary",
+                value: "2",
+              },
+              {
+                id: "z02",
+                caption: "Secondary",
+                value: "8"
+              }
+            ]
+          }
+        ],
+        timingFunction: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "tf01",  
+                caption: "Primary",
+                value: "linear",
+              },
+              {
+                id: "tf02",
+                caption: "Secondary",
+                value: "ease-in"
+              }
+            ]
+          }
+        ],
+        times: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "t01",  
+                caption: "Primary",
+                value: "3s",
+              },
+              {
+                id: "t02",
+                caption: "Secondary",
+                value: "1s"
+              }
+            ]
+          }
+        ],
+        mediaQueries: [
+          {
+            tokenCategory: "empty model",
+            tokens: [
+              {
+                id: "mq01",  
+                caption: "Primary",
+                value: "Speech And (Min-Width: 30em) And (Orientation: Landscape)",
+              },
+              {
+                id: "mq02",
+                caption: "Secondary",
+                value: "Print And (Min-Width: 30em) And (Orientation: Landscape)"
+              }
+            ]
+          }
+        ]
+      },
+      "preview" : null,
+      "mode_dark": {
+        fontSizes: [
+          {
+            tokenCategory: "mode_dark",
+            tokens: [
+              {
+                id: "b01",
+                caption: "XSmall",
+                value: "10px"
+              },
+              {
+                id: "b02",
+                caption: "Small",
+                value: "16px"
+              },
+              {
+                id: "b03",
+                caption: "Regular",
+                value: "22px"
+              },
+              {
+                id: "b04",
+                caption: "Big",
+                value: "99px"
+              }
+            ]
+          },
+          {
+            tokenCategory: "secondary",
+            tokens: [
+              {
+                id: "b05",
+                caption: "XSmall",
+                value: "10px"
+              },
+              {
+                id: "b06",
+                caption: "Small",
+                value: "16px"
+              },
+              {
+                id: "b07",
+                caption: "Regular",
+                value: "22px"
+              },
+              {
+                id: "b08",
+                caption: "Big",
+                value: "99px"
+              }
+            ]
+          }
+        ]
+      },
+      "platform_linux": {
+        fontSizes: [
+          {
+            tokenCategory: "platform_linux",
+            tokens: [
+              {
+                id: "b01",
+                caption: "XSmall",
+                value: "10px"
+              },
+              {
+                id: "b02",
+                caption: "Small",
+                value: "16px"
+              },
+              {
+                id: "b03",
+                caption: "Regular",
+                value: "22px"
+              },
+              {
+                id: "b04",
+                caption: "Big",
+                value: "99px"
+              }
+            ]
+          },
+          {
+            tokenCategory: "secondary",
+            tokens: [
+              {
+                id: "b05",
+                caption: "XSmall",
+                value: "10px"
+              },
+              {
+                id: "b06",
+                caption: "Small",
+                value: "16px"
+              },
+              {
+                id: "b07",
+                caption: "Regular",
+                value: "22px"
+              },
+              {
+                id: "b08",
+                caption: "Big",
+                value: "99px"
+              }
+            ]
+          }
+        ],
+        spacing: [
+          {
+            tokenCategory: null,
+            tokens: [
+              {
+                id: "d01",
+                caption: "XSmall",
+                value: "8px"
+              },
+              {
+                id: "d02",
+                caption: "Small",
+                value: "10px"
+              },
+              {
+                id: "d03",
+                caption: "Medium",
+                value: "15px"
+              },
+              {
+                id: "d04",
+                caption: "Large",
+                value: "45px"
+              }
+            ]
+          }
+        ]
+      },
+      "platform_linux%mode_dark": {
+        fontSizes: [
+          {
+            tokenCategory: "platform_linux%mode_dark",
+            tokens: [
+              {
+                id: "b01",
+                caption: "XSmall",
+                value: "10px"
+              },
+              {
+                id: "b02",
+                caption: "Small",
+                value: "16px"
+              },
+              {
+                id: "b03",
+                caption: "Regular",
+                value: "22px"
+              },
+              {
+                id: "b04",
+                caption: "Big",
+                value: "99px"
+              }
+            ]
+          },
+          {
+            tokenCategory: "secondary",
+            tokens: [
+              {
+                id: "b05",
+                caption: "XSmall",
+                value: "10px"
+              },
+              {
+                id: "b06",
+                caption: "Small",
+                value: "16px"
+              },
+              {
+                id: "b07",
+                caption: "Regular",
+                value: "22px"
+              },
+              {
+                id: "b08",
+                caption: "Big",
+                value: "99px"
+              }
+            ]
+          }
+        ]
+      }
+    };
+
     const modelMaxi = {
     "": {
         "colors": [
@@ -665,7 +2094,70 @@
             }
         ]
       }
-  }
+    }
+
+    const modelPreview = {
+      "": {
+        "colors": [
+            {
+                "tokenCategory":null,
+                "tokens": [
+                    {
+                        "id":"_colors_Primary",
+                        "caption":"Primary",
+                        "value":"red"
+                    }
+                ]
+            }
+        ]
+      },
+      "preview" : {
+        fontSizes: [
+          {
+            tokenCategory: null,
+            tokens: [
+              {
+                id: "b01",  
+                caption: "font size 1",
+                value: "--fontSizes_f08",
+                readonly: true
+              },
+              {
+                id: "b02",
+                caption: "font size 2",
+                value: "--fontSizes_f09",
+                readonly: true
+              }
+            ]
+          }
+        ],
+        colors: [
+          {
+            tokenCategory: null,
+            tokens: [
+              {
+                id: "c08",
+                caption: "color 1",
+                value: "--colors_c08",
+                readonly: true
+              },
+              {
+                id: "c09",
+                caption: "color 2",
+                value: "--colors_c09",
+                readonly: true
+              }
+            ]
+          }
+        ]
+      }
+    }
+
+    const modelAllNull = {
+    "": null,
+    "platform_linux": null,
+    "platform_linux%mode_dark" : null
+    }
 
    const modelNull = null;
 
@@ -674,11 +2166,18 @@
     
     main.avaiableOptions = avaiableOptions;
     //main.avaiableOptions = avaiableOptionsTinyModel;
-    //main.model = model;
-    //main.model = modelWithoutEmptyModelName;
 
     // main.avaiableOptions = avaiableOptionsTinyModel;
-    main.model = tinyModel;
+    main.model = model;
+    // main.model = modelWithEmptyModelNull;
+    // main.model = modelWithoutEmptyModel;
+    // main.model = modelWithoutPreview;
+    // main.model = modelWithPreviewNull;
+    // main.model = modelAllNull;
+    main.model = modelPreview;
+
+
+    //main.model = tinyModel;
     
 
     main.needHelpUrl = "http://need-help.com";

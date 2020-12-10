@@ -42,6 +42,7 @@ export class Card {
   @State() cardMinHeight: string;
   @State() focusableButtons: boolean = false;
   @State() mode: string = "preview";
+  @State() tokenValueName: string;
 
   //Events
   @Event()
@@ -67,11 +68,6 @@ export class Card {
     tokenId: this.tokenId,
     tokenGroup: this.tokenGroup
   };
-
-  componentDidLoad() {
-    console.log("read only");
-    console.log(this.readOnly);
-  }
 
   @Listen("editModeClosed")
   editModeClosedHandler(event) {
@@ -158,7 +154,20 @@ export class Card {
     }
   }
 
-  componentDidUpdate() {}
+  componentWillLoad() {
+    if (!this.newCard) {
+      if (
+        this.tokenValue.charAt(0) === "-" &&
+        this.tokenValue.charAt(1) === "-"
+      ) {
+        //The value is a css variable
+        let cssVariableValue = getComputedStyle(
+          document.documentElement
+        ).getPropertyValue(this.tokenValue);
+        this.tokenValue = cssVariableValue;
+      }
+    }
+  }
 
   componentDidUnload() {
     document.removeEventListener("click", this.detectClickOutsideCard);

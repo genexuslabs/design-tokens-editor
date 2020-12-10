@@ -18,6 +18,7 @@
         display: flex;
         .color-palette-row-box {
           min-height: var(--spacing-comp-04);
+          border-color: transparent;
         }
         .color-palette-row-box:first-child {
           margin-right: var(--spacing-comp-01);
@@ -65,6 +66,18 @@
       min-height: 0;
       height: var(--spacing-comp-05);
       margin-right: 0;
+    }
+  }
+}
+//preview value
+:host(.has-preview-value) {
+  .color-palette {
+    &-row {
+      &:last-child {
+        .color-palette-row-box {
+          background-color: var(--preview-value) !important;
+        }
+      }
     }
   }
 }

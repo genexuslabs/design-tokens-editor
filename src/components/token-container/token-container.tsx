@@ -1,3 +1,4 @@
+import { getRenderingRef } from "@genexus/gemini/dist/types/stencil-public-runtime";
 import { Component, Prop, h, Listen, Element, State } from "@stencil/core";
 
 @Component({
@@ -32,9 +33,27 @@ export class TokenContainer {
     this.mode = event.detail;
   }
 
-  componentDidLoad() {
-    console.log("read only token container");
-    console.log(this.readOnly);
+  returnPreviewVariable() {
+    if (
+      this.tokenValue.charAt(0) === "-" &&
+      this.tokenValue.charAt(1) === "-"
+    ) {
+      //The value is a css variable
+      return `var(${this.tokenValue})`;
+    } else {
+      return "";
+    }
+  }
+  hasPreviewValue() {
+    if (
+      this.tokenValue.charAt(0) === "-" &&
+      this.tokenValue.charAt(1) === "-"
+    ) {
+      //The value is a css variable
+      return true;
+    } else {
+      return false;
+    }
   }
 
   render() {
@@ -132,8 +151,14 @@ export class TokenContainer {
             return [
               <dt-token-color-palette
                 slot="preview"
+                style={{
+                  "--preview-value": this.returnPreviewVariable()
+                }}
                 color={tokenValue}
-                class={{ listItem: this.cardAsListItem }}
+                class={{
+                  listItem: this.cardAsListItem,
+                  "has-preview-value": this.hasPreviewValue()
+                }}
               ></dt-token-color-palette>
             ];
           } else {

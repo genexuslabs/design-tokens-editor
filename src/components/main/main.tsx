@@ -1,5 +1,8 @@
 import { State } from "@genexus/gemini/dist/types/stencil-public-runtime";
 import { GxgFormSelect } from "@genexus/gemini/dist/types/components/form-select/gxg-select";
+import { GxgToggle } from "@genexus/gemini/dist/types/components/toggle/toggle";
+//import wizard
+import * as wizard from "./wizard";
 import {
   Component,
   Prop,
@@ -10,6 +13,7 @@ import {
   EventEmitter,
   Element
 } from "@stencil/core";
+import { FontSize } from "../token-font-size/token-font-size";
 
 @Component({
   tag: "dt-main",
@@ -37,7 +41,6 @@ export class Main {
 
   //Loader
   @State() updatingModel: boolean = true;
-  @State() hideLoader: boolean = false;
 
   //Model
   @State() options: Object = { mode: null, platform: null };
@@ -45,6 +48,9 @@ export class Main {
   @State() selectedModelName: string = null;
   @State() selectedOptions = [];
   @State() firstLoad: boolean = true;
+
+  //Preview mode
+  @State() previewMode: boolean = false;
 
   @State() modelAlreadyEmpty: boolean = false;
   @State() bounceMessage: boolean = false;
@@ -70,11 +76,12 @@ export class Main {
     });
   }
 
-  componentWillLoad() {
-    this.setInitialSelectedModel();
-  }
+  componentWillLoad() {}
 
-  componentDidLoad() {}
+  componentDidLoad() {
+    this.setInitialSelectedModel();
+    //wizard.intro(this);
+  }
 
   @Watch("tokenDeleted")
   tokenDeletedHandler(newValue: boolean) {
@@ -122,6 +129,10 @@ export class Main {
     }
   }
 
+  previewTokensHandler(ev) {
+    this.optionsHaveChanged();
+  }
+
   /****************************
    * OPTIONS
    ****************************/
@@ -131,7 +142,7 @@ export class Main {
     let optionsCard = this.el.shadowRoot.querySelector(".options-card");
     optionsCard.removeAttribute("tabindex");
 
-    let firstSelect = this.el.shadowRoot.querySelector(".select-options");
+    let firstSelect = this.el.shadowRoot.querySelector(".select-option");
     (firstSelect.shadowRoot.querySelector(
       ".select-selected"
     ) as HTMLElement).focus();
@@ -171,12 +182,10 @@ export class Main {
         .shadowRoot.querySelector(".button-native");
       (settingsButton as HTMLElement).focus();
     }
-
-    this.hideMainContainer = true;
   }
 
   cancelOptions() {
-    let optionsSelects = this.el.shadowRoot.querySelectorAll(".select-options");
+    let optionsSelects = this.el.shadowRoot.querySelectorAll(".select-option");
     optionsSelects.forEach(select => {
       let gxgSelect = (select as unknown) as GxgFormSelect;
       if (this.selectedOptions.length > 0) {
@@ -208,7 +217,46 @@ export class Main {
     if (Object.keys(this.avaiableOptions).length === 1) {
       this.updateSelectedModel();
     }
-    this.disableOptionsButtons = false;
+    this.optionsHaveChanged();
+  }
+
+  optionsHaveChanged() {
+    let newOptionsMatchesCurrentOptions = true;
+    let newSelectedOptions = [];
+    let optionsSelects = this.el.shadowRoot.querySelectorAll(".select-option");
+    optionsSelects.forEach(select => {
+      let optionLabel = ((select as unknown) as GxgFormSelect).label.toLowerCase();
+      let optionValue = ((select as unknown) as GxgFormSelect).value;
+      if (optionValue !== "") {
+        newSelectedOptions.push(optionLabel + "_" + optionValue);
+      }
+    });
+
+    //Compare current selected options with current applied options to the model
+    if (this.selectedOptions.length === newSelectedOptions.length) {
+      for (let i = 0; i < this.selectedOptions.length; i++) {
+        if (this.selectedOptions[i] !== newSelectedOptions[i]) {
+          newOptionsMatchesCurrentOptions = false;
+          break;
+        }
+      }
+    } else {
+      newOptionsMatchesCurrentOptions = false;
+    }
+
+    //Compare preview mode toggle
+    let previewToggle = this.el.shadowRoot.querySelector("#preview-toggle");
+    let newPreviewModeValue = ((previewToggle as unknown) as GxgToggle).on;
+    if (newPreviewModeValue !== this.previewMode) {
+      newOptionsMatchesCurrentOptions = false;
+    }
+
+    //If new options are the same as the current applied options, disable options buttons.
+    if (newOptionsMatchesCurrentOptions) {
+      this.disableOptionsButtons = true;
+    } else {
+      this.disableOptionsButtons = false;
+    }
   }
 
   /****************************
@@ -369,8 +417,28 @@ export class Main {
 
   setInitialSelectedModel() {
     if (this.model !== null && this.model !== undefined) {
-      this.selectedModelName = Object.keys(this.model)[0];
-      this.selectedModel = this.model[Object.keys(this.model)[0]];
+      //Set the first not-empty model as the selected model.
+      //If all the models are null, set the first model as the selected model.
+      let modelNotNullFound = false;
+      let modelNotNullKey: string;
+      for (const [modelKey] of Object.entries(this.model)) {
+        if (this.model[modelKey] !== null) {
+          modelNotNullFound = true;
+          modelNotNullKey = modelKey;
+          break;
+        }
+      }
+      if (modelNotNullFound) {
+        this.selectedModelName = modelNotNullKey;
+        this.selectedModel = this.model[modelNotNullKey];
+      } else {
+        //If all models are null, set the first model as the selected model
+        this.selectedModelName = Object.keys(this.model)[0];
+        this.selectedModel = this.model[Object.keys(this.model)[0]];
+      }
+      if (this.selectedModel === null) {
+        this.modelAlreadyEmpty = true;
+      }
       this.updateSelectedOptions();
 
       setTimeout(
@@ -403,11 +471,36 @@ export class Main {
         this.selectedOptions[0] = this.selectedModelName;
       }
     }
+
+    //preview tokens mode
+    let previewToggle = this.el.shadowRoot.querySelector("#preview-toggle");
+    this.previewMode = ((previewToggle as unknown) as GxgToggle).on;
+    setTimeout(() => {
+      //Update root gx-data options
+      if (this.previewMode) {
+        //preview mode is on
+        if (this.selectedOptions.length > 0) {
+          for (let i = 0; i < this.selectedOptions.length; i++) {
+            let optionArray = this.selectedOptions[i].split("_");
+            let arrayOptionKey = optionArray[0];
+            let arrayOptionValue = optionArray[1];
+            document.documentElement.setAttribute(
+              "gx-data-" + arrayOptionKey,
+              arrayOptionValue
+            );
+          }
+        }
+      } else {
+        //preview mode is off
+        Object.keys(this.avaiableOptions).map(optionType => {
+          document.documentElement.removeAttribute("gx-data-" + optionType);
+        });
+      }
+    }, 500);
   }
 
   setSelectedOption(optionType, optionValue) {
     let returnValue = false;
-    for (let i = 0; i < this.selectedOptions.length; i++) {}
     if (this.selectedOptions.length !== 0) {
       for (let i = 0; i < this.selectedOptions.length; i++) {
         let optionArray = this.selectedOptions[i].split("_");
@@ -426,7 +519,7 @@ export class Main {
 
   updateSelectedModel() {
     let selectedModelName = "";
-    let optionsSelects = this.el.shadowRoot.querySelectorAll(".select-options");
+    let optionsSelects = this.el.shadowRoot.querySelectorAll(".select-option");
     optionsSelects.forEach(select => {
       let selectLabel = ((select as unknown) as GxgFormSelect).label.toLowerCase();
       let selectValue = ((select as unknown) as GxgFormSelect).value;
@@ -445,99 +538,235 @@ export class Main {
   }
 
   setSelectedModel() {
-    if (this.selectedOptions.length === 0) {
-      if (this.model.hasOwnProperty("")) {
-        this.hideOptions();
-        setTimeout(() => {
-          this.disableOptionsButtons;
-        }, 200);
-        if (this.modelAlreadyEmpty) {
-          this.hideMessage = true;
-        }
-        setTimeout(() => {
-          this.hideMainContainer = true;
-          setTimeout(() => {
-            this.updatingModel = true;
-            this.selectedModel = this.model[""];
-            this.modelAlreadyEmpty = false;
+    if (this.previewMode) {
+      if (this.model.hasOwnProperty("preview")) {
+        if (this.model["preview"] === null) {
+          if (this.modelAlreadyEmpty) {
+            this.disableOptionsButtons = true;
+            this.bounceMessage = true;
             setTimeout(() => {
-              this.updatingModel = false;
+              this.bounceMessage = false;
+            }, 600);
+          } else {
+            //model is not already empty
+            this.disableOptionsButtons = true;
+            this.hideMainContainer = true;
+            setTimeout(() => {
+              this.selectedModel = null;
+              this.modelAlreadyEmpty = true;
+            }, 200);
+          }
+        } else {
+          //preview model is not null
+          if (this.modelAlreadyEmpty) {
+            this.hideOptions();
+            setTimeout(() => {
+              this.disableOptionsButtons = true;
+              this.hideMessage = true;
               setTimeout(() => {
-                this.hideMainContainer = false;
-                this.hideMessage = false;
+                this.updatingModel = true;
+                this.selectedModel = this.model["preview"];
+                setTimeout(() => {
+                  this.updatingModel = false;
+                  setTimeout(() => {
+                    this.hideMainContainer = false;
+                    this.modelAlreadyEmpty = false;
+                    this.hideMessage = false;
+                  }, 200);
+                }, 500);
               }, 200);
-            }, 500);
-          }, 200);
-        }, 200);
+            }, 200);
+          } else {
+            //Model is not already empty
+            this.hideOptions();
+            setTimeout(() => {
+              this.disableOptionsButtons = true;
+              this.hideMainContainer = true;
+              setTimeout(() => {
+                this.updatingModel = true;
+                this.selectedModel = this.model["preview"];
+                setTimeout(() => {
+                  this.updatingModel = false;
+                  setTimeout(() => {
+                    this.hideMainContainer = false;
+                    this.modelAlreadyEmpty = false;
+                  }, 200);
+                }, 500);
+              }, 200);
+            }, 200);
+          }
+        }
       } else {
-        this.disableOptionsButtons = true;
+        //preview model does not exists.
         if (this.modelAlreadyEmpty) {
+          this.disableOptionsButtons = true;
           this.bounceMessage = true;
           setTimeout(() => {
             this.bounceMessage = false;
           }, 600);
         } else {
+          //Model is not already empty
+          this.disableOptionsButtons = true;
           this.hideMainContainer = true;
-          this.modelAlreadyEmpty = true;
           setTimeout(() => {
             this.selectedModel = null;
+            this.modelAlreadyEmpty = true;
           }, 200);
         }
       }
     } else {
-      let modelFound = false;
-      loop1: for (const [modelKey] of Object.entries(this.model)) {
-        let modelKeyLength = modelKey.split("%").length;
-        if (modelKeyLength === this.selectedOptions.length) {
-          loop2: for (let i = 0; i < this.selectedOptions.length; i++) {
-            if (!modelKey.includes(this.selectedOptions[i])) {
-              modelFound = false;
-              break loop2;
+      if (this.selectedOptions.length === 0) {
+        if (this.model.hasOwnProperty("")) {
+          if (this.model[""] === null) {
+            //model "" is null
+            if (this.modelAlreadyEmpty) {
+              this.disableOptionsButtons = true;
+              this.bounceMessage = true;
+              setTimeout(() => {
+                this.bounceMessage = false;
+              }, 600);
             } else {
-              modelFound = true;
+              //model is not already empty
+              this.disableOptionsButtons = true;
+              this.hideMainContainer = true;
+              setTimeout(() => {
+                this.selectedModel = null;
+                this.modelAlreadyEmpty = true;
+              }, 200);
+            }
+          } else {
+            //model "" is not null
+            if (this.modelAlreadyEmpty) {
+              this.hideOptions();
+              setTimeout(() => {
+                this.disableOptionsButtons = true;
+                this.hideMessage = true;
+                setTimeout(() => {
+                  this.updatingModel = true;
+                  this.selectedModel = this.model[""];
+                  setTimeout(() => {
+                    this.updatingModel = false;
+                    setTimeout(() => {
+                      this.hideMainContainer = false;
+                      this.modelAlreadyEmpty = false;
+                      this.hideMessage = false;
+                    }, 200);
+                  }, 500);
+                }, 200);
+              }, 200);
+            } else {
+              //model is not already empty
+              this.hideOptions();
+              setTimeout(() => {
+                this.disableOptionsButtons = true;
+                this.hideMainContainer = true;
+                setTimeout(() => {
+                  this.updatingModel = true;
+                  this.setSelectedModel = this.model[""];
+                  setTimeout(() => {
+                    this.updatingModel = false;
+                    setTimeout(() => {
+                      this.hideMainContainer = false;
+                      this.modelAlreadyEmpty = false;
+                    }, 200);
+                  }, 500);
+                }, 200);
+              }, 200);
+            }
+          }
+        } else {
+          //model "" does not exists
+          this.disableOptionsButtons = true;
+          if (this.modelAlreadyEmpty) {
+            this.bounceMessage = true;
+            setTimeout(() => {
+              this.bounceMessage = false;
+            }, 600);
+          } else {
+            this.hideMainContainer = true;
+            setTimeout(() => {
+              this.selectedModel = null;
+              this.modelAlreadyEmpty = true;
+            }, 200);
+          }
+        }
+      } else {
+        //Selected model is not 'preview' or ""
+        let modelFound = false;
+        let selectedModelKey: string;
+        loop1: for (const [modelKey] of Object.entries(this.model)) {
+          let modelKeyLength = modelKey.split("%").length;
+          if (modelKeyLength === this.selectedOptions.length) {
+            loop2: for (let i = 0; i < this.selectedOptions.length; i++) {
+              if (!modelKey.includes(this.selectedOptions[i])) {
+                modelFound = false;
+                break loop2;
+              } else {
+                modelFound = true;
+              }
+            }
+            if (modelFound) {
+              selectedModelKey = modelKey;
+              break loop1;
             }
           }
         }
         if (modelFound) {
-          this.hideOptions();
-          if (this.selectedModel === null) {
-            this.hideMessage = true;
+          if (this.modelAlreadyEmpty) {
+            this.hideOptions();
+            setTimeout(() => {
+              this.disableOptionsButtons = true;
+              this.hideMessage = true;
+              setTimeout(() => {
+                this.updatingModel = true;
+                this.selectedModel = this.model[selectedModelKey];
+                setTimeout(() => {
+                  this.updatingModel = false;
+                  setTimeout(() => {
+                    this.hideMainContainer = false;
+                    this.modelAlreadyEmpty = false;
+                    this.hideMessage = false;
+                  }, 200);
+                }, 500);
+              }, 200);
+            }, 200);
+          } else {
+            //model is not already empty
+            this.hideOptions();
+            setTimeout(() => {
+              this.disableOptionsButtons = true;
+              this.hideMainContainer = true;
+              setTimeout(() => {
+                this.updatingModel = true;
+                this.selectedModel = this.model[selectedModelKey];
+                setTimeout(() => {
+                  this.updatingModel = false;
+                  setTimeout(() => {
+                    this.hideMainContainer = false;
+                    this.modelAlreadyEmpty = false;
+                  }, 200);
+                }, 500);
+              }, 200);
+            }, 200);
           }
-          setTimeout(() => {
+        } else {
+          //model not found
+          if (this.modelAlreadyEmpty) {
+            this.disableOptionsButtons = true;
+            this.bounceMessage = true;
+            setTimeout(() => {
+              this.bounceMessage = false;
+            }, 600);
+          } else {
+            //model is not already empty
             this.disableOptionsButtons = true;
             this.hideMainContainer = true;
             setTimeout(() => {
-              this.updatingModel = true;
-              this.selectedModel = this.model[modelKey];
-              this.selectedModelName = modelKey;
-              setTimeout(() => {
-                this.updatingModel = false;
-                setTimeout(() => {
-                  this.hideMainContainer = false;
-                  this.hideMessage = false;
-                }, 200);
-              }, 500);
+              this.selectedModel = null;
+              this.modelAlreadyEmpty = true;
             }, 200);
-          }, 200);
-          this.modelAlreadyEmpty = false;
-          //this.bounceMessage = false;
-          break loop1;
+          }
         }
-      }
-      if (!modelFound) {
-        this.disableOptionsButtons = true;
-        this.hideMainContainer = true;
-        setTimeout(() => {
-          this.selectedModel = null;
-        }, 200);
-
-        if (this.modelAlreadyEmpty) {
-          this.bounceMessage = true;
-          setTimeout(() => {
-            this.bounceMessage = false;
-          }, 600);
-        }
-        this.modelAlreadyEmpty = true;
       }
     }
   }
@@ -736,31 +965,37 @@ export class Main {
   resetFilter() {
     if (this.modelAlreadyEmpty) {
       this.hideMessage = true;
-      setTimeout(() => {
-        this.hideMessage = false;
-      }, 200);
       this.modelAlreadyEmpty = false;
+    } else {
+      this.hideMainContainer = true;
     }
-    this.hideMainContainer = true;
+
     setTimeout(
       function() {
-        this.updatingModel = true;
-        this.setInitialSelectedModel();
-        this.cancelOptions();
+        //Clear search input
         let searchInput = this.el.shadowRoot.querySelector("#searchFilter");
         searchInput.value = "";
         this.filterValue = "";
+
+        //Reset token group select
         let tokenGroupSelect = this.el.shadowRoot.querySelector(
           "#tokenGroupsSelect"
         );
         tokenGroupSelect.value = "all";
 
+        //Preview toggle
+        let previewToggle = this.el.shadowRoot.querySelector("#preview-toggle");
+        previewToggle.on = false;
+
+        //Set variables as they were at the beginning
+        this.updatingModel = true;
+        this.hideMessage = false;
+        this.optionsVisible = false;
         setTimeout(() => {
-          this.updatingModel = false;
-          setTimeout(() => {
-            this.hideMainContainer = false;
-          }, 200);
-        }, 500);
+          this.disableOptionsButtons = true;
+        }, 200);
+
+        this.setInitialSelectedModel();
       }.bind(this),
       200
     );
@@ -803,7 +1038,7 @@ export class Main {
       } else {
         //Click happened outside the card
         if (event.screenX !== 0 && event.screenY !== 0) {
-          this.optionsVisible = false;
+          this.hideOptions();
         }
       }
     }
@@ -811,9 +1046,7 @@ export class Main {
 
   render() {
     return [
-      <dt-loader
-        class={{ "updating-model": this.updatingModel, hide: this.hideLoader }}
-      ></dt-loader>,
+      <dt-loader class={{ "updating-model": this.updatingModel }}></dt-loader>,
       <div
         class={{
           container: true,
@@ -821,7 +1054,19 @@ export class Main {
           "show-options": this.optionsVisible
         }}
       >
-        <div id="filter">
+        <div
+          style={{
+            "font-size": "10px",
+            "font-family": "open sans",
+            "margin-bottom": "10px",
+            position: "absolute",
+            top: "0"
+          }}
+        >
+          model: "" | preview | mode_dark | platform_linux |
+          platform_linux%mode_dark
+        </div>
+        <div id="filter" style={{ "margin-top": "10px" }}>
           <div class="filter-container">
             <div class="col-left">
               <div class="menu">
@@ -889,7 +1134,7 @@ export class Main {
                               optionType.charAt(0).toUpperCase() +
                               optionType.slice(1)
                             }
-                            class={"select-options"}
+                            class={"select-option"}
                             id={optionType}
                             onChange={this.optionSelectChangeHandler.bind(this)}
                           >
@@ -910,6 +1155,12 @@ export class Main {
                         ))}
                       </gxg-spacer-layout>
                     </div>
+
+                    <gxg-toggle
+                      id="preview-toggle"
+                      label="Preview"
+                      onToggleSwitched={ev => this.previewTokensHandler(ev)}
+                    ></gxg-toggle>
 
                     {Object.keys(this.avaiableOptions).length > 1 ? (
                       <footer class="options-card__footer">
