@@ -126,7 +126,7 @@
       .item-menu {
         opacity: 1;
       }
-      background-color: var(--gray-01);
+      background-color: rgba(var(--color-primary-hover-rgb), 0.1);
     }
   }
 }

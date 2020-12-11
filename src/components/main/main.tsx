@@ -536,6 +536,7 @@ export class Main {
 
   setSelectedModel() {
     if (this.previewMode) {
+      console.log("preview mode");
       if (this.model.hasOwnProperty("preview")) {
         if (this.model["preview"] === null) {
           if (this.modelAlreadyEmpty) {
@@ -612,9 +613,13 @@ export class Main {
         }
       }
     } else {
+      console.log("not preview mode");
       if (this.selectedOptions.length === 0) {
+        console.log("this.selectedOptions.length === 0");
         if (this.model.hasOwnProperty("")) {
+          console.log('this.model.hasOwnProperty("")');
           if (this.model[""] === null) {
+            console.log('this.model[""] === null');
             //model "" is null
             if (this.modelAlreadyEmpty) {
               this.disableOptionsButtons = true;
@@ -632,7 +637,6 @@ export class Main {
               }, 200);
             }
           } else {
-            //model "" is not null
             if (this.modelAlreadyEmpty) {
               this.hideOptions();
               setTimeout(() => {
@@ -653,13 +657,14 @@ export class Main {
               }, 200);
             } else {
               //model is not already empty
+              console.log("model is not already empty");
               this.hideOptions();
               setTimeout(() => {
                 this.disableOptionsButtons = true;
                 this.hideMainContainer = true;
                 setTimeout(() => {
                   this.updatingModel = true;
-                  this.setSelectedModel = this.model[""];
+                  this.selectedModel = this.model[""];
                   setTimeout(() => {
                     this.updatingModel = false;
                     setTimeout(() => {
@@ -1042,6 +1047,17 @@ export class Main {
   }
 
   render() {
+    console.log("this.selectedModelName");
+    console.log(this.selectedModelName);
+    console.log("=======================");
+    console.log("this.selectedModel");
+    console.log(this.selectedModel);
+    console.log("=======================");
+    console.log("this.selectedOptions");
+    console.log(this.selectedOptions);
+    console.log("=======================");
+    console.log("=======================");
+    console.log("=======================");
     return [
       <dt-loader class={{ "updating-model": this.updatingModel }}></dt-loader>,
       <div
