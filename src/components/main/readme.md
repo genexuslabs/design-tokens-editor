@@ -35,7 +35,9 @@
 - [dt-list-item-header](../list-item-header)
 - gxg-accordion
 - gxg-accordion-item
+- [dt-demo](../dt-demo)
 - [dt-loader](../dt-loader)
+- gxg-modal
 - gxg-button
 - gxg-spacer-one
 - gxg-card
@@ -43,6 +45,7 @@
 - gxg-title
 - gxg-select
 - gxg-option
+- gxg-toggle
 - gxg-pill
 - gxg-form-text
 - gxg-alert
@@ -57,7 +60,9 @@ graph TD;
   dt-main --> dt-list-item-header
   dt-main --> gxg-accordion
   dt-main --> gxg-accordion-item
+  dt-main --> dt-demo
   dt-main --> dt-loader
+  dt-main --> gxg-modal
   dt-main --> gxg-button
   dt-main --> gxg-spacer-one
   dt-main --> gxg-card
@@ -65,6 +70,7 @@ graph TD;
   dt-main --> gxg-title
   dt-main --> gxg-select
   dt-main --> gxg-option
+  dt-main --> gxg-toggle
   dt-main --> gxg-pill
   dt-main --> gxg-form-text
   dt-main --> gxg-alert
@@ -102,6 +108,10 @@ graph TD;
   gxg-form-textarea --> gxg-form-message
   gxg-accordion-item --> gxg-icon
   gxg-accordion-item --> gxg-form-text
+  dt-demo --> dt-demo-instruction
+  dt-demo --> dt-demo-modal
+  dt-demo-modal --> gxg-button
+  gxg-modal --> gxg-button
   gxg-pill --> gxg-icon
   gxg-alert --> gxg-icon
   gxg-alert --> gxg-button

@@ -57,6 +57,10 @@ export class Main {
   @State() optionsVisible: boolean = false;
   @State() disableOptionsButtons: boolean = true;
 
+  //Demo
+  @State() initiateDemo: boolean = false;
+  @State() demoItemNumber: number = 0;
+
   alertBox!: HTMLElement;
   @Element() el: HTMLElement;
 
@@ -446,6 +450,8 @@ export class Main {
               function() {
                 this.hideContainer = false;
                 this.firstLoad = false;
+                let dtModal = this.el.shadowRoot.querySelector("#dt-modal");
+                dtModal.setAttribute("visible", "true");
               }.bind(this),
               200
             );
@@ -536,7 +542,6 @@ export class Main {
 
   setSelectedModel() {
     if (this.previewMode) {
-      console.log("preview mode");
       if (this.model.hasOwnProperty("preview")) {
         if (this.model["preview"] === null) {
           if (this.modelAlreadyEmpty) {
@@ -613,13 +618,9 @@ export class Main {
         }
       }
     } else {
-      console.log("not preview mode");
       if (this.selectedOptions.length === 0) {
-        console.log("this.selectedOptions.length === 0");
         if (this.model.hasOwnProperty("")) {
-          console.log('this.model.hasOwnProperty("")');
           if (this.model[""] === null) {
-            console.log('this.model[""] === null');
             //model "" is null
             if (this.modelAlreadyEmpty) {
               this.disableOptionsButtons = true;
@@ -657,7 +658,6 @@ export class Main {
               }, 200);
             } else {
               //model is not already empty
-              console.log("model is not already empty");
               this.hideOptions();
               setTimeout(() => {
                 this.disableOptionsButtons = true;
@@ -1046,20 +1046,104 @@ export class Main {
     }
   }
 
+  /********************************
+   * DEMO and MODAL
+   ********************************/
+
+  initiateDemoFunc() {
+    setTimeout(() => {
+      this.hideContainer = true;
+      setTimeout(() => {
+        this.updatingModel = true;
+        setTimeout(() => {
+          this.initiateDemo = true;
+          setTimeout(() => {
+            this.updatingModel = false;
+            setTimeout(() => {
+              this.hideContainer = false;
+            }, 250);
+          }, 250);
+        }, 250);
+      }, 250);
+    }, 250);
+
+    let dtModal = this.el.shadowRoot.querySelector("#dt-modal");
+    dtModal.setAttribute("visible", "false");
+  }
+
+  cancelDemoFunc() {
+    let dtModal = this.el.shadowRoot.querySelector("#dt-modal");
+    dtModal.setAttribute("visible", "false");
+  }
+
+  @Listen("initiateDemoEvent")
+  initiateDemoEventHandler(event) {
+    setTimeout(() => {
+      this.selectedModel = event.detail;
+    }, 250);
+  }
+
+  @Listen("nextItem")
+  nextItemHandler() {
+    this.demoItemNumber = this.demoItemNumber + 1;
+  }
+
+  @Listen("reloadApplicationEvent")
+  reloadApplicationEventHandler() {
+    //Overlay div
+    let body = document.querySelector("body");
+    var overlay = document.createElement("div");
+    overlay.style.backgroundColor = "white";
+    overlay.style.opacity = "0";
+    overlay.style.width = "100%";
+    overlay.style.height = "100%";
+    overlay.style.position = "absolute";
+    overlay.style.zIndex = "110";
+    overlay.style.left = "0";
+    overlay.style.transition = "opacity 0.25s";
+    body.prepend(overlay);
+    setTimeout(() => {
+      overlay.style.opacity = "1";
+      setTimeout(() => {
+        location.reload();
+      }, 150);
+    }, 150);
+  }
+
+  /********************************
+   * / DEMO and MODAL
+   ********************************/
+
   render() {
-    console.log("this.selectedModelName");
-    console.log(this.selectedModelName);
-    console.log("=======================");
-    console.log("this.selectedModel");
-    console.log(this.selectedModel);
-    console.log("=======================");
-    console.log("this.selectedOptions");
-    console.log(this.selectedOptions);
-    console.log("=======================");
-    console.log("=======================");
-    console.log("=======================");
     return [
+      <dt-demo
+        initiateDemo={this.initiateDemo}
+        demoItemNumber={this.demoItemNumber}
+      ></dt-demo>,
       <dt-loader class={{ "updating-model": this.updatingModel }}></dt-loader>,
+      <gxg-modal
+        padding="m"
+        modal-title="Welcome to the Design Tokens Editor!"
+        id="dt-modal"
+      >
+        Here you can create and edit your own css tokens. Would you like to take
+        the demo? It will only take two minutes!
+        <gxg-button
+          slot="footer"
+          type="primary-text-only"
+          onClick={this.initiateDemoFunc.bind(this)}
+        >
+          Yes, please
+        </gxg-button>
+        <gxg-spacer-one slot="footer" space="xs"></gxg-spacer-one>
+        <gxg-button
+          slot="footer"
+          type="secondary-text-only"
+          onClick={this.cancelDemoFunc.bind(this)}
+        >
+          I will figure it out myself
+        </gxg-button>
+      </gxg-modal>,
       <div
         class={{
           container: true,
@@ -1080,6 +1164,9 @@ export class Main {
                     "filter-button": true,
                     selected: this.cardAsListItem
                   }}
+                  data-demo
+                  data-demo-position="left"
+                  data-demo-text="View the tokens as a list. Usefull when there are so many tokens that you need to do some scrolling to find the token you are looking for."
                 ></gxg-button>
                 <gxg-spacer-one space="xs"></gxg-spacer-one>
                 <gxg-button
@@ -1091,6 +1178,9 @@ export class Main {
                     "filter-button": true,
                     selected: this.cardAsListItem === false
                   }}
+                  data-demo
+                  data-demo-position="left"
+                  data-demo-text="View the tokens as cards. Usefull when you want to have a better look at the token appereance."
                 ></gxg-button>
                 <gxg-spacer-one space="xs"></gxg-spacer-one>
                 <div
@@ -1102,20 +1192,23 @@ export class Main {
                     type="tertiary"
                     icon="gemini-tools/settings"
                     id="settingsButton"
+                    data-demo
+                    data-demo-position="left"
+                    data-demo-text="Select a model, or a combination of models."
                   ></gxg-button>
 
                   <gxg-card
                     elevation="01"
                     padding="m"
                     class="options-card"
-                    max-width="300px"
+                    maxWidth="300px"
                     tabindex="-1"
                   >
                     <header class="options-card__header">
                       <gxg-spacer-layout
                         space="s"
                         orientation="horizontal"
-                        justify-content="space-between"
+                        justifyContent="space-between"
                       >
                         <gxg-title type="title-04">Model options</gxg-title>
                         <gxg-button
@@ -1168,7 +1261,7 @@ export class Main {
                         <gxg-spacer-layout
                           space="s"
                           orientation="horizontal"
-                          justify-content="end"
+                          justifyContent="end"
                         >
                           <gxg-button
                             type="secondary-text-only"
@@ -1206,11 +1299,14 @@ export class Main {
               <div class="search">
                 <gxg-form-text
                   placeholder="Search tokens"
-                  icon-position="start"
+                  iconPosition="start"
                   icon="gemini-tools/search"
                   onInput={this.filterTokens.bind(this)}
                   disabled={true ? this.selectedModel === null : false}
                   id="searchFilter"
+                  data-demo
+                  data-demo-position="center"
+                  data-demo-text="Filter tokens by name, or value."
                 ></gxg-form-text>
               </div>
               <div class="categories">
@@ -1219,6 +1315,9 @@ export class Main {
                   size="8"
                   onChange={this.updateTokenGroup.bind(this)}
                   id="tokenGroupsSelect"
+                  data-demo
+                  data-demo-position="right"
+                  data-demo-text="Filter tokens by group, such as colors, font-sizes, opacity, shadows, spacing, radius, or times."
                 >
                   <gxg-option value="all" selected>
                     All
@@ -1239,6 +1338,9 @@ export class Main {
                 icon="gemini-tools/reset"
                 style={{ "margin-left": "var(--spacing-comp-01)" }}
                 onClick={this.resetFilter.bind(this)}
+                data-demo
+                data-demo-position="right"
+                data-demo-text="Reset all the options, and clear the filter."
               ></gxg-button>
             </div>
           </div>

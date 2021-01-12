@@ -162,7 +162,6 @@ export class Card {
         this.tokenValue.charAt(0) === "-" &&
         this.tokenValue.charAt(1) === "-"
       ) {
-        console.log("The value is a css variable");
         //The value is a css variable
         let cssVariableValue = getComputedStyle(
           document.documentElement

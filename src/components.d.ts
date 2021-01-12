@@ -30,6 +30,18 @@ export namespace Components {
     'cardTitle': string;
     'value': string;
   }
+  interface DtDemo {
+    'demoItemNumber': number;
+    'initiateDemo': boolean;
+  }
+  interface DtDemoInstruction {
+    'arrowPosition': string;
+    'instructionMessage': string;
+    'instructionNumber': number;
+  }
+  interface DtDemoModal {
+    'demoItemNumber': number;
+  }
   interface DtEditTokenValue {
     'listItem': boolean;
     'options': string;
@@ -174,6 +186,24 @@ declare global {
   var HTMLDtColorPickerElement: {
     prototype: HTMLDtColorPickerElement;
     new (): HTMLDtColorPickerElement;
+  };
+
+  interface HTMLDtDemoElement extends Components.DtDemo, HTMLStencilElement {}
+  var HTMLDtDemoElement: {
+    prototype: HTMLDtDemoElement;
+    new (): HTMLDtDemoElement;
+  };
+
+  interface HTMLDtDemoInstructionElement extends Components.DtDemoInstruction, HTMLStencilElement {}
+  var HTMLDtDemoInstructionElement: {
+    prototype: HTMLDtDemoInstructionElement;
+    new (): HTMLDtDemoInstructionElement;
+  };
+
+  interface HTMLDtDemoModalElement extends Components.DtDemoModal, HTMLStencilElement {}
+  var HTMLDtDemoModalElement: {
+    prototype: HTMLDtDemoModalElement;
+    new (): HTMLDtDemoModalElement;
   };
 
   interface HTMLDtEditTokenValueElement extends Components.DtEditTokenValue, HTMLStencilElement {}
@@ -335,6 +365,9 @@ declare global {
     'dt-card': HTMLDtCardElement;
     'dt-categories-select': HTMLDtCategoriesSelectElement;
     'dt-color-picker': HTMLDtColorPickerElement;
+    'dt-demo': HTMLDtDemoElement;
+    'dt-demo-instruction': HTMLDtDemoInstructionElement;
+    'dt-demo-modal': HTMLDtDemoModalElement;
     'dt-edit-token-value': HTMLDtEditTokenValueElement;
     'dt-list-item': HTMLDtListItemElement;
     'dt-list-item-header': HTMLDtListItemHeaderElement;
@@ -393,6 +426,21 @@ declare namespace LocalJSX {
     'onNameInputEvent'?: (event: CustomEvent<any>) => void;
     'onSave'?: (event: CustomEvent<any>) => void;
     'value'?: string;
+  }
+  interface DtDemo {
+    'demoItemNumber'?: number;
+    'initiateDemo'?: boolean;
+    'onInitiateDemoEvent'?: (event: CustomEvent<any>) => void;
+  }
+  interface DtDemoInstruction {
+    'arrowPosition'?: string;
+    'instructionMessage'?: string;
+    'instructionNumber'?: number;
+  }
+  interface DtDemoModal {
+    'demoItemNumber'?: number;
+    'onNextItem'?: (event: CustomEvent<any>) => void;
+    'onReloadApplicationEvent'?: (event: CustomEvent<any>) => void;
   }
   interface DtEditTokenValue {
     'listItem'?: boolean;
@@ -534,6 +582,9 @@ declare namespace LocalJSX {
     'dt-card': DtCard;
     'dt-categories-select': DtCategoriesSelect;
     'dt-color-picker': DtColorPicker;
+    'dt-demo': DtDemo;
+    'dt-demo-instruction': DtDemoInstruction;
+    'dt-demo-modal': DtDemoModal;
     'dt-edit-token-value': DtEditTokenValue;
     'dt-list-item': DtListItem;
     'dt-list-item-header': DtListItemHeader;
@@ -572,6 +623,9 @@ declare module "@stencil/core" {
       'dt-card': LocalJSX.DtCard & JSXBase.HTMLAttributes<HTMLDtCardElement>;
       'dt-categories-select': LocalJSX.DtCategoriesSelect & JSXBase.HTMLAttributes<HTMLDtCategoriesSelectElement>;
       'dt-color-picker': LocalJSX.DtColorPicker & JSXBase.HTMLAttributes<HTMLDtColorPickerElement>;
+      'dt-demo': LocalJSX.DtDemo & JSXBase.HTMLAttributes<HTMLDtDemoElement>;
+      'dt-demo-instruction': LocalJSX.DtDemoInstruction & JSXBase.HTMLAttributes<HTMLDtDemoInstructionElement>;
+      'dt-demo-modal': LocalJSX.DtDemoModal & JSXBase.HTMLAttributes<HTMLDtDemoModalElement>;
       'dt-edit-token-value': LocalJSX.DtEditTokenValue & JSXBase.HTMLAttributes<HTMLDtEditTokenValueElement>;
       'dt-list-item': LocalJSX.DtListItem & JSXBase.HTMLAttributes<HTMLDtListItemElement>;
       'dt-list-item-header': LocalJSX.DtListItemHeader & JSXBase.HTMLAttributes<HTMLDtListItemHeaderElement>;
