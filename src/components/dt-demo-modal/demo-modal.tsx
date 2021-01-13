@@ -38,10 +38,6 @@ export class DemoModal {
           >
             Next
           </gxg-button>
-          <gxg-form-checkbox
-            label="Do not show this again"
-            id="not-show-modal-again"
-          ></gxg-form-checkbox>
         </div>
       </div>
     ];
