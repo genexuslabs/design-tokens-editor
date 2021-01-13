@@ -1106,7 +1106,7 @@ export class Main {
     setTimeout(() => {
       overlay.style.opacity = "1";
       setTimeout(() => {
-        window.location.reload(false);
+        window.top.location.reload();
       }, 150);
     }, 150);
   }
