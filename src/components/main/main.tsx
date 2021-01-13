@@ -80,8 +80,9 @@ export class Main {
   componentWillLoad() {}
 
   componentDidLoad() {
+    console.log("model");
+    console.log(this.model);
     this.setInitialSelectedModel();
-    //wizard.intro(this);
   }
 
   @Watch("tokenDeleted")
@@ -1222,31 +1223,40 @@ export class Main {
 
                     <div class="options-card__select-container">
                       <gxg-spacer-layout space="m" orientation="vertical">
-                        {Object.keys(this.avaiableOptions).map(optionType => (
-                          <gxg-select
-                            label={
-                              optionType.charAt(0).toUpperCase() +
-                              optionType.slice(1)
-                            }
-                            class={"select-option"}
-                            id={optionType}
-                            onChange={this.optionSelectChangeHandler.bind(this)}
-                          >
-                            <gxg-option value="">None</gxg-option>
-                            {this.avaiableOptions[optionType].map(option => (
-                              <gxg-option
-                                value={option}
-                                key={option}
-                                selected={this.setSelectedOption(
-                                  optionType,
-                                  option
-                                )}
-                              >
-                                {option}
-                              </gxg-option>
-                            ))}
-                          </gxg-select>
-                        ))}
+                        {this.avaiableOptions !== null &&
+                        this.avaiableOptions !== undefined
+                          ? Object.keys(this.avaiableOptions).map(
+                              optionType => (
+                                <gxg-select
+                                  label={
+                                    optionType.charAt(0).toUpperCase() +
+                                    optionType.slice(1)
+                                  }
+                                  class={"select-option"}
+                                  id={optionType}
+                                  onChange={this.optionSelectChangeHandler.bind(
+                                    this
+                                  )}
+                                >
+                                  <gxg-option value="">None</gxg-option>
+                                  {this.avaiableOptions[optionType].map(
+                                    option => (
+                                      <gxg-option
+                                        value={option}
+                                        key={option}
+                                        selected={this.setSelectedOption(
+                                          optionType,
+                                          option
+                                        )}
+                                      >
+                                        {option}
+                                      </gxg-option>
+                                    )
+                                  )}
+                                </gxg-select>
+                              )
+                            )
+                          : null}
                       </gxg-spacer-layout>
                     </div>
 
@@ -1256,32 +1266,39 @@ export class Main {
                       onToggleSwitched={() => this.previewTokensHandler()}
                     ></gxg-toggle>
 
-                    {Object.keys(this.avaiableOptions).length > 1 ? (
-                      <footer class="options-card__footer">
-                        <gxg-spacer-layout
-                          space="s"
-                          orientation="horizontal"
-                          justifyContent="end"
-                        >
-                          <gxg-button
-                            type="secondary-text-only"
-                            onClick={this.cancelOptions.bind(this)}
-                            disabled={true ? this.disableOptionsButtons : false}
+                    {this.avaiableOptions !== null &&
+                    this.avaiableOptions !== undefined ? (
+                      Object.keys(this.avaiableOptions).length > 1 ? (
+                        <footer class="options-card__footer">
+                          <gxg-spacer-layout
+                            space="s"
+                            orientation="horizontal"
+                            justifyContent="end"
                           >
-                            Cancel
-                          </gxg-button>
-                          <gxg-button
-                            onClick={this.updateSelectedModel.bind(this)}
-                            type="primary-text-only"
-                            onKeyDown={this.updateSelectedModelButtonHandler.bind(
-                              this
-                            )}
-                            disabled={true ? this.disableOptionsButtons : false}
-                          >
-                            Update model
-                          </gxg-button>
-                        </gxg-spacer-layout>
-                      </footer>
+                            <gxg-button
+                              type="secondary-text-only"
+                              onClick={this.cancelOptions.bind(this)}
+                              disabled={
+                                true ? this.disableOptionsButtons : false
+                              }
+                            >
+                              Cancel
+                            </gxg-button>
+                            <gxg-button
+                              onClick={this.updateSelectedModel.bind(this)}
+                              type="primary-text-only"
+                              onKeyDown={this.updateSelectedModelButtonHandler.bind(
+                                this
+                              )}
+                              disabled={
+                                true ? this.disableOptionsButtons : false
+                              }
+                            >
+                              Update model
+                            </gxg-button>
+                          </gxg-spacer-layout>
+                        </footer>
+                      ) : null
                     ) : null}
                   </gxg-card>
                 </div>
