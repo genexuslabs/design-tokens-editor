@@ -993,8 +993,8 @@ export class Main {
       function() {
         //Clear search input
         let searchInput = this.el.shadowRoot.querySelector("#searchFilter");
-        searchInput.value = "";
         this.filterValue = "";
+        searchInput.value = "";
 
         //Reset token group select
         let tokenGroupSelect = this.el.shadowRoot.querySelector(
