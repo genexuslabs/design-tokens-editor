@@ -60,6 +60,8 @@ export class Main {
   //Demo
   @State() initiateDemo: boolean = false;
   @State() demoItemNumber: number = 0;
+  @State() dontShowModalAgain: boolean = false;
+  checkBoxDontShowMeAgain!: HTMLElement;
 
   alertBox!: HTMLElement;
   @Element() el: HTMLElement;
@@ -80,9 +82,17 @@ export class Main {
   componentWillLoad() {}
 
   componentDidLoad() {
-    console.log("model");
-    console.log(this.model);
     this.setInitialSelectedModel();
+
+    //Don't show me again demo modal checkbox
+    this.checkBoxDontShowMeAgain.addEventListener(
+      "change",
+      function(e) {
+        if ((e as any).detail["checkbox value"] === true) {
+          this.dontShowModalAgain = true;
+        }
+      }.bind(this)
+    );
   }
 
   @Watch("tokenDeleted")
@@ -452,7 +462,13 @@ export class Main {
                 this.hideContainer = false;
                 this.firstLoad = false;
                 let dtModal = this.el.shadowRoot.querySelector("#dt-modal");
-                dtModal.setAttribute("visible", "true");
+                //Check if the modal should appear or not
+                let dontShowModal = localStorage.getItem(
+                  "genexus-dso-dont-show-modal-again"
+                );
+                if (!dontShowModal) {
+                  dtModal.setAttribute("visible", "true");
+                }
               }.bind(this),
               200
             );
@@ -1052,6 +1068,9 @@ export class Main {
    ********************************/
 
   initiateDemoFunc() {
+    let dtModal = this.el.shadowRoot.querySelector("#dt-modal");
+    dtModal.setAttribute("visible", "false");
+
     setTimeout(() => {
       this.hideContainer = true;
       setTimeout(() => {
@@ -1068,13 +1087,18 @@ export class Main {
       }, 250);
     }, 250);
 
-    let dtModal = this.el.shadowRoot.querySelector("#dt-modal");
-    dtModal.setAttribute("visible", "false");
+    if (this.dontShowModalAgain) {
+      localStorage.setItem("genexus-dso-dont-show-modal-again", "true");
+    }
   }
 
   cancelDemoFunc() {
     let dtModal = this.el.shadowRoot.querySelector("#dt-modal");
     dtModal.setAttribute("visible", "false");
+
+    if (this.dontShowModalAgain) {
+      localStorage.setItem("genexus-dso-dont-show-modal-again", "true");
+    }
   }
 
   @Listen("initiateDemoEvent")
@@ -1111,6 +1135,11 @@ export class Main {
     }, 150);
   }
 
+  doNotShowModalAgain(e) {
+    console.log("checkbox checked");
+    console.log(e.value);
+  }
+
   /********************************
    * / DEMO and MODAL
    ********************************/
@@ -1126,24 +1155,34 @@ export class Main {
         padding="m"
         modal-title="Welcome to the Design Tokens Editor!"
         id="dt-modal"
+        width="350px"
+        footerJustifyContent="space-between"
       >
         Here you can create and edit your own css tokens. Would you like to take
         the demo? It will only take two minutes!
-        <gxg-button
+        <gxg-form-checkbox
           slot="footer"
-          type="primary-text-only"
-          onClick={this.initiateDemoFunc.bind(this)}
-        >
-          Yes, please
-        </gxg-button>
+          label="Don't show me again"
+          id="dont-show-me-again"
+          ref={el => (this.checkBoxDontShowMeAgain = el as HTMLElement)}
+        ></gxg-form-checkbox>
         <gxg-spacer-one slot="footer" space="xs"></gxg-spacer-one>
         <gxg-button
           slot="footer"
           type="secondary-text-only"
           onClick={this.cancelDemoFunc.bind(this)}
         >
-          I will figure it out myself
+          No, thanks.
         </gxg-button>
+        <gxg-spacer-one slot="footer" space="xs"></gxg-spacer-one>
+        <gxg-button
+          slot="footer"
+          type="primary-text-only"
+          onClick={this.initiateDemoFunc.bind(this)}
+        >
+          Yes!
+        </gxg-button>
+        <gxg-spacer-one slot="footer" space="xs"></gxg-spacer-one>
       </gxg-modal>,
       <div
         class={{
