@@ -11,7 +11,11 @@ export class DemoModal {
   @Prop() demoItemNumber: number;
 
   nextDemoItem() {
-    this.nextItem.emit();
+    if (this.demoItemNumber !== 8) {
+      this.nextItem.emit();
+    } else {
+      this.reloadApplication();
+    }
   }
 
   reloadApplication() {
@@ -34,9 +38,8 @@ export class DemoModal {
           <gxg-button
             type="primary-text-only"
             onClick={this.nextDemoItem.bind(this)}
-            disabled={this.demoItemNumber === 8}
           >
-            Next
+            {this.demoItemNumber !== 8 ? "Next" : "Finish"}
           </gxg-button>
         </div>
       </div>

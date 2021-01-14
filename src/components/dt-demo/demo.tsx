@@ -218,8 +218,6 @@ export class Demo {
       this.itemTopCoordinate = y + height + 10 + "px";
       this.itemMessage =
         "Add a new empty token on the current tokens group. In this case adds a new color token.";
-
-      //disable next button
     }
     if (this.demoItemNumber === 8) {
       //remove styles from previous element
@@ -242,8 +240,6 @@ export class Demo {
       this.itemTopCoordinate = y + height + 10 + "px";
       this.itemMessage =
         "Add the first token for this token group. In this case, add the first font-size token.";
-
-      //disable "Next button" because this is the last demo-item
     } else {
       (this.demoItems[this.demoItemNumber] as HTMLElement).style.zIndex = "10";
       (this.demoItems[

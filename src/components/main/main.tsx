@@ -1158,13 +1158,16 @@ export class Main {
         width="350px"
         footerJustifyContent="space-between"
       >
-        Here you can create and edit your own css tokens. Would you like to take
-        the demo? It will only take two minutes!
+        Here you can create and edit your own Design System Tokens. Would you
+        like to take the demo? It will only take two minutes!
         <gxg-form-checkbox
           slot="footer"
           label="Don't show me again"
           id="dont-show-me-again"
           ref={el => (this.checkBoxDontShowMeAgain = el as HTMLElement)}
+          style={{
+            "margin-bottom": "0"
+          }}
         ></gxg-form-checkbox>
         <gxg-spacer-one slot="footer" space="xs"></gxg-spacer-one>
         <gxg-button
@@ -1182,7 +1185,6 @@ export class Main {
         >
           Yes!
         </gxg-button>
-        <gxg-spacer-one slot="footer" space="xs"></gxg-spacer-one>
       </gxg-modal>,
       <div
         class={{
@@ -1220,7 +1222,7 @@ export class Main {
                   }}
                   data-demo
                   data-demo-position="left"
-                  data-demo-text="View the tokens as cards. Usefull when you want to have a better look at the token appereance."
+                  data-demo-text="View the tokens as cards. Usefull when you want to have a better look at the token appearance."
                 ></gxg-button>
                 <gxg-spacer-one space="xs"></gxg-spacer-one>
                 <div
