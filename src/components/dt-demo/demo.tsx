@@ -69,7 +69,7 @@ export class Demo {
     overlay.style.opacity = "0";
     overlay.style.width = "100%";
     overlay.style.height = "100%";
-    overlay.style.position = "absolute";
+    overlay.style.position = "fixed";
     overlay.style.zIndex = "10";
     overlay.style.left = "0";
     overlay.style.transition = "opacity 1s";
