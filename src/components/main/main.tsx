@@ -1265,7 +1265,7 @@ export class Main {
                   ></gxg-button>
 
                   <gxg-card
-                    elevation="01"
+                    elevation="xs"
                     padding="m"
                     class="options-card"
                     maxWidth="300px"
