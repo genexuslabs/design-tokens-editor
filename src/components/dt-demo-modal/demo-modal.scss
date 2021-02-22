@@ -1,7 +1,7 @@
 :host {
   position: fixed;
   bottom: -100px;
-  @include ui-animation(bottom);
+  transition: bottom 0.5s;
   left: 50%;
   height: 40px;
   z-index: 100;

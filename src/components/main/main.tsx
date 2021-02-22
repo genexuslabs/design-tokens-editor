@@ -61,6 +61,7 @@ export class Main {
   @State() initiateDemo: boolean = false;
   @State() demoItemNumber: number = 0;
   @State() dontShowModalAgain: boolean = false;
+  @State() endDemo = false;
   checkBoxDontShowMeAgain!: HTMLElement;
 
   alertBox!: HTMLElement;
@@ -1130,15 +1131,40 @@ export class Main {
     setTimeout(() => {
       overlay.style.opacity = "1";
       setTimeout(() => {
-        location.reload();
-      }, 150);
+        //location.reload();
+        this.updatingModel = true;
+        this.endDemo = true;
+        let blackOverlay = this.el.shadowRoot.querySelector(".overlay");
+        blackOverlay.remove();
+        setTimeout(() => {
+          this.setInitialSelectedModel();
+          setTimeout(() => {
+            overlay.style.opacity = "0";
+            setTimeout(() => {
+              overlay.remove();
+              //remove dt-demo inline styles
+              let demoItems = this.el.shadowRoot.querySelectorAll(
+                "*[data-demo]"
+              );
+              demoItems.forEach(function(dtDemoItem) {
+                (dtDemoItem as HTMLElement).style.zIndex = "";
+                (dtDemoItem as HTMLElement).parentElement.style.zIndex = "";
+                (dtDemoItem as HTMLElement).style.backgroundColor = "";
+                (dtDemoItem as HTMLElement).style.opacity = "";
+                (dtDemoItem as HTMLElement).style.boxShadow = "";
+                (dtDemoItem as HTMLElement).style.pointerEvents = "";
+
+                console.log("dtDemoItem");
+                console.log(dtDemoItem);
+              });
+            }, 250);
+          }, 950);
+        }, 250);
+      }, 250);
     }, 150);
   }
 
-  doNotShowModalAgain(e) {
-    console.log("checkbox checked");
-    console.log(e.value);
-  }
+  doNotShowModalAgain(e) {}
 
   /********************************
    * / DEMO and MODAL
@@ -1149,6 +1175,7 @@ export class Main {
       <dt-demo
         initiateDemo={this.initiateDemo}
         demoItemNumber={this.demoItemNumber}
+        endDemo={this.endDemo}
       ></dt-demo>,
       <dt-loader class={{ "updating-model": this.updatingModel }}></dt-loader>,
       <gxg-modal

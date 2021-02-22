@@ -1,5 +1,13 @@
 import { State } from "@genexus/gemini/dist/types/stencil-public-runtime";
-import { Component, Event, EventEmitter, Prop, h, Watch } from "@stencil/core";
+import {
+  Component,
+  Element,
+  Event,
+  EventEmitter,
+  Prop,
+  h,
+  Watch
+} from "@stencil/core";
 
 @Component({
   tag: "dt-demo",
@@ -7,7 +15,11 @@ import { Component, Event, EventEmitter, Prop, h, Watch } from "@stencil/core";
   shadow: true
 })
 export class Demo {
+  @Element() el: HTMLElement;
+
   @Prop() initiateDemo: boolean = false;
+  @Prop() endDemo: boolean = false;
+
   @Event() initiateDemoEvent: EventEmitter;
   @State() demoItems: object;
 
@@ -121,6 +133,13 @@ export class Demo {
     this.itemMessage = (this.demoItems[0] as HTMLElement).getAttribute(
       "data-demo-text"
     );
+  }
+
+  @Watch("endDemo")
+  endDemoHandler() {
+    if (this.endDemo) {
+      this.el.remove();
+    }
   }
 
   @Watch("demoItemNumber")

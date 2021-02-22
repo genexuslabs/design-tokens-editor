@@ -32,6 +32,7 @@ export namespace Components {
   }
   interface DtDemo {
     'demoItemNumber': number;
+    'endDemo': boolean;
     'initiateDemo': boolean;
   }
   interface DtDemoInstruction {
@@ -429,6 +430,7 @@ declare namespace LocalJSX {
   }
   interface DtDemo {
     'demoItemNumber'?: number;
+    'endDemo'?: boolean;
     'initiateDemo'?: boolean;
     'onInitiateDemoEvent'?: (event: CustomEvent<any>) => void;
   }
