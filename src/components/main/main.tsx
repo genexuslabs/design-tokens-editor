@@ -58,10 +58,13 @@ export class Main {
   @State() disableOptionsButtons: boolean = true;
 
   //Demo
+  @Prop() showDemo: boolean = true;
   @State() initiateDemo: boolean = false;
   @State() demoItemNumber: number = 0;
   @State() dontShowModalAgain: boolean = false;
   @State() endDemo = false;
+  @Event()
+  dontShowDemoAgain: EventEmitter;
   checkBoxDontShowMeAgain!: HTMLElement;
 
   alertBox!: HTMLElement;
@@ -464,10 +467,7 @@ export class Main {
                 this.firstLoad = false;
                 let dtModal = this.el.shadowRoot.querySelector("#dt-modal");
                 //Check if the modal should appear or not
-                let dontShowModal = localStorage.getItem(
-                  "genexus-dso-dont-show-modal-again"
-                );
-                if (!dontShowModal) {
+                if (this.showDemo) {
                   dtModal.setAttribute("visible", "true");
                 }
               }.bind(this),
@@ -1089,7 +1089,7 @@ export class Main {
     }, 250);
 
     if (this.dontShowModalAgain) {
-      localStorage.setItem("genexus-dso-dont-show-modal-again", "true");
+      this.dontShowDemoAgain.emit(true);
     }
   }
 
@@ -1098,7 +1098,7 @@ export class Main {
     dtModal.setAttribute("visible", "false");
 
     if (this.dontShowModalAgain) {
-      localStorage.setItem("genexus-dso-dont-show-modal-again", "true");
+      this.dontShowDemoAgain.emit(true);
     }
   }
 
@@ -1131,7 +1131,6 @@ export class Main {
     setTimeout(() => {
       overlay.style.opacity = "1";
       setTimeout(() => {
-        //location.reload();
         this.updatingModel = true;
         this.endDemo = true;
         let blackOverlay = this.el.shadowRoot.querySelector(".overlay");

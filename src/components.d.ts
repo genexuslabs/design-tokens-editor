@@ -80,6 +80,7 @@ export namespace Components {
     'needHelpUrl': string;
     'selectedTokenGroup': string;
     'selectedTokenId': string;
+    'showDemo': boolean;
     'tokenDeleted': boolean;
   }
   interface DtQuote {
@@ -488,9 +489,11 @@ declare namespace LocalJSX {
     'avaiableOptions'?: object;
     'model'?: object;
     'needHelpUrl'?: string;
+    'onDontShowDemoAgain'?: (event: CustomEvent<any>) => void;
     'onSaveNewValue'?: (event: CustomEvent<any>) => void;
     'selectedTokenGroup'?: string;
     'selectedTokenId'?: string;
+    'showDemo'?: boolean;
     'tokenDeleted'?: boolean;
   }
   interface DtQuote {
