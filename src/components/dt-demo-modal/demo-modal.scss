@@ -6,8 +6,9 @@
   height: 40px;
   z-index: 100;
   background-color: var(--color-background);
-  width: 450px;
-  margin-left: -225px;
+  width: 95%;
+  max-width: 360px;
+  transform: translateX(-50%);
   border-radius: var(--border-radius-md);
   box-shadow: var(--box-shadow-02);
   display: flex;

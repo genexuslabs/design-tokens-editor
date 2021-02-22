@@ -50,21 +50,6 @@ export class Demo {
             id: "c02",
             caption: "Medium Turquoise",
             value: "#4ECDC4"
-          },
-          {
-            id: "c03",
-            caption: "Mint Cream",
-            value: "#F7FFF7"
-          },
-          {
-            id: "c04",
-            caption: "Bittersweet",
-            value: "#FF6B6B"
-          },
-          {
-            id: "c05",
-            caption: "Naples Yellow",
-            value: "#FFE66D"
           }
         ]
       }
@@ -232,8 +217,9 @@ export class Demo {
       let height = itemCoordinates.height;
       let width = itemCoordinates.width;
 
-      this.itemPosition = "center";
-      this.itemleftCoordinate = x + width / 2 + "px";
+      this.itemPosition = "right";
+      // this.itemleftCoordinate = x + width / 2 + "px";
+      this.itemleftCoordinate = x - width - 5 + "px";
       this.itemTopCoordinate = y + height + 10 + "px";
       this.itemMessage =
         "Add a new empty token on the current tokens group. In this case adds a new color token.";
