@@ -1164,8 +1164,6 @@ export class Main {
     }, 150);
   }
 
-  doNotShowModalAgain(e) {}
-
   /********************************
    * / DEMO and MODAL
    ********************************/
