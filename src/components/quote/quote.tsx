@@ -36,13 +36,7 @@ export class Quote {
     }
   }
   printButtonLabel() {
-    if (this.quote === "") {
-      return "Add token";
-    } else if (this.token !== "") {
-      return "Add your first " + this.token + " token";
-    } else {
-      return this.buttonLabel;
-    }
+    return "Add your first " + this.token + " token";
   }
 
   componentDidLoad() {}
@@ -64,7 +58,7 @@ export class Quote {
               <cite class="cite">{this.printAuthor()}</cite>
             </footer>
           </blockquote>
-          <gxg-button onClick={this.addFirstTokenFunction}>
+          <gxg-button type="outlined" onClick={this.addFirstTokenFunction}>
             {this.printButtonLabel()}
           </gxg-button>
         </div>

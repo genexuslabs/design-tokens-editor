@@ -2169,17 +2169,19 @@
     //main.avaiableOptions = avaiableOptionsTinyModel;
 
     // main.avaiableOptions = avaiableOptionsTinyModel;
-    main.model = model;
-    //main.showDemo = false;
+    //main.model = model;
+    main.model = tinyModel;
     // main.model = modelWithEmptyModelNull;
     // main.model = modelWithoutEmptyModel;
     // main.model = modelWithoutPreview;
     // main.model = modelWithPreviewNull;
     // main.model = modelAllNull;
 
+    main.showDemo = false;
 
-
-    //main.model = tinyModel;
+    main.addEventListener("dontShowDemoAgain", function(){
+      alert("don't show modal again");
+    })
     
 
     main.needHelpUrl = "http://need-help.com";

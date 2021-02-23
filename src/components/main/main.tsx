@@ -36,6 +36,22 @@ export class Main {
   @State() filterTokenGroup: string = "all";
   @State() searchValue: string = "";
 
+  //List of tokens
+  @State() listOfTokens = [
+    "fonts",
+    "fontSizes",
+    "colors",
+    "spacing",
+    "borders",
+    "radius",
+    "shadows",
+    "opacity",
+    "zIndex",
+    "timingFunction",
+    "times",
+    "mediaQueries"
+  ];
+
   //Loader
   @State() updatingModel: boolean = true;
 
@@ -1167,6 +1183,27 @@ export class Main {
    * / DEMO and MODAL
    ********************************/
 
+  showEmptyTokens() {
+    const selectedModelNumberOfTokens = Object.keys(this.selectedModel).length;
+    if (selectedModelNumberOfTokens < this.listOfTokens.length) {
+      const accordionItems = [];
+      for (let tokenName of this.listOfTokens) {
+        if (!this.selectedModel.hasOwnProperty(tokenName)) {
+          accordionItems.push(
+            <gxg-accordion-item
+              status="open"
+              itemId={tokenName}
+              itemTitle={tokenName}
+            >
+              {this.tokenGroupEmptyMessage(tokenName)}
+            </gxg-accordion-item>
+          );
+        }
+      }
+      return accordionItems;
+    }
+  }
+
   render() {
     return [
       <dt-demo
@@ -1201,7 +1238,6 @@ export class Main {
         >
           No, thanks.
         </gxg-button>
-        <gxg-spacer-one slot="footer" space="xs"></gxg-spacer-one>
         <gxg-button
           slot="footer"
           type="primary-text-only"
@@ -1533,6 +1569,7 @@ export class Main {
                         ) : null
                       ) : null;
                     })}
+                    {this.showEmptyTokens()}
                   </gxg-accordion>
                 ) : (
                   //The filter didn´t match any token on the entire model
